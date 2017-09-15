@@ -20,7 +20,7 @@
 				Registrieren
 			</div>
 			<div class="col-xs-12 col-md-3">
-				Anmelden Hallo
+				Anmelden
 			</div>
 			<div class="col-xs-12 col-md-3">
 			</div>
