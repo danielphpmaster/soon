@@ -1,3 +1,59 @@
 * {
 	font-family: 'Roboto', sans-serif;
 }
+
+.navbar {
+	margin-bottom: 0px;
+}
+div.background-image {
+	background-image: url(images/landscape.jpg);
+	min-height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	background-attachment: fixed;
+}
+
+div.row a {	
+	text-decoration: none;
+}
+
+div.message {
+	color: white;
+	padding: 20px;
+	text-align: center;
+	font-size: 40px;
+	margin-top: calc(100vh*0.25);	
+	background: rgba(0,0,0,0.5);
+	background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,0,0,0.5)), color-stop(70%, rgba(179,179,179,0)), color-stop(100%, rgba(255,255,255,0)));
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+	background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+	background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+	background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+}
+
+div.linkbox {
+	padding: 20px;
+	text-align: center;
+	font-size: 20px;
+	margin-top: 10px;
+	box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+}
+
+div.linkbox:hover {
+	opacity: 0.95;
+}
+
+div.registration {
+	background-color: #e9494c;
+	color: white;
+}
+
+
+div.login {
+	background-color: #f7f7f7;
+	color: black;
+	margin-bottom: calc(100vh*0.25);
+}
