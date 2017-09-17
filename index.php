@@ -18,9 +18,9 @@
 			<div class="col-xs-12 col-md-3">
 			</div>
 			<div class="col-xs-12 col-md-6">
-				<div class="message">
+				<h1>
 					Alle Ihre Termine – immer und überall abrufbar
-				</div>
+				</h1>
 			</div>
 			<div class="col-xs-12 col-md-3">
 			</div>

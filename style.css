@@ -18,10 +18,11 @@ div.row a {
 	text-decoration: none;
 }
 
-div.message {
+h1 {
 	color: white;
 	padding: 20px;
 	text-align: center;
+	line-height: 1.4285;
 	font-size: 40px;
 	margin-top: calc(100vh*0.25);	
 	background: rgba(0,0,0,0.5);
@@ -32,6 +33,13 @@ div.message {
 	background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
 	background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+}
+
+h2 {
+	color: black;
+	line-height: 1.4285;
+	font-size: 32px;
+	margin: 0 0 20px 0;
 }
 
 div.linkbox {
@@ -53,7 +61,74 @@ div.registration {
 
 
 div.login {
-	background-color: #f7f7f7;
+	background-color: #f8f8f8;
 	color: black;
 	margin-bottom: calc(100vh*0.25);
+}
+
+div.box {
+	background-color: #f8f8f8;
+	border: 1px solid #e7e7e7;
+	padding: 20px;
+	margin-top: 80px;
+	margin-bottom: calc(100vh*0.25);
+}
+
+.form-check-label:checked + .form-check-input {
+	color: red;
+}
+
+label {
+	font-weight: normal;
+}
+
+div.day {
+	margin-top: 30px;
+}
+
+div.appointment {
+	background-color: #f8f8f8;
+	border: 1px solid #e7e7e7;
+	margin-top: 5px;
+}
+
+div.appointment:hover, div.appointment:focus {
+	background-color: #e9494c;
+	color: white;
+	border: 1px solid #e7e7e7;
+	margin-top: 5px;
+}
+
+div.noappointment {
+	padding: 10px;
+	margin-top: 5px;
+}
+
+div.title {
+	padding: 10px;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+div.time {
+	padding: 10px 10px 5px 10px;
+}
+
+div.location {
+	padding: 0 10px 10px 10px;
+	border-bottom: 1px solid #e7e7e7;	
+}
+
+div.comment {
+	padding: 10px;
+}
+
+h3 {
+	color: black;
+	line-height: 1.4285;
+	font-size: 14px;
+	margin: 0 0 20px 0;
+}
+
+.calendar-container {
+	padding: 15px;
 }
