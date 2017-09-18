@@ -6,7 +6,7 @@
 	margin-bottom: 0px;
 }
 div.background-image {
-	background-image: url(images/landscape.jpg);
+	background-image: url(images/landscape_resize.jpg);
 	min-height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
