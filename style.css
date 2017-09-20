@@ -83,7 +83,8 @@ label {
 }
 
 div.day {
-	margin-top: 30px;
+	margin-top: 10px;
+	min-height: 400px;
 }
 
 div.appointment {
