@@ -36,6 +36,7 @@
 							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort">
 						</div>
 						<button type="submit" class="btn btn-primary">Registrieren</button>
+						<a href="login.php">Ich habe bereits einen Account</a>
 					</form>
 				</div>
 			</div>
