@@ -34,7 +34,7 @@
 						Registrieren
 					</div>
 				</a>
-			</div>	
+			</div>
 			<div class="col-xs-6 col-md-3">
 				<a href="login.php">
 					<div class="linkbox login">
@@ -49,4 +49,4 @@
 	</div>
 </body>
 
-</html> 
+</html>

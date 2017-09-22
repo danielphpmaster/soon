@@ -7,14 +7,14 @@
 }
 div.background-image {
 	background-image: url(images/landscape_resize.jpg);
-	min-height: 100vh;
+	min-height: calc(100vh - 52px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 	background-attachment: fixed;
 }
 
-div.row a {	
+div.row a {
 	text-decoration: none;
 }
 
@@ -24,7 +24,7 @@ h1 {
 	text-align: center;
 	line-height: 1.4285;
 	font-size: 40px;
-	margin-top: calc(100vh*0.25);	
+	margin-top: calc(100vh*0.25);
 	background: rgba(0,0,0,0.5);
 	background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,0,0,0.5)), color-stop(70%, rgba(179,179,179,0)), color-stop(100%, rgba(255,255,255,0)));
@@ -34,6 +34,15 @@ h1 {
 	background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
 }
+
+	/*Für Handys*/
+	@media only screen and (max-device-width: 600px){
+		h1 {
+			margin-top: calc(100vh / 20);
+		}
+	}
+
+
 
 h2 {
 	color: black;
@@ -116,7 +125,7 @@ div.time {
 
 div.location {
 	padding: 0 10px 10px 10px;
-	border-bottom: 1px solid #e7e7e7;	
+	border-bottom: 1px solid #e7e7e7;
 }
 
 div.comment {
