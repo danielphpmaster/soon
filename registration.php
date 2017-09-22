@@ -25,7 +25,7 @@
 					<form>
 						<div class="form-group">
 							<label for="exampleInputUsername1">Benutzername</label>
-							<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Benutzername">
+							<input type="text" class="form-control" id="exampleInputUsername1" placeholder="Benutzername">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">E-Mail-Adresse</label>
