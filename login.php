@@ -4,6 +4,10 @@
 
 <?php
 	$title = "Anmelden - soon";
+	
+	include 'connection.php'
+	
+					/*	VALUES (".$username.", ".$email.", ".$password.")";*/
 ?>
 
 <head>

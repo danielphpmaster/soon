@@ -45,7 +45,7 @@ CREATE TABLE `appointments` (
 CREATE TABLE `users` (
   `userid` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `mail` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

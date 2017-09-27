@@ -4,6 +4,8 @@
 
 <?php
 	$title = "Registrieren - soon";
+	
+	include 'connection.php';
 ?>
 
 <head>
@@ -22,18 +24,18 @@
 					<h2>
 						Registrieren
 					</h2>
-					<form>
+					<form action="confirmation.php" method="post">
 						<div class="form-group">
 							<label for="exampleInputUsername1">Benutzername</label>
-							<input type="text" class="form-control" id="exampleInputUsername1" placeholder="Benutzername">
+							<input name="username" type="text" class="form-control" id="username" placeholder="Benutzername">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">E-Mail-Adresse</label>
-							<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-Mail-Adresse">
+							<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">Passwort</label>
-							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort">
+							<input name="password" type="password" class="form-control" id="password" placeholder="Passwort">
 						</div>
 						<button type="submit" class="btn btn-primary">Registrieren</button>
 						<a href="login.php">Ich habe bereits einen Account</a>
