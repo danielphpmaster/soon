@@ -142,3 +142,17 @@ h3 {
 .calendar-container {
 	padding: 15px;
 }
+
+.btn-primary {
+	background-color:#e9494c;
+	border-color:#e9494c;
+}
+
+.btn-primary:hover {
+	background-color:#ca4043;
+	border-color:#ca4043;
+}
+
+.edit-line a{
+	float:right;
+}
