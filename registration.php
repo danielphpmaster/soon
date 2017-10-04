@@ -38,7 +38,7 @@
 							<input name="password" type="password" class="form-control" id="password" placeholder="Passwort">
 						</div>
 						<button type="submit" class="btn btn-primary">Registrieren</button>
-						<a href="login.php">Ich habe bereits einen Account</a>
+						Bereits einen Account? <a href="login.php">Anmelden!</a>
 					</form>
 				</div>
 			</div>

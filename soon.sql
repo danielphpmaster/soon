@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Erstellungszeit: 20. Sep 2017 um 16:34
--- Server-Version: 10.0.32-MariaDB-0+deb8u1
--- PHP-Version: 5.6.30
+-- Host: 127.0.0.1
+-- Erstellungszeit: 27. Sep 2017 um 20:51
+-- Server-Version: 10.1.10-MariaDB
+-- PHP-Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `soon`
 --
+CREATE DATABASE IF NOT EXISTS `soon` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `soon`;
 
 -- --------------------------------------------------------
 

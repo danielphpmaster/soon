@@ -42,7 +42,7 @@
 							</label>
 						</div>
 						<button type="submit" class="btn btn-primary">Anmelden</button>
-						<a href="registration.php">Ich habe noch keinen Account</a>						
+						Noch keinen Account? <a href="registration.php">Registrieren!</a>						
 					</form>
 				</div>
 			</div>
