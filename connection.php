@@ -7,7 +7,7 @@
 	$db = 'soon';
 	$connection = new mysqli($servername, $user, $pw, $db);
 
-	/* Verbindung zur Datenbank (beim Server)
+/* Verbindung zur Datenbank (beim Server)
 	$servername = 'localhost:3306';
 	$user = 'sooncalroot';
 	$pw = '';

@@ -4,7 +4,7 @@
 
 <?php
 	$title = "Registrieren - soon";
-	
+
 	include 'connection.php';
 ?>
 
@@ -26,21 +26,19 @@
 					</h2>
 					<?php
 					
-
 						$username = $_POST["username"];
 						$email = $_POST["email"];
 						$password = $_POST["password"];
-						echo "<div class='alert alert-success'>","Willkommen bei soon, ".$username."</div>";
+												
+						echo "<div class='alert alert-success'>","Willkommen bei soon, ".$username."!</div>";
 						
 						$sql = "INSERT INTO users (username, email, password)
 						VALUES ('".$username."', '".$email."', '".$password."')";
-						
-						if ($connection->query($sql) === TRUE) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $connection->error;
-}
+
+						$_SESSION['username'] = $username;
 					?>
+					
+					<a href="calendar.php" class="btn btn-info" role="button">Loslegen</a>
 					
 					
 				</div>
