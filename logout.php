@@ -30,7 +30,7 @@
 						echo "<div class='alert alert-success'>","Auf wiedersehen, ".$username."!</div>";
 											
 					?>	
-						<meta http-equiv="refresh" content="1; URL=index.php">
+						<meta http-equiv="refresh" content="2; URL=index.php">
 					
 				</div>
 			</div>

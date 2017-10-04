@@ -37,6 +37,10 @@
 							<label for="exampleInputPassword1">Passwort</label>
 							<input name="password" type="password" class="form-control" id="password" placeholder="Passwort">
 						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Passwort wiederholen</label>
+							<input name="password" type="password" class="form-control" id="password" placeholder="Passwort wiederholen">
+						</div>
 						<button type="submit" class="btn btn-primary">Registrieren</button>
 						Bereits einen Account? <a href="login.php">Anmelden!</a>
 					</form>

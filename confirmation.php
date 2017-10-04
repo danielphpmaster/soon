@@ -36,6 +36,7 @@
 						VALUES ('".$username."', '".$email."', '".$password."')";
 
 						$_SESSION['username'] = $username;
+						$_SESSION['email'] = $email;
 					?>
 					
 					<a href="calendar.php" class="btn btn-info" role="button">Loslegen</a>

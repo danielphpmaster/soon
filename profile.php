@@ -23,13 +23,13 @@
 						Mein Profil
 					</h2>
 						<div class="edit-line">
-						Benutzername: <?php echo $username; ?><a href="index.php/edit.php">Benutzername ändern</a><br>
+						Benutzername: <strong><?php echo $username; ?></strong><a href="edit_username.php"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 						</div>
 						<div class="edit-line">
-						E-Mail: <?php echo $email; ?><a href="index.php/edit.php">E-Mail ändern</a><br>
+						E-Mail: <strong><?php echo $email; ?></strong><a href="edit_mail.php"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 						</div>
 						<div class="edit-line">
-						<a href="index.php/edit.php">Passwort ändern</a><br>
+						<a href="edit_password.php">Passwort ändern</a><br>
 						</div>
 				</div>
 			</div>
