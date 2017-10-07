@@ -11,7 +11,15 @@
 </head>
 
 <body>
-	<?php include 'navbar.php';?>
+	<?php include 'navbar.php';
+	
+	if(!isset($_SESSION['userid'])) {
+ die(header('Location: login.php'));
+	}
+
+?>
+	
+	
 	
 	<div class="container">
 		<div class="row" style="margin-top: 20px;">

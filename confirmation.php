@@ -13,7 +13,12 @@
 </head>
 
 <body>
-	<?php include 'navbar.php';?>
+	<?php include 'navbar.php';
+
+	if(!isset($_SESSION['userid'])) {
+ die(header('Location: login.php'));
+	}
+?>
 	
 	<div class="container">
 		<div class="row">
@@ -25,18 +30,7 @@
 						Registrierung erfolgreich
 					</h2>
 					<?php
-					
-						$username = $_POST["username"];
-						$email = $_POST["email"];
-						$password = $_POST["password"];
-												
 						echo "<div class='alert alert-success'>","Willkommen bei soon, ".$username."!</div>";
-						
-						$sql = "INSERT INTO users (username, email, password)
-						VALUES ('".$username."', '".$email."', '".$password."')";
-
-						$_SESSION['username'] = $username;
-						$_SESSION['email'] = $email;
 					?>
 					
 					<a href="calendar.php" class="btn btn-info" role="button">Loslegen</a>

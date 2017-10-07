@@ -8,6 +8,18 @@ if (empty($_SESSION['email'])){
 	$email = $_SESSION['email'];
 }
 
+if (empty($_SESSION['username'])){
+ echo "";
+} else {
+	$username = $_SESSION['username'];
+}
+
+if (empty($_SESSION['userid'])){
+ echo "";
+} else {
+	$userid = $_SESSION['userid'];
+}
+
 ?>
 
 <nav class="navbar navbar-default">
@@ -15,7 +27,7 @@ if (empty($_SESSION['email'])){
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<?php
-				if(empty($_SESSION['username'])) {
+				if(empty($_SESSION['userid'])) {
 					echo "";
 				} else {
 					echo "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>
@@ -26,7 +38,7 @@ if (empty($_SESSION['email'])){
 			</button>";
 				} ?>
 			<a class="navbar-brand" href="<?php
-				if(empty($_SESSION['username'])) {
+				if(empty($_SESSION['userid'])) {
 					echo "index.php";
 				} else {
 					echo "calendar.php";
@@ -35,7 +47,7 @@ if (empty($_SESSION['email'])){
 		</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<?php
-				if(empty($_SESSION['username'])) {
+				if(empty($_SESSION['userid'])) {
 					echo "";
 				} else {
 					$username = $_SESSION['username'];

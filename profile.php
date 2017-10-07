@@ -3,6 +3,8 @@
 <html>
 
 <?php
+
+	
 	$title = "Oktober 2017 - soon";
 ?>
 
@@ -11,7 +13,10 @@
 </head>
 
 <body>
-	<?php include 'navbar.php';?>
+	<?php include 'navbar.php';
+if(!isset($_SESSION['userid'])) {
+ die(header('Location: login.php'));
+	}?>
 	
 	<div class="container">
 		<div class="row">

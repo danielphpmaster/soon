@@ -28,9 +28,8 @@
 					
 						session_destroy();
 						echo "<div class='alert alert-success'>","Auf wiedersehen, ".$username."!</div>";
-											
+						header('Location: index.php')				
 					?>	
-						<meta http-equiv="refresh" content="2; URL=index.php">
 					
 				</div>
 			</div>
