@@ -5,75 +5,142 @@
 .navbar {
 	margin-bottom: 0px;
 }
-div.background-image {
-	background-image: url(images/landscape_resize.jpg);
-	min-height: calc(100vh - 52px);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-	background-attachment: fixed;
-}
 
+/* Unterstreichgung von Links verhindern */
 div.row a {
 	text-decoration: none;
 }
 
-h1 {
-	color: white;
-	padding: 20px;
-	text-align: center;
-	line-height: 1.4285;
-	font-size: 40px;
-	margin-top: calc(100vh*0.25);
-	background: rgba(0,0,0,0.5);
-	background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,0,0,0.5)), color-stop(70%, rgba(179,179,179,0)), color-stop(100%, rgba(255,255,255,0)));
-	background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-	background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-	background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-	background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
-}
+/* 
+==============================
+==============================
+Betrifft nur index.php 
+==============================
+============================== 
+*/
 
-	/*Für Handys*/
-	@media only screen and (max-device-width: 600px){
-		h1 {
-			margin-top: calc(100vh / 20);
-		}
+	div.background-image {
+		background-image: url(images/landscape_resize.jpg);
+		min-height: calc(100vh - 52px);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-attachment: fixed;
 	}
 
+	h1 {
+		color: white;
+		padding: 20px;
+		text-align: center;
+		line-height: 1.4285;
+		font-size: 40px;
+		margin-top: calc(100vh*0.25);
+		background: rgba(0,0,0,0.5);
+		background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,0,0,0.5)), color-stop(70%, rgba(179,179,179,0)), color-stop(100%, rgba(255,255,255,0)));
+		background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+	}
 
+	/* margin-top bei Mobile Devices */
+		@media only screen and (max-device-width: 600px){
+			h1 {
+				margin-top: calc(100vh / 20);
+			}
+		}
 
-h2 {
-	color: black;
-	line-height: 1.4285;
-	font-size: 32px;
-	margin: 0 0 20px 0;
-}
+	h2 {
+		color: black;
+		line-height: 1.4285;
+		font-size: 32px;
+		margin: 0 0 20px 0;
+	}
 
-div.linkbox {
-	padding: 20px;
-	text-align: center;
-	font-size: 20px;
-	margin-top: 10px;
-	box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
-}
+	div.linkbox {
+		padding: 20px;
+		text-align: center;
+		font-size: 20px;
+		margin-top: 10px;
+		box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+	}
 
-div.linkbox:hover {
-	opacity: 0.95;
-}
+	div.linkbox:hover {
+		opacity: 0.95;
+	}
 
-div.registration {
-	background-color: #e9494c;
-	color: white;
-}
+	div.registration {
+		background-color: #e9494c;
+		color: white;
+	}
 
+	div.login {
+		background-color: #f8f8f8;
+		color: black;
+		margin-bottom: calc(100vh*0.25);
+	} /* Ende von CSS, welches nur index.php betrifft */
 
-div.login {
-	background-color: #f8f8f8;
-	color: black;
-	margin-bottom: calc(100vh*0.25);
-}
+/* 
+==============================
+==============================
+Betrifft nur calendar.php 
+==============================
+============================== 
+*/
+
+	div.day {
+		margin-top: 10px;
+		min-height: 400px;
+	}
+
+	div.appointment {
+		background-color: #f8f8f8;
+		border: 1px solid #e7e7e7;
+		margin-top: 5px;
+	}
+
+	div.appointment:hover, div.appointment:focus {
+		background-color: #e9494c;
+		color: white;
+		border: 1px solid #e7e7e7;
+		margin-top: 5px;
+	}
+
+	div.noappointment {
+		padding: 10px;
+		margin-top: 5px;
+	}
+
+	div.title {
+		padding: 10px;
+		border-bottom: 1px solid #e7e7e7;
+	}
+
+	div.time {
+		padding: 10px 10px 5px 10px;
+	}
+
+	div.location {
+		padding: 0 10px 10px 10px;
+		border-bottom: 1px solid #e7e7e7;
+	}
+
+	div.comment {
+		padding: 10px;
+	}
+
+	h3 {
+		color: black;
+		line-height: 1.4285;
+		font-size: 14px;
+		margin: 0 0 20px 0;
+	}
+
+	.calendar-container {
+		padding: 15px;
+	} /* Ende von CSS, welches nur calendar.php betrifft */
 
 div.box {
 	background-color: #f8f8f8;
@@ -83,74 +150,28 @@ div.box {
 	margin-bottom: calc(100vh*0.25);
 }
 
-.form-check-label:checked + .form-check-input {
-	color: red;
-}
+/* 
+==============================
+==============================
+Formulare und Buttons 
+==============================
+============================== 
+*/
 
-label {
-	font-weight: normal;
-}
+	.form-check-label:checked + .form-check-input {
+		color: red;
+	}
 
-div.day {
-	margin-top: 10px;
-	min-height: 400px;
-}
+	label {
+		font-weight: normal;
+	}
 
-div.appointment {
-	background-color: #f8f8f8;
-	border: 1px solid #e7e7e7;
-	margin-top: 5px;
-}
+	.btn-primary, .btn-info {
+		background-color:#e9494c;
+		border-color:#e9494c;
+	}
 
-div.appointment:hover, div.appointment:focus {
-	background-color: #e9494c;
-	color: white;
-	border: 1px solid #e7e7e7;
-	margin-top: 5px;
-}
-
-div.noappointment {
-	padding: 10px;
-	margin-top: 5px;
-}
-
-div.title {
-	padding: 10px;
-	border-bottom: 1px solid #e7e7e7;
-}
-
-div.time {
-	padding: 10px 10px 5px 10px;
-}
-
-div.location {
-	padding: 0 10px 10px 10px;
-	border-bottom: 1px solid #e7e7e7;
-}
-
-div.comment {
-	padding: 10px;
-}
-
-h3 {
-	color: black;
-	line-height: 1.4285;
-	font-size: 14px;
-	margin: 0 0 20px 0;
-}
-
-.calendar-container {
-	padding: 15px;
-}
-
-.btn-primary, .btn-info {
-	background-color:#e9494c;
-	border-color:#e9494c;
-}
-
-.btn-primary:hover, .btn-info:hover {
-	background-color:#ca4043;
-	border-color:#ca4043;
-}
-
-
+	.btn-primary:hover, .btn-info:hover {
+		background-color:#ca4043;
+		border-color:#ca4043;
+	} /* Ende von CSS betreffend Formulare und Buttons */

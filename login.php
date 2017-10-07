@@ -1,7 +1,7 @@
 <?php
-	$connection = new PDO('mysql:host=localhost;dbname=soon', 'root', '');
-	session_start();
-	
+	include 'connection.php';
+	include 'session.php';
+		
 	$title = "Anmelden - soon";
 
 	if(isset($_GET['login'])) {
@@ -22,7 +22,7 @@
 			header('Location: calendar.php');
 		} 
 		else {
-			$errorMessage = "<div class='alert alert-danger'>E-Mail oder Passwort war ungültig</div>";
+			$errorMessage = "<div class='alert alert-danger'>E-Mail-Adresse oder Passwort ist ungültig</div>";
 		}
 	}
 ?>
@@ -68,7 +68,7 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- END .row -->
+			</div> <!-- Ende von .row -->
 		</div>
 	</body>
 </html>
