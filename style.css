@@ -92,7 +92,6 @@ Betrifft nur calendar.php
 
 	div.day {
 		margin-top: 10px;
-		min-height: 400px;
 	}
 
 	div.appointment {
@@ -140,7 +139,37 @@ Betrifft nur calendar.php
 
 	.calendar-container {
 		padding: 15px;
-	} /* Ende von CSS, welches nur calendar.php betrifft */
+	} 
+
+	/* Ermöglicht sieben Spalten */
+	@media (min-width: 768px){
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1  {
+		width: 100%;
+		*width: 100%;
+		}
+	}
+
+	@media (min-width: 992px) {
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
+		width: 14.285714285714285714285714285714%;
+		*width: 14.285714285714285714285714285714%;
+		}
+	}
+ 
+	@media (min-width: 1200px) {
+	.seven-cols .col-md-1,
+	.seven-cols .col-sm-1,
+	.seven-cols .col-lg-1 {
+		width: 14.285714285714285714285714285714%;
+		*width: 14.285714285714285714285714285714%;
+		padding-left: 2px;
+		padding-right: 2px;
+		}
+	}/* Ende von CSS, welches nur calendar.php betrifft */
 
 div.box {
 	background-color: #f8f8f8;
@@ -148,6 +177,18 @@ div.box {
 	padding: 20px;
 	margin-top: 80px;
 	margin-bottom: calc(100vh*0.25);
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
 }
 
 /* 
