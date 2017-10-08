@@ -32,15 +32,21 @@
 								$password = $_POST['password'];
 								$password2 = $_POST['password2'];
 
+								// Überprüfung, ob ein Benutzername angegeben wurde
+								if(empty($username)) {
+									echo '<div class="alert alert-danger">Geben Sie einen Benutzernamen ein</div>';
+									$error = true;
+								}
+								
 								// Überprüfung, ob die angegebene E-Mail-Adresse gültig ist
 								if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-									echo '<div class="alert alert-danger">Bitte eine gültige E-Mail-Adresse eingeben</div>';
+									echo '<div class="alert alert-danger">Geben Sie eine gültige E-Mail-Adresse ein</div>';
 									$error = true;
 								}
 									
 								// Überprüfung, ob ein Passwort angegeben wurde
 								if(strlen($password) == 0) {
-									echo '<div class="alert alert-danger">Bitte ein Passwort angeben</div>';
+									echo '<div class="alert alert-danger">Geben Sie ein Passwort ein</div>';
 									$error = true;
 								}
 									
@@ -92,20 +98,20 @@
 								?>
 								<form action="?register=1" method="post">
 														<div class="form-group">
-															<label for="exampleInputUsername1">Benutzername</label>
-															<input name="username" type="text" class="form-control" id="username" placeholder="Benutzername">
+															<label for="username">Benutzername</label>
+															<input name="username" type="text" class="form-control" id="username" placeholder="Benutzername"  required value="<?php if(isset($username)){echo $username;}?>">
 														</div>
 														<div class="form-group">
-															<label for="exampleInputEmail1">E-Mail-Adresse</label>
-															<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse">
+															<label for="email">E-Mail-Adresse</label>
+															<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" required value="<?php if(isset($email)){echo $email;}?>">
 														</div>
 														<div class="form-group">
-															<label for="exampleInputPassword1">Passwort</label>
-															<input name="password" type="password" class="form-control" id="password" placeholder="Passwort">
+															<label for="password">Passwort</label>
+															<input name="password" type="password" class="form-control" id="password" required placeholder="Passwort">
 														</div>
 														<div class="form-group">
-															<label for="exampleInputPassword1">Passwort wiederholen</label>
-															<input name="password2" type="password" class="form-control" id="password" placeholder="Passwort wiederholen">
+															<label for="password2">Passwort wiederholen</label>
+															<input name="password2" type="password" class="form-control" id="password2" required placeholder="Passwort wiederholen">
 														</div>
 								<button type="submit" class="btn btn-primary">Registrieren</button>
 														Bereits einen Account? <a href="login.php">Anmelden!</a>

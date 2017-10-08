@@ -41,10 +41,10 @@
 					</form>
 							
 					<ul class='nav navbar-nav navbar-right'>
-						<li><a href='calendar.php'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> Mein Kalender <span class='label label-danger'>4</span></a></li>
 						<li><a href='add.php'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Termin</a></li>
+						<li><a href='calendar.php'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> Mein Kalender <span class='label label-danger'>4</span></a></li>
 						<li class='dropdown'>
-							<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>".$username."<span class='caret'></span></a>
+							<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>".$username." <span class='caret'></span></a>
 							<ul class='dropdown-menu'>
 								<li><a href='profile.php'>Einstellungen</a></li>
 								<li role='separator' class='divider'></li>

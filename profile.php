@@ -20,20 +20,32 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<div class="box">
+					<div class="box">					
 						<h2>Mein Profil</h2>
-						
-						<p>
-							Benutzername: <strong><?php echo $username; ?></strong><a href="edit_username.php"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-						</p>
-						
-						<p>
-							E-Mail: <strong><?php echo $email; ?></strong><a href="edit_mail.php"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-						</p>
-						
-						<p>
-							<a href="edit_password.php">Passwort ändern</a><br>
-						</p>						
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td>Benutzername</td>
+									<td><?php echo $username;?></td>
+									<td><a href="edit_username.php"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
+								</tr>
+								<tr>
+									<td>E-Mail-Adresse</td>
+									<td><?php echo $email;?></td>
+									<td><a href="edit_mail.php"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
+								</tr>
+								<tr>
+									<td>Passwort</td>
+									<td><a href="edit_password.php"><button type="button" class="btn btn-default btn-xs">Passwort ändern</button></a></td>
+									<td></td>
+								 </tr>
+								 <tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								 </tr>
+							</tbody>
+						 </table>				
 					</div>
 				</div>
 				

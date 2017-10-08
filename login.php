@@ -49,12 +49,12 @@
 						?>
 						<form action="?login=1" method="post">
 							<div class="form-group">
-								<label for="exampleInputEmail1">E-Mail-Adresse</label>
-								<input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-Mail-Adresse">
+								<label for="email">E-Mail-Adresse</label>
+								<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required placeholder="E-Mail-Adresse" value="<?php if(isset($email)){echo $email;}?>">
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword1">Passwort</label>
-								<input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort">
+								<label for="password">Passwort</label>
+								<input name="password" type="password" class="form-control" id="password" required placeholder="Passwort">
 							</div>
 							<div class="form-check">
 								<label class="form-check-label">
