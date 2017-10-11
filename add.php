@@ -47,18 +47,19 @@
 								// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 								if(!$error) {
 									$statement = $connection->prepare("INSERT INTO appointments (appointmentname, date, time, location, comment) VALUES (:appointmentname, :date, :time, :location, :comment)");
-									$result = $statement->execute(array('appointmentname' => $appointmentname, 'time' => $time, 'location' => $location, 'comment' => $location));
+									$result = $statement->execute(array('appointmentname' => $appointmentname, 'date' => $date, 'time' => $time, 'location' => $location, 'comment' => $comment));
 										 
 									$_SESSION['username'] = $username;
 									$_SESSION['email'] = $email;
-										 
+									$userid = $user['id'];
+									$_SESSION['userid'] = $userid;	 
+									
 									if($result) {										 
 										$statement = $connection->prepare("SELECT * FROM users WHERE email = :email");
 										$result = $statement->execute(array('email' => $email));
 										$user = $statement->fetch();
 
-										$userid = $user['id'];
-										$_SESSION['userid'] = $userid;
+										
 										 
 										header('Location: calendar.php');
 										$showFormular = false;
