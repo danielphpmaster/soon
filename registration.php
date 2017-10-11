@@ -89,7 +89,7 @@
 										header('Location: confirmation.php');
 										$showFormular = false;
 									} else {
-										echo 'Beim Registrieren ist leider ein Fehler aufgetreten<br>';
+										echo '<div class="alert alert-danger">Beim Registrieren ist leider ein Fehler aufgetreten</div>';
 									}
 								} // Ende von if(!$error)
 							} // Ende von if(isset($_GET['register']))

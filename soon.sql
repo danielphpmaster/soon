@@ -33,7 +33,7 @@ USE `soon`;
 CREATE TABLE `appointments` (
   `terminid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `title` varchar(50) NOT NULL,
+  `appointmentname` varchar(50) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
   `location` varchar(50) NOT NULL,
