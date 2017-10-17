@@ -1,8 +1,9 @@
 <?php
 	include 'session.php';
+	include 'connection.php';
 	include 'loginwall.php';
 	
-	$title = "Oktober  - soon";
+	$title = "".date('M')."  - soon";
 ?>
 
 <!DOCTYPE html>
@@ -17,407 +18,119 @@
 				
 		<div class="container">
 			<div class="row" style="margin-top: 20px;">
-				<div class="col-xs-6 col-md-3">
-					<select class="form-control">
-						<option>Januar</option>
-						<option>Februar</option>
-						<option>März</option>
-						<option>April</option>
-						<option>Mai</option>
-						<option>Juni</option>
-						<option>Juli</option>
-						<option>August</option>
-						<option>September</option>
-						<option>Oktober</option>
-						<option>November</option>
-						<option>Dezember</option>
-					</select>
+				<div class="hidden-xs hidden-sm col-md-3">
 				</div>
-				<div class="col-xs-6 col-md-3">
-					<select class="form-control">
-						<option></option>
-						<option>2018</option>
-						<option>2019</option>
-					</select>
+				<div class="col-xs-6 col-sm-6 col-md-3">
+					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> September 2017</button>
 				</div>
-				<div class="col-xs-6 col-md-3">
-					<button type="button" class="btn btn-default">Kalender öffnen</button>
+				<div class="col-xs-6 col-sm-6 col-md-3">
+					<button type="button" class="btn btn-default">November 2017 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+				</div>
+				<div class="hidden-xs hidden-sm col-md-3">
 				</div>
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->
 		
 		<div class="calendar-container">
 			<div class="row seven-cols">
-				<div class="col-md-1">
-				</div>
-
-				<div class="col-md-1">
-				</div>
-
-				<div class="col-md-1">
-				</div>
-
-
-				<div class="col-md-1">
-				</div>
-
-
-				<div class="col-md-1">
-				</div>
-
-
-				<div class="col-md-1">
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>So, 01.10.</b>
-						<div class="appointment" tabindex="1">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
 				
-				<div class="col-md-1">
-					<div class="day">
-						<b>Mo, 02.10.</b>
-						<div class="noappointment">Keine Termine.</div>
-					</div>
-				</div>
+				<?php
+				$date = date("Y-m-d");
+				$lastday = date("Y-m-t", strtotime($date));
 				
-				<div class="col-md-1">
-					<div class="day">
-						<b>Di, 03.10.</b>
-						<div class="appointment" tabindex="2">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-						<div class="appointment" tabindex="5">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
+				while ($date <= $lastday) {
+					
+					if($date == date("Y-m-d")) {
+						$appointmentcolor = "style='color: #d9534f;'";
+					} else {
+						$appointmentcolor = "";
+					}
+					
+					if($date == $lastday) {
+						$dateclass = "last";
+					} else {
+						$dateclass = "";
+					}
 				
-				<div class="col-md-1">
-					<div class="day">
-						<b>Mi, 04.10.</b>
-						<div class="appointment" tabindex="3">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
+					echo "<div class='col-md-1'>
+						<div class='day'>
+						<div class='date ".$dateclass."'><b>".$date."</b></div>";
+					
+					$sql = "SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$date."'";
+										
+					foreach ($connection->query($sql) as $row) {
+					   if($row['appointmentid'] < '1') {
+						   echo "<div class='noappointment'>Keine Termine</div>";
+					   } else {
+						   echo "<div class='appointment'>
+							<a href='appointment.php?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
+							
+							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+								echo "";
+							} else {
+								echo "<div class='appointmentinformation'>";
+							}
+							
+							if($row['time'] == "00:00:00") {
+								echo "";
+							} else {
+								echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$row['time']."</div>";
+							}
+							if(empty($row['location'])) {
+								echo "";
+							} else {
+								echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".$row['location']."</div>";
+							}
+							if(empty($row['comment'])) {
+								echo "";
+							} else {
+								echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".$row['comment']."</div>";
+							}
+														
+							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+								echo "";
+							} else {
+								echo "</div>";
+							}
+							
+							echo "</div>";
+					   }
+					}
+					
+					if (empty($row['appointmentid'])) {
+						echo "<div class='noappointment'>Keine Termine</div>";
+					} else {
+						echo '';
+					}
+					
+					$row['appointmentid'] = '';
+								
+				echo "</div></div>";
 				
-				<div class="col-md-1">
-					<div class="day">
-						<b>Do, 05.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Vorgestern Fr, 06.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Gestern Sa, 07.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b style="color: red;">Heute So, 08.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Morgen Mo, 09.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Übermorgen Di, 10.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Mi, 11.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Do, 12.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Fr, 13.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Sa, 14.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>So, 15.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Mo, 16.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Di, 17.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Mi, 18.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Do, 19.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Fr, 20.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Sa, 21.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>So, 22.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Mo, 23.10.</b>
-						<div class="noappointment">Keine Termine.</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Di, 24.10.</b>
-						<div class="noappointment">Keine Termine.</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Mi 25.10.</b>
-						<div class="noappointment">Keine Termine.</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Do, 26.10.</b>
-						<div class="noappointment">Keine Termine.</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Fr, 27.10.</b>
-						<div class="noappointment">Keine Termine.</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Sa, 28.10.</b>
-						<div class="noappointment">Keine Termine.</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>So, 29.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Mo, 30.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-1">
-					<div class="day">
-						<b>Di, 31.10.</b>
-						<div class="appointment" tabindex="4">
-							<div class="title"><b>Besprechnung Präsentation <span id="edit-icon" style="height: 17px; margin-bottom: 3px;"></span></b></div>
-							<div class="time">13:00 - 13:30</div>
-							<div class="location">Sitzungszimmer Visp</div>
-							<div class="comment">Ausserdem das Dossier zur Abgabe mitnehmen.</div>
-						</div>
-					</div>
-				</div>
+				$date++;
+				}
+				
+				?>
 			</div> <!-- Ende von .row -->
+			<script>
+				// When the user scrolls down 20px from the top of the document, show the button
+				window.onscroll = function() {scrollFunction()};
+
+				function scrollFunction() {
+				    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+				        document.getElementById("myBtn").style.display = "block";
+				    } else {
+				        document.getElementById("myBtn").style.display = "none";
+				    }
+				}
+
+				// When the user clicks on the button, scroll to the top of the document
+				function topFunction() {
+				    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+				    document.documentElement.scrollTop = 0; // For IE and Firefox
+				} 
+			</script>
+			<button onclick="topFunction()" id="myBtn"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> Nach oben</button> 
 		</div> <!-- Ende von .calendar-container -->
 	</body>
 </html>

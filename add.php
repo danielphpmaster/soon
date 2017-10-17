@@ -46,12 +46,11 @@
 								
 								// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 								if(!$error) {
-									$statement = $connection->prepare("INSERT INTO appointments (appointmentname, date, time, location, comment) VALUES (:appointmentname, :date, :time, :location, :comment)");
-									$result = $statement->execute(array('appointmentname' => $appointmentname, 'date' => $date, 'time' => $time, 'location' => $location, 'comment' => $comment));
+									$statement = $connection->prepare("INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES (:userid, :appointmentname, :date, :time, :location, :comment)");
+									$result = $statement->execute(array('userid' => $userid, 'appointmentname' => $appointmentname, 'date' => $date, 'time' => $time, 'location' => $location, 'comment' => $comment));
 										 
 									$_SESSION['username'] = $username;
 									$_SESSION['email'] = $email;
-									$userid = $user['id'];
 									$_SESSION['userid'] = $userid;	 
 									
 									if($result) {										 
@@ -68,6 +67,7 @@
 									}
 								} // Ende von if(!$error)
 							} // Ende von if(isset($_GET['add']))
+
 						?>
 						<form action="?add=1" method="post">
 							<div class="form-group">
@@ -76,7 +76,7 @@
 							</div>
 							<div class="form-group">
 								<label for="date">Datum</label>
-								<input name="date" type="date" class="form-control" id="date" min="2017-10-08" required placeholder="Datum" value="<?php if(isset($date)){echo $date;}?>">
+								<input name="date" type="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" required placeholder="Datum" value="<?php if(isset($date)){echo $date;}?>">
 							</div>
 							<div class="form-group">
 								<label for="time">Zeit</label>
@@ -91,6 +91,7 @@
 								<input name="comment" type="text" class="form-control" id="comment" placeholder="Bemerkung" value="<?php if(isset($comment)){echo $comment;}?>">
 							</div>
 							<button type="submit" class="btn btn-primary">Termin erfassen</button>
+							<a href="calendar.php">Abrrechen</a>
 						</form>
 					</div>
 				</div>

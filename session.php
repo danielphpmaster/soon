@@ -18,4 +18,10 @@
 	} else {
 		$userid = $_SESSION['userid'];
 	}
+	
+	if (empty($_SESSION['searchvalue'])){
+	 echo "";
+	} else {
+		$searchvalue = $_SESSION['searchvalue'];
+	}
 ?>

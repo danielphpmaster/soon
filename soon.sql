@@ -31,7 +31,7 @@ USE `soon`;
 --
 
 CREATE TABLE `appointments` (
-  `terminid` int(11) NOT NULL,
+  `appointmentid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `appointmentname` varchar(50) NOT NULL,
   `date` date NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `users` (
 -- Indizes für die Tabelle `appointments`
 --
 ALTER TABLE `appointments`
-  ADD PRIMARY KEY (`terminid`);
+  ADD PRIMARY KEY (`appointmentid`);
 
 --
 -- Indizes für die Tabelle `users`
@@ -78,7 +78,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `terminid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `appointmentid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`

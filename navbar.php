@@ -1,3 +1,7 @@
+<?php
+	include 'connection.php';
+?>
+
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -30,19 +34,41 @@
 			if(empty($_SESSION['userid'])) {
 				echo "";
 			} else {
+			/* Zählen, wieviele Termine der angemeldete Benutzer heute hat */
+			$datetoday = date("Y-m-d");
+			$statement = $connection->prepare("SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$datetoday."'");
+			$statement->execute(array('userid' => $userid, 'date' => $datetoday)); 
+			$numberofappointments = $statement->rowCount();
+			}
+			if(isset($_GET['search'])) {
+				$searchvalue = $_GET['search'];
+			} elseif (isset($searchvalue)){
+				$searchvalue = $searchvalue;
+			} else {
+				$searchvalue = '';
+			}				
+		
+			if(empty($_SESSION['userid'])) {
+				echo "";
+			} else {
 				$username = $_SESSION['username'];
 			echo "
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
-					<form class='navbar-form navbar-left'>
+					<form class='navbar-form navbar-left' action='result.php' methode='post'>
 						<div class='form-group'>
-						<input type='text' class='form-control' placeholder='Termin suchen...'>
+						<input name='search' type='text' class='form-control' placeholder='Termin suchen...' value='".$searchvalue."'>
 						</div>
 						<button type='submit' class='btn btn-default'>Suchen</button>
 					</form>
 							
 					<ul class='nav navbar-nav navbar-right'>
-						<li><a href='add.php'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Termin</a></li>
-						<li><a href='calendar.php'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> Mein Kalender <span class='label label-danger'>4</span></a></li>
+						<li><a href='add.php'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Termin hinzufügen</a></li>
+						<li><a href='calendar.php'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> Mein Kalender";
+			if($numberofappointments > '0') {
+				echo " <span class='label label-danger'>".$numberofappointments."</span>";
+			}
+			
+			echo "</a></li>
 						<li class='dropdown'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>".$username." <span class='caret'></span></a>
 							<ul class='dropdown-menu'>
