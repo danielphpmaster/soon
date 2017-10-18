@@ -3,7 +3,7 @@
 	
 <title><?php echo $title; ?></title>
 
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>	
+<link rel="icon" href="images/favicon.ico" />
 
 <!-- Einbindung von Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">

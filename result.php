@@ -77,6 +77,8 @@
 									echo "</div></div>";
 							   }
 							}
+						} else {
+							echo "Hallo";
 						}
 					?>
 						<br>

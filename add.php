@@ -18,14 +18,16 @@
 		
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-md-3">
-				</div>
+				<div class="col-xs-12 col-md-3"></div>
+				
 				<div class="col-xs-12 col-md-6">
 					<div class="box">
 						<h2>Termin hinzufügen</h2>
 						<?php
 							if(isset($_GET['add'])) {
 								$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
+								
+								// Werte aus dem Formular als Variablen speichern
 								$appointmentname = $_POST['appointmentname'];
 								$date = $_POST['date'];
 								$time = $_POST['time'];
@@ -48,26 +50,19 @@
 								if(!$error) {
 									$statement = $connection->prepare("INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES (:userid, :appointmentname, :date, :time, :location, :comment)");
 									$result = $statement->execute(array('userid' => $userid, 'appointmentname' => $appointmentname, 'date' => $date, 'time' => $time, 'location' => $location, 'comment' => $comment));
-										 
-									$_SESSION['username'] = $username;
-									$_SESSION['email'] = $email;
-									$_SESSION['userid'] = $userid;	 
 									
 									if($result) {										 
 										$statement = $connection->prepare("SELECT * FROM users WHERE email = :email");
 										$result = $statement->execute(array('email' => $email));
 										$user = $statement->fetch();
-
 										
-										 
+										// Weiterleitung nach dem Speichern des Termins
 										header('Location: calendar.php');
-										$showFormular = false;
 									} else {
 										echo '<div class="alert alert-danger">Beim Registrieren ist leider ein Fehler aufgetreten</div>';
 									}
 								} // Ende von if(!$error)
 							} // Ende von if(isset($_GET['add']))
-
 						?>
 						<form action="?add=1" method="post">
 							<div class="form-group">
@@ -93,11 +88,11 @@
 							<button type="submit" class="btn btn-primary">Termin erfassen</button>
 							<a href="calendar.php">Abrrechen</a>
 						</form>
-					</div>
-				</div>
+					</div> <?php // Ende von .box ?>
+				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html>

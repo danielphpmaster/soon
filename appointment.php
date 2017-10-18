@@ -4,17 +4,28 @@
 	include 'loginwall.php';
 
 	if(isset($_GET['a'])) {
-							$appointmentid = $_GET['a'];
-							
-							$sql = "SELECT * FROM appointments WHERE userid = ".$userid." AND appointmentid = ".$appointmentid."";
-							foreach ($connection->query($sql) as $row) {
-								 $appointmentname = $row['appointmentname'];
-								 $date = $row['date'];
-								 $time = $row['time'];
-								 $location = $row['location'];
-								 $comment = $row['comment'];
-							}
-						}
+		$appointmentid = $_GET['a'];
+		
+		// Suche nach dem Termin
+		$sql = "SELECT * FROM appointments WHERE userid = ".$userid." AND appointmentid = ".$appointmentid."";
+		
+		// Termininformationen als Variablen speichern
+		foreach ($connection->query($sql) as $row) {
+			$appointmentname = $row['appointmentname'];
+			$date = $row['date'];
+			$time = $row['time'];
+			$location = $row['location'];
+			$comment = $row['comment'];
+		}
+		
+		// Umleitung, wenn kein Termin gefunden
+		if(empty($appointmentname)) {
+			header('Location: calendar.php');
+		}
+	} else {
+		// Umleitung, wenn kein "a"-Wert mitgeschickt wurde
+		header('Location: calendar.php');
+	}
 	
 	$title = "".$appointmentname." - soon";
 ?>
@@ -36,58 +47,70 @@
 				<div class="col-xs-12 col-md-6">
 					<div class="box result">	
 						<div class="float_right">
-						<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a>
-						<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
-						<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></button></a>
+							<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a>
+							<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
+							<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></button></a>
 						</div>
-						<h2>Termin</h2></div>
+						<h2>Termin</h2>
+					</div>
 					<?php
+						// Variable, die definiert, welche Farbe der Terminname hat 
 						if ($row['date'] == date("Y-m-d")) {
-										$appointmentcolor = "style='color: #d9534f;'";
+										$appointment_color = "style='color: #d9534f;'";
 									} else {
-										$appointmentcolor = "";
+										$appointment_color = "";
 									}
+						
+						// Ausgabe Termindatum
 						echo "<div class='date outsidecalendar'><b>".$date."</b></div>";					
 						
+						// Ausgabe Terminname
 						echo "<div class='appointment'>
-							<a href='appointment.php?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
-							
-							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
-								echo "";
-							} else {
-								echo "<div class='appointmentinformation'>";
-							}
-							
-							if($row['time'] == "00:00:00") {
-								echo "";
-							} else {
-								echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$row['time']."</div>";
-							}
-							if(empty($row['location'])) {
-								echo "";
-							} else {
-								echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".$row['location']."</div>";
-							}
-							if(empty($row['comment'])) {
-								echo "";
-							} else {
-								echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".$row['comment']."</div>";
-							}
-														
-							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
-								echo "";
-							} else {
-								echo "</div>";
-							}
-							
-							echo "</div>";
-						?>
-						<br>
-						<a href="calendar.php" class="result_margin_bottom">Zurück</a>
-				</div>
+							<div class='title'".$appointment_color."><b>".$row['appointmentname']."</b></div>";
+						
+						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
+						if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+							echo "";
+						} else {
+							echo "<div class='appointmentinformation'>";
+						}
+						
+						// Wenn vorhanden: Ausgabe Terminzeit
+						if($row['time'] == "00:00:00") {
+							echo "";
+						} else {
+							echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$row['time']."</div>";
+						}
+						
+						// Wenn vorhanden: Ausgabe Terminort
+						if(empty($row['location'])) {
+							echo "";
+						} else {
+							echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".$row['location']."</div>";
+						}
+						
+						// Wenn vorhanden: Ausgabe Terminkommentar
+						if(empty($row['comment'])) {
+							echo "";
+						} else {
+							echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".$row['comment']."</div>";
+						}
+						
+						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist						
+						if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+							echo "";
+						} else {
+							echo "</div>"; // Ende <div class='appointmentinformation'>
+						}
+						
+						echo "</div>"; // Ende <div class='appointment'>						
+					?>
+					<br>
+					<a href="calendar.php" class="result_margin_bottom">Zurück</a>
+				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html>

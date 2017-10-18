@@ -3,7 +3,7 @@
 	include 'session.php';
 	include 'loginwall.php';
 	
-	$title = "Oktober 2017 - soon";
+	$title = "Passwort ändern - soon";
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +26,8 @@
 						<?php
 							if(isset($_GET['editpassword'])) {
 								$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
+								
+								// Werte aus dem Formular als Variablen speichern
 								$currentpassword = $_POST['currentpassword'];
 								$newpassword = $_POST['newpassword'];
 								$newpassword2 = $_POST['newpassword2'];
@@ -55,11 +57,11 @@
 										} else {
 											echo "<div class='alert alert-danger'>Die Änderung Ihres Passwortes konnte nicht gespeichert werden.</div>";
 										}
-									} else {
+									}
+								} else {
 										echo '<div class="alert alert-danger">Das aktuelle Passwort muss stimmen</div>';
 										$error = true;
 									}
-								}
 							}
 						?>
 						<form action="?editpassword=1" method="post">
@@ -80,11 +82,11 @@
 							<button type="submit" class="btn btn-primary">Speichern</button>
 							<a href="profile.php">Abrrechen</a>
 						</form>
-					</div>
-				</div>
+					</div> <?php // Ende von .box ?>
+				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>				
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
-</html> 
+</html>

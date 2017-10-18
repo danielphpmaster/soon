@@ -3,7 +3,7 @@
 	include 'session.php';
 	include 'loginwall.php';
 	
-	$title = "Oktober 2017 - soon";
+	$title = "Benutzername ändern - soon";
 ?>
 
 <!DOCTYPE html>
@@ -25,11 +25,13 @@
 						<h2>Benutzername ändern</h2>
 						<?php
 							if(isset($_GET['editusername'])) {
-								$newusername = $_POST['newusername'];
-								$sql = "UPDATE users SET username='".$newusername."' WHERE id=".$userid."";
+								$new_username = $_POST['new_username'];
+											
+								$sql = "UPDATE users SET username='".$new_username."' WHERE id=".$userid."";
+								
 								if ($connection->query($sql)) {
-								$_SESSION['username'] = $newusername;
-								header('Location: profile.php');
+									$_SESSION['username'] = $new_username;
+									header('Location: profile.php');
 								} else {
 									echo "<div class='alert alert-danger'>Die Änderung Ihres Nutzernamens konnte nicht gespeichert werden.</div>";
 								}
@@ -37,17 +39,17 @@
 						?>
 						<form action="?editusername=1" method="post">
 							<div class="form-group">
-								<label for="newusername">Neuer Benutzername</label>
-								<input name="newusername" type="text" class="form-control" id="newusername" placeholder="Neuer Benutzername" value="<?php if(isset($username)){echo $username;}?>">
+								<label for="new_username">Neuer Benutzername</label>
+								<input name="new_username" type="text" class="form-control" id="new_username" placeholder="Neuer Benutzername" value="<?php if(isset($username)){echo $username;}?>">
 							</div>
 							<button type="submit" class="btn btn-primary">Speichern</button>
 							<a href="profile.php">Abrrechen</a>
 						</form>
-					</div>
-				</div>
+					</div> <?php // Ende von .box ?>
+				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html> 

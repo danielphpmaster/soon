@@ -3,7 +3,7 @@
 	include 'session.php';
 	include 'loginwall.php';
 	
-	$title = "Oktober 2017 - soon";
+	$title = "E-Mail-Adresse bearbeiten - soon";
 ?>
 
 <!DOCTYPE html>
@@ -26,53 +26,62 @@
 						<?php							
 							if(isset($_GET['editemail'])) {
 								$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
-								$newemail = $_POST['newemail'];
-							
+								
+								$new_email = $_POST['new_email'];
+								
 								// Überprüfung, ob die angegebene E-Mail-Adresse gültig ist
-								if(!filter_var($newemail, FILTER_VALIDATE_EMAIL)) {
+								if(!filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
 									echo '<div class="alert alert-danger">Geben Sie eine gültige E-Mail-Adresse ein</div>';
 									$error = true;
-									$currentemail = false;
 								}
 								
-								// Überprüfung, ob die E-Mail-Adresse noch nicht angegeben wurde
-								if($currentemail){
-									if(!$error or $newemail == $email) {
-										$statement = $connection->prepare("SELECT * FROM users WHERE email = :email");
-										$result = $statement->execute(array('email' => $email));
-										$emailcheck = $statement->fetch();
-
-										if($emailcheck !== false) {
-											echo '<div class="alert alert-danger">Diese E-Mail-Adresse ist bereits vergeben</div>';
-											$error = true;
+								// Überprüfung, ob die angegebene E-Mail-Adresse die gleiche ist wie bisher
+								if($email == $new_email) {
+									$email_change = false;
+								} else {
+									$email_change = true;
+								}
+								
+								// Überprüfung, ob die E-Mail-Adresse bereits angegeben wurde								
+								if($email_change) {
+									if(!$error) {
+										$sql = "SELECT * FROM users WHERE email = '".$new_email."'";
+										
+										foreach ($connection->query($sql) as $row) {
+											if($row['email'] > '0') {
+												echo "<div class='alert alert-danger'>Diese E-Mail-Adresse ist bereits vergeben.</div>";
+												$error = true;
+											}							
 										}
 									}
 								}
 								
+								// Wenn kein Fehler besteht, dann wird die E-Mail-Adresse geändert
 								if(!$error) {
-								$sql = "UPDATE users SET email='".$newemail."' WHERE id=".$userid."";
-								if ($connection->query($sql)) {
-								$_SESSION['email'] = $newemail;
-								header('Location: profile.php');
-								} else {
-									echo "<div class='alert alert-danger'>Die Änderung Ihrer E-Mail-Adresse konnte nicht gespeichert werden.</div>";
+									$sql = "UPDATE users SET email='".$new_email."' WHERE id=".$userid."";
+									
+									if ($connection->query($sql)) {
+										$_SESSION['email'] = $new_email;
+										header('Location: profile.php');
+									} else {
+										echo "<div class='alert alert-danger'>Die Änderung Ihrer E-Mail-Adresse konnte nicht gespeichert werden.</div>";
+									}
 								}
-								}
-							}
+							} // Ende von if(isset($_GET['editemail']))
 						?>
 						<form action="?editemail=1" method="post">
 							<div class="form-group">
-								<label for="newemail">Neue E-Mail-Adresse</label>
-								<input name="newemail" type="mail" class="form-control" id="newemail" aria-describedby="emailHelp" placeholder="Neue E-Mail-Adresse" required value="<?php if(isset($_GET['editemail'])){echo $_POST['newemail'];} else {echo $email;}?>">
+								<label for="new_email">Neue E-Mail-Adresse</label>
+								<input name="new_email" type="mail" class="form-control" id="new_email" aria-describedby="emailHelp" placeholder="Neue E-Mail-Adresse" required value="<?php if(isset($_GET['editemail'])){echo $_POST['new_email'];} else {echo $email;}?>">
 							</div>
 							<button type="submit" class="btn btn-primary">Speichern</button>
 							<a href="profile.php">Abrrechen</a>	
 						</form>
-					</div>
-				</div>
+					</div> <?php // Ende von .box ?>
+				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html>

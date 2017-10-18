@@ -2,7 +2,7 @@
 	include 'session.php';
 	include 'loginwall.php';
 	
-	$title = "Registrieren - soon";
+	$title = "Registrierung erfolgreich - soon";
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +30,7 @@
 				</div>
 				
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html>
