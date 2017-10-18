@@ -5,11 +5,11 @@
 	$title = "Anmelden - soon";
 
 	if(isset($_GET['login'])) {
-		$email = $_POST['email'];
+		$username = $_POST['username'];
 		$password = $_POST['password'];
-
-		$statement = $connection->prepare("SELECT * FROM users WHERE email = :email");
-		$result = $statement->execute(array('email' => $email));
+		
+		$statement = $connection->prepare("SELECT * FROM users WHERE username = :username");
+		$result = $statement->execute(array('username' => $username));
 		$user = $statement->fetch();
 
 		// Passwort überprüfen
@@ -18,6 +18,7 @@
 			$_SESSION['userid'] = $userid;
 			$username = $user['username'];
 			$_SESSION['username'] = $username;
+			$email = $user['email'];
 			$_SESSION['email'] = $email;
 			header('Location: calendar.php');
 		} 
@@ -49,8 +50,8 @@
 						?>
 						<form action="?login=1" method="post">
 							<div class="form-group">
-								<label for="email">E-Mail-Adresse</label>
-								<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required placeholder="E-Mail-Adresse" value="<?php if(isset($email)){echo $email;}?>">
+								<label for="username">Benutzername</label>
+								<input name="username" type="username" class="form-control" id="username" aria-describedby="emailHelp" required placeholder="Benutzername" value="<?php if(isset($username)){echo $username;}?>">
 							</div>
 							<div class="form-group">
 								<label for="password">Passwort</label>
