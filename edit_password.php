@@ -1,6 +1,6 @@
 <?php
-	include 'connection.php';
 	include 'session.php';
+	include 'connection.php';
 	include 'loginwall.php';
 	
 	$title = "Passwort ändern - soon";

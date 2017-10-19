@@ -1,6 +1,6 @@
 <?php
-	include 'connection.php';
 	include 'session.php';
+	include 'connection.php';
 		
 	$title = "Anmelden - soon";
 
@@ -16,15 +16,18 @@
 		if ($user !== false && password_verify($password, $user['password'])) {
 			$userid = $user['id'];
 			$_SESSION['userid'] = $userid;
+			
 			$username = $user['username'];
 			$_SESSION['username'] = $username;
+			
 			$_SESSION['email'] = $email;
+			
 			header('Location: calendar.php');
 		} 
 		else {
 			$errorMessage = "<div class='alert alert-danger'>E-Mail-Adresse oder Passwort ist ungültig</div>";
 		}
-	}
+	} // Ende von if(isset($_GET['login']))
 ?>
 
 <!DOCTYPE html>
@@ -65,10 +68,10 @@
 							<button type="submit" class="btn btn-primary">Anmelden</button>
 							Noch keinen Account? <a href="registration.php">Registrieren!</a>						
 						</form>
-					</div>
-				</div>
+					</div> <?php // Ende von .box ?>
+				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div>
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html>

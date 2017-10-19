@@ -1,6 +1,6 @@
 <?php
-	include 'connection.php';
 	include 'session.php';
+	include 'connection.php';
 	
 	$title = "Abmeldung erfolgreich - soon";
 ?>
@@ -25,13 +25,13 @@
 						<?php						
 							session_destroy();
 							echo "<div class='alert alert-success'>","Auf wiedersehen, ".$username."!</div>";
-							header('Location: index.php')				
+							header('Location: index.php')
 						?>						
-					</div>
-				</div>
+					</div> <?php // Ende von .box ?>
+				</div> <?php // Ende von .col-xs-12.col-md.6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html>

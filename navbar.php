@@ -5,8 +5,8 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<!-- Button, mit dem man in der Mobile-Ansicht das Navi aufklappt. Erscheint nur im angemeldeten Zustand -->
 			<?php
+				// Button, mit dem man in der Mobile-Ansicht das Navi aufklappt. Erscheint nur im angemeldeten Zustand
 				if(empty($_SESSION['userid'])) {
 					echo "";
 				} else {
@@ -18,9 +18,9 @@
 						</button>";
 				}
 			?>
-			<!-- Logo, welches im unangemeldet Zustand zu index.php und im angemeldeten Zustand zu calendar.php verlinkt -->
 			<a class="navbar-brand" href="
 				<?php
+					// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Link führt zu calendar.php. Wenn nein: Link führt zu index.php
 					if(empty($_SESSION['userid'])) {
 						echo "index.php";
 					} else {
@@ -28,18 +28,9 @@
 					}
 				?>
 			"><img src="images/logo.svg" height="20px"></a>
-		</div>
-		<!-- Suchen-Formular und Navigations-Punkte, welche nur im angemeldeten Zustand erscheinen -->
-		<?php
-			if(empty($_SESSION['userid'])) {
-				echo "";
-			} else {
-			/* Zählen, wieviele Termine der angemeldete Benutzer heute hat */
-			$datetoday = date("Y-m-d");
-			$statement = $connection->prepare("SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$datetoday."'");
-			$statement->execute(array('userid' => $userid, 'date' => $datetoday)); 
-			$numberofappointments = $statement->rowCount();
-			}
+		</div> <?php // Ende von .navbar-header ?>
+		<?php			
+			// Prüfung, ob ein Suchwert eingegeben wurde
 			if(isset($_GET['search'])) {
 				$searchvalue = $_GET['search'];
 			} elseif (isset($searchvalue)){
@@ -48,10 +39,18 @@
 				$searchvalue = '';
 			}				
 		
+			// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Suchenleiste und Navigations-Punkte werden angezeigt
 			if(empty($_SESSION['userid'])) {
 				echo "";
 			} else {
+				// Zählen, wieviele Termine der angemeldete Benutzer heute hat
+				$datetoday = date("Y-m-d");
+				$statement = $connection->prepare("SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$datetoday."'");
+				$statement->execute(array('userid' => $userid, 'date' => $datetoday)); 
+				$numberofappointments = $statement->rowCount();
+								
 				$username = $_SESSION['username'];
+
 			echo "
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 					<form class='navbar-form navbar-left' action='result.php' methode='post'>
@@ -64,6 +63,7 @@
 					<ul class='nav navbar-nav navbar-right'>
 						<li><a href='add.php'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Termin hinzufügen</a></li>
 						<li><a href='calendar.php'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> Mein Kalender";
+			
 			if($numberofappointments > '0') {
 				echo " <span class='label label-danger'>".$numberofappointments."</span>";
 			}
@@ -72,14 +72,14 @@
 						<li class='dropdown'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>".$username." <span class='caret'></span></a>
 							<ul class='dropdown-menu'>
-								<li><a href='profile.php'>Einstellungen</a></li>
+								<li><a href='profile.php'>Mein Profil</a></li>
 								<li role='separator' class='divider'></li>
 								<li><a href='logout.php'>Abmelden</a></li>
 							</ul>
 						</li>
 					</ul>
-				</div><!-- Ende von .navbar-collapse -->";
+				</div> <?php // Ende von .navbar-collapse ?>";
 				}
 				?>
-	</div> <!-- Ende von .container-fluid -->
+	</div> <?php // Ende von .container-fluid ?>
 </nav>

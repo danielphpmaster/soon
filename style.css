@@ -44,7 +44,7 @@ Betrifft nur index.php
 		background-attachment: fixed;
 	}
 
-	h1 {
+	div.index-title {
 		color: white;
 		padding: 20px;
 		text-align: center;
@@ -61,10 +61,11 @@ Betrifft nur index.php
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
 	}
 
-	/* margin-top bei Mobile Devices */
-		@media only screen and (max-device-width: 600px){
-			h1 {
+	/* margin-top bei mobilen Geräten */
+		@media (max-width: 600px) {
+			div.index-title {
 				margin-top: calc(100vh / 20);
+				font-size: 35px;
 			}
 		}
 
@@ -95,29 +96,29 @@ Betrifft nur index.php
 	div.login {
 		background-color: #f8f8f8;
 		color: black;
-		margin-bottom: calc(100vh*0.25);
+	}
+	
+	div.index-margin-bottom {
+		margin-bottom: calc(100vh*0.25);		
 	} 
 	
-/* "Nach oben"-Button */
-	#myBtn {
-		display: none; /* Hidden by default */
-		position: fixed; /* Fixed/sticky position */
-		bottom: 20px; /* Place the button at the bottom of the page */
-		right: 30px; /* Place the button 30px from the right */
-		z-index: 99; /* Make sure it does not overlap */
-		border: none; /* Remove borders */
-		outline: none; /* Remove outline */
-		background-color: #f8f8f8; /* Set a background color */
-		color: black; /* Text color */
-		cursor: pointer; /* Add a mouse pointer on hover */
-		padding: 15px; /* Some padding */
-		border: 1px solid #e7e7e7;
-		border-radius: 5px; /* Rounded corners */
-	}
-
-	#myBtn:hover {
-		background-color: #e7e7e7; /* Add a dark-grey background on hover */
+	div.more-information-button {
+		color: white;
+		font-size: 40px;
+		text-align: center;
 	} /* Ende von CSS, welches nur index.php betrifft */
+
+/* 
+==============================
+==============================
+Betrifft nur profile.php 
+==============================
+============================== 
+*/
+
+	tr.last-table-row {
+		border-bottom: 1px solid #ddd;
+	}
 
 /* 
 ==============================
@@ -231,7 +232,28 @@ Betrifft nur calendar.php
 		padding-left: 0px;
 		padding-right: 0px;
 		}
-	}/* Ende von CSS, welches nur calendar.php betrifft */
+	} 
+	
+/* "Nach oben"-Button */
+	#myBtn {
+		display: none; /* Hidden by default */
+		position: fixed; /* Fixed/sticky position */
+		bottom: 20px; /* Place the button at the bottom of the page */
+		right: 30px; /* Place the button 30px from the right */
+		z-index: 99; /* Make sure it does not overlap */
+		border: none; /* Remove borders */
+		outline: none; /* Remove outline */
+		background-color: #f8f8f8; /* Set a background color */
+		color: black; /* Text color */
+		cursor: pointer; /* Add a mouse pointer on hover */
+		padding: 15px; /* Some padding */
+		border: 1px solid #e7e7e7;
+		border-radius: 5px; /* Rounded corners */
+	}
+
+	#myBtn:hover {
+		background-color: #e7e7e7; /* Add a dark-grey background on hover */
+	} /* Ende von CSS, welches nur calendar.php betrifft */
 
 div.box {
 	background-color: #f8f8f8;
@@ -245,7 +267,8 @@ div.box.result {
 	margin-bottom: 0px;
 }
 
-.result_margin_bottom {
+.result_margin {
+	margin-top: 20px;
 	margin-bottom: calc(100vh*0.25);
 }
 

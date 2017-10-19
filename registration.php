@@ -97,33 +97,33 @@
 							if($showFormular) {
 								?>
 								<form action="?register=1" method="post">
-														<div class="form-group">
-															<label for="username">Benutzername</label>
-															<input name="username" type="text" class="form-control" id="username" placeholder="Benutzername"  required value="<?php if(isset($username)){echo $username;}?>">
-														</div>
-														<div class="form-group">
-															<label for="email">E-Mail-Adresse</label>
-															<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" required value="<?php if(isset($email)){echo $email;}?>">
-														</div>
-														<div class="form-group">
-															<label for="password">Passwort</label>
-															<input name="password" type="password" class="form-control" id="password" required placeholder="Passwort">
-														</div>
-														<div class="form-group">
-															<label for="password2">Passwort wiederholen</label>
-															<input name="password2" type="password" class="form-control" id="password2" required placeholder="Passwort wiederholen">
-														</div>
-								<button type="submit" class="btn btn-primary">Registrieren</button>
-														Bereits einen Account? <a href="login.php">Anmelden!</a>
+									<div class="form-group">
+										<label for="username">Benutzername</label>
+										<input name="username" type="text" class="form-control" id="username" placeholder="Benutzername"  required value="<?php if(isset($username)){echo $username;}?>">
+									</div>
+									<div class="form-group">
+										<label for="email">E-Mail-Adresse</label>
+										<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" required value="<?php if(isset($email)){echo $email;}?>">
+									</div>
+									<div class="form-group">
+										<label for="password">Passwort</label>
+										<input name="password" type="password" class="form-control" id="password" required placeholder="Passwort">
+									</div>
+									<div class="form-group">
+										<label for="password2">Passwort wiederholen</label>
+										<input name="password2" type="password" class="form-control" id="password2" required placeholder="Passwort wiederholen">
+									</div>
+									<button type="submit" class="btn btn-primary">Registrieren</button>
+									Bereits einen Account? <a href="login.php">Anmelden!</a>
 								</form>
 
 								<?php
 								} // Ende von if($showFormular)
 						?>
-					</div> <!-- Ende von .box -->
-				</div> <!-- Ende von .col-xs-12.col-md3 -->
+					</div> <?php // Ende von .box ?>
+				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html>

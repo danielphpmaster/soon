@@ -34,23 +34,18 @@
 									<td><?php echo $email;?></td>
 									<td><a href="edit_mail.php"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
 								</tr>
-								<tr>
+								<tr class="last-table-row">
 									<td>Passwort</td>
 									<td><a href="edit_password.php"><button type="button" class="btn btn-default btn-xs">Passwort ändern</button></a></td>
 									<td></td>
-								 </tr>
-								 <tr>
-									<td></td>
-									<td></td>
-									<td></td>
-								 </tr>
+								</tr>
 							</tbody>
 						 </table>				
-					</div>
-				</div>
+					</div> <?php // Ende von .box ?>
+				</div> <?php // Ende von col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>
-			</div> <!-- Ende von .row -->
-		</div> <!-- Ende von .container -->
+			</div> <?php // Ende von .row ?>
+		</div> <?php // Ende von .container ?>
 	</body>
 </html>
