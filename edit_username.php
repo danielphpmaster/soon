@@ -26,14 +26,18 @@
 						<?php
 							if(isset($_GET['editusername'])) {
 								$new_username = $_POST['new_username'];
-											
-								$sql = "UPDATE users SET username='".$new_username."' WHERE id=".$userid."";
 								
-								if ($connection->query($sql)) {
-									$_SESSION['username'] = $new_username;
-									header('Location: profile.php');
-								} else {
-									echo "<div class='alert alert-danger'>Die Änderung Ihres Nutzernamens konnte nicht gespeichert werden.</div>";
+								if(empty($new_username)) {
+									echo "<div class='alert alert-danger'>Geben Sie einen Benutzernamen an.</div>";
+								} else {								
+									$sql = "UPDATE users SET username='".$new_username."' WHERE id=".$userid."";
+									
+									if ($connection->query($sql)) {
+										$_SESSION['username'] = $new_username;
+										header('Location: profile.php');
+									} else {
+										echo "<div class='alert alert-danger'>Die Änderung Ihres Nutzernamens konnte nicht gespeichert werden.</div>";
+									}
 								}
 							}
 						?>

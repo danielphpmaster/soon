@@ -22,15 +22,26 @@
 				</div>
 				<?php
 				$date = date("Y-m-d");
-				$month = date("m",strtotime($date))-'1';
-				echo $month;
-				
-				echo"<div class='col-xs-6 col-sm-6 col-md-3'>
-					<button type='button' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> September 2017</button>
-				</div>
-				<div class='col-xs-6 col-sm-6 col-md-3'>
-					<button type='button' class='btn btn-default'>November 2017 <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></button>
-				</div>";
+				$year = DATE("Y");
+				$current_month = date("m",strtotime($date));
+				$next_month = date("m",strtotime($date))+'1';
+								
+				if(isset($_GET['y']) and isset($_GET['m']))  {
+					$calendar_year = $_GET['y'];
+					$calendar_month = $_GET['m'];
+					
+					echo"<div class='col-xs-6 col-sm-6 col-md-3'>
+						<a type='button' href='?y=".$year."&m=".$next_month."' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$calendar_month." ".$calendar_year."</a>
+					</div>
+					<div class='col-xs-6 col-sm-6 col-md-3'>
+						<a type='button' href='?y=".date("y",strtotime($year))+'1'."&m=".$next_month."' class='btn btn-default'>".$calendar_month." ".$calendar_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
+					</div>";
+				} else { // Ende von if(isset($_GET['y'])) AND isset($_GET['m'])
+					echo"<div class='col-xs-6 col-sm-6 col-md-3'></div>
+					<div class='col-xs-6 col-sm-6 col-md-3'>
+						<a type='button' href='?y=".$year."&m=".$next_month."' class='btn btn-default'>".$next_month." ".$year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
+					</div>";
+				}
 				?>
 				<div class="hidden-xs hidden-sm col-md-3">
 				</div>
