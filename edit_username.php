@@ -43,8 +43,7 @@
 						?>
 						<form action="?editusername=1" method="post">
 							<div class="form-group">
-								<label for="new_username">Neuer Benutzername</label>
-								<input name="new_username" type="text" class="form-control" id="new_username" placeholder="Neuer Benutzername" value="<?php if(isset($username)){echo $username;}?>">
+								<span class='glyphicon glyphicon-user form' style='color:#777'; aria-hidden='true'></span><input name="new_username" type="text" class="form-control with_glyphicon" id="new_username" placeholder="Neuer Benutzername" value="<?php if(isset($username)){echo $username;}?>">
 							</div>
 							<button type="submit" class="btn btn-primary">Speichern</button>
 							<a href="profile.php">Abrrechen</a>

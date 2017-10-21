@@ -60,22 +60,24 @@
 				if($timestamp >= (date(strtotime("+ ".$nm." month")))) {
 					$month = date("F", $timestamp);
 					$year = date("Y", $timestamp);
-					echo "<div class='col-xs-4'></div>";
+					echo "<div class='col-xs-6 col-sm-4'></div>";
 				} else {
-					echo"<div class='col-xs-4'>
+					echo"<div class='col-xs-6 col-sm-4'>
 							<a type='button' href='?m=-1' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$previous_month." ".$previous_year."</a>
 						</div>";
 				}
 				
-				echo "<div class='col-xs-4' style='text-align: center;'><button class='btn btn-default' style='border:1px solid white;'><b>".$month." ".$year."</b></button></div>";
+				echo "<div class='hidden-xs col-sm-4 calendar_current_month' style='text-align: center;'><b>".$month." ".$year."</b></div>";
 				
 				if($year == '2019' and $month =='December') {
-					echo "<div class='col-xs-4'></div>";
+					echo "<div class='col-xs-6 col-sm-4'></div>";
 				} else {
-				echo"<div class='col-xs-4'>
+				echo"<div class='col-xs-6 col-sm-4'>
 						<a type='button' href='?m=1' class='btn btn-default'>".$next_month." ".$next_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
 					</div>";					
 				}
+				
+				echo "<div class='col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl calendar_current_month' style='text-align: center;'><b>".$month." ".$year."</b></div>";
 				?>
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->
@@ -158,7 +160,7 @@
 												
 						if (empty($row['appointmentid'])) {
 							// Ausgabe, wenn kein Termin an diesem Datum besteht
-							echo "<div class='noappointment'>Keine Termine</div>";
+							// echo "<div class='noappointment'>Keine Termine</div>";
 						} else {
 							echo '';
 						}

@@ -71,8 +71,7 @@
 						?>
 						<form action="?editemail=1" method="post">
 							<div class="form-group">
-								<label for="new_email">Neue E-Mail-Adresse</label>
-								<input name="new_email" type="mail" class="form-control" id="new_email" aria-describedby="emailHelp" placeholder="Neue E-Mail-Adresse" required value="<?php if(isset($_GET['editemail'])){echo $_POST['new_email'];} else {echo $email;}?>">
+								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="new_email" type="mail" class="form-control with_glyphicon" id="new_email" aria-describedby="emailHelp" placeholder="Neue E-Mail-Adresse" required value="<?php if(isset($_GET['editemail'])){echo $_POST['new_email'];} else {echo $email;}?>">
 							</div>
 							<button type="submit" class="btn btn-primary">Speichern</button>
 							<a href="profile.php">Abrrechen</a>	

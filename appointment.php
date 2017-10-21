@@ -45,14 +45,7 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<div class="box result">	
-						<div class="float_right">
-							<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a>
-							<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a>
-							<a href=""><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></button></a>
-						</div>
-						<h2>Termin</h2>
-					</div>
+					<h2 class='no_box'>Termin</h2>
 					<?php
 						// Variable, die definiert, welche Farbe der Terminname hat 
 						if ($row['date'] == date("Y-m-d")) {
@@ -62,7 +55,14 @@
 									}
 						
 						// Ausgabe Termindatum
-						echo "<div class='date outsidecalendar'><b>".$date."</b></div>";					
+						echo "<div class='day'>
+								<div class='date outside_calendar'><b>".$date."</b>
+									<div class='float_right'>
+										<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+										<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+										<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
+									</div>
+								</div>";					
 						
 						// Ausgabe Terminname
 						echo "<div class='appointment'>
@@ -100,13 +100,14 @@
 						if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
 							echo "";
 						} else {
-							echo "</div>"; // Ende <div class='appointmentinformation'>
+							echo "</div>"; // Ende .appointmentinformation
 						}
 						
-						echo "</div>"; // Ende <div class='appointment'>						
+						echo "</div></div>"; // Ende .appointment					
 					?>
-					<br>
-					<a href="calendar.php" class="result_margin_bottom">Zurück</a>
+					<div class="after_appointment">
+						<a href="calendar.php" class="result_margin_bottom">Zurück</a>
+					</div>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>

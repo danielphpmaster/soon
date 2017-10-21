@@ -27,6 +27,25 @@ a > span.glyphicon, button > span.glyphicon {
 	float: right;
 }
 
+.after_appointment {
+	margin-bottom: calc(100vh*0.25);
+}
+
+h2.no_box {
+	margin: 80px 0 20px 0;
+	padding: 0 10px 0 10px;
+}
+
+span.glyphicon.form {
+	width: 5%;
+	float: left;
+	padding: 10px 6px 7px 0;
+}
+
+input.with_glyphicon {
+	width: 95%;
+}
+
 /* 
 ==============================
 ==============================
@@ -131,9 +150,9 @@ Betrifft nur calendar.php
 	div.calendar-container {
 		margin-bottom: 100px;
 	}
-
+	
 	div.day {
-		margin-top: 10px;
+		margin-bottom: 20px;
 	}
 	
 	div.date {
@@ -144,8 +163,9 @@ Betrifft nur calendar.php
 		margin: 20px 0 0 0;
 	}
 	
-	div.date.outsidecalendar {
+	div.date.outside_calendar {
 		border: 1px solid #e7e7e7;
+		margin-top: 0;
 	}
 	
 	@media (min-width: 750px) {
@@ -253,6 +273,11 @@ Betrifft nur calendar.php
 
 	#myBtn:hover {
 		background-color: #e7e7e7; /* Add a dark-grey background on hover */
+	} 
+
+	div.calendar_current_month {
+		padding: 7px 12px 7px 12px;
+		text-align: center;
 	} /* Ende von CSS, welches nur calendar.php betrifft */
 
 div.box {
@@ -260,15 +285,6 @@ div.box {
 	border: 1px solid #e7e7e7;
 	padding: 20px;
 	margin-top: 80px;
-	margin-bottom: calc(100vh*0.25);
-}
-
-div.box.result {
-	margin-bottom: 0px;
-}
-
-.result_margin {
-	margin-top: 20px;
 	margin-bottom: calc(100vh*0.25);
 }
 

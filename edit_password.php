@@ -67,16 +67,13 @@
 						<form action="?editpassword=1" method="post">
 							<div class="form-group">
 								<p>
-									<label for="currentpassword">Aktuelles Passwort</label>
-									<input name="currentpassword" type="password" class="form-control" id="currentpassword" required placeholder="Aktuelles Passwort">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="currentpassword" type="password" class="form-control with_glyphicon" id="currentpassword" required placeholder="Aktuelles Passwort">
 								</p>
 								<p>
-									<label for="newpassword">Neues Passwort</label>
-									<input name="newpassword" type="password" class="form-control" id="newpassword" required placeholder="Neues Passwort">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword" type="password" class="form-control with_glyphicon" id="newpassword" required placeholder="Neues Passwort">
 								</p>
 								<p>
-									<label for="newpassword2">Neues Passwort bestätigen</label>
-									<input name="newpassword2" type="password" class="form-control" id="newpassword2" required placeholder="Neues Passwort bestätigen">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword2" type="password" class="form-control with_glyphicon" id="newpassword2" required placeholder="Neues Passwort bestätigen">
 								</p>
 							</div>
 							<button type="submit" class="btn btn-primary">Speichern</button>

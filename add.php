@@ -25,9 +25,7 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<div class="box result">
-						<h2>Termin hinzufügen</h2>
-					</div>
+					<h2 class="no_box">Termin hinzufügen</h2>
 						<?php
 							if(isset($_GET['add'])) {
 								$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
@@ -38,17 +36,42 @@
 								$time = $_POST['time'];
 								$location = $_POST['location'];
 								$comment = $_POST['comment'];
-
+																
 								// Überprüfung, ob ein Terminname angegeben wurde
 								if(empty($appointmentname)) {
 									echo '<div class="alert alert-danger">Geben Sie einen Terminnamen ein</div>';
 									$error = true;
 								}
+																
+								// Überprüfung, ob ein gültiges Datum angegeben wurde							
+								$formats = array("d.m.Y", "d/m/Y", "Ymd", "Y-m-d");
+								$dates = array($date);
+
+								foreach ($dates as $input) 
+								 {
+								   foreach ($formats as $format)
+									{
+									  // echo "Applying format $format on date $input...<br>";
+
+									  $date2 = DateTime::createFromFormat($format, $input);
+									  if ($date2 == false) {
+									   // echo "Failed<br>";
+									  } else {
+									   // echo "Success<br>";
+									$date = date("Y-m-d", strtotime($date));
+									}
+									}
+								 }
+								 
+								 function validateDate($date)
+								{
+									$d = DateTime::createFromFormat('Y-m-d', $date);
+									return $d && $d->format('Y-m-d') === $date;
+								}
 								
-								// Überprüfung, ob ein Datum angegeben wurde
-								if(empty($date)) {
-									echo '<div class="alert alert-danger">Geben Sie ein Datum ein</div>';
-									$error = true;
+								if(validateDate($date) == '0') {
+										echo '<div class="alert alert-danger">Geben Sie ein gültiges Datum ein</div>';
+										$error = true;									
 								}
 								
 								// Wenn kein Fehler besteht, dann wird der Termin gespeichert
@@ -71,42 +94,23 @@
 						
 						// Ausgabe Termindatum
 						?>
+						<div class="day">
 						<form action="?add=1" method="post">
-						<div class='date outsidecalendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" required placeholder="Datum" value="<?php if(isset($date)){echo $date;}?>"></b></div>
-						<div class='appointment'>
-							<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" required placeholder="Terminname" value="<?php if(isset($appointmentname)){echo $appointmentname;}?>"></b></div>
-							<div class='appointmentinformation'>
-							<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> <input name="time" type="number" class="form-control" id="time" placeholder="Zeit" value="<?php if(isset($time)){echo $time;}?>"></div>
-						<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> <input name="location" type="text" class="form-control" id="location" placeholder="Ort" value="<?php if(isset($location)){echo $location;}?>"></div>
-						<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> <input name="comment" type="text" class="form-control" id="comment" placeholder="Bemerkung" value="<?php if(isset($comment)){echo $comment;}?>"></div>
+							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="Datum" value="<?php if(isset($date)){echo $date;}?>"></b></div>
+							<div class='appointment'>
+								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="Terminname" value="<?php if(isset($appointmentname)){echo $appointmentname;}?>"></b></div>
+								<div class='appointmentinformation'>
+									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="Zeit" value="<?php if(isset($time)){echo $time;}?>"></div>
+									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="Ort" value="<?php if(isset($location)){echo $location;}?>"></div>
+									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="Bemerkung" value="<?php if(isset($comment)){echo $comment;}?>"></div>
+								</div>
+							</div>
 						</div>
-						</div>
-							<button type="submit" class="btn btn-primary">Termin erfassen</button>
-							<a href="calendar.php">Abrrechen</a>
+							<div class="after_appointment">
+								<button type="submit" class="btn btn-primary">Termin erfassen</button>
+								<a href="calendar.php">Abrrechen</a>
+							</div>
 						</form>
-						<!--
-						<form action="?add=1" method="post">
-							<div class="form-group">
-								<label for="appointmentname">Terminname</label>
-								<input name="appointmentname" type="text" class="form-control" id="appointmentname" required placeholder="Terminname" value="<?php if(isset($appointmentname)){echo $appointmentname;}?>">
-							</div>
-							<div class="form-group">
-								<label for="date">Datum</label>
-								<input name="date" type="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" required placeholder="Datum" value="<?php if(isset($date)){echo $date;}?>">
-							</div>
-							<div class="form-group">
-								<label for="time">Zeit</label>
-								<input name="time" type="time" class="form-control" id="time" placeholder="Zeit" value="<?php if(isset($time)){echo $time;}?>">
-							</div>
-							<div class="form-group">
-								<label for="location">Ort</label>
-								<input name="location" type="text" class="form-control" id="location" placeholder="Ort" value="<?php if(isset($location)){echo $location;}?>">
-							</div>
-							<div class="form-group">						
-								<label for="comment">Bemerkung</label>
-								<input name="comment" type="text" class="form-control" id="comment" placeholder="Bemerkung" value="<?php if(isset($comment)){echo $comment;}?>">
-							</div>
-						</form>-->
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>

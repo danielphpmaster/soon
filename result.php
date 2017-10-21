@@ -21,26 +21,33 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<div class="box result">
 					<?php
 						if(isset($_GET['search'])) {
 							$searchvalue = $_GET['search'];
 							
 							// Prüfung, ob ein Suchbegriff angegeben wurde
 							if(empty($searchvalue)) {
-								echo "<h2>Keine Suchergebnisse</h2>
-								<div class='alert alert-danger'>Geben Sie einen Suchbegriff ein</div></div>";
+								echo "<h2 class='no_box'>Keine Suchergebnisse</h2>
+								<div class='alert alert-danger'>Geben Sie einen Suchbegriff ein</div>";
 								$_SESSION['searchvalue'] = '';
-							} else {
-								$_SESSION['searchvalue'] = $searchvalue;							
+							} else {								
+								$_SESSION['searchvalue'] = $searchvalue;	
 								
 								// Suche nach einem Termin, der im Terminnamen den Suchbegriff enthält und der heute oder in Zukunft stattfindet
 								$sql = "SELECT * FROM `appointments` WHERE userid = '".$userid."' AND appointmentname LIKE '%".$searchvalue."%' AND date >= '".date("Y-m-d")."' ";
 								
 								// Ausgabe Titel mit Suchbegriff
-								echo "<h2>Suchergebnisse zu '".$searchvalue."'</h2></div>";
+								echo "<h2 class='no_box'>Suchergebnisse zu '".$searchvalue."'</h2>";
 																
 								foreach ($connection->query($sql) as $row) {
+									
+									if (empty($row['appointmentid'])) {
+										// Ausgabe, wenn kein Termin an diesem Datum besteht
+										echo "<div class='noappointment'>Keine Termine</div>";
+									} else {
+										echo '';
+									}
+									
 									// Variable, die definiert, welche Farbe der Terminname hat
 									if ($row['date'] == date("Y-m-d")) {
 											$appointmentcolor = "style='color: #d9534f;'";
@@ -49,7 +56,14 @@
 									}
 									
 									// Ausgabe Termindatum
-									echo "<div class='day'><div class='date outsidecalendar'><b>".$row['date']."</b></div>";
+									echo "<div class='day'>
+											<div class='date outside_calendar'><b>".$row['date']."</b>
+												<div class='float_right'>
+													<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+													<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+													<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
+												</div>
+											</div>";
 									  
 									// Ausgabe Terminname
 									echo "<div class='appointment'>
@@ -95,7 +109,9 @@
 							}
 						} // Ende von if(isset($_GET['search']))
 					?>
-						<a href="calendar.php" class="result_margin">Zurück</a>
+					<div class="after_appointment">
+						<a href="calendar.php">Zurück</a>
+					</div>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>
