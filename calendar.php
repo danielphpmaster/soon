@@ -3,7 +3,44 @@
 	include 'connection.php';
 	include 'loginwall.php';
 	
-	$title = "".date('F')."  - soon";
+	$timestamp = time();				
+				
+						
+				if(empty($_GET['m'])) {
+					$nm = '0';
+				} else {
+					if(empty($nm)) {
+						$nm = $_GET['m'];
+					} else {
+						$nm = $nm+$_GET['m'];
+					}
+				}
+				
+				$_SESSION['nm'] = $nm;
+					
+				$month = date("F", strtotime("+ ".$nm." month"));
+				$previous_month_nm = $nm-'1';
+				$previous_month = date("F", strtotime("+ ".$previous_month_nm." month"));
+				$next_month_nm = $nm+'1';
+				$next_month = date("F", strtotime("+ ".$next_month_nm." month"));
+				
+				$year = date("Y", strtotime("+ ".$nm." month"));
+				
+				if($month == 'January') {
+					$previous_year_nm = $nm-'1';
+					$previous_year = date("Y", strtotime("+ ".$previous_year_nm." month"));
+				} else {
+					$previous_year = $year;
+				}
+				
+				if($month == 'December') {
+					$next_year_nm = $nm+'1';
+					$next_year = date("Y", strtotime("+ ".$next_month_nm." month"));
+				} else {
+					$next_year = $year;
+				}
+				
+	$title = "".$month." ".$year."  - soon";
 ?>
 
 <!DOCTYPE html>
@@ -18,39 +55,38 @@
 				
 		<div class="container">
 			<div class="row" style="margin-top: 20px;">
-				<div class="hidden-xs hidden-sm col-md-3">
-				</div>
 				<?php
-				$date = date("Y-m-d");
-				$year = DATE("Y");
-				$current_month = date("m",strtotime($date));
-				$next_month = date("m",strtotime($date))+'1';
-								
-				if(isset($_GET['y']) and isset($_GET['m']))  {
-					$calendar_year = $_GET['y'];
-					$calendar_month = $_GET['m'];
-					
-					echo"<div class='col-xs-6 col-sm-6 col-md-3'>
-						<a type='button' href='?y=".$year."&m=".$next_month."' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$calendar_month." ".$calendar_year."</a>
-					</div>
-					<div class='col-xs-6 col-sm-6 col-md-3'>
-						<a type='button' href='?y=".date("y",strtotime($year))+'1'."&m=".$next_month."' class='btn btn-default'>".$calendar_month." ".$calendar_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
-					</div>";
-				} else { // Ende von if(isset($_GET['y'])) AND isset($_GET['m'])
-					echo"<div class='col-xs-6 col-sm-6 col-md-3'></div>
-					<div class='col-xs-6 col-sm-6 col-md-3'>
-						<a type='button' href='?y=".$year."&m=".$next_month."' class='btn btn-default'>".$next_month." ".$year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
-					</div>";
+				
+				if($timestamp >= (date(strtotime("+ ".$nm." month")))) {
+					$month = date("F", $timestamp);
+					$year = date("Y", $timestamp);
+					echo "<div class='col-xs-4'></div>";
+				} else {
+					echo"<div class='col-xs-4'>
+							<a type='button' href='?m=-1' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$previous_month." ".$previous_year."</a>
+						</div>";
+				}
+				
+				echo "<div class='col-xs-4' style='text-align: center;'><button class='btn btn-default' style='border:1px solid white;'><b>".$month." ".$year."</b></button></div>";
+				
+				if($year == '2019' and $month =='December') {
+					echo "<div class='col-xs-4'></div>";
+				} else {
+				echo"<div class='col-xs-4'>
+						<a type='button' href='?m=1' class='btn btn-default'>".$next_month." ".$next_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
+					</div>";					
 				}
 				?>
-				<div class="hidden-xs hidden-sm col-md-3">
-				</div>
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->
-		
 		<div class="calendar-container">
 			<div class="row seven-cols">
 				<?php
+					if($month == date("F", $timestamp) and $year == date("Y", $timestamp)) {
+					$date = date("Y-m-d", strtotime("+ ".$nm." month")); } else {
+					$date = date("Y-m-01", strtotime("+ ".$nm." month"));
+					}
+				
 					$last_day_of_current_month = date("Y-m-t", strtotime($date));
 					
 					while ($date <= $last_day_of_current_month) {
@@ -72,12 +108,12 @@
 						// Ausgabe Termindatum
 						echo "<div class='col-md-1'>
 							<div class='day'>
-							<div class='date ".$dateclass."'><b>".$date."</b></div>";
+							<div class='date ".$dateclass."'><b>".date('d. M Y', strtotime($date))."</b><a href='add.php?date=".$date."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
 						
 						// Suche nach einem Termin
 						$sql = "SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$date."'";
 										
-						foreach ($connection->query($sql) as $row) {						   
+						foreach ($connection->query($sql) as $row) {
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
 							<a href='appointment.php?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";

@@ -24,4 +24,10 @@
 	} else {
 		$searchvalue = $_SESSION['searchvalue'];
 	}
+	
+	if (empty($_SESSION['nm'])){
+	 echo "";
+	} else {
+		$nm = $_SESSION['nm'];
+	}
 ?>

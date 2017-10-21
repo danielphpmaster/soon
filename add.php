@@ -4,6 +4,10 @@
 	include 'loginwall.php';
 
 	$title = "Termin hinzufügen - soon";
+	
+	if(isset($_GET['date'])) {
+		$date = $_GET['date'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +25,9 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<div class="box">
+					<div class="box result">
 						<h2>Termin hinzufügen</h2>
+					</div>
 						<?php
 							if(isset($_GET['add'])) {
 								$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
@@ -63,7 +68,23 @@
 									}
 								} // Ende von if(!$error)
 							} // Ende von if(isset($_GET['add']))
+						
+						// Ausgabe Termindatum
 						?>
+						<form action="?add=1" method="post">
+						<div class='date outsidecalendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" required placeholder="Datum" value="<?php if(isset($date)){echo $date;}?>"></b></div>
+						<div class='appointment'>
+							<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" required placeholder="Terminname" value="<?php if(isset($appointmentname)){echo $appointmentname;}?>"></b></div>
+							<div class='appointmentinformation'>
+							<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> <input name="time" type="number" class="form-control" id="time" placeholder="Zeit" value="<?php if(isset($time)){echo $time;}?>"></div>
+						<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> <input name="location" type="text" class="form-control" id="location" placeholder="Ort" value="<?php if(isset($location)){echo $location;}?>"></div>
+						<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> <input name="comment" type="text" class="form-control" id="comment" placeholder="Bemerkung" value="<?php if(isset($comment)){echo $comment;}?>"></div>
+						</div>
+						</div>
+							<button type="submit" class="btn btn-primary">Termin erfassen</button>
+							<a href="calendar.php">Abrrechen</a>
+						</form>
+						<!--
 						<form action="?add=1" method="post">
 							<div class="form-group">
 								<label for="appointmentname">Terminname</label>
@@ -85,10 +106,7 @@
 								<label for="comment">Bemerkung</label>
 								<input name="comment" type="text" class="form-control" id="comment" placeholder="Bemerkung" value="<?php if(isset($comment)){echo $comment;}?>">
 							</div>
-							<button type="submit" class="btn btn-primary">Termin erfassen</button>
-							<a href="calendar.php">Abrrechen</a>
-						</form>
-					</div> <?php // Ende von .box ?>
+						</form>-->
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>
