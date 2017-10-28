@@ -1,7 +1,7 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
-	include 'loginwall.php';
+	require_once 'session.php';
+	require_once 'connection.php';
+	require_once 'loginwall.php';
 	
 	$title = "Benutzername ändern - soon";
 ?>
@@ -10,11 +10,11 @@
 
 <html>
 	<head>
-		<?php include 'head.php';?>
+		<?php require_once 'head.php';?>
 	</head>
 
 	<body>
-		<?php include 'navbar.php';?>
+		<?php require_once 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -36,7 +36,7 @@
 										$_SESSION['username'] = $new_username;
 										header('Location: profile.php');
 									} else {
-										echo "<div class='alert alert-danger'>Die Änderung Ihres Nutzernamens konnte nicht gespeichert werden.</div>";
+										echo "<div class='alert alert-danger'>Die Änderung Ihres Nutzernamens konnte nicht gespeichert werden</div>";
 									}
 								}
 							}

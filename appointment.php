@@ -1,7 +1,7 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
-	include 'loginwall.php';
+	require_once 'session.php';
+	require_once 'connection.php';
+	require_once 'loginwall.php';
 
 	if(isset($_GET['a'])) {
 		$appointmentid = $_GET['a'];
@@ -34,11 +34,11 @@
 
 <html>
 	<head>
-		<?php include 'head.php';?>
+		<?php require_once 'head.php';?>
 	</head>
 
 	<body>
-		<?php include 'navbar.php';?>
+		<?php require_once 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -58,8 +58,8 @@
 						echo "<div class='day'>
 								<div class='date outside_calendar'><b>".$date."</b>
 									<div class='float_right'>
-										<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
-										<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+										<a href='remove_appointment.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+										<a href='edit_appointment.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
 										<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
 									</div>
 								</div>";					

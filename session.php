@@ -30,4 +30,10 @@
 	} else {
 		$nm = $_SESSION['nm'];
 	}
+	
+	if (empty($_SESSION['appointmentid'])){
+	 echo "";
+	} else {
+		$appointmentid = $_SESSION['appointmentid'];
+	}
 ?>

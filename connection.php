@@ -1,8 +1,11 @@
 <?php
 	// Verbindung zur Datenbank
-		$servername = 'localhost';
-		$user = 'root';
-		$pw = '';
-		$db = 'soon';
 		$connection = new PDO('mysql:host=localhost;dbname=soon', 'root', '');
+	
+		class db {
+		public static $link;
+    }
+
+    db::$link = new mysqli('localhost', 'root', '', 'soon');
+
 ?>

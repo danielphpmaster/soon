@@ -1,5 +1,5 @@
 <?php
-	include 'connection.php';
+	require_once 'connection.php';
 ?>
 
 <nav class="navbar navbar-default">

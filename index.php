@@ -1,5 +1,5 @@
 <?php
-	include 'session.php';
+	require_once 'session.php';
 	
 	// Wenn in angemeldetem Zustand: Umleitung zu calendar.php
 	if(isset($_SESSION['userid'])) {
@@ -13,11 +13,11 @@
 
 <html>
 	<head>
-		<?php include 'head.php';?>
+		<?php require_once 'head.php';?>
 	</head>
 
 	<body>
-		<?php include 'navbar.php';?>
+		<?php require_once 'navbar.php';?>
 		
 		<div class="background-image">
 			<div class="container">

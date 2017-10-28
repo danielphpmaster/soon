@@ -1,7 +1,7 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
-	include 'loginwall.php';
+	require_once 'session.php';
+	require_once 'connection.php';
+	require_once 'loginwall.php';
 	
 	$timestamp = time();				
 				
@@ -47,11 +47,11 @@
 
 <html>
 	<head>
-		<?php include 'head.php';?>
+		<?php require_once 'head.php';?>
 	</head>
 
 	<body>
-		<?php include 'navbar.php';?>
+		<?php require_once 'navbar.php';?>
 				
 		<div class="container">
 			<div class="row" style="margin-top: 20px;">

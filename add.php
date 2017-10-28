@@ -1,7 +1,7 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
-	include 'loginwall.php';
+	require_once 'session.php';
+	require_once 'connection.php';
+	require_once 'loginwall.php';
 
 	$title = "Termin hinzufügen - soon";
 	
@@ -14,11 +14,11 @@
 
 <html>
 	<head>
-		<?php include 'head.php';?>
+		<?php require_once 'head.php';?>
 	</head>
 
 	<body>
-		<?php include 'navbar.php';?>
+		<?php require_once 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -44,7 +44,7 @@
 								}
 																
 								// Überprüfung, ob ein gültiges Datum angegeben wurde							
-								$formats = array("d.m.Y", "d/m/Y", "Ymd", "Y-m-d");
+								$formats = array("d.m.Y", "Ymd", "Y-m-d");
 								$dates = array($date);
 
 								foreach ($dates as $input) 
@@ -74,6 +74,12 @@
 										$error = true;									
 								}
 								
+								/* Überprüfung, ob ein Datum in der Zukunft angegeben wurde
+								if($date <= time()) {
+										echo '<div class="alert alert-danger">Geben Sie ein zukünftiges Datum ein</div>';
+										$error = true;												
+								}*/
+								
 								// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 								if(!$error) {
 									$statement = $connection->prepare("INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES (:userid, :appointmentname, :date, :time, :location, :comment)");
@@ -87,7 +93,7 @@
 										// Weiterleitung nach dem Speichern des Termins
 										header('Location: calendar.php');
 									} else {
-										echo '<div class="alert alert-danger">Beim Registrieren ist leider ein Fehler aufgetreten</div>';
+										echo '<div class="alert alert-danger">Ihr Termin konnte nicht gespeichert werden</div>';
 									}
 								} // Ende von if(!$error)
 							} // Ende von if(isset($_GET['add']))

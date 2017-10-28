@@ -1,6 +1,6 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	require_once 'session.php';
+	require_once 'connection.php';
 		
 	$title = "Anmelden - soon";
 
@@ -33,11 +33,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php include 'head.php';?>
+		<?php require_once 'head.php';?>
 	</head>
 	
 	<body>
-		<?php include 'navbar.php';?>
+		<?php require_once 'navbar.php';?>
 			
 		<div class="container">
 			<div class="row">

@@ -1,6 +1,6 @@
 <?php
-	include 'session.php';
-	include 'loginwall.php';
+	require_once 'session.php';
+	require_once 'loginwall.php';
 	
 	$title = "Registrierung erfolgreich - soon";
 ?>
@@ -9,11 +9,11 @@
 
 <html>
 	<head>
-		<?php include 'head.php';?>
+		<?php require_once 'head.php';?>
 	</head>
 
 	<body>
-		<?php include 'navbar.php';?>
+		<?php require_once 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
