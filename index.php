@@ -52,8 +52,12 @@
 					
 					<div class="col-xs-12 col-md-3"></div>
 					
-					<div class="col-xs-12 more-information-button">
-						<a href="" style="color: white;"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+					<div class="col-xs-12 more-information-button"> 
+						<?php /* Ungenutze Schaltfläche (Pfeil nach unten-Symbol)
+						<div>
+							<a href="" style="color: white;"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+						</div> 
+						*/ ?>
 					</div>
 				</div> <?php // Ende von .row ?>
 			</div> <?php // Ende von .container ?>

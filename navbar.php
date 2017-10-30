@@ -45,10 +45,12 @@
 			} else {
 				// Zählen, wieviele Termine der angemeldete Benutzer heute hat
 				$datetoday = date("Y-m-d");
-				$statement = $connection->prepare("SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$datetoday."'");
-				$statement->execute(array('userid' => $userid, 'date' => $datetoday)); 
-				$numberofappointments = $statement->rowCount();
-								
+				$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = ".$userid." AND date = '".$datetoday."'";
+				$count_results = db::$link->query($sql_select);
+
+				$total_appointments_today  = $count_results->fetch_row();
+				$total_appointments_today = $total_appointments_today[0];
+			
 				$username = $_SESSION['username'];
 
 			echo "
@@ -64,8 +66,8 @@
 						<li><a href='add.php'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Termin hinzufügen</a></li>
 						<li><a href='calendar.php'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> Mein Kalender";
 			
-			if($numberofappointments > '0') {
-				echo " <span class='label label-danger'>".$numberofappointments."</span>";
+			if($total_appointments_today > '0') {
+				echo " <span class='label label-danger'>".$total_appointments_today."</span>";
 			}
 			
 			echo "</a></li>

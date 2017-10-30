@@ -33,13 +33,13 @@
 							} else {								
 								$_SESSION['searchvalue'] = $searchvalue;	
 								
-								// Suche nach einem Termin, der im Terminnamen den Suchbegriff enthält und der heute oder in Zukunft stattfindet
-								$sql = "SELECT * FROM `appointments` WHERE userid = '".$userid."' AND appointmentname LIKE '%".$searchvalue."%' AND date >= '".date("Y-m-d")."' ";
-								
 								// Ausgabe Titel mit Suchbegriff
-								echo "<h2 class='no_box'>Suchergebnisse zu '".$searchvalue."'</h2>";
-																
-								foreach ($connection->query($sql) as $row) {
+								echo "<h2 class='margin-bottom-4px'>Suchergebnisse zu '".$searchvalue."'</h2>";
+								
+								// Suche nach einem Termin, der im Terminnamen den Suchbegriff enthält und der heute oder in Zukunft stattfindet
+								$sql_select = "SELECT * FROM `appointments` WHERE userid = '".$userid."' AND appointmentname LIKE '%".$searchvalue."%' AND date >= '".date("Y-m-d")."' ";
+								$sql_select = db::$link->query($sql_select);
+								while($row = $sql_select->fetch_array()) {
 									
 									if (empty($row['appointmentid'])) {
 										// Ausgabe, wenn kein Termin an diesem Datum besteht
@@ -50,24 +50,31 @@
 									
 									// Variable, die definiert, welche Farbe der Terminname hat
 									if ($row['date'] == date("Y-m-d")) {
-											$appointmentcolor = "style='color: #d9534f;'";
+											$appointment_color = "style='color: #d9534f;'";
 									} else {
-											$appointmentcolor = "";
+											$appointment_color = "";
 									}
 									
-									// Ausgabe Termindatum
-									echo "<div class='day'>
-											<div class='date outside_calendar'><b>".$row['date']."</b>
+									echo "<div class='day'>";
+									 
+									if($row['date'] == date("Y-m-d")) {
+										$date_output = "heute (".date("d. M", strtotime($row['date'])).")";
+									} elseif($row['date'] == date("Y-m-d", strtotime("+1 day"))) {
+										$date_output = "morgen (".date("d. M", strtotime($row['date'])).")";
+									} else {
+										$date_output = date("d. M Y", strtotime($row['date']));
+									}
+						
+									// Ausgabe Terminname und Termindatum
+									echo "<div class='appointment'>
+									<a href='appointment.php?a=".$row['appointmentid']."'".$appointment_color."><div class='title'><b>".$row['appointmentname']."</b></a>
+												<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>
 												<div class='float_right'>
-													<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
-													<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+													<a href='remove.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+													<a href='edit_appointment.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
 													<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
 												</div>
 											</div>";
-									  
-									// Ausgabe Terminname
-									echo "<div class='appointment'>
-									<a href='appointment.php?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
 									
 									// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
 									if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
@@ -109,8 +116,8 @@
 							}
 						} // Ende von if(isset($_GET['search']))
 					?>
-					<div class="after_appointment">
-						<a href="calendar.php">Zurück</a>
+					<div class="last_element">
+						<a class="btn btn-primary grey-button" href="calendar.php">Zum Kalender</a>
 					</div>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

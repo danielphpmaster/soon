@@ -25,83 +25,69 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2 class="no_box">Termin hinzufügen</h2>
-						<?php
-							if(isset($_GET['add'])) {
-								$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
-								
-								// Werte aus dem Formular als Variablen speichern
-								$appointmentname = $_POST['appointmentname'];
-								$date = $_POST['date'];
-								$time = $_POST['time'];
-								$location = $_POST['location'];
-								$comment = $_POST['comment'];
-																
-								// Überprüfung, ob ein Terminname angegeben wurde
-								if(empty($appointmentname)) {
-									echo '<div class="alert alert-danger">Geben Sie einen Terminnamen ein</div>';
-									$error = true;
-								}
-																
-								// Überprüfung, ob ein gültiges Datum angegeben wurde							
-								$formats = array("d.m.Y", "Ymd", "Y-m-d");
-								$dates = array($date);
-
-								foreach ($dates as $input) 
-								 {
-								   foreach ($formats as $format)
-									{
-									  // echo "Applying format $format on date $input...<br>";
-
-									  $date2 = DateTime::createFromFormat($format, $input);
-									  if ($date2 == false) {
-									   // echo "Failed<br>";
-									  } else {
-									   // echo "Success<br>";
-									$date = date("Y-m-d", strtotime($date));
-									}
-									}
-								 }
-								 
-								 function validateDate($date)
-								{
-									$d = DateTime::createFromFormat('Y-m-d', $date);
-									return $d && $d->format('Y-m-d') === $date;
-								}
-								
-								if(validateDate($date) == '0') {
-										echo '<div class="alert alert-danger">Geben Sie ein gültiges Datum ein</div>';
-										$error = true;									
-								}
-								
-								/* Überprüfung, ob ein Datum in der Zukunft angegeben wurde
-								if($date <= time()) {
-										echo '<div class="alert alert-danger">Geben Sie ein zukünftiges Datum ein</div>';
-										$error = true;												
-								}*/
-								
-								// Wenn kein Fehler besteht, dann wird der Termin gespeichert
-								if(!$error) {
-									$statement = $connection->prepare("INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES (:userid, :appointmentname, :date, :time, :location, :comment)");
-									$result = $statement->execute(array('userid' => $userid, 'appointmentname' => $appointmentname, 'date' => $date, 'time' => $time, 'location' => $location, 'comment' => $comment));
+					<h2>Termin hinzufügen</h2>
+					<?php
+						if(isset($_GET['add'])) {
+							$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
+							
+							// Werte aus dem Formular als Variablen speichern
+							$appointmentname = $_POST['appointmentname'];
+							$date = $_POST['date'];
+							$time = $_POST['time'];
+							$location = $_POST['location'];
+							$comment = $_POST['comment'];
+	
+							// Überprüfung, ob ein Terminname angegeben wurde
+							if(empty($appointmentname)) {
+								echo '<div class="alert alert-danger">Geben Sie einen Terminnamen ein</div>';
+								$error = true;
+							}
+											
+							// Überprüfung, ob ein gültiges Datum angegeben wurde							
+							$formats = array("d.m.Y", "Ymd", "Y-m-d");
+							$dates = array($date);
+							
+							foreach ($dates as $input) {
+								foreach ($formats as $format) {
+									// echo "Applying format $format on date $input...<br>";
+									$date2 = DateTime::createFromFormat($format, $input);
 									
-									if($result) {										 
-										$statement = $connection->prepare("SELECT * FROM users WHERE email = :email");
-										$result = $statement->execute(array('email' => $email));
-										$user = $statement->fetch();
-										
-										// Weiterleitung nach dem Speichern des Termins
-										header('Location: calendar.php');
+									if ($date2 == false) {
+										// echo "Failed<br>";
 									} else {
-										echo '<div class="alert alert-danger">Ihr Termin konnte nicht gespeichert werden</div>';
+										// echo "Success<br>";
+										$date = date("Y-m-d", strtotime($date));
 									}
-								} // Ende von if(!$error)
-							} // Ende von if(isset($_GET['add']))
-						
-						// Ausgabe Termindatum
-						?>
+								}
+							}
+							 
+							function validateDate($date) {
+								$d = DateTime::createFromFormat('Y-m-d', $date);
+								return $d && $d->format('Y-m-d') === $date;
+							}
+								
+							if(validateDate($date) == '0') {
+								echo '<div class="alert alert-danger">Geben Sie ein gültiges Datum ein</div>';
+								$error = true;									
+							}
+								
+							/* Überprüfung, ob ein Datum in der Zukunft angegeben wurde
+							if($date <= time()) {
+									echo '<div class="alert alert-danger">Geben Sie ein zukünftiges Datum ein</div>';
+									$error = true;												
+							}*/
+								
+							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
+							if(!$error) {
+								$sql_insert = "INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES ('".$userid."', '".$appointmentname."', '".$date."', '".$time."', '".$location."', '".$comment."')";
+								$sql_insert = db::$link->query($sql_insert);
+								
+								header('Location: calendar.php');
+							} // Ende von if(!$error)
+						} // Ende von if(isset($_GET['add']))
+					?>
+					<form action="?add=1" method="post">
 						<div class="day">
-						<form action="?add=1" method="post">
 							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="Datum" value="<?php if(isset($date)){echo $date;}?>"></b></div>
 							<div class='appointment'>
 								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="Terminname" value="<?php if(isset($appointmentname)){echo $appointmentname;}?>"></b></div>
@@ -112,11 +98,11 @@
 								</div>
 							</div>
 						</div>
-							<div class="after_appointment">
-								<button type="submit" class="btn btn-primary">Termin erfassen</button>
-								<a href="calendar.php">Abrrechen</a>
-							</div>
-						</form>
+						<div class="last_element">
+							<button type="submit" class="btn btn-primary">Termin erfassen</button>
+							<a class="btn btn-primary grey-button" href="calendar.php">Abrrechen</a>
+						</div>
+					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>

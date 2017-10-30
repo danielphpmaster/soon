@@ -108,14 +108,22 @@
 						}
 						
 						// Ausgabe Termindatum
+						if($date == date("Y-m-d")) {
+							$date_output = "heute, ".date("d. M Y", strtotime($date))."";
+						} elseif($date == date("Y-m-d", strtotime("+1 day"))) {
+							$date_output = "morgen, ".date("d. M Y", strtotime($date))."";
+						} else {
+							$date_output = date("d. M Y", strtotime($date));
+						}						
+						
 						echo "<div class='col-md-1'>
 							<div class='day'>
-							<div class='date ".$dateclass."'><b>".date('d. M Y', strtotime($date))."</b><a href='add.php?date=".$date."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
+							<div class='date ".$dateclass."'><b><span class='date_output_calendar'>".$date_output."</span></b><a href='add.php?date=".$date."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
 						
 						// Suche nach einem Termin
-						$sql = "SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$date."'";
+						$sql_select = "SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$date."'";
 										
-						foreach ($connection->query($sql) as $row) {
+						foreach (db::$link->query($sql_select) as $row) {
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
 							<a href='appointment.php?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";

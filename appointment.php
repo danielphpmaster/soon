@@ -7,17 +7,17 @@
 		$appointmentid = $_GET['a'];
 		
 		// Suche nach dem Termin
-		$sql = "SELECT * FROM appointments WHERE userid = ".$userid." AND appointmentid = ".$appointmentid."";
+		$sql_select = "SELECT * FROM appointments WHERE userid = ".$userid." AND appointmentid = ".$appointmentid."";
 		
-		// Termininformationen als Variablen speichern
-		foreach ($connection->query($sql) as $row) {
+		foreach (db::$link->query($sql_select) as $row) {
+			// Termininformationen als Variablen speichern
 			$appointmentname = $row['appointmentname'];
 			$date = $row['date'];
 			$time = $row['time'];
 			$location = $row['location'];
 			$comment = $row['comment'];
 		}
-		
+				
 		// Umleitung, wenn kein Termin gefunden
 		if(empty($appointmentname)) {
 			header('Location: calendar.php');
@@ -45,28 +45,35 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2 class='no_box'>Termin</h2>
+					<h2>Termin</h2>
 					<?php
 						// Variable, die definiert, welche Farbe der Terminname hat 
 						if ($row['date'] == date("Y-m-d")) {
-										$appointment_color = "style='color: #d9534f;'";
-									} else {
-										$appointment_color = "";
-									}
+							$appointment_color = "style='color: #d9534f;'";
+						} else {
+							$appointment_color = "";
+						}
 						
-						// Ausgabe Termindatum
-						echo "<div class='day'>
-								<div class='date outside_calendar'><b>".$date."</b>
-									<div class='float_right'>
-										<a href='remove_appointment.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
-										<a href='edit_appointment.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
-										<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
-									</div>
-								</div>";					
+						echo "<div class='day'>";
+						
+						if($row['date'] == date("Y-m-d")) {
+							$date_output = "heute (".date("d. M", strtotime($row['date'])).")";
+						} elseif($row['date'] == date("Y-m-d", strtotime("+1 day"))) {
+							$date_output = "morgen (".date("d. M", strtotime($row['date'])).")";
+						} else {
+							$date_output = date("d. M Y", strtotime($row['date']));
+						}
 						
 						// Ausgabe Terminname
-						echo "<div class='appointment'>
-							<div class='title'".$appointment_color."><b>".$row['appointmentname']."</b></div>";
+						echo "<div class='appointment' style='margin-top: 0'>
+									<div ".$appointment_color." class='title'><b>".$row['appointmentname']."</b>
+										<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>
+										<div class='float_right'>
+											<a href='remove.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+											<a href='edit_appointment.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+											<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
+										</div>
+									</div>";
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
 						if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
@@ -105,8 +112,8 @@
 						
 						echo "</div></div>"; // Ende .appointment					
 					?>
-					<div class="after_appointment">
-						<a href="calendar.php" class="result_margin_bottom">Zurück</a>
+					<div class="last_element">
+						<a class="btn btn-primary grey-button" href="calendar.php">Zum Kalender</a>
 					</div>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

@@ -21,65 +21,84 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<div class="box">
-						<h2>Passwort ändern</h2>
+					<h2>Passwort ändern</h2>
 						<?php
 							if(isset($_GET['editpassword'])) {
 								$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
-								
+									
 								// Werte aus dem Formular als Variablen speichern
-								$currentpassword = $_POST['currentpassword'];
-								$newpassword = $_POST['newpassword'];
-								$newpassword2 = $_POST['newpassword2'];
+								if(empty($_POST['newpassword2'])) {
+									$newpassword2 = "";
+								} else {
+									$newpassword2 = $_POST['newpassword2'];
+								}
+								
+								if(empty($_POST['newpassword'])) {
+									$newpassword = "";
+								} else {
+									$newpassword = $_POST['newpassword'];
+								}
+								
+								if(empty($_POST['currentpassword'])) {
+									$currentpassword = "";
+								} else {
+									$currentpassword = $_POST['currentpassword'];									
+								}
 								
 								// Überprüfung, dass angebene Passwort mit dem aktuellen Passwort übereinstimmt
-								$statement = $connection->prepare("SELECT * FROM users WHERE email = :email");
-								$result = $statement->execute(array('email' => $email));
-								$user = $statement->fetch();
+								$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
+										
+								foreach (db::$link->query($sql_select) as $row) {
+									$password_check = $row['password'];
+								}
 								
-								if ($user !== false && password_verify($currentpassword, $user['password'])) {
-								
+								if (password_verify($currentpassword, $password_check)) {
+									
+									if(empty($newpassword) AND empty($newpassword2)) {
+										echo '<div class="alert alert-danger">Geben Sie ein neues Passwort ein</div>';
+										$error = true;
+									}
+									
 									// Überprüfung, ob die beiden angegebenen Passwörter übereinstimmen
 									if($newpassword == $newpassword2) {
 									} else {
-									echo '<div class="alert alert-danger">Die neuen Passwörter müssen übereinstimmen</div>';
-									$error = true;
+										echo '<div class="alert alert-danger">Die neuen Passwörter müssen übereinstimmen</div>';
+										$error = true;
 									}
 
 									// Wenn kein Fehler besteht, dann wird das Passwort geändert
 									if(!$error) {
 										$newpassword_hash = password_hash($newpassword, PASSWORD_DEFAULT);
-										$sql = "UPDATE users SET password='".$newpassword_hash."' WHERE id=".$userid."";
 										
-										if ($connection->query($sql)) {
-											$_SESSION['password'] = $newpassword;
-											header('Location: profile.php');
-										} else {
-											echo "<div class='alert alert-danger'>Die Änderung Ihres Passwortes konnte nicht gespeichert werden.</div>";
-										}
+										$sql_update = "UPDATE users SET password='".$newpassword_hash."' WHERE userid=".$userid."";
+										$sql_update = db::$link->query($sql_update);
+										
+										$_SESSION['password'] = $newpassword;
+										header('Location: profile.php');
 									}
 								} else {
-										echo '<div class="alert alert-danger">Das aktuelle Passwort muss stimmen</div>';
-										$error = true;
-									}
+									echo '<div class="alert alert-danger">Das aktuelle Passwort muss stimmen</div>';
+									$error = true;
+								}
 							}
 						?>
 						<form action="?editpassword=1" method="post">
-							<div class="form-group">
-								<p>
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="currentpassword" type="password" class="form-control with_glyphicon" id="currentpassword" required placeholder="Aktuelles Passwort">
-								</p>
-								<p>
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword" type="password" class="form-control with_glyphicon" id="newpassword" required placeholder="Neues Passwort">
-								</p>
-								<p>
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword2" type="password" class="form-control with_glyphicon" id="newpassword2" required placeholder="Neues Passwort bestätigen">
-								</p>
+							<div class="box">
+								<div class="form-group">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="currentpassword" type="password" class="form-control with_glyphicon" id="currentpassword" placeholder="Aktuelles Passwort">
+								</div>
+								<div class="form-group">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword" type="password" class="form-control with_glyphicon" id="newpassword" placeholder="Neues Passwort">
+								</div>
+								<div class="form-group margin-bottom-0">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword2" type="password" class="form-control with_glyphicon" id="newpassword2" placeholder="Neues Passwort bestätigen">
+								</div>
+							</div> <?php // Ende von .box ?>
+							<div class="last_element">
+								<button type="submit" class="btn btn-primary">Speichern</button>
+								<a class="btn btn-primary grey-button" href="profile.php">Abrrechen</a>
 							</div>
-							<button type="submit" class="btn btn-primary">Speichern</button>
-							<a href="profile.php">Abrrechen</a>
 						</form>
-					</div> <?php // Ende von .box ?>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				
 				<div class="col-xs-12 col-md-3"></div>				

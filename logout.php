@@ -20,13 +20,12 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<div class="box">
-						<h2>Abmeldung erfolgreich</h2>
-						<?php						
-							session_destroy();
-							echo "<div class='alert alert-success'>","Auf wiedersehen, ".$username."!</div>";
-							header('Location: index.php')
-						?>						
+					<h2>Abmeldung erfolgreich</h2>
+					<?php						
+						session_destroy();
+						echo "<div class='alert alert-success'>","Auf wiedersehen, ".$username."!</div>";
+						header('Location: index.php')
+					?>						
 					</div> <?php // Ende von .box ?>
 				</div> <?php // Ende von .col-xs-12.col-md.6 ?>
 				

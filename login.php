@@ -5,27 +5,39 @@
 	$title = "Anmelden - soon";
 
 	if(isset($_GET['login'])) {
-		$email = $_POST['email'];
-		$password = $_POST['password'];
 		
-		$statement = $connection->prepare("SELECT * FROM users WHERE email = :email");
-		$result = $statement->execute(array('email' => $email));
-		$user = $statement->fetch();
+		if(empty($_POST['email'])) {
+			$email = "";
+		} else {
+			$email = $_POST['email'];
+		}
+		
+		if(empty($_POST['password'])) {
+			$password = "";
+		} else {
+			$password = $_POST['password'];
+		}
+		
+		$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
+		
+		foreach (db::$link->query($sql_select) as $row) {
+			$password_check = $row['password'];
+		}
 
-		// Passwort überprüfen
-		if ($user !== false && password_verify($password, $user['password'])) {
-			$userid = $user['id'];
+		if(empty($password_check)) {
+			$error_message = "<div class='alert alert-danger'>E-Mail-Adresse oder Passwort ist ungültig</div>";
+		} elseif (password_verify($password, $password_check)) {
+			$userid = $row['userid'];
 			$_SESSION['userid'] = $userid;
-			
-			$username = $user['username'];
+				
+			$username = $row['username'];
 			$_SESSION['username'] = $username;
 			
 			$_SESSION['email'] = $email;
-			
+				
 			header('Location: calendar.php');
-		} 
-		else {
-			$errorMessage = "<div class='alert alert-danger'>E-Mail-Adresse oder Passwort ist ungültig</div>";
+		} else {
+			$error_message = "<div class='alert alert-danger'>E-Mail-Adresse oder Passwort ist ungültig</div>";
 		}
 	} // Ende von if(isset($_GET['login']))
 ?>
@@ -43,21 +55,19 @@
 			<div class="row">
 				<div class="col-xs-12 col-md-3"></div>
 				<div class="col-xs-12 col-md-6">
-					<div class="box">
-						<h2>Anmelden</h2>
-						<?php
-							if(isset($errorMessage)) {
-								echo $errorMessage;
-							}
-						?>
-						<form action="?login=1" method="post">
+					<h2>Anmelden</h2>
+					<?php
+						if(isset($error_message)) {
+							echo $error_message;
+						}
+					?>
+					<form action="?login=1" method="post">
+						<div class="box">
 							<div class="form-group">
-								<label for="email">E-Mail-Adresse</label>
-								<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required placeholder="E-Mail-Adresse" value="<?php if(isset($email)){echo $email;}?>">
+								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="email" type="email" class="form-control with_glyphicon" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" value="<?php if(isset($email)){echo $email;}?>">
 							</div>
 							<div class="form-group">
-								<label for="password">Passwort</label>
-								<input name="password" type="password" class="form-control" id="password" required placeholder="Passwort">
+								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password" type="password" class="form-control with_glyphicon" id="password" placeholder="Passwort">
 							</div>
 							<div class="form-check">
 								<label class="form-check-label">
@@ -65,10 +75,12 @@
 									Angemeldet bleiben
 								</label>
 							</div>
+						</div> <?php // Ende von .box ?>
+						<div class="last_element">	
 							<button type="submit" class="btn btn-primary">Anmelden</button>
-							Noch keinen Account? <a href="registration.php">Registrieren!</a>						
-						</form>
-					</div> <?php // Ende von .box ?>
+							Noch keinen Account? <a href="registration.php">Registrieren!</a>
+						</div>
+					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				<div class="col-xs-12 col-md-3"></div>
 			</div> <?php // Ende von .row ?>
