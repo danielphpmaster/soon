@@ -92,20 +92,40 @@
 							// Wenn kein Fehler besteht, dann wird der Benutzer registriert
 							if(!$error) {
 								$password_hash = password_hash($password, PASSWORD_DEFAULT);
-
+								
+								/*
 								$sql_insert = "INSERT INTO users (username, email, password, language) VALUES ('".$username."', '".$email."', '".$password_hash."', '".$language."')";
 								$sql_insert = $connection->query($sql_insert);
+								*/
+								
+								$sql_insert = $connection->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+								$result = $sql_insert->execute(array('username' => $username, 'email' => $email, 'password' => $password_hash));
+								
+								if($result) {										 
+										$statement = $connection->prepare("SELECT * FROM users WHERE email = :email");
+										$result = $statement->execute(array('email' => $email));
+										$user = $statement->fetch();
 								
 								$_SESSION['username'] = $username;
 								$_SESSION['email'] = $email;
 								
+								/*
 								$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
 								foreach ($connection->query($sql_select) as $row) {
 									$userid = $row['userid'];
 								}
+								*/
+								
+								$userid = $user['userid'];
 								
 								$_SESSION['userid'] = $userid;
 								header('Location: confirmation.php');
+								
+								$showFormular = false;
+									} else {
+										echo '<div class="alert alert-danger">Beim Registrieren ist leider ein Fehler aufgetreten</div>';
+									}
+								
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['register']))
 					?>
