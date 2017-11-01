@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 	
 	$title = "Benutzername ändern - soon";
 ?>
@@ -10,11 +10,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -36,7 +36,7 @@
 								echo "<div class='alert alert-danger'>Geben Sie einen Benutzernamen an.</div>";
 							} else {
 								$sql_update = "UPDATE users SET username='".$new_username."' WHERE userid=".$userid."";
-								$sql_update = db::$link->query($sql_update);
+								$sql_update = $connection->query($sql_update);
 								
 								$_SESSION['username'] = $new_username;
 								header('Location: profile.php');

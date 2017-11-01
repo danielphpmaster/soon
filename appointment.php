@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 
 	if(isset($_GET['a'])) {
 		$appointmentid = $_GET['a'];
@@ -9,7 +9,7 @@
 		// Suche nach dem Termin
 		$sql_select = "SELECT * FROM appointments WHERE userid = ".$userid." AND appointmentid = ".$appointmentid."";
 		
-		foreach (db::$link->query($sql_select) as $row) {
+		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
 			$appointmentname = $row['appointmentname'];
 			$date = $row['date'];
@@ -34,11 +34,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">

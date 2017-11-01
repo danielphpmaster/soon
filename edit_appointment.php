@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 
 	if(isset($_GET['a'])) {
 		$appointmentid = $_GET['a'];
@@ -11,7 +11,7 @@
 		$sql_select = "SELECT * FROM appointments WHERE userid = '".$userid."' AND appointmentid = '".$appointmentid."'";
 		
 		// Termininformationen als Variablen speichern
-		foreach (db::$link->query($sql_select) as $row) {
+		foreach ($connection->query($sql_select) as $row) {
 		}
 		
 		// Umleitung, wenn kein Termin gefunden
@@ -29,11 +29,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -95,7 +95,7 @@
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {									
 								$sql_update = "UPDATE appointments SET appointmentname = '".$newappointmentname."', date = '".$newdate."', time = '".$newtime."', location = '".$newlocation."', comment = '".$newcomment."' WHERE userid = '".$userid."' AND appointmentid = '".$appointmentid."'";
-								$sql_update = db::$link->query($sql_update);
+								$sql_update = $connection->query($sql_update);
 								
 								header('Location: calendar.php');						
 							} // Ende von if(!$error)

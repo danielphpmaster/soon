@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 
 	$title = "Termin hinzufügen - soon";
 	
@@ -14,11 +14,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -80,7 +80,7 @@
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {
 								$sql_insert = "INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES ('".$userid."', '".$appointmentname."', '".$date."', '".$time."', '".$location."', '".$comment."')";
-								$sql_insert = db::$link->query($sql_insert);
+								$sql_insert = $connection->query($sql_insert);
 								
 								header('Location: calendar.php');
 							} // Ende von if(!$error)

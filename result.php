@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 
 	$title = "Suchergebnisse - soon";
 ?>
@@ -10,11 +10,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -38,8 +38,7 @@
 								
 								// Suche nach einem Termin, der im Terminnamen den Suchbegriff enthält und der heute oder in Zukunft stattfindet
 								$sql_select = "SELECT * FROM `appointments` WHERE userid = '".$userid."' AND appointmentname LIKE '%".$searchvalue."%' AND date >= '".date("Y-m-d")."' ";
-								$sql_select = db::$link->query($sql_select);
-								while($row = $sql_select->fetch_array()) {
+								foreach ($connection->query($sql_select) as $row) {
 									
 									if (empty($row['appointmentid'])) {
 										// Ausgabe, wenn kein Termin an diesem Datum besteht

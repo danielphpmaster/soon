@@ -1,6 +1,6 @@
 <?php
-	include 'connection.php';
 	include 'session.php';
+	include 'connection.php';
 	
 	$title = "Registrieren - soon";
 ?>
@@ -81,7 +81,7 @@
 							if(!$error) {
 								$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
 										
-								foreach (db::$link->query($sql_select) as $row) {
+								foreach ($connection->query($sql_select) as $row) {
 									if($row['email'] > '0') {
 										echo "<div class='alert alert-danger'>Diese E-Mail-Adresse ist bereits vergeben.</div>";
 										$error = true;
@@ -94,14 +94,13 @@
 								$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 								$sql_insert = "INSERT INTO users (username, email, password, language) VALUES ('".$username."', '".$email."', '".$password_hash."', '".$language."')";
-								$sql_insert = db::$link->query($sql_insert);
+								$sql_insert = $connection->query($sql_insert);
 								
 								$_SESSION['username'] = $username;
 								$_SESSION['email'] = $email;
 								
 								$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
-								$sql_select = db::$link->query($sql_select);
-								while($row = $sql_select->fetch_array()) {
+								foreach ($connection->query($sql_select) as $row) {
 									$userid = $row['userid'];
 								}
 								
@@ -113,16 +112,16 @@
 					<form action="?register=1" method="post">								
 						<div class="box">
 							<div class="form-group">
-								<span class='glyphicon glyphicon-user form' style='color:#777'; aria-hidden='true'></span><input name="username" type="text" class="form-control with_glyphicon" id="username" placeholder="Benutzername"  required value="<?php if(isset($username)){echo $username;}?>">
+								<span class='glyphicon glyphicon-user form' style='color:#777'; aria-hidden='true'></span><input name="username" type="text" class="form-control with_glyphicon" id="username" placeholder="Benutzername" value="<?php if(isset($username)){echo $username;}?>">
 							</div>
 							<div class="form-group">
-								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="email" type="email" class="form-control with_glyphicon" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" required value="<?php if(isset($email)){echo $email;}?>">
+								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="email" type="email" class="form-control with_glyphicon" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" value="<?php if(isset($email)){echo $email;}?>">
 							</div>
 							<div class="form-group">
-								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password" type="password" class="form-control with_glyphicon" id="password" required placeholder="Passwort">
+								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password" type="password" class="form-control with_glyphicon" id="password" placeholder="Passwort">
 							</div>
 							<div class="form-group margin-bottom-0">
-								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password2" type="password" class="form-control with_glyphicon" id="password2" required placeholder="Passwort wiederholen">
+								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password2" type="password" class="form-control with_glyphicon" id="password2" placeholder="Passwort wiederholen">
 							</div>
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">

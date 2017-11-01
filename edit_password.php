@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 	
 	$title = "Passwort ändern - soon";
 ?>
@@ -10,11 +10,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -48,7 +48,7 @@
 								// Überprüfung, dass angebene Passwort mit dem aktuellen Passwort übereinstimmt
 								$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
 										
-								foreach (db::$link->query($sql_select) as $row) {
+								foreach ($connection->query($sql_select) as $row) {
 									$password_check = $row['password'];
 								}
 								
@@ -71,7 +71,7 @@
 										$newpassword_hash = password_hash($newpassword, PASSWORD_DEFAULT);
 										
 										$sql_update = "UPDATE users SET password='".$newpassword_hash."' WHERE userid=".$userid."";
-										$sql_update = db::$link->query($sql_update);
+										$sql_update = $connection->query($sql_update);
 										
 										$_SESSION['password'] = $newpassword;
 										header('Location: profile.php');

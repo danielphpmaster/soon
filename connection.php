@@ -1,8 +1,4 @@
 <?php
 	// Verbindung zur Datenbank
-		class db {
-		public static $link;
-    }
-
-    db::$link = new mysqli('localhost', 'root', '', 'soon');
+	$connection = new PDO('mysql:host=localhost;dbname=soon', 'root', ''); 
 ?>

@@ -1,6 +1,6 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
+	include 'session.php';
+	include 'connection.php';
 	
 	$title = "Abmeldung erfolgreich - soon";
 ?>
@@ -9,11 +9,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">

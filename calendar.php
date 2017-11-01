@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 	
 	$timestamp = time();				
 				
@@ -47,11 +47,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 				
 		<div class="container">
 			<div class="row" style="margin-top: 20px;">
@@ -123,7 +123,7 @@
 						// Suche nach einem Termin
 						$sql_select = "SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$date."'";
 										
-						foreach (db::$link->query($sql_select) as $row) {
+						foreach ($connection->query($sql_select) as $row) {
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
 							<a href='appointment.php?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";

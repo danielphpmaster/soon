@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 	
 	$title = "Termin erfolgreich gelöscht - soon";
 	
@@ -14,11 +14,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -28,7 +28,7 @@
 					<h2>Termin erfolgreich gelöscht</h2>
 					<?php						
 						$sql_delete = "DELETE FROM appointments WHERE appointmentid = '".$appointmentid."' and userid = '".$userid."'";
-						$sql_delete = db::$link->query($sql_delete);
+						$sql_delete = $connection->query($sql_delete);
 						
 						echo "<div class='alert alert-success'>Der Termin wurde erfolgreich gelöscht</div>";
 						

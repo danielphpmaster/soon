@@ -1,6 +1,6 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
+	include 'session.php';
+	include 'connection.php';
 		
 	$title = "Anmelden - soon";
 
@@ -20,7 +20,7 @@
 		
 		$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
 		
-		foreach (db::$link->query($sql_select) as $row) {
+		foreach ($connection->query($sql_select) as $row) {
 			$password_check = $row['password'];
 		}
 
@@ -45,11 +45,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 	
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 			
 		<div class="container">
 			<div class="row">

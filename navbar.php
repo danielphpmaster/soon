@@ -1,7 +1,3 @@
-<?php
-	require_once 'connection.php';
-?>
-
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -46,10 +42,10 @@
 				// Zählen, wieviele Termine der angemeldete Benutzer heute hat
 				$datetoday = date("Y-m-d");
 				$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = ".$userid." AND date = '".$datetoday."'";
-				$count_results = db::$link->query($sql_select);
+				$count_result = $connection->prepare($sql_select);
+				$count_result->execute();
 
-				$total_appointments_today  = $count_results->fetch_row();
-				$total_appointments_today = $total_appointments_today[0];
+				$total_appointments_today = $count_result->fetchColumn();
 			
 				$username = $_SESSION['username'];
 

@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 	
 	$title = "Termin löschen - soon";
 	
@@ -10,12 +10,12 @@
 	}	
 	
 	$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = '".$userid."' AND appointmentid = '".$appointmentid."'";
-	$count_results = db::$link->query($sql_select);
+	$count_result = $connection->prepare($sql_select);
+	$count_result->execute();
 
-	$get_total  = $count_results->fetch_row();
-	$get_total = $get_total[0];
-						
-	if($get_total < '1') {
+	$total_appointments_found = $count_result->fetchColumn();
+							
+	if($total_appointments_found < '1') {
 		header('Location: calendar.php');
 	}
 ?>
@@ -24,11 +24,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">

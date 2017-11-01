@@ -1,7 +1,7 @@
 <?php
-	require_once 'session.php';
-	require_once 'connection.php';
-	require_once 'loginwall.php';
+	include 'session.php';
+	include 'connection.php';
+	include 'loginwall.php';
 	
 	$title = "E-Mail-Adresse bearbeiten - soon";
 ?>
@@ -10,11 +10,11 @@
 
 <html>
 	<head>
-		<?php require_once 'head.php';?>
+		<?php include 'head.php';?>
 	</head>
 
 	<body>
-		<?php require_once 'navbar.php';?>
+		<?php include 'navbar.php';?>
 		
 		<div class="container">
 			<div class="row">
@@ -50,7 +50,7 @@
 								if(!$error) {
 									$sql_select = "SELECT * FROM users WHERE email = '".$new_email."'";
 										
-									foreach (db::$link->query($sql_select) as $row) {
+									foreach ($connection->query($sql_select) as $row) {
 										if($row['email'] > '0') {
 											echo "<div class='alert alert-danger'>Diese E-Mail-Adresse ist bereits vergeben.</div>";
 											$error = true;
@@ -62,7 +62,7 @@
 							// Wenn kein Fehler besteht, dann wird die E-Mail-Adresse geändert
 							if(!$error) {
 								$sql_update = "UPDATE users SET email='".$new_email."' WHERE userid=".$userid."";
-								$sql_update = db::$link->query($sql_update);
+								$sql_update = $connection->query($sql_update);
 								
 								$_SESSION['email'] = $new_email;
 								header('Location: profile.php');
