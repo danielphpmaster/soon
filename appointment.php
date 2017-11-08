@@ -71,7 +71,7 @@
 										<div class='float_right'>
 											<a href='remove.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
 											<a href='edit_appointment.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
-											<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
+											<a href='share_appointment.php'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
 										</div>
 									</div>";
 						
