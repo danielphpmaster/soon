@@ -42,10 +42,10 @@
 								$receiver = $mail_receiver;
 								$subject = $username." hat dir einen soon Termin gesendet";
 								$from = "Von: soon calendar <termin@soon-calendar.ch>";
-								$text = "Test";
+								$text = "Hallo!<br><br>".$username." hat dir einen soon Termin gesendet.<br>Klicke <a href='https://www.soon-calendar.ch'>hier</a> um den Termin in soon zu öffnen.";
 								 
 								mail($receiver, $subject, $text, $from);
-								
+								echo "<div class='alert alert-success'>Termin erfolgreich mit ".$mail_receiver." geteilt</div>";
 							}
 						}
 					?>
