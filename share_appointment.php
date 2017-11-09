@@ -38,13 +38,17 @@
 							}
 							
 							// Prüfung, ob ein Nutzername angegeben wurde. Wenn ja, wird dieser gespeichert
-							if(!$error) {
-								$receiver = $mail_receiver;
+							if(!$error) {								
+								$headers = "From:soon-calendar.ch <termin@soon-calendar.ch>\n";
+								$headers .= "MIME-Version: 1.0\n";
+								$headers .= "Content-Type: text/plain; charset=\"utf-8\"\n";
+								
 								$subject = $username." hat dir einen soon Termin gesendet";
-								$from = "Von: soon calendar <termin@soon-calendar.ch>";
 								$text = "Hallo!<br><br>".$username." hat dir einen soon Termin gesendet.<br>Klicke <a href='https://www.soon-calendar.ch'>hier</a> um den Termin in soon zu öffnen.";
-								 
-								mail($receiver, $subject, $text, $from);
+
+								mail($mail_receiver, $subject, $text, $headers);
+							
+
 								echo "<div class='alert alert-success'>Termin erfolgreich mit ".$mail_receiver." geteilt</div>";
 							}
 						}
