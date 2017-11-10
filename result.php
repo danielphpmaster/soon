@@ -37,7 +37,7 @@
 								echo "<h2 class='margin-bottom-4px'>Suchergebnisse zu '".$searchvalue."'</h2>";
 								
 								// Suche nach einem Termin, der im Terminnamen den Suchbegriff enthält und der heute oder in Zukunft stattfindet
-								$sql_select = "SELECT * FROM `appointments` WHERE userid = '".$userid."' AND appointmentname LIKE '%".$searchvalue."%' AND date >= '".date("Y-m-d")."' ";
+								$sql_select = "SELECT * FROM `appointments` WHERE userid = '$userid' AND appointmentname LIKE '%$searchvalue%' AND date >= '".date("Y-m-d")."' ";
 								foreach ($connection->query($sql_select) as $row) {
 									
 									if (empty($row['appointmentid'])) {

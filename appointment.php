@@ -7,7 +7,7 @@
 		$appointmentid = $_GET['a'];
 		
 		// Suche nach dem Termin
-		$sql_select = "SELECT * FROM appointments WHERE userid = ".$userid." AND appointmentid = ".$appointmentid."";
+		$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND appointmentid = '$appointmentid'";
 		
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern

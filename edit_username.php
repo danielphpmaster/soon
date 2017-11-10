@@ -35,7 +35,7 @@
 							if(empty($new_username)) {
 								echo "<div class='alert alert-danger'>Geben Sie einen Benutzernamen an.</div>";
 							} else {
-								$sql_update = "UPDATE users SET username='".$new_username."' WHERE userid=".$userid."";
+								$sql_update = "UPDATE users SET username = '$new_username' WHERE userid = '$userid'";
 								$sql_update = $connection->query($sql_update);
 								
 								$_SESSION['username'] = $new_username;

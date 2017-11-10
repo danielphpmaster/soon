@@ -41,7 +41,7 @@
 			} else {
 				// Zählen, wieviele Termine der angemeldete Benutzer heute hat
 				$datetoday = date("Y-m-d");
-				$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = ".$userid." AND date = '".$datetoday."'";
+				$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = '$userid' AND date = '$datetoday'";
 				$count_result = $connection->prepare($sql_select);
 				$count_result->execute();
 

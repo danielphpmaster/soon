@@ -42,9 +42,42 @@
 								$headers = "From:soon-calendar.ch <termin@soon-calendar.ch>\n";
 								$headers .= "MIME-Version: 1.0\n";
 								$headers .= "Content-Type: text/plain; charset=\"utf-8\"\n";
+								$headers .= "Content-Type: text/html\n";
 								
-								$subject = $username." hat dir einen soon Termin gesendet";
-								$text = "Hallo!<br><br>".$username." hat dir einen soon Termin gesendet.<br>Klicke <a href='https://www.soon-calendar.ch'>hier</a> um den Termin in soon zu öffnen.";
+								$subject = $username." hat mit dir einen soon Termin geteilt";
+								$text = "
+									<html>
+										<head>
+											<title>soon Termin</title>
+										</head>
+										
+										<body>
+											<p>Hallo!\n\n".$username." hat  einen soon Termin mit dir geteilt.\n\nKlicke <a href='https://www.soon-calendar.ch'>hier</a> um den Termin in soon zu öffnen!</p>
+											<table style='border:1px solid #e7e7e7;'>
+												<tr>
+													<td style='width: 250px; background-color: #f8f8f8; border-bottom: 1px solid #e7e7e7; padding: 10px;'>
+													Text
+													</td>
+												</tr>
+												<tr>
+													<td style='width: 250px; padding: 10px;'>
+														🕓 16:00 Uhr
+													</td>												
+												</tr>
+												<tr>
+													<td style='width: 250px; padding: 0 10px;'>
+														🗺 Staldenried
+													</td>
+												</tr>
+												<tr >
+													<td style='width: 250px; padding: 10px;'>
+														🗨 Kommentar
+													</td>
+												</tr>
+											</table>
+										</body>
+									</html>
+									";
 
 								mail($mail_receiver, $subject, $text, $headers);
 							

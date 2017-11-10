@@ -9,7 +9,7 @@
 		$appointmentid = $_GET['a'];
 	}	
 	
-	$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = '".$userid."' AND appointmentid = '".$appointmentid."'";
+	$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = '$userid' AND appointmentid = '$appointmentid'";
 	$count_result = $connection->prepare($sql_select);
 	$count_result->execute();
 

@@ -48,7 +48,7 @@
 							// Überprüfung, ob die E-Mail-Adresse bereits angegeben wurde								
 							if($email_change) {
 								if(!$error) {
-									$sql_select = "SELECT * FROM users WHERE email = '".$new_email."'";
+									$sql_select = "SELECT * FROM users WHERE email = '$new_email'";
 										
 									foreach ($connection->query($sql_select) as $row) {
 										if($row['email'] > '0') {
@@ -61,7 +61,7 @@
 							
 							// Wenn kein Fehler besteht, dann wird die E-Mail-Adresse geändert
 							if(!$error) {
-								$sql_update = "UPDATE users SET email='".$new_email."' WHERE userid=".$userid."";
+								$sql_update = "UPDATE users SET email= '$new_email' WHERE userid = '$userid'";
 								$sql_update = $connection->query($sql_update);
 								
 								$_SESSION['email'] = $new_email;

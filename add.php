@@ -79,7 +79,7 @@
 								
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {
-								$sql_insert = "INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES ('".$userid."', '".$appointmentname."', '".$date."', '".$time."', '".$location."', '".$comment."')";
+								$sql_insert = "INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES ('$userid', '$appointmentname', '$date', '$time', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 								
 								header('Location: calendar.php');

@@ -18,7 +18,7 @@
 			$password = $_POST['password'];
 		}
 		
-		$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
+		$sql_select = "SELECT * FROM users WHERE email = '$email'";
 		
 		foreach ($connection->query($sql_select) as $row) {
 			$password_check = $row['password'];

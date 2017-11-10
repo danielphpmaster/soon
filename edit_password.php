@@ -46,7 +46,7 @@
 								}
 								
 								// Überprüfung, dass angebene Passwort mit dem aktuellen Passwort übereinstimmt
-								$sql_select = "SELECT * FROM users WHERE email = '".$email."'";
+								$sql_select = "SELECT * FROM users WHERE email = '$email'";
 										
 								foreach ($connection->query($sql_select) as $row) {
 									$password_check = $row['password'];
@@ -70,7 +70,7 @@
 									if(!$error) {
 										$newpassword_hash = password_hash($newpassword, PASSWORD_DEFAULT);
 										
-										$sql_update = "UPDATE users SET password='".$newpassword_hash."' WHERE userid=".$userid."";
+										$sql_update = "UPDATE users SET password = '$newpassword_hash' WHERE userid = '$userid'";
 										$sql_update = $connection->query($sql_update);
 										
 										$_SESSION['password'] = $newpassword;

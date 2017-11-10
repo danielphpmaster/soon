@@ -27,7 +27,7 @@
 				<div class="col-xs-12 col-md-6">
 					<h2>Termin erfolgreich gelöscht</h2>
 					<?php						
-						$sql_delete = "DELETE FROM appointments WHERE appointmentid = '".$appointmentid."' and userid = '".$userid."'";
+						$sql_delete = "DELETE FROM appointments WHERE appointmentid = '$appointmentid' and userid = '$userid'";
 						$sql_delete = $connection->query($sql_delete);
 						
 						echo "<div class='alert alert-success'>Der Termin wurde erfolgreich gelöscht</div>";

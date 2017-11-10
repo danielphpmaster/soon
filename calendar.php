@@ -121,7 +121,7 @@
 							<div class='date ".$dateclass."'><b><span class='date_output_calendar'>".$date_output."</span></b><a href='add.php?date=".$date."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
 						
 						// Suche nach einem Termin
-						$sql_select = "SELECT * FROM appointments WHERE userid = ".$userid." AND date = '".$date."'";
+						$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND date = '$date'";
 										
 						foreach ($connection->query($sql_select) as $row) {
 							// Ausgabe Terminname
