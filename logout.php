@@ -22,6 +22,7 @@
 					<h2>Abmeldung erfolgreich</h2>
 					<?php						
 						session_destroy();
+						setcookie ("soonstayloggedin", "", time() - (86400 * 365));
 						echo "<div class='alert alert-success'>","Auf wiedersehen, ".$username."!</div>";
 						header('Location: '.$path)
 					?>						

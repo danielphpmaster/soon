@@ -1,8 +1,8 @@
 <?php
 	include 'inlcude_all.php';
-		
+	
 	$title = "Anmelden - soon";
-
+	
 	if(isset($_GET['login'])) {
 		
 		if(empty($_POST['email'])) {
@@ -25,7 +25,16 @@
 
 		if(empty($password_check)) {
 			$error_message = "<div class='alert alert-danger'>E-Mail-Adresse oder Passwort ist ungültig</div>";
-		} elseif (password_verify($password, $password_check)) {
+		} elseif (password_verify($password, $password_check)) {			
+			
+			// Wenn die Checkbox "Angemeldet bleiben" aktiv: Cookie wird gesetzt
+			if(isset($_POST['stayloggedin'])) {
+								
+				$cookie_name = "soonstayloggedin";
+				$cookie_value = $row['usertoken'];
+				setcookie($cookie_name, $cookie_value, time() + (86400 * 365), $path); // 86400 = 1 day
+			}
+			
 			$userid = $row['userid'];
 			$_SESSION['userid'] = $userid;
 				
@@ -70,7 +79,7 @@
 							</div>
 							<div class="form-check">
 								<label class="form-check-label">
-									<input type="checkbox" class="form-check-input">
+									<input type="checkbox" name="stayloggedin" class="form-check-input">
 									Angemeldet bleiben
 								</label>
 							</div>

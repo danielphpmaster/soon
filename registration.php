@@ -90,9 +90,37 @@
 
 							// Wenn kein Fehler besteht, dann wird der Benutzer registriert
 							if(!$error) {
+								
+								// Erstellung User-Token
+								$create_token = '0';
+								while ($create_token < '1') {
+									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.*%!?";
+									$pass = array(); //remember to declare $pass as an array
+									$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+									for ($i = 0; $i < 80; $i++) {
+										$n = rand(0, $alphaLength);
+										$pass[] = $alphabet[$n];
+									}
+									$usertoken = implode($pass); //turn the array into a string
+									
+									$sql_select = "SELECT * FROM users WHERE usertoken = '$usertoken'";
+
+									$count_result = $connection->prepare($sql_select);
+									$count_result->execute();
+
+									$total = $count_result->fetchColumn();
+									
+									if($total < '1') {
+										$create_token = '1';
+									}
+								}
+								
+								// Erstellung des Registrierungsdatum
+								$created     = strtotime(date('Y-m-d H:i:s'));
+								
 								$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-								$sql_insert = "INSERT INTO users (username, email, password, language) VALUES ('$username', '$email', '$password_hash', '$language')";
+								$sql_insert = "INSERT INTO users (usertoken, username, email, password, language, created) VALUES ('$usertoken', '$username', '$email', '$password_hash', '$language', '$created')";
 								$sql_insert = $connection->query($sql_insert);
 
 								$_SESSION['username'] = $username;

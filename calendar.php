@@ -3,41 +3,40 @@
 	include 'loginwall.php';
 	
 	$timestamp = time();				
-				
-						
-				if(empty($_GET['m'])) {
-					$nm = '0';
-				} else {
-					if(empty($nm)) {
-						$nm = $_GET['m'];
-					} else {
-						$nm = $nm+$_GET['m'];
-					}
-				}
-				
-				$_SESSION['nm'] = $nm;
-					
-				$month = date("F", strtotime("+ ".$nm." month"));
-				$previous_month_nm = $nm-'1';
-				$previous_month = date("F", strtotime("+ ".$previous_month_nm." month"));
-				$next_month_nm = $nm+'1';
-				$next_month = date("F", strtotime("+ ".$next_month_nm." month"));
-				
-				$year = date("Y", strtotime("+ ".$nm." month"));
-				
-				if($month == 'January') {
-					$previous_year_nm = $nm-'1';
-					$previous_year = date("Y", strtotime("+ ".$previous_year_nm." month"));
-				} else {
-					$previous_year = $year;
-				}
-				
-				if($month == 'December') {
-					$next_year_nm = $nm+'1';
-					$next_year = date("Y", strtotime("+ ".$next_month_nm." month"));
-				} else {
-					$next_year = $year;
-				}
+							
+	if(empty($_GET['m'])) {
+		$nm = '0';
+	} else {
+		if(empty($nm)) {
+			$nm = $_GET['m'];
+		} else {
+			$nm = $nm+$_GET['m'];
+		}
+	}
+		
+	$_SESSION['nm'] = $nm;
+		
+	$month = date("F", strtotime("+ ".$nm." month"));
+	$previous_month_nm = $nm-'1';
+	$previous_month = date("F", strtotime("+ ".$previous_month_nm." month"));
+	$next_month_nm = $nm+'1';
+	$next_month = date("F", strtotime("+ ".$next_month_nm." month"));
+		
+	$year = date("Y", strtotime("+ ".$nm." month"));
+		
+	if($month == 'January') {
+		$previous_year_nm = $nm-'1';
+		$previous_year = date("Y", strtotime("+ ".$previous_year_nm." month"));
+	} else {
+		$previous_year = $year;
+	}
+		
+	if($month == 'December') {
+		$next_year_nm = $nm+'1';
+		$next_year = date("Y", strtotime("+ ".$next_month_nm." month"));
+	} else {
+		$next_year = $year;
+	}
 				
 	$title = "".$month." ".$year."  - soon";
 ?>

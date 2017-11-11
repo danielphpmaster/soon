@@ -209,6 +209,7 @@ Betrifft nur calendar.php
 	div.title {
 		background-color: #f8f8f8;
 		padding: 10px;
+		word-wrap: break-word;
 	}
 	
 	div.appointmentinformation {
@@ -222,10 +223,12 @@ Betrifft nur calendar.php
 
 	div.location {
 		padding-bottom: 10px;
+		word-wrap: break-word;
 	}
 
 	div.comment {
 		padding-bottom: 10px;
+		word-wrap: break-word;
 	}
 
 	h3 {
