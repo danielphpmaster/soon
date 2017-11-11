@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
 	$title = "Termin löschen - soon";
@@ -16,7 +15,7 @@
 	$total_appointments_found = $count_result->fetchColumn();
 							
 	if($total_appointments_found < '1') {
-		header('Location: calendar.php');
+		header('Location: '.$path.'calendar');
 	}
 ?>
 
@@ -40,8 +39,8 @@
 						echo "<div class='alert alert-success'>Termin löschen?</div>";
 					?>
 					<div class="last_element">
-						<a class="btn btn-primary" href="remove_appointment.php?a=<?php echo $appointmentid ?>">Bestätigen</a>
-						<a class="btn btn-primary grey-button" href="calendar.php">Abbrechen</a>
+						<a class="btn btn-primary" href="<?php echo $path; ?>remove_appointment?a=<?php echo $appointmentid ?>">Bestätigen</a>
+						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Abbrechen</a>
 					</div>
 				</div> <?php // Ende von .col-xs-12.col-md.6 ?>
 				

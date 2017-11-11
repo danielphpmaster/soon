@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 
 	$title = "Termin hinzufügen - soon";
@@ -82,7 +81,7 @@
 								$sql_insert = "INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES ('$userid', '$appointmentname', '$date', '$time', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 								
-								header('Location: calendar.php');
+								header('Location: '.$path.'calendar');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
@@ -100,7 +99,7 @@
 						</div>
 						<div class="last_element">
 							<button type="submit" class="btn btn-primary">Termin erfassen</button>
-							<a class="btn btn-primary grey-button" href="calendar.php">Abrrechen</a>
+							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Abrrechen</a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

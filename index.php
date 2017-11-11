@@ -1,10 +1,9 @@
 <?php
-	include 'connection.php';
-	include 'session.php';
+	include 'inlcude_all.php';
 	
 	// Wenn in angemeldetem Zustand: Umleitung zu calendar.php
 	if(isset($_SESSION['userid'])) {
-		die(header('Location: calendar.php'));
+		die(header('Location: '.$path.'calendar'));
 	}
 
 	$title = "soon - Dein persönlicher Kalender";
@@ -36,7 +35,7 @@
 					<div class="col-xs-12 col-md-3"></div>
 					
 					<div class="col-xs-6 col-md-3">
-						<a href="registration.php">
+						<a href="<?php echo $path; ?>registration">
 							<div class="linkbox registration">
 								Registrieren
 							</div>
@@ -44,7 +43,7 @@
 					</div>
 					
 					<div class="col-xs-6 col-md-3 index-margin-bottom">
-						<a href="login.php">
+						<a href="<?php echo $path; ?>login">
 							<div class="linkbox login">
 								Anmelden
 							</div>

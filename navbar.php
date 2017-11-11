@@ -18,9 +18,9 @@
 				<?php
 					// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Link führt zu calendar.php. Wenn nein: Link führt zu index.php
 					if(empty($_SESSION['userid'])) {
-						echo "index.php";
+						echo $path;
 					} else {
-						echo "calendar.php";
+						echo $path."calendar";
 					}
 				?>
 			"><img src="images/logo.svg" height="20px"></a>
@@ -51,7 +51,7 @@
 
 			echo "
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
-					<form class='navbar-form navbar-left' action='result.php' methode='post'>
+					<form class='navbar-form navbar-left' action='".$path."result' methode='post'>
 						<div class='form-group'>
 						<input name='search' type='text' class='form-control' placeholder='Termin suchen...' value='".$searchvalue."'>
 						</div>
@@ -59,8 +59,8 @@
 					</form>
 							
 					<ul class='nav navbar-nav navbar-right'>
-						<li><a href='add.php'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Termin hinzufügen</a></li>
-						<li><a href='calendar.php'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> Mein Kalender";
+						<li><a href='".$path."add'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Termin hinzufügen</a></li>
+						<li><a href='".$path."calendar'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> Mein Kalender";
 			
 			if($total_appointments_today > '0') {
 				echo " <span class='label label-danger'>".$total_appointments_today."</span>";
@@ -70,9 +70,9 @@
 						<li class='dropdown'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>".$username." <span class='caret'></span></a>
 							<ul class='dropdown-menu'>
-								<li><a href='profile.php'>Mein Profil</a></li>
+								<li><a href='".$path."profile'>Mein Profil</a></li>
 								<li role='separator' class='divider'></li>
-								<li><a href='logout.php'>Abmelden</a></li>
+								<li><a href='".$path."logout'>Abmelden</a></li>
 							</ul>
 						</li>
 					</ul>

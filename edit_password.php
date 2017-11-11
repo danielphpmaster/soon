@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
 	$title = "Passwort ändern - soon";
@@ -74,7 +73,7 @@
 										$sql_update = $connection->query($sql_update);
 										
 										$_SESSION['password'] = $newpassword;
-										header('Location: profile.php');
+										header('Location: '.$path.'profile');
 									}
 								} else {
 									echo '<div class="alert alert-danger">Das aktuelle Passwort muss stimmen</div>';
@@ -96,7 +95,7 @@
 							</div> <?php // Ende von .box ?>
 							<div class="last_element">
 								<button type="submit" class="btn btn-primary">Speichern</button>
-								<a class="btn btn-primary grey-button" href="profile.php">Abrrechen</a>
+								<a class="btn btn-primary grey-button" href="<?php echo $path; ?>profile">Abrrechen</a>
 							</div>
 						</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 
 	$title = "Suchergebnisse - soon";
@@ -66,11 +65,11 @@
 						
 									// Ausgabe Terminname und Termindatum
 									echo "<div class='appointment'>
-									<a href='appointment.php?a=".$row['appointmentid']."'".$appointment_color."><div class='title'><b>".$row['appointmentname']."</b></a>
+									<a href='".$path."appointment?a=".$row['appointmentid']."'".$appointment_color."><div class='title'><b>".$row['appointmentname']."</b></a>
 												<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>
 												<div class='float_right'>
-													<a href='remove.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
-													<a href='edit_appointment.php?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+													<a href='".$path."remove?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+													<a href='".$path."edit_appointment?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
 													<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
 												</div>
 											</div>";
@@ -116,7 +115,7 @@
 						} // Ende von if(isset($_GET['search']))
 					?>
 					<div class="last_element">
-						<a class="btn btn-primary grey-button" href="calendar.php">Zum Kalender</a>
+						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Zum Kalender</a>
 					</div>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 		
 	$title = "Anmelden - soon";
 
@@ -35,7 +34,7 @@
 			
 			$_SESSION['email'] = $email;
 				
-			header('Location: calendar.php');
+			header('Location: '.$path.'calendar');
 		} else {
 			$error_message = "<div class='alert alert-danger'>E-Mail-Adresse oder Passwort ist ungültig</div>";
 		}
@@ -78,7 +77,7 @@
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">	
 							<button type="submit" class="btn btn-primary">Anmelden</button>
-							Noch keinen Account? <a href="registration.php">Registrieren!</a>
+							Noch keinen Account? <a href="<?php echo $path; ?>registration">Registrieren!</a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

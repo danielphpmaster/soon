@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
 	$title = "Termin erfolgreich gelöscht - soon";
@@ -32,7 +31,7 @@
 						
 						echo "<div class='alert alert-success'>Der Termin wurde erfolgreich gelöscht</div>";
 						
-						header('Location: calendar.php')
+						header('Location: '.$path.'calendar')
 					?>
 				</div> <?php // Ende von .col-xs-12.col-md.6 ?>
 				

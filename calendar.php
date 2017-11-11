@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
 	$timestamp = time();				
@@ -118,7 +117,7 @@
 						
 						echo "<div class='col-md-1'>
 							<div class='day'>
-							<div class='date ".$dateclass."'><b><span class='date_output_calendar'>".$date_output."</span></b><a href='add.php?date=".$date."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
+							<div class='date ".$dateclass."'><b><span class='date_output_calendar'>".$date_output."</span></b><a href='".$path."add?date=".$date."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
 						
 						// Suche nach einem Termin
 						$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND date = '$date'";
@@ -126,7 +125,7 @@
 						foreach ($connection->query($sql_select) as $row) {
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
-							<a href='appointment.php?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
+							<a href='".$path."appointment?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
 							
 							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
 							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {

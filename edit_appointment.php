@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 
 	if(isset($_GET['a'])) {
@@ -16,10 +15,10 @@
 		
 		// Umleitung, wenn kein Termin gefunden
 		if(empty($row['appointmentname'])) {
-			header('Location: calendar.php');
+			header('Location: '.$path.'calendar');
 		}
 	} elseif (empty($_GET['editappointment'])) {
-		header('Location: calendar.php');
+		header('Location: '.$path.'calendar');
 	}
 	
 	$title = "Termin bearbeiten - soon";
@@ -97,7 +96,7 @@
 								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', date = '$newdate', time = '$newtime', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND appointmentid = '$appointmentid'";
 								$sql_update = $connection->query($sql_update);
 								
-								header('Location: calendar.php');						
+								header('Location: '.$path.'calendar');						
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
@@ -115,7 +114,7 @@
 						</div>
 						<div class="last_element">
 							<button type="submit" class="btn btn-primary">Speichern</button>
-							<a class="btn btn-primary grey-button" href="calendar.php">Abrrechen</a>
+							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Abrrechen</a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

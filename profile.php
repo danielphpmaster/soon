@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 
 	$title = "Mein Profil - soon";
@@ -28,16 +27,16 @@
 								<tr>
 									<td style="border:0;">Benutzername</td>
 									<td style="border:0;"><?php echo $username;?></td>
-									<td style="border:0;"><a href="edit_username.php"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
+									<td style="border:0;"><a href="<?php echo $path; ?>edit_username"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
 								</tr>
 								<tr>
 									<td>E-Mail-Adresse</td>
 									<td><?php echo $email;?></td>
-									<td><a href="edit_mail.php"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
+									<td><a href="<?php echo $path; ?>edit_mail"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
 								</tr>
 								<tr>
 									<td>Passwort</td>
-									<td><a href="edit_password.php"><button type="button" class="btn btn-default btn-xs">Passwort ändern</button></a></td>
+									<td><a href="<?php echo $path; ?>edit_password"><button type="button" class="btn btn-default btn-xs">Passwort ändern</button></a></td>
 									<td></td>
 								</tr>
 							</tbody>

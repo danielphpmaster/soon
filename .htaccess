@@ -1,0 +1,10 @@
+RewriteEngine On
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+
+RewriteRule ^/?calendar/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ calendar.php?y=$1&mm=$2
+
+
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

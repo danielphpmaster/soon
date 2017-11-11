@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
 	$title = "Termin teilen - soon";
@@ -96,7 +95,7 @@
 							</div>
 						</div> <?php // Ende von .box ?>
 						<button type="submit" class="btn btn-primary">Teilen</button>
-						<a class="btn btn-primary grey-button" href="calendar.php">Abrrechen</a>
+						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Abrrechen</a>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

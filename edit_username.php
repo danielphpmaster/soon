@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
 	$title = "Benutzername ändern - soon";
@@ -39,7 +38,7 @@
 								$sql_update = $connection->query($sql_update);
 								
 								$_SESSION['username'] = $new_username;
-								header('Location: profile.php');
+								header('Location: '.$path.'profile');
 							}
 						}
 					?>
@@ -50,7 +49,7 @@
 							</div>
 						</div> <?php // Ende von .box ?>
 						<button type="submit" class="btn btn-primary">Speichern</button>
-						<a class="btn btn-primary grey-button" href="profile.php">Abrrechen</a>
+						<a class="btn btn-primary grey-button" href="profile">Abrrechen</a>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

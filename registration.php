@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	
 	$title = "Registrieren - soon";
 ?>
@@ -105,7 +104,7 @@
 								}
 
 								$_SESSION['userid'] = $userid;
-								header('Location: confirmation.php');
+								header('Location: '.$path.'confirmation');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['register']))
 					?>

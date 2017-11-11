@@ -1,6 +1,5 @@
 <?php
-	include 'session.php';
-	include 'connection.php';
+	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
 	$title = "Registrierung erfolgreich - soon";
@@ -26,7 +25,7 @@
 						echo "<div class='alert alert-success'>","Willkommen bei soon, ".$username."!</div>";
 					?>
 					<div class="last_element">
-						<a href="calendar.php" class="btn btn-primary" role="button">Loslegen</a>
+						<a href="<?php echo $path; ?>calendar" class="btn btn-primary" role="button">Loslegen</a>
 					</div>
 				</div>
 				
