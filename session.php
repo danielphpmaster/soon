@@ -31,9 +31,9 @@
 		$nm = $_SESSION['nm'];
 	}
 	
-	if (empty($_SESSION['appointmentid'])){
+	if (empty($_SESSION['appointmenttoken'])){
 	 echo "";
 	} else {
-		$appointmentid = $_SESSION['appointmentid'];
+		$appointmenttoken = $_SESSION['appointmenttoken'];
 	}
 ?>

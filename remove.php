@@ -5,10 +5,10 @@
 	$title = "Termin löschen - soon";
 	
 	if(isset($_GET['a'])) {
-		$appointmentid = $_GET['a'];
+		$appointmenttoken = $_GET['a'];
 	}	
 	
-	$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = '$userid' AND appointmentid = '$appointmentid'";
+	$sql_select = "SELECT COUNT(appointmenttoken) FROM appointments WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
 	$count_result = $connection->prepare($sql_select);
 	$count_result->execute();
 
@@ -39,7 +39,7 @@
 						echo "<div class='alert alert-success'>Termin löschen?</div>";
 					?>
 					<div class="last_element">
-						<a class="btn btn-primary" href="<?php echo $path; ?>remove_appointment?a=<?php echo $appointmentid ?>">Bestätigen</a>
+						<a class="btn btn-primary" href="<?php echo $path; ?>remove_appointment?a=<?php echo $appointmenttoken ?>">Bestätigen</a>
 						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Abbrechen</a>
 					</div>
 				</div> <?php // Ende von .col-xs-12.col-md.6 ?>

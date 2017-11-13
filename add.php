@@ -78,7 +78,31 @@
 								
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {
-								$sql_insert = "INSERT INTO appointments (userid, appointmentname, date, time, location, comment) VALUES ('$userid', '$appointmentname', '$date', '$time', '$location', '$comment')";
+								// Erstellung Termin-Token
+								$create_token = '0';
+								while ($create_token < '1') {
+									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.*!?";
+									$pass = array(); //remember to declare $pass as an array
+									$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+									for ($i = 0; $i < 80; $i++) {
+										$n = rand(0, $alphaLength);
+										$pass[] = $alphabet[$n];
+									}
+									$appointmenttoken = implode($pass); //turn the array into a string
+									
+									$sql_select = "SELECT * FROM appointments WHERE appointmenttoken = '$appointmenttoken'";
+
+									$count_result = $connection->prepare($sql_select);
+									$count_result->execute();
+
+									$total = $count_result->fetchColumn();
+									
+									if($total < '1') {
+										$create_token = '1';
+									}
+								}							
+								
+								$sql_insert = "INSERT INTO appointments (appointmenttoken, userid, appointmentname, date, time, location, comment) VALUES ('$appointmenttoken', '$userid', '$appointmentname', '$date', '$time', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 								
 								header('Location: '.$path.'calendar');

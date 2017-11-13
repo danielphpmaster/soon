@@ -4,7 +4,12 @@
 			<?php
 				// Button, mit dem man in der Mobile-Ansicht das Navi aufklappt. Erscheint nur im angemeldeten Zustand
 				if(empty($_SESSION['userid'])) {
-					echo "";
+					echo "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>
+							<span class='sr-only'>Toggle navigation</span>
+							<span class='icon-bar'></span>
+							<span class='icon-bar'></span>
+							<span class='icon-bar'></span>
+						</button>";
 				} else {
 					echo "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>
 							<span class='sr-only'>Toggle navigation</span>
@@ -23,7 +28,7 @@
 						echo $path."calendar";
 					}
 				?>
-			"><img src="images/logo.svg" height="20px"></a>
+			"><img src="<?php echo $path; ?>images/logo.svg" height="20px"></a>
 		</div> <?php // Ende von .navbar-header ?>
 		<?php			
 			// Prüfung, ob ein Suchwert eingegeben wurde
@@ -37,7 +42,12 @@
 		
 			// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Suchenleiste und Navigations-Punkte werden angezeigt
 			if(empty($_SESSION['userid'])) {
-				echo "";
+				echo "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+						<ul class='nav navbar-nav navbar-right'>
+							<li><a href='".$path."login'><span class='glyphicon glyphicon-user' aria-hidden='true'></span> Anmelden</a></li>
+							<li><a href='".$path."registration'><span class='glyphicon glyphicon-user' aria-hidden='true'></span> Registrieren</a></li>
+						</ul>
+					</div>";
 			} else {
 				// Zählen, wieviele Termine der angemeldete Benutzer heute hat
 				$datetoday = date("Y-m-d");

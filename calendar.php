@@ -124,7 +124,7 @@
 						foreach ($connection->query($sql_select) as $row) {
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
-							<a href='".$path."appointment?a=".$row['appointmentid']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
+							<a href='".$path."appointment?a=".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
 							
 							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
 							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {

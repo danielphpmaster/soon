@@ -39,7 +39,7 @@
 								$sql_select = "SELECT * FROM `appointments` WHERE userid = '$userid' AND appointmentname LIKE '%$searchvalue%' AND date >= '".date("Y-m-d")."' ";
 								foreach ($connection->query($sql_select) as $row) {
 									
-									if (empty($row['appointmentid'])) {
+									if (empty($row['appointmenttoken'])) {
 										// Ausgabe, wenn kein Termin an diesem Datum besteht
 										echo "<div class='noappointment'>Keine Termine</div>";
 									} else {
@@ -65,12 +65,12 @@
 						
 									// Ausgabe Terminname und Termindatum
 									echo "<div class='appointment'>
-									<a href='".$path."appointment?a=".$row['appointmentid']."'".$appointment_color."><div class='title'><b>".$row['appointmentname']."</b></a>
+									<a href='".$path."appointment?a=".$row['appointmenttoken']."'".$appointment_color."><div class='title'><b>".$row['appointmentname']."</b></a>
 												<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>
 												<div class='float_right'>
-													<a href='".$path."remove?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
-													<a href='".$path."edit_appointment?a=".$row['appointmentid']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
-													<a href=''><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
+													<a href='".$path."remove?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+													<a href='".$path."edit_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+													<a href='".$path."share_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
 												</div>
 											</div>";
 									

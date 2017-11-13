@@ -3,11 +3,11 @@
 	include 'loginwall.php';
 
 	if(isset($_GET['a'])) {
-		$appointmentid = $_GET['a'];
-		$_SESSION['appointmentid'] = $appointmentid;
+		$appointmenttoken = $_GET['a'];
+		$_SESSION['appointmenttoken'] = $appointmenttoken;
 		
 		// Suche nach dem Termin
-		$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND appointmentid = '$appointmentid'";
+		$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
 		
 		// Termininformationen als Variablen speichern
 		foreach ($connection->query($sql_select) as $row) {
@@ -93,7 +93,7 @@
 								
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {									
-								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', date = '$newdate', time = '$newtime', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND appointmentid = '$appointmentid'";
+								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', date = '$newdate', time = '$newtime', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'calendar');						

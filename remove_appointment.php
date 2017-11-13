@@ -5,7 +5,7 @@
 	$title = "Termin erfolgreich gelöscht - soon";
 	
 	if(isset($_GET['a'])) {
-		$appointmentid = $_GET['a'];
+		$appointmenttoken = $_GET['a'];
 	}
 ?>
 
@@ -26,7 +26,7 @@
 				<div class="col-xs-12 col-md-6">
 					<h2>Termin erfolgreich gelöscht</h2>
 					<?php						
-						$sql_delete = "DELETE FROM appointments WHERE appointmentid = '$appointmentid' and userid = '$userid'";
+						$sql_delete = "DELETE FROM appointments WHERE appointmenttoken = '$appointmenttoken' and userid = '$userid'";
 						$sql_delete = $connection->query($sql_delete);
 						
 						echo "<div class='alert alert-success'>Der Termin wurde erfolgreich gelöscht</div>";
