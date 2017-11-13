@@ -107,11 +107,11 @@
 						
 						// Ausgabe Termindatum
 						if($date == date("Y-m-d")) {
-							$date_output = "heute, ".date("d. M Y", strtotime($date))."";
+							$date_output = "heute, ".date("D", strtotime($date)).", ".date("d. M y", strtotime($date))."";
 						} elseif($date == date("Y-m-d", strtotime("+1 day"))) {
-							$date_output = "morgen, ".date("d. M Y", strtotime($date))."";
+							$date_output = "morgen, ".date("D", strtotime($date)).", ".date("d. M y", strtotime($date))."";
 						} else {
-							$date_output = date("d. M Y", strtotime($date));
+							$date_output = date("D", strtotime($date)).", ".date("d. M y", strtotime($date));
 						}						
 						
 						echo "<div class='col-md-1'>
