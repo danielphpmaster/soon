@@ -1,43 +1,41 @@
 <?php
 	include 'inlcude_all.php';
 	include 'loginwall.php';
+
+	if(empty($_GET['y'])) {
+		$year = date('Y');
+	} else {
+		$year = $_GET['y'];
+	}
 	
-	$timestamp = time();				
-							
-	if(empty($_GET['m'])) {
-		$nm = '0';
+	if(empty($_GET['mm'])) {
+		$month = date('F');
 	} else {
-		if(empty($nm)) {
-			$nm = $_GET['m'];
-		} else {
-			$nm = $nm+$_GET['m'];
-		}
+		$month = $_GET['mm'];
 	}
-		
-	$_SESSION['nm'] = $nm;
-		
-	$month = date("F", strtotime("+ ".$nm." month"));
-	$previous_month_nm = $nm-'1';
-	$previous_month = date("F", strtotime("+ ".$previous_month_nm." month"));
-	$next_month_nm = $nm+'1';
-	$next_month = date("F", strtotime("+ ".$next_month_nm." month"));
-		
-	$year = date("Y", strtotime("+ ".$nm." month"));
-		
-	if($month == 'January') {
-		$previous_year_nm = $nm-'1';
-		$previous_year = date("Y", strtotime("+ ".$previous_year_nm." month"));
-	} else {
-		$previous_year = $year;
+			
+	$timestamp = strtotime("$year $month");
+	
+	if($timestamp < strtotime(date('Y-m-01'))) {
+		$year = date('Y');
+		$month = date('F');
+		header('Location: '.$path.'/calendar/'.$year.'/'.$month.'');
 	}
-		
-	if($month == 'December') {
-		$next_year_nm = $nm+'1';
-		$next_year = date("Y", strtotime("+ ".$next_month_nm." month"));
-	} else {
-		$next_year = $year;
+	
+	if($timestamp > strtotime(date('2019-12-01'))) {
+		$year = date('Y');
+		$month = date('F');
+		header('Location: '.$path.'/calendar/'.$year.'/'.$month.'');
 	}
-				
+	
+	$previous_month_timestamp = strtotime('-1 month', $timestamp);
+	$previous_month = date("F", $previous_month_timestamp);
+	$previous_month_year = date("Y", $previous_month_timestamp);
+	
+	$next_month_timestamp = strtotime('+1 month', $timestamp);
+	$next_month = date("F", $next_month_timestamp);
+	$next_month_year = date("Y", $next_month_timestamp);
+	
 	$title = "".$month." ".$year."  - soon";
 ?>
 
@@ -55,13 +53,11 @@
 			<div class="row" style="margin-top: 20px;">
 				<?php
 				
-				if($timestamp >= (date(strtotime("+ ".$nm." month")))) {
-					$month = date("F", $timestamp);
-					$year = date("Y", $timestamp);
+				if($timestamp < time()) {
 					echo "<div class='col-xs-6 col-sm-4'></div>";
 				} else {
 					echo"<div class='col-xs-6 col-sm-4'>
-							<a type='button' href='?m=-1' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$previous_month." ".$previous_year."</a>
+							<a type='button' href='".$path."calendar/".$previous_month_year."/".$previous_month."' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$previous_month." ".$previous_month_year."</a>
 						</div>";
 				}
 				
@@ -71,20 +67,22 @@
 					echo "<div class='col-xs-6 col-sm-4'></div>";
 				} else {
 				echo"<div class='col-xs-6 col-sm-4'>
-						<a type='button' href='?m=1' class='btn btn-default'>".$next_month." ".$next_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
+						<a type='button' href='".$path."calendar/".$next_month_year."/".$next_month."' class='btn btn-default'>".$next_month." ".$next_month_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
 					</div>";					
 				}
 				
 				echo "<div class='col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl calendar_current_month' style='text-align: center;'><b>".$month." ".$year."</b></div>";
+				
 				?>
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->
 		<div class="calendar-container">
 			<div class="row seven-cols">
-				<?php
-					if($month == date("F", $timestamp) and $year == date("Y", $timestamp)) {
-					$date = date("Y-m-d", strtotime("+ ".$nm." month")); } else {
-					$date = date("Y-m-01", strtotime("+ ".$nm." month"));
+				<?php									
+					$date = date("Y-m-d", $timestamp);
+					
+					if($timestamp == strtotime(date('Y-m-01'))) {
+						$date = date('Y-m-d');
 					}
 				
 					$last_day_of_current_month = date("Y-m-t", strtotime($date));
@@ -124,7 +122,7 @@
 						foreach ($connection->query($sql_select) as $row) {
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
-							<a href='".$path."appointment?a=".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
+							<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
 							
 							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
 							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {

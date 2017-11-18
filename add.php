@@ -84,11 +84,13 @@
 									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.*!?";
 									$pass = array(); //remember to declare $pass as an array
 									$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-									for ($i = 0; $i < 80; $i++) {
+									for ($i = 0; $i < 12; $i++) {
 										$n = rand(0, $alphaLength);
 										$pass[] = $alphabet[$n];
 									}
 									$appointmenttoken = implode($pass); //turn the array into a string
+									
+									$timestamp = strtotime("$date $time");
 									
 									$sql_select = "SELECT * FROM appointments WHERE appointmenttoken = '$appointmenttoken'";
 
@@ -102,13 +104,13 @@
 									}
 								}							
 								
-								$sql_insert = "INSERT INTO appointments (appointmenttoken, userid, appointmentname, date, time, location, comment) VALUES ('$appointmenttoken', '$userid', '$appointmentname', '$date', '$time', '$location', '$comment')";
+								$sql_insert = "INSERT INTO appointments (appointmenttoken, userid, appointmentname, timestamp, date, time, location, comment) VALUES ('$appointmenttoken', '$userid', '$appointmentname', '$timestamp', '$date', '$time', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 								
 								header('Location: '.$path.'calendar');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
-					?>
+					?>				
 					<form action="?add=1" method="post">
 						<div class="day">
 							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="Datum" value="<?php if(isset($date)){echo $date;}?>"></b></div>
