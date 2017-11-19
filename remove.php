@@ -36,7 +36,7 @@
 				<div class="col-xs-12 col-md-6">
 					<h2>Termin löschen</h2>
 					<?php						
-						echo "<div class='alert alert-success'>Termin löschen?</div>";
+						echo "<div class='alert alert-danger'>Termin löschen?</div>";
 					?>
 					<div class="last_element">
 						<a class="btn btn-primary" href="<?php echo $path; ?>remove_appointment?a=<?php echo $appointmenttoken ?>">Bestätigen</a>
