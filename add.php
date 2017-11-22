@@ -81,7 +81,7 @@
 								// Erstellung Termin-Token
 								$create_token = '0';
 								while ($create_token < '1') {
-									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.*!?";
+									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.*!";
 									$pass = array(); //remember to declare $pass as an array
 									$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
 									for ($i = 0; $i < 12; $i++) {

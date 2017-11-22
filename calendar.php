@@ -19,13 +19,13 @@
 	if($timestamp < strtotime(date('Y-m-01'))) {
 		$year = date('Y');
 		$month = date('F');
-		header('Location: '.$path.'/calendar/'.$year.'/'.$month.'');
+		header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
 	}
 	
 	if($timestamp > strtotime(date('2019-12-01'))) {
 		$year = date('Y');
 		$month = date('F');
-		header('Location: '.$path.'/calendar/'.$year.'/'.$month.'');
+		header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
 	}
 	
 	$previous_month_timestamp = strtotime('-1 month', $timestamp);
