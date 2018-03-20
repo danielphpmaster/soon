@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
-	$title = "Termin löschen - soon";
+	$title = $t_title_remove[$language];
 	
 	if(isset($_GET['a'])) {
 		$appointmenttoken = $_GET['a'];
@@ -34,13 +34,13 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2>Termin löschen</h2>
+					<h2><?php echo $t_delete_appointment[$language] ?></h2>
 					<?php						
-						echo "<div class='alert alert-danger'>Termin löschen?</div>";
+						echo "<div class='alert alert-danger'>".$t_delete_appointment[$language]."?</div>";
 					?>
 					<div class="last_element">
-						<a class="btn btn-primary" href="<?php echo $path; ?>remove_appointment?a=<?php echo $appointmenttoken ?>">Bestätigen</a>
-						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Abbrechen</a>
+						<a class="btn btn-primary" href="<?php echo $path; ?>remove_appointment?a=<?php echo $appointmenttoken ?>"><?php echo $t_confirm[$language] ?></a>
+						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar"><?php echo $t_cancel[$language] ?></a>
 					</div>
 				</div> <?php // Ende von .col-xs-12.col-md.6 ?>
 				

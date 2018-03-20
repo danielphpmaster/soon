@@ -29,7 +29,7 @@
 		//header('Location: '.$path.'calendar');
 	}
 	
-	$title = "Termin teilen - soon";
+	$title = $t_title_share_appointment[$language];
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +47,7 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2>Termin teilen</h2>
+					<h2><?php echo $t_share_appointment[$language] ?></h2>
 					<?php
 						if(isset($_GET['sharemail'])) {
 												
@@ -71,7 +71,7 @@
 							
 							// Überprüfung, ob die angegebene E-Mail-Adresse gültig ist
 							if(!filter_var($mail_receiver, FILTER_VALIDATE_EMAIL)) {
-								echo '<div class="alert alert-danger">Geben Sie eine gültige E-Mail-Adresse ein</div>';
+								echo '<div class="alert alert-danger">'.$t_please_enter_a_valid_email_address[$language].'</div>';
 								$error = true;
 							}
 							
@@ -89,8 +89,8 @@
 										</head>
 										
 										<body>
-											Hallo!<br><br>
-											<b>".$username."</b> hat  einen soon Termin mit dir geteilt.<br><br>
+											".$t_hey_there[$language]."<br><br>
+											<b>".$username."</b> ".$t_has_shared_a_soon_appointment_with_you[$language]."<br><br>
 											".$mail_message_1."".$mail_message_2."".$mail_message_3."
 											<div style='width: 250px; border: 1px solid #e7e7e7;'>
 												<div style='background-color: #f8f8f8; border-bottom: 1px solid #e7e7e7; padding: 10px;'>
@@ -106,17 +106,17 @@
 													🗨 ".$comment."
 												</div>
 											</div><br>
-											Klicke <a href='".$link."'>hier</a> um den Termin in soon zu öffnen!<br>
+											<a href='".$link."'>".$t_click_here_to_open_the_appointment_in_soon[$language]."</a><br>
 										</body>
 									</html>
 									";
 
 								mail($mail_receiver, $subject, $text, $headers);
 							
-								echo "<div class='alert alert-success'>Termin erfolgreich mit ".$mail_receiver." geteilt</div>
-									<div>
-										<a class='btn btn-primary' href='".$path."share_appointment?a=".$appointmenttoken."'>Nochmals teilen</a>
-										<a class='btn btn-primary grey-button' href='".$path."calendar'>Zum Kalender</a>
+								echo "<div class='alert alert-success'>".$t_your_appointment_has_been_succesfully_shared_with[$language]." ".$mail_receiver."</div>
+									<div  class='last_element'>
+										<a class='btn btn-primary' href='".$path."share_appointment?a=".$appointmenttoken."'>".$t_share_appointment_with_another_person[$language]."</a>
+										<a class='btn btn-primary grey-button' href='".$path."calendar'>".$t_view_calendar[$language]."</a>
 									</div>
 								";
 								
@@ -143,14 +143,16 @@
 						<form action='?a=".$appointmenttoken."&sharemail=1' method='post'>
 							<div class='box'>
 								<div class='form-group'>
-									<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name='mail_receiver' type='text' class='form-control with_glyphicon' id='mail_receiver' placeholder='E-Mail Empfänger' value='".$mail_receiver."'>
+									<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name='mail_receiver' type='text' class='form-control with_glyphicon' id='mail_receiver' placeholder='".$t_email_of_the_recipient[$language]."' value='".$mail_receiver."'>
 								</div>
 								<div class='form-group margin-bottom-0'>
-									<span class='glyphicon glyphicon-comment form' style='color:#777'; aria-hidden='true'></span><input name='mail_message' type='text' class='form-control with_glyphicon' id='mail_message' placeholder='Ihre Nachricht' value='".$mail_message_2."'>
+									<span class='glyphicon glyphicon-comment form' style='color:#777'; aria-hidden='true'></span><input name='mail_message' type='text' class='form-control with_glyphicon' id='mail_message' placeholder='".$t_your_message[$language]."' value='".$mail_message_2."'>
 								</div>
 							</div> <?php // Ende von .box ?>
-							<button type='submit' class='btn btn-primary'>Teilen</button>
-							<a class='btn btn-primary grey-button' href='".$path."calendar'>Abrrechen</a>
+							<div class='last_element'>
+								<button type='submit' class='btn btn-primary'>".$t_share[$language]."</button>
+								<a class='btn btn-primary grey-button' href='".$path."calendar'>".$t_cancel[$language]."</a>
+							</div>
 						</form>";
 					}
 					?>

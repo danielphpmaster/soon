@@ -47,14 +47,14 @@
 	}
 		
 	if($guest OR $other_user) {		
-		$alternative_appointmentname = " von ".$row_user['username']."";
+		$alternative_appointmentname = " ".$t_from[$language]." ".$row_user['username']."";
 	} else {
 		$alternative_appointmentname = "";
 	}
 		
 	include 'loginwall.php';
 		
-	$title = "".$appointmentname." - soon";
+	$title = "".$appointmentname." ".$t_title_appointment[$language]."";
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +73,7 @@
 				
 				<div class="col-xs-12 col-md-6">
 					<?php
-						echo "<h2>Termin".$alternative_appointmentname."</h2>";
+						echo "<h2>".$t_appointment[$language]."".$alternative_appointmentname."</h2>";
 					
 						// Variable, die definiert, welche Farbe der Terminname hat 
 						if ($row['date'] == date("Y-m-d")) {
@@ -85,9 +85,9 @@
 						echo "<div class='day'>";
 						
 						if($row['date'] == date("Y-m-d")) {
-							$date_output = "heute (".date("d. M", strtotime($row['date'])).")";
+							$date_output = "".$t_today[$language]." (".date("d. M", strtotime($row['date'])).")";
 						} elseif($row['date'] == date("Y-m-d", strtotime("+1 day"))) {
-							$date_output = "morgen (".date("d. M", strtotime($row['date'])).")";
+							$date_output = "".$t_tomorrow[$language]." (".date("d. M", strtotime($row['date'])).")";
 						} else {
 							$date_output = date("d. M Y", strtotime($row['date']));
 						}
@@ -148,7 +148,7 @@
 						if($guest OR $other_user) {
 						} else { echo "
 							<div class='last_element'>
-								<a class='btn btn-primary grey-button' href='".$path."calendar'>Zum Kalender</a>
+								<a class='btn btn-primary grey-button' href='".$path."calendar'>".$t_to_my_calendar[$language]."</a>
 							</div>";
 						}
 					?>

@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
-	$title = "Passwort ändern - soon";
+	$title = $t_title_edit_password[$language];
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2>Passwort ändern</h2>
+					<h2><?php echo $t_change_password[$language] ?></h2>
 						<?php
 							if(isset($_GET['editpassword'])) {
 								$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
@@ -54,14 +54,14 @@
 								if (password_verify($currentpassword, $password_check)) {
 									
 									if(empty($newpassword) AND empty($newpassword2)) {
-										echo '<div class="alert alert-danger">Geben Sie ein neues Passwort ein</div>';
+										echo '<div class="alert alert-danger">'.$t_please_insert_a_new_password[$language].'</div>';
 										$error = true;
 									}
 									
 									// Überprüfung, ob die beiden angegebenen Passwörter übereinstimmen
 									if($newpassword == $newpassword2) {
 									} else {
-										echo '<div class="alert alert-danger">Die neuen Passwörter müssen übereinstimmen</div>';
+										echo '<div class="alert alert-danger">'.$t_the_passwords_must_match[$language].'</div>';
 										$error = true;
 									}
 
@@ -76,7 +76,7 @@
 										header('Location: '.$path.'profile');
 									}
 								} else {
-									echo '<div class="alert alert-danger">Das aktuelle Passwort muss stimmen</div>';
+									echo '<div class="alert alert-danger">'.$t_the_current_password_is_wrong[$language].'</div>';
 									$error = true;
 								}
 							}
@@ -84,18 +84,18 @@
 						<form action="?editpassword=1" method="post">
 							<div class="box">
 								<div class="form-group">
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="currentpassword" type="password" class="form-control with_glyphicon" id="currentpassword" placeholder="Aktuelles Passwort">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="currentpassword" type="password" class="form-control with_glyphicon" id="currentpassword" placeholder="<?php echo $t_current_password[$language] ?>">
 								</div>
 								<div class="form-group">
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword" type="password" class="form-control with_glyphicon" id="newpassword" placeholder="Neues Passwort">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword" type="password" class="form-control with_glyphicon" id="newpassword" placeholder="<?php echo $t_new_password[$language] ?>">
 								</div>
 								<div class="form-group margin-bottom-0">
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword2" type="password" class="form-control with_glyphicon" id="newpassword2" placeholder="Neues Passwort bestätigen">
+									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword2" type="password" class="form-control with_glyphicon" id="newpassword2" placeholder="<?php echo $t_confirm_new_password[$language] ?>">
 								</div>
 							</div> <?php // Ende von .box ?>
 							<div class="last_element">
-								<button type="submit" class="btn btn-primary">Speichern</button>
-								<a class="btn btn-primary grey-button" href="<?php echo $path; ?>profile">Abrrechen</a>
+								<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>
+								<a class="btn btn-primary grey-button" href="<?php echo $path; ?>profile"><?php echo $t_cancel[$language] ?></a>
 							</div>
 						</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

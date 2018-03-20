@@ -2,38 +2,44 @@
 	session_start();
 
 	if (empty($_SESSION['email'])){
-	 echo "";
+		echo "";
 	} else {
 		$email = $_SESSION['email'];
 	}
 
 	if (empty($_SESSION['username'])){
-	 echo "";
+		echo "";
 	} else {
 		$username = $_SESSION['username'];
 	}
 
 	if (empty($_SESSION['userid'])){
-	 echo "";
+		echo "";
 	} else {
 		$userid = $_SESSION['userid'];
 	}
 	
 	if (empty($_SESSION['searchvalue'])){
-	 echo "";
+		echo "";
 	} else {
 		$searchvalue = $_SESSION['searchvalue'];
 	}
 	
 	if (empty($_SESSION['nm'])){
-	 echo "";
+		echo "";
 	} else {
 		$nm = $_SESSION['nm'];
 	}
 	
 	if (empty($_SESSION['appointmenttoken'])){
-	 echo "";
+		echo "";
 	} else {
 		$appointmenttoken = $_SESSION['appointmenttoken'];
+	}
+	
+	if (empty($_SESSION['language'])){
+		echo "";
+	} else {
+		$language = $_SESSION['language'];
 	}
 ?>

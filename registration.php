@@ -1,7 +1,12 @@
 <?php
 	include 'inlcude_all.php';
 	
-	$title = "Registrieren - soon";
+	// Wenn in angemeldetem Zustand: Umleitung zu calendar.php
+	if(isset($_SESSION['userid'])) {
+		die(header('Location: '.$path.'calendar'));
+	}
+	
+	$title = $t_title_registration[$language];
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +24,7 @@
 				<div class="col-xs-12 col-md-3"></div>
 
 				<div class="col-xs-12 col-md-6">
-					<h2>Registrieren</h2>
+					<h2><?php echo $t_sign_up[$language] ?></h2>
 					<?php
 						$showFormular = true; // Variable, die definiert, ob das Registrierungsformular angezeigt werden soll
 
@@ -50,42 +55,41 @@
 								$password2 = $_POST['password2'];
 							}
 
-							$language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-
+							$user_language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+							$_SESSION['language'] = $user_language;
+							
 							// Überprüfung, ob ein Benutzername angegeben wurde
 							if(empty($username)) {
-								echo '<div class="alert alert-danger">Geben Sie einen Benutzernamen ein</div>';
+								echo '<div class="alert alert-danger">'.$t_please_enter_a_username[$language].'</div>';
 								$error = true;
 							}
 
 							// Überprüfung, ob die angegebene E-Mail-Adresse gültig ist
 							if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-								echo '<div class="alert alert-danger">Geben Sie eine gültige E-Mail-Adresse ein</div>';
+								echo '<div class="alert alert-danger">'.$t_please_enter_a_valid_email_address[$language].'</div>';
 								$error = true;
+							} else {
+								$sql_select = "SELECT * FROM users WHERE email = '$email'";
+
+								foreach ($connection->query($sql_select) as $row) {
+									// Überprüfung, ob die E-Mail-Adresse noch nicht angegeben wurde
+									if($row['email'] > '0') {
+										echo "<div class='alert alert-danger'>".$this_email_address_is_already_taken[$language]."</div>";
+										$error = true;
+									}
+								}
 							}
 
 							// Überprüfung, ob ein Passwort angegeben wurde
 							if(strlen($password) == 0) {
-								echo '<div class="alert alert-danger">Geben Sie ein Passwort ein</div>';
+								echo '<div class="alert alert-danger">'.$t_please_enter_a_password[$language].'</div>';
 								$error = true;
 							}
 
 							// Überprüfung, ob die beiden angegebenen Passwörter übereinstimmen
 							if($password != $password2) {
-								echo '<div class="alert alert-danger">Die Passwörter müssen übereinstimmen</div>';
+								echo '<div class="alert alert-danger">'.$t_the_passwords_must_be_identical[$language].'</div>';
 								$error = true;
-							}
-
-							// Überprüfung, ob die E-Mail-Adresse noch nicht angegeben wurde
-							if(!$error) {
-								$sql_select = "SELECT * FROM users WHERE email = '$email'";
-
-								foreach ($connection->query($sql_select) as $row) {
-									if($row['email'] > '0') {
-										echo "<div class='alert alert-danger'>Diese E-Mail-Adresse ist bereits vergeben.</div>";
-										$error = true;
-									}
-								}
 							}
 
 							// Wenn kein Fehler besteht, dann wird der Benutzer registriert
@@ -120,7 +124,7 @@
 								
 								$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-								$sql_insert = "INSERT INTO users (usertoken, username, email, password, language, created) VALUES ('$usertoken', '$username', '$email', '$password_hash', '$language', '$created')";
+								$sql_insert = "INSERT INTO users (usertoken, username, email, password, language, created) VALUES ('$usertoken', '$username', '$email', '$password_hash', '$user_language', '$created')";
 								$sql_insert = $connection->query($sql_insert);
 
 								$_SESSION['username'] = $username;
@@ -139,21 +143,21 @@
 					<form action="?register=1" method="post">								
 						<div class="box">
 							<div class="form-group">
-								<span class='glyphicon glyphicon-user form' style='color:#777'; aria-hidden='true'></span><input name="username" type="text" class="form-control with_glyphicon" id="username" placeholder="Benutzername" value="<?php if(isset($username)){echo $username;}?>">
+								<span class='glyphicon glyphicon-user form' style='color:#777'; aria-hidden='true'></span><input name="username" type="text" class="form-control with_glyphicon" id="username" placeholder="<?php echo $t_username[$language] ?>" value="<?php if(isset($username)){echo $username;}?>">
 							</div>
 							<div class="form-group">
-								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="email" type="email" class="form-control with_glyphicon" id="email" aria-describedby="emailHelp" placeholder="E-Mail-Adresse" value="<?php if(isset($email)){echo $email;}?>">
+								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="email" type="email" class="form-control with_glyphicon" id="email" aria-describedby="emailHelp" placeholder="<?php echo $t_email[$language] ?>" value="<?php if(isset($email)){echo $email;}?>">
 							</div>
 							<div class="form-group">
-								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password" type="password" class="form-control with_glyphicon" id="password" placeholder="Passwort">
+								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password" type="password" class="form-control with_glyphicon" id="password" placeholder="<?php echo $t_password[$language] ?>">
 							</div>
 							<div class="form-group margin-bottom-0">
-								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password2" type="password" class="form-control with_glyphicon" id="password2" placeholder="Passwort wiederholen">
+								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password2" type="password" class="form-control with_glyphicon" id="password2" placeholder="<?php echo $t_repeat_password[$language] ?>">
 							</div>
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">
-							<button type="submit" class="btn btn-primary">Registrieren</button>
-							Bereits einen Account? <a href="login.php">Anmelden!</a>
+							<button type="submit" class="btn btn-primary"><?php echo $t_sign_up[$language] ?></button>
+							<?php echo $t_already_have_an_account[$language] ?> <a href="login.php"><?php echo $t_log_in[$language] ?>!</a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

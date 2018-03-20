@@ -6,7 +6,7 @@
 		die(header('Location: '.$path.'calendar'));
 	}
 
-	$title = "soon - Dein persönlicher Kalender";
+	$title = $t_title_index[$language];
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
 					<div class="col-xs-12 col-md-3"></div>
 					
 					<div class="col-xs-12 col-md-6">
-						<div class="index-title">Alle Ihre Termine – immer und überall abrufbar</div>
+						<div class="index-title"><?php echo $t_headline[$language]; ?></div>
 					</div>
 					
 					<div class="col-xs-12 col-md-3"></div>
@@ -37,7 +37,7 @@
 					<div class="col-xs-6 col-md-3">
 						<a href="<?php echo $path; ?>registration">
 							<div class="linkbox registration">
-								Registrieren
+								<?php echo $t_sign_up[$language]; ?>
 							</div>
 						</a>
 					</div>
@@ -45,7 +45,7 @@
 					<div class="col-xs-6 col-md-3 index-margin-bottom">
 						<a href="<?php echo $path; ?>login">
 							<div class="linkbox login">
-								Anmelden
+								<?php echo $t_log_in[$language]; ?>
 							</div>
 						</a>
 					</div>

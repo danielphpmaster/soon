@@ -396,4 +396,12 @@ Formulare und Buttons
 		background-color: #e7e7e7;
 		border-color: #e7e7e7;
 		color: #555;
-	} /* Ende von CSS betreffend Formulare und Buttons */
+	} 
+	
+	.dropdown_form {
+		height: 34px;
+		width: 95%;
+		padding-left: 12px;
+		border-color: #ccc;
+		border-radius: 5px;
+	}/* Ende von CSS betreffend Formulare und Buttons */

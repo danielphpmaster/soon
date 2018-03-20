@@ -21,7 +21,7 @@
 		header('Location: '.$path.'calendar');
 	}
 	
-	$title = "Termin bearbeiten - soon";
+	$title = $t_title_edit_appointment[$language];
 ?>
 
 <!DOCTYPE html>
@@ -39,21 +39,45 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2>Termin bearbeiten</h2>
+					<h2><?php echo $t_edit_appointment[$language] ?></h2>
 					<?php
 						if(isset($_GET['editappointment'])) {
 							$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
 							
 							// Werte aus dem Formular als Variablen speichern
-							$newappointmentname = $_POST['appointmentname'];
-							$newdate = $_POST['date'];
-							$newtime = $_POST['time'];
-							$newlocation = $_POST['location'];
-							$newcomment = $_POST['comment'];
-												
+							if(empty($_POST['appointmentname'])) {
+								$newappointmentname = "";
+							} else {
+								$newappointmentname = $_POST['appointmentname'];								
+							}
+							
+							if(empty($_POST['date'])) {
+								$newdate = "";
+							} else {
+								$newdate = $_POST['date'];								
+							}
+							
+							if(empty($_POST['time'])) {
+								$newtime = "";
+							} else {
+								$newtime = $_POST['time'];								
+							}
+							
+							if(empty($_POST['location'])) {
+								$newlocation = "";
+							} else {
+								$newlocation = $_POST['location'];								
+							}
+							
+							if(empty($_POST['comment'])) {
+								$newcomment = "";
+							} else {
+								$newcomment = $_POST['comment'];								
+							}
+														
 							// Überprüfung, ob ein Terminname angegeben wurde
 							if(empty($newappointmentname)) {
-								echo '<div class="alert alert-danger">Geben Sie einen Terminnamen ein</div>';
+								echo '<div class="alert alert-danger">'.$t_insert_an_appointment_name[$language].'</div>';
 								$error = true;
 							}
 																
@@ -81,10 +105,10 @@
 								}
 								
 							if(validateDate($newdate) == '0') {
-								echo '<div class="alert alert-danger">Geben Sie ein gültiges Datum ein</div>';
-								$error = true;									
+								echo '<div class="alert alert-danger">'.$t_insert_a_valid_date[$language].'</div>';
+								$error = true;
 							}
-								
+							
 							// Überprüfung, ob ein Datum in der Zukunft angegeben wurde
 							/*if($date < time()) {
 									echo '<div class="alert alert-danger">Geben Sie ein zukünftiges Datum ein</div>';
@@ -102,19 +126,19 @@
 					?>
 					<form action="?editappointment=1" method="post">
 						<div class="day">
-							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="Datum" value="<?php if(isset($row['date'])){echo $row['date'];} else {echo $newdate;}?>"></b></div>
+							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($row['date'])){echo $row['date'];} else {echo $newdate;}?>"></b></div>
 							<div class='appointment'>
-								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="Terminname" value="<?php if(isset( $row['appointmentname'])){echo  $row['appointmentname'];} else {echo $newappointmentname;}?>"></b></div>
+								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset( $row['appointmentname'])){echo  $row['appointmentname'];} else {echo $newappointmentname;}?>"></b></div>
 								<div class='appointmentinformation'>
-									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="Zeit" value="<?php if(isset($row['time'])){echo $row['time'];} else {echo $newtime;}?>"></div>
-									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="Ort" value="<?php if(isset($row['location'])){echo $row['location'];} else{echo $newlocation;}?>"></div>
-									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="Bemerkung" value="<?php if(isset($row['comment'])){echo $row['comment'];} else{echo $newcomment;}?>"></div>
+									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($row['time'])){echo $row['time'];} else {echo $newtime;}?>"></div>
+									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="<?php echo $t_location[$language] ?>" value="<?php if(isset($row['location'])){echo $row['location'];} else{echo $newlocation;}?>"></div>
+									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="<?php echo $t_comment[$language] ?>" value="<?php if(isset($row['comment'])){echo $row['comment'];} else{echo $newcomment;}?>"></div>
 								</div>
 							</div>
 						</div>
 						<div class="last_element">
-							<button type="submit" class="btn btn-primary">Speichern</button>
-							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Abrrechen</a>
+							<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>
+							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar"><?php echo $t_cancel[$language] ?></a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

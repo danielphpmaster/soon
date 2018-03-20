@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 
-	$title = "Suchergebnisse - soon";
+	$title = $t_title_result[$language];
 ?>
 
 <!DOCTYPE html>
@@ -26,14 +26,14 @@
 							
 							// Prüfung, ob ein Suchbegriff angegeben wurde
 							if(empty($searchvalue)) {
-								echo "<h2 class='no_box'>Keine Suchergebnisse</h2>
-								<div class='alert alert-danger'>Geben Sie einen Suchbegriff ein</div>";
+								echo "<h2 class='no_box'>".$t_no_search_results[$language]."</h2>
+								<div class='alert alert-danger'>".$t_please_enter_a_search_term[$language]."</div>";
 								$_SESSION['searchvalue'] = '';
 							} else {								
 								$_SESSION['searchvalue'] = $searchvalue;	
 								
 								// Ausgabe Titel mit Suchbegriff
-								echo "<h2 class='margin-bottom-4px'>Suchergebnisse zu '".$searchvalue."'</h2>";
+								echo "<h2 class='margin-bottom-4px'>".$t_search_results_for[$language]." '".$searchvalue."'</h2>";
 								
 								// Suche nach einem Termin, der im Terminnamen den Suchbegriff enthält und der heute oder in Zukunft stattfindet
 								$sql_select = "SELECT * FROM `appointments` WHERE userid = '$userid' AND appointmentname LIKE '%$searchvalue%' AND date >= '".date("Y-m-d")."' ";
@@ -56,9 +56,9 @@
 									echo "<div class='day'>";
 									 
 									if($row['date'] == date("Y-m-d")) {
-										$date_output = "heute (".date("d. M", strtotime($row['date'])).")";
+										$date_output = "".$t_today[$language]." (".date("d. M", strtotime($row['date'])).")";
 									} elseif($row['date'] == date("Y-m-d", strtotime("+1 day"))) {
-										$date_output = "morgen (".date("d. M", strtotime($row['date'])).")";
+										$date_output = "".$t_tomorrow[$language]." (".date("d. M", strtotime($row['date'])).")";
 									} else {
 										$date_output = date("d. M Y", strtotime($row['date']));
 									}
@@ -115,7 +115,7 @@
 						} // Ende von if(isset($_GET['search']))
 					?>
 					<div class="last_element">
-						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar">Zum Kalender</a>
+						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar"><?php echo $t_view_calendar[$language] ?></a>
 					</div>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

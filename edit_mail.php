@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
-	$title = "E-Mail-Adresse bearbeiten - soon";
+	$title = $t_title_edit_mail[$language];
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2>E-Mail-Adresse ändern</h2>
+					<h2><?php echo $t_change_email[$language] ?></h2>
 					<?php							
 						if(isset($_GET['editemail'])) {
 							$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
@@ -33,7 +33,7 @@
 							
 							// Überprüfung, ob die angegebene E-Mail-Adresse gültig ist
 							if(!filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
-								echo '<div class="alert alert-danger">Geben Sie eine gültige E-Mail-Adresse ein</div>';
+								echo '<div class="alert alert-danger">'.$t_please_enter_a_valid_email_address[$language].'</div>';
 								$error = true;
 							}
 								
@@ -51,7 +51,7 @@
 										
 									foreach ($connection->query($sql_select) as $row) {
 										if($row['email'] > '0') {
-											echo "<div class='alert alert-danger'>Diese E-Mail-Adresse ist bereits vergeben.</div>";
+											echo "<div class='alert alert-danger'>".$this_email_address_is_already_taken[$language]."</div>";
 											$error = true;
 										}							
 									}
@@ -71,12 +71,12 @@
 					<form action="?editemail=1" method="post">
 						<div class="box">
 							<div class="form-group margin-bottom-0">
-								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="new_email" type="mail" class="form-control with_glyphicon" id="new_email" aria-describedby="emailHelp" placeholder="Neue E-Mail-Adresse" value="<?php if(isset($_POST['new_email'])){echo $_POST['new_email'];} else {echo $email;}?>">
+								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="new_email" type="mail" class="form-control with_glyphicon" id="new_email" aria-describedby="emailHelp" placeholder="<?php echo $t_new_email[$language] ?>" value="<?php if(isset($_POST['new_email'])){echo $_POST['new_email'];} else {echo $email;}?>">
 							</div>
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">
-							<button type="submit" class="btn btn-primary">Speichern</button>
-							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>profile">Abrrechen</a>
+							<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>
+							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>profile"><?php echo $t_cancel[$language] ?></a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
