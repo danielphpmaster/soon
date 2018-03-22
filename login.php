@@ -41,7 +41,7 @@
 			$username = $row['username'];
 			$_SESSION['username'] = $username;
 			
-			$language = $row['language'];
+			$language = $language_array[$row['language']];			
 			$_SESSION['language'] = $language;
 			
 			$_SESSION['email'] = $email;
