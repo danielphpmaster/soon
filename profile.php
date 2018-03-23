@@ -26,7 +26,7 @@
 							<tbody>
 								<tr>
 									<td style="border:0;"><?php echo $t_username[$language] ?></td>
-									<td style="border:0;"><?php echo $username;?></td>
+									<td style="border:0;"><?php echo htmlspecialchars($username);?></td>
 									<td style="border:0;"><a href="<?php echo $path; ?>edit_username"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
 								</tr>
 								<tr>

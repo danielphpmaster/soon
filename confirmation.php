@@ -20,7 +20,7 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2><?php echo $t_welcome_to_soon[$language] .", ".$username?>!</h2>
+					<h2><?php echo $t_welcome_to_soon[$language] .", ".htmlspecialchars($username)?>!</h2>
 					<?php
 						echo "<div class='alert alert-success'>","".$t_you_have_successfully_registered[$language]."</div>";
 					?>

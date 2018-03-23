@@ -94,15 +94,16 @@
 						
 						// Ausgabe Terminname
 						echo "<div class='appointment' style='margin-top: 0'>
-									<div ".$appointment_color." class='title'><b>".$row['appointmentname']."</b>
+									<div ".$appointment_color." class='title'><b>".htmlspecialchars($row['appointmentname'])."</b>
 										<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>";
 						if($guest OR $other_user) {
-						} else { echo "
-										<div class='float_right'>
-											<a href='".$path."remove?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
-											<a href='".$path."edit_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
-											<a href='".$path."share_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
-										</div>";
+						} else {
+							echo "
+								<div class='float_right'>
+									<a href='".$path."remove?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+									<a href='".$path."edit_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+									<a href='".$path."share_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>
+								</div>";
 						}
 						echo "
 									</div>";
@@ -119,21 +120,21 @@
 						if($row['time'] == "00:00:00") {
 							echo "";
 						} else {
-							echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$row['time']."</div>";
+							echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['time'])."</div>";
 						}
 						
 						// Wenn vorhanden: Ausgabe Terminort
 						if(empty($row['location'])) {
 							echo "";
 						} else {
-							echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".$row['location']."</div>";
+							echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['location'])."</div>";
 						}
 						
 						// Wenn vorhanden: Ausgabe Terminkommentar
 						if(empty($row['comment'])) {
 							echo "";
 						} else {
-							echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".$row['comment']."</div>";
+							echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['comment'])."</div>";
 						}
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist						

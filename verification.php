@@ -50,14 +50,14 @@
 								$_SESSION['email_verified'] = 'true';
 								header('Location: '.$path.'confirmation');
 							} else {
-								echo "<div class='alert alert-danger'>".$t_please_enter_a_username[$language]."</div>";
+								echo "<div class='alert alert-danger'>".$t_invalid_verification_code[$language]."</div>";
 							}
 						} // Ende von if(isset($_GET['editemail']))
 					?>
 					<form action="?verifyemail=1" method="post">
 						<div class="box">
 							<div class="form-group margin-bottom-0">
-								<span class='glyphicon glyphicon-ok form' style='color:#777'; aria-hidden='true'></span><input name="verification_code" type="text" class="form-control with_glyphicon" id="verification_code" placeholder="<?php echo $t_verification_code[$language] ?>" value="<?php if(isset($_POST['verification_code'])){echo $_POST['verification_code'];}?>">
+								<span class='glyphicon glyphicon-ok form' style='color:#777'; aria-hidden='true'></span><input name="verification_code" type="text" class="form-control with_glyphicon" id="verification_code" placeholder="<?php echo $t_verification_code[$language] ?>" value="<?php if(isset($_POST['verification_code'])){echo htmlspecialchars($_POST['verification_code']);}?>">
 							</div>
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">

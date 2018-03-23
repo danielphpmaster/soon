@@ -154,10 +154,10 @@
 					<form action="?register=1" method="post">								
 						<div class="box">
 							<div class="form-group">
-								<span class='glyphicon glyphicon-user form' style='color:#777'; aria-hidden='true'></span><input name="username" type="text" class="form-control with_glyphicon" id="username" placeholder="<?php echo $t_username[$language] ?>" value="<?php if(isset($username)){echo $username;}?>">
+								<span class='glyphicon glyphicon-user form' style='color:#777'; aria-hidden='true'></span><input name="username" type="text" class="form-control with_glyphicon" id="username" placeholder="<?php echo $t_username[$language] ?>" value="<?php if(isset($username)){echo htmlspecialchars($username);}?>">
 							</div>
 							<div class="form-group">
-								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="email" type="email" class="form-control with_glyphicon" id="email" aria-describedby="emailHelp" placeholder="<?php echo $t_email[$language] ?>" value="<?php if(isset($email)){echo $email;}?>">
+								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="email" type="email" class="form-control with_glyphicon" id="email" aria-describedby="emailHelp" placeholder="<?php echo $t_email[$language] ?>" value="<?php if(isset($email)){echo htmlspecialchars($email);}?>">
 							</div>
 							<div class="form-group">
 								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password" type="password" class="form-control with_glyphicon" id="password" placeholder="<?php echo $t_password[$language] ?>">

@@ -71,7 +71,7 @@
 					<form action="?editemail=1" method="post">
 						<div class="box">
 							<div class="form-group margin-bottom-0">
-								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="new_email" type="mail" class="form-control with_glyphicon" id="new_email" aria-describedby="emailHelp" placeholder="<?php echo $t_new_email[$language] ?>" value="<?php if(isset($_POST['new_email'])){echo $_POST['new_email'];} else {echo $email;}?>">
+								<span class='glyphicon glyphicon-envelope form' style='color:#777'; aria-hidden='true'></span><input name="new_email" type="mail" class="form-control with_glyphicon" id="new_email" aria-describedby="emailHelp" placeholder="<?php echo $t_new_email[$language] ?>" value="<?php if(isset($_POST['new_email'])){echo htmlspecialchars($_POST['new_email']);} else {echo htmlspecialchars($email);}?>">
 							</div>
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">

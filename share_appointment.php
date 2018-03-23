@@ -113,7 +113,7 @@
 
 								mail($mail_receiver, $subject, $text, $headers);
 							
-								echo "<div class='alert alert-success'>".$t_your_appointment_has_been_succesfully_shared_with[$language]." ".$mail_receiver."</div>
+								echo "<div class='alert alert-success'>".$t_your_appointment_has_been_succesfully_shared_with[$language]." ".htmlspecialchars($mail_receiver)."</div>
 									<div  class='last_element'>
 										<a class='btn btn-primary' href='".$path."share_appointment?a=".$appointmenttoken."'>".$t_share_appointment_with_another_person[$language]."</a>
 										<a class='btn btn-primary grey-button' href='".$path."calendar'>".$t_view_calendar[$language]."</a>

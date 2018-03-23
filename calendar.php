@@ -122,7 +122,7 @@
 						foreach ($connection->query($sql_select) as $row) {
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
-							<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".$row['appointmentname']."</b></div></a>";
+							<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".htmlspecialchars($row['appointmentname'])."</b></div></a>";
 							
 							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
 							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
@@ -135,21 +135,21 @@
 							if($row['time'] == "00:00:00") {
 								echo "";
 							} else {
-								echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$row['time']."</div>";
+								echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['time'])."</div>";
 							}
 							
 							// Wenn vorhanden: Ausgabe Terminort
 							if(empty($row['location'])) {
 								echo "";
 							} else {
-								echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".$row['location']."</div>";
+								echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['location'])."</div>";
 							}
 							
 							// Wenn vorhanden: Ausgabe Terminkommentar
 							if(empty($row['comment'])) {
 								echo "";
 							} else {
-								echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".$row['comment']."</div>";
+								echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['comment'])."</div>";
 							}
 							
 							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist

@@ -115,6 +115,10 @@ $t_verification_code = array(
 	"Bestätigungscode",
 	"Verification code"
 );
+$t_invalid_verification_code = array(
+	"Ungültiger Bestätigungscode",
+	"Invalid verification code"
+);
 
 /* confirmation.php */
 $t_title_confirmation = array(

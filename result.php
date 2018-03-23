@@ -33,7 +33,7 @@
 								$_SESSION['searchvalue'] = $searchvalue;	
 								
 								// Ausgabe Titel mit Suchbegriff
-								echo "<h2 class='margin-bottom-4px'>".$t_search_results_for[$language]." '".$searchvalue."'</h2>";
+								echo "<h2 class='margin-bottom-4px'>".$t_search_results_for[$language]." '".htmlspecialchars($searchvalue)."'</h2>";
 								
 								// Suche nach einem Termin, der im Terminnamen den Suchbegriff enthält und der heute oder in Zukunft stattfindet
 								$sql_select = "SELECT * FROM `appointments` WHERE userid = '$userid' AND appointmentname LIKE '%$searchvalue%' AND date >= '".date("Y-m-d")."' ";
@@ -65,7 +65,7 @@
 						
 									// Ausgabe Terminname und Termindatum
 									echo "<div class='appointment'>
-									<a href='".$path."appointment?a=".$row['appointmenttoken']."'".$appointment_color."><div class='title'><b>".$row['appointmentname']."</b></a>
+									<a href='".$path."appointment?a=".$row['appointmenttoken']."'".$appointment_color."><div class='title'><b>".htmlspecialchars($row['appointmentname'])."</b></a>
 												<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>
 												<div class='float_right'>
 													<a href='".$path."remove?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
@@ -85,21 +85,21 @@
 									if($row['time'] == "00:00:00") {
 										echo "";
 									} else {
-										echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$row['time']."</div>";
+										echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['time'])."</div>";
 									}
 									
 									// Wenn vorhanden: Ausgabe Terminort
 									if(empty($row['location'])) {
 										echo "";
 									} else {
-										echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".$row['location']."</div>";
+										echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['location'])."</div>";
 									}
 									
 									// Wenn vorhanden: Ausgabe Terminkommentar
 									if(empty($row['comment'])) {
 										echo "";
 									} else {
-										echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".$row['comment']."</div>";
+										echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['comment'])."</div>";
 									}
 									
 									// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
