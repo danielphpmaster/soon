@@ -42,4 +42,9 @@
 	} else {
 		$language = $_SESSION['language'];
 	}
+	if (empty($_SESSION['email_verified'])){
+		echo "";
+	} else {
+		$email_verified = $_SESSION['email_verified'];
+	}
 ?>

@@ -102,14 +102,28 @@ $this_email_address_is_already_taken = array(
 	"This email address is already taken"
 );
 
+/* verification.php */
+$t_title_verification = array(
+	"E-Mail-Adresse bestätigen - soon",
+	"Verify email adress - soon"
+);
+$t_verify_email_adress = array(
+	"E-Mail-Adresse bestätigen",
+	" Verify email adress"
+);
+$t_verification_code = array(
+	"Bestätigungscode",
+	"Verification code"
+);
+
 /* confirmation.php */
 $t_title_confirmation = array(
 	"Erfolgreiche Registrierung - soon",
 	"Successfully registrated - soon"
 );
-$t_successfully_registrated = array(
-	"Erfolgreiche Registrierung",
-	"Successfully registrated"
+$t_you_have_successfully_registered = array(
+	"Du hast dich erfolgreich registriert",
+	"You have successfully registered."
 );
 $t_welcome_to_soon = array(
 	"Willkommen bei soon",

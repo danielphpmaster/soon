@@ -38,6 +38,9 @@
 			$userid = $row['userid'];
 			$_SESSION['userid'] = $userid;
 			
+			$email_verified = $row['email_verified'];
+			$_SESSION['email_verified'] = $email_verified;
+			
 			$username = $row['username'];
 			$_SESSION['username'] = $username;
 			

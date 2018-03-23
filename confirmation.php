@@ -1,12 +1,7 @@
 <?php
 	include 'inlcude_all.php';
 	include 'loginwall.php';
-	
-	// Wenn in angemeldetem Zustand: Umleitung zu calendar.php
-	if(isset($_SESSION['userid'])) {
-		die(header('Location: '.$path.'calendar'));
-	}
-	
+		
 	$title = $t_title_confirmation[$language];
 ?>
 
@@ -25,9 +20,9 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2><?php echo $t_successfully_registrated[$language] ?></h2>
+					<h2><?php echo $t_welcome_to_soon[$language] .", ".$username?>!</h2>
 					<?php
-						echo "<div class='alert alert-success'>","".$t_welcome_to_soon[$language].", ".$username."!</div>";
+						echo "<div class='alert alert-success'>","".$t_you_have_successfully_registered[$language]."</div>";
 					?>
 					<div class="last_element">
 						<a href="<?php echo $path; ?>calendar" class="btn btn-primary" role="button"><?php echo $t_getting_started[$language] ?></a>

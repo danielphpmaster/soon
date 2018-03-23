@@ -56,7 +56,7 @@
 							}
 
 							$user_language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-							$_SESSION['language'] = $user_language;
+							$_SESSION['language'] = $language_array[$user_language];
 							
 							// Überprüfung, ob ein Benutzername angegeben wurde
 							if(empty($username)) {
@@ -119,12 +119,22 @@
 									}
 								}
 								
+								// Erstellung Verifizierungscode
+								$numbers = "123456789";
+								$pass2 = array(); //remember to declare $pass2 as an array
+								$numberLength = strlen($numbers) - 1; //put the length -1 in cache
+								for ($i2 = 0; $i2 < 5; $i2++) {
+									$n2 = rand(0, $numberLength);
+									$pass2[] = $numbers[$n2];
+								}
+								$verification_code = implode($pass2); //turn the array into a string
+																
 								// Erstellung des Registrierungsdatum
-								$created     = strtotime(date('Y-m-d H:i:s'));
+								$created = strtotime(date('Y-m-d H:i:s'));
 								
 								$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-								$sql_insert = "INSERT INTO users (usertoken, username, email, password, language, created) VALUES ('$usertoken', '$username', '$email', '$password_hash', '$user_language', '$created')";
+								$sql_insert = "INSERT INTO users (usertoken, username, email, email_verified, verification_code, password, language, created) VALUES ('$usertoken', '$username', '$email', 'false', '$verification_code', '$password_hash', '$user_language', '$created')";
 								$sql_insert = $connection->query($sql_insert);
 
 								$_SESSION['username'] = $username;
@@ -135,8 +145,9 @@
 									$userid = $row['userid'];
 								}
 
+								$_SESSION['email_verified'] = false;
 								$_SESSION['userid'] = $userid;
-								header('Location: '.$path.'confirmation');
+								header('Location: '.$path.'verification');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['register']))
 					?>
