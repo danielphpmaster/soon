@@ -84,7 +84,13 @@
 				</div>
 			
 				<div class="col-xs-12 col-md-3 last_element"></div>
+				<div class="col-xs-12 more-information-button"> 
+						<div>
+							<a href="index.php" style="color: black;"><span class="glyphicon glyphicon glyphicon-menu-up" aria-hidden="true"></span></a>
+						</div> 
+					</div>
 			</div>
 		</div>
 	</body>
 </html>
+

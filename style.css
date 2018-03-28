@@ -309,10 +309,15 @@ Betrifft nur calendar.php
 	} 
 
 	div.calendar_current_month {
-		padding: 7px 12px 7px 12px;
+		padding: 0px 12px 7px 12px;
 		text-align: center;
 	} /* Ende von CSS, welches nur calendar.php betrifft */
 
+		div.calendar_current_month_mobile {
+		padding: 7px 12px 7px 12px;
+		text-align: center;
+	}
+	
 	div.box {
 		background-color: #f8f8f8;
 		border: 1px solid #e7e7e7;
