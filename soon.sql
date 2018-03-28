@@ -15,8 +15,6 @@ CREATE TABLE `appointments` (
   `userid` int(11) NOT NULL,
   `appointmentname` text NOT NULL,
   `timestamp` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `time` time NOT NULL,
   `location` text NOT NULL,
   `comment` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -40,12 +38,11 @@ ALTER TABLE `appointments`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`userid`);
 
+
 ALTER TABLE `appointments`
   MODIFY `appointmentid` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `users`
   MODIFY `userid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
- 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

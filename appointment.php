@@ -17,12 +17,21 @@
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
 			$appointmentname = $row['appointmentname'];
-			$date = $row['date'];
-			$time = $row['time'];
+			$date = $row['timestamp'];
+			$time = $row['timestamp'];
 			$location = $row['location'];
 			$comment = $row['comment'];
 			$appointmentid = $row['appointmentid'];
 		}
+		
+		// Definierung Datumformat
+		$t_day = 't_day_'.date("N", $date);
+		$t_month = 't_month_'.date("n", $date);
+		
+		$t_date = array(
+			${$t_day}[$language].", ".date("d. ", $date).${$t_month}[$language], 
+			${$t_day}[$language].", ".${$t_month}[$language].date(" d", $date)
+		);
 				
 		// Umleitung, wenn kein Termin gefunden
 		if(empty($appointmentname)) {
@@ -76,7 +85,9 @@
 						echo "<h2>".$t_appointment[$language]."".$alternative_appointmentname."</h2>";
 					
 						// Variable, die definiert, welche Farbe der Terminname hat 
-						if ($row['date'] == date("Y-m-d")) {
+						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
+						
+						if ($first_timestamp_of_day == strtotime(date("Y-m-d 00:00:00", time()))) {
 							$appointment_color = "style='color: #d9534f;'";
 						} else {
 							$appointment_color = "";
@@ -84,12 +95,13 @@
 						
 						echo "<div class='day'>";
 						
-						if($row['date'] == date("Y-m-d")) {
-							$date_output = "".$t_today[$language]." (".date("d. M", strtotime($row['date'])).")";
-						} elseif($row['date'] == date("Y-m-d", strtotime("+1 day"))) {
-							$date_output = "".$t_tomorrow[$language]." (".date("d. M", strtotime($row['date'])).")";
+						// Ausgabe Termindatum
+						if(strtotime(date("Y-m-d 00:00:00", $date)) == strtotime(date("Y-m-d 00:00:00", time()))) {
+							$date_output = $t_today[$language].", ".$t_date[$language];
+						} elseif($date == strtotime('+1 day', time())) {
+							$date_output = $t_tomorrow[$language].", ".$t_date[$language];
 						} else {
-							$date_output = date("d. M Y", strtotime($row['date']));
+							$date_output = $t_date[$language];
 						}
 						
 						// Ausgabe Terminname
@@ -110,17 +122,23 @@
 						
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-						if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+						if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($row['location']) and empty($row['comment'])) {
 							echo "";
 						} else {
 							echo "<div class='appointmentinformation'>";
 						}
 						
+						// Definierung Zeitformat
+						$t_time = array(
+							date('G:i', $row['timestamp'])." Uhr",
+							date('g.i a', $row['timestamp'])
+						);
+						
 						// Wenn vorhanden: Ausgabe Terminzeit
-						if($row['time'] == "00:00:00") {
+						if(date("h:i:s", $row['timestamp']) == "12:00:01") {
 							echo "";
 						} else {
-							echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['time'])."</div>";
+							echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$t_time[$language]."</div>";
 						}
 						
 						// Wenn vorhanden: Ausgabe Terminort
@@ -138,7 +156,7 @@
 						}
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist						
-						if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+						if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($row['location']) and empty($row['comment'])) {
 							echo "";
 						} else {
 							echo "</div>"; // Ende .appointmentinformation
@@ -149,7 +167,7 @@
 						if($guest OR $other_user) {
 						} else { echo "
 							<div class='last_element'>
-								<a class='btn btn-primary grey-button' href='".$path."calendar'>".$t_to_my_calendar[$language]."</a>
+								<a class='btn btn-primary grey-button' href='".$path."calendar'>".$t_view_calendar[$language]."</a>
 							</div>";
 						}
 					?>

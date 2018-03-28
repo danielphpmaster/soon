@@ -14,25 +14,25 @@
 		$month = $_GET['mm'];
 	}
 			
-	$timestamp = strtotime("$year $month");
+	$timestamp_of_month = strtotime("$year $month");
 	
-	if($timestamp < strtotime(date('Y-m-01'))) {
+	if($timestamp_of_month < strtotime(date('Y-m-01'))) {
 		$year = date('Y');
 		$month = date('F');
 		header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
 	}
 	
-	if($timestamp > strtotime(date('2019-12-01'))) {
+	if($timestamp_of_month > strtotime(date('2019-12-01'))) {
 		$year = date('Y');
 		$month = date('F');
 		header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
 	}
 	
-	$previous_month_timestamp = strtotime('-1 month', $timestamp);
+	$previous_month_timestamp = strtotime('-1 month', $timestamp_of_month);
 	$previous_month = date("F", $previous_month_timestamp);
 	$previous_month_year = date("Y", $previous_month_timestamp);
 	
-	$next_month_timestamp = strtotime('+1 month', $timestamp);
+	$next_month_timestamp = strtotime('+1 month', $timestamp_of_month);
 	$next_month = date("F", $next_month_timestamp);
 	$next_month_year = date("Y", $next_month_timestamp);
 	
@@ -53,7 +53,7 @@
 			<div class="row" style="margin-top: 20px;">
 				<?php
 				
-				if($timestamp < time()) {
+				if($timestamp_of_month < time()) {
 					echo "<div class='col-xs-6 col-sm-4'></div>";
 				} else {
 					echo"<div class='col-xs-6 col-sm-4'>
@@ -78,64 +78,82 @@
 		</div> <!-- Ende von .container -->
 		<div class="calendar-container">
 			<div class="row seven-cols">
-				<?php									
-					$date = date("Y-m-d", $timestamp);
+				<?php
+					$date = $timestamp_of_month;
 					
-					if($timestamp == strtotime(date('Y-m-01'))) {
-						$date = date('Y-m-d');
+					// Einstellung, dass beim aktuellen Monat beim aktuellen Tag begonnen wird
+					if($timestamp_of_month == strtotime(date('Y-m-01'))) {
+						$date = time();
 					}
-				
-					$last_day_of_current_month = date("Y-m-t", strtotime($date));
 					
-					while ($date <= $last_day_of_current_month) {
-						
+					$last_day_of_month = strtotime(date("Y-m-t 24:00", $timestamp_of_month));
+										
+					while ($date <= $last_day_of_month) {
 						// Variable, die definiert, welche Farbe der Terminname hat
-						if($date == date("Y-m-d")) {
+						if($date == time()) {
 							$appointmentcolor = "style='color: #d9534f;'";
 						} else {
 							$appointmentcolor = "";
 						}
 						
 						// Variable, die definiert, ob das ausgegebene Datum einen border: right erhält
-						if($date == $last_day_of_current_month) {
+						if($date == $last_day_of_month) {
 							$dateclass = "last";
 						} else {
 							$dateclass = "";
 						}
 						
-						// Ausgabe Termindatum
-						if($date == date("Y-m-d")) {
-							$date_output = "heute, ".date("D", strtotime($date)).", ".date("d. M y", strtotime($date))."";
-						} elseif($date == date("Y-m-d", strtotime("+1 day"))) {
-							$date_output = "morgen, ".date("D", strtotime($date)).", ".date("d. M y", strtotime($date))."";
+						// Definierung Datumformat
+						$t_day = 't_day_'.date("N", $date);
+						$t_month = 't_month_'.date("n", $date);
+					
+						$t_date_format = array(
+							${$t_day}[$language].", ".date("d. ", $date).${$t_month}[$language], 
+							${$t_day}[$language].", ".${$t_month}[$language].date(" d", $date)
+						);
+						
+						// Ausgabe Datum
+						if($date == time()) {
+							$date_output = $t_today[$language].", ".$t_date_format[$language];
+						} elseif($date == strtotime('+1 day', time())) {
+							$date_output = $t_tomorrow[$language].", ".$t_date_format[$language];
 						} else {
-							$date_output = date("D", strtotime($date)).", ".date("d. M y", strtotime($date));
-						}						
+							$date_output = $t_date_format[$language];
+						}
 						
 						echo "<div class='col-md-1'>
 							<div class='day'>
-							<div class='date ".$dateclass."'><b><span class='date_output_calendar'>".$date_output."</span></b><a href='".$path."add?date=".$date."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
+							<div class='date ".$dateclass."'><b><span class='date_output_calendar'>".$date_output."</span></b><a href='".$path."add?date=".date("Y-m-d", $date)."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
 						
 						// Suche nach einem Termin
-						$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND date = '$date'";
+						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
+						$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", $date));
+						
+						$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day'";
 										
 						foreach ($connection->query($sql_select) as $row) {
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
 							<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".htmlspecialchars($row['appointmentname'])."</b></div></a>";
-							
+														
 							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+							if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($row['location']) and empty($row['comment'])) {
 								echo "";
 							} else {
 								echo "<div class='appointmentinformation'>";
 							}
 							
+							// Definierung Zeitformat
+							$t_time = array(
+								date('G:i', $row['timestamp'])." Uhr",
+								date('g.i a', $row['timestamp'])
+							);
+							
 							// Wenn vorhanden: Ausgabe Terminzeit
-							if($row['time'] == "00:00:00") {
+							if(date("h:i:s", $row['timestamp']) == "12:00:01") {
 								echo "";
 							} else {
-								echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['time'])."</div>";
+								echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$t_time[$language]."</div>";
 							}
 							
 							// Wenn vorhanden: Ausgabe Terminort
@@ -153,7 +171,7 @@
 							}
 							
 							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-							if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+							if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($row['location']) and empty($row['comment'])) {
 								echo "";
 							} else {
 								echo "</div>"; // Ende <div class='appointmentinformation'>
@@ -174,8 +192,8 @@
 									
 						echo "</div></div>"; // Ende von .col-md-1 und von .day
 						
-						$date++;
-					} // Ende von while ($date <= $last_day_of_current_month)
+						$date = strtotime('+1 day', $date);
+					} // Ende von while ($date <= $last_day_of_month)
 				?>
 			</div> <?php // Ende von .row.seven-cols ?>
 			<script>

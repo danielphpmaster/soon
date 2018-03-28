@@ -58,7 +58,7 @@
 							}
 							
 							if(empty($_POST['time'])) {
-								$newtime = "";
+								$newtime = "12:00:01";
 							} else {
 								$newtime = $_POST['time'];								
 							}
@@ -109,15 +109,18 @@
 								$error = true;
 							}
 							
-							// Überprüfung, ob ein Datum in der Zukunft angegeben wurde
-							/*if($date < time()) {
-									echo '<div class="alert alert-danger">Geben Sie ein zukünftiges Datum ein</div>';
+							$timestamp = strtotime("$newdate $newtime");
+							
+							// Prüfung, ob ein zukünftiges Datum angegeben wurde
+							if($timestamp < strtotime(date("Y-m-n 00:00:00", time()))) {
+									echo '<div class="alert alert-danger">'.$t_insert_a_future_date[$language].'</div>';
 									$error = true;												
-							}*/
-								
+							}
+							
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {									
-								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', date = '$newdate', time = '$newtime', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
+								
+								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', timestamp = '$timestamp', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'calendar');						
@@ -126,11 +129,11 @@
 					?>
 					<form action="?editappointment=1" method="post">
 						<div class="day">
-							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($row['date'])){echo $row['date'];} else {echo htmlspecialchars($newdate);}?>"></b></div>
+							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($row['timestamp'])){echo date("Y-m-d", $row['timestamp']);} else {echo htmlspecialchars($newdate);}?>"></b></div>
 							<div class='appointment'>
 								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset( $row['appointmentname'])){echo htmlspecialchars($row['appointmentname']);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
 								<div class='appointmentinformation'>
-									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($row['time'])){echo htmlspecialchars($row['time']);} else {echo htmlspecialchars($newtime);}?>"></div>
+									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($row['timestamp'])){echo date('h:i', $row['timestamp']);} else {echo htmlspecialchars($newtime);}?>"></div>
 									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="<?php echo $t_location[$language] ?>" value="<?php if(isset($row['location'])){echo htmlspecialchars($row['location']);} else{echo htmlspecialchars($newlocation);}?>"></div>
 									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="<?php echo $t_comment[$language] ?>" value="<?php if(isset($row['comment'])){echo htmlspecialchars($row['comment']);} else{echo htmlspecialchars($newcomment);}?>"></div>
 								</div>

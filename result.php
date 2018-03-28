@@ -36,9 +36,9 @@
 								echo "<h2 class='margin-bottom-4px'>".$t_search_results_for[$language]." '".htmlspecialchars($searchvalue)."'</h2>";
 								
 								// Suche nach einem Termin, der im Terminnamen den Suchbegriff enthält und der heute oder in Zukunft stattfindet
-								$sql_select = "SELECT * FROM `appointments` WHERE userid = '$userid' AND appointmentname LIKE '%$searchvalue%' AND date >= '".date("Y-m-d")."' ";
+								$sql_select = "SELECT * FROM `appointments` WHERE userid = '$userid' AND appointmentname LIKE '%$searchvalue%' AND timestamp >= '".strtotime(date("Y-m-d 00:00:00", time()))."' ";
 								foreach ($connection->query($sql_select) as $row) {
-									
+																		
 									if (empty($row['appointmenttoken'])) {
 										// Ausgabe, wenn kein Termin an diesem Datum besteht
 										echo "<div class='noappointment'>Keine Termine</div>";
@@ -47,22 +47,32 @@
 									}
 									
 									// Variable, die definiert, welche Farbe der Terminname hat
-									if ($row['date'] == date("Y-m-d")) {
+									$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $row['timestamp']));
+						
+									if ($first_timestamp_of_day == strtotime(date("Y-m-d 00:00:00", time()))) {
 											$appointment_color = "style='color: #d9534f;'";
 									} else {
 											$appointment_color = "";
 									}
 									
 									echo "<div class='day'>";
-									 
-									if($row['date'] == date("Y-m-d")) {
-										$date_output = "".$t_today[$language]." (".date("d. M", strtotime($row['date'])).")";
-									} elseif($row['date'] == date("Y-m-d", strtotime("+1 day"))) {
-										$date_output = "".$t_tomorrow[$language]." (".date("d. M", strtotime($row['date'])).")";
-									} else {
-										$date_output = date("d. M Y", strtotime($row['date']));
-									}
+									
+									$t_day = 't_day_'.date("N", $row['timestamp']);
+									$t_month = 't_month_'.date("n", $row['timestamp']);
+									
+									$t_date_format = array(
+										${$t_day}[$language].", ".date("d. ", $row['timestamp']).${$t_month}[$language], 
+										${$t_day}[$language].", ".${$t_month}[$language].date(" d", $row['timestamp'])
+									);
 						
+									if(strtotime(date("Y-m-d 00:00:00", $row['timestamp'])) == strtotime(date("Y-m-d 00:00:00", time()))) {
+										$date_output = $t_today[$language].", ".$t_date_format[$language];
+									} elseif(strtotime(date("Y-m-d 00:00:00", $row['timestamp'])) == strtotime('+1 day', time())) {
+										$date_output = $t_tomorrow[$language].", ".$t_date_format[$language];
+									} else {
+										$date_output = $t_date_format[$language];
+									}
+									
 									// Ausgabe Terminname und Termindatum
 									echo "<div class='appointment'>
 									<a href='".$path."appointment?a=".$row['appointmenttoken']."'".$appointment_color."><div class='title'><b>".htmlspecialchars($row['appointmentname'])."</b></a>
@@ -75,17 +85,17 @@
 											</div>";
 									
 									// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-									if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+									if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($row['location']) and empty($row['comment'])) {
 										echo "";
 									} else {
 										echo "<div class='appointmentinformation'>";
 									}
 									
 									// Wenn vorhanden: Ausgabe Terminzeit
-									if($row['time'] == "00:00:00") {
+									if(date("h:i:s", $row['timestamp']) == "12:00:01") {
 										echo "";
 									} else {
-										echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['time'])."</div>";
+										echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars(date($t_time_format[$language], $row['timestamp']))."</div>";
 									}
 									
 									// Wenn vorhanden: Ausgabe Terminort
@@ -103,7 +113,7 @@
 									}
 									
 									// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-									if($row['time'] == "00:00:00" and empty($row['location']) and empty($row['comment'])) {
+									if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($row['location']) and empty($row['comment'])) {
 										echo "";
 									} else {
 										echo "</div>"; // Ende von .appointmentinformation

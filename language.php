@@ -12,6 +12,93 @@
 
 /* Text */
 
+/* Zeitformat */
+
+$t_time_format = array(
+	"'G:i'",
+	"g.i a"
+);
+
+/* Wochentage */
+$t_day_1 = array(
+	"Montag",
+	"Monday"
+);
+$t_day_2 = array(
+	"Dienstag",
+	"Tuesday"
+);
+$t_day_3 = array(
+	"Mittwoch",
+	"Wednesday"
+);
+$t_day_4 = array(
+	"Donnerstag",
+	"Thursday"
+);
+$t_day_5 = array(
+	"Freitag",
+	"Friday"
+);
+$t_day_6 = array(
+	"Samstag",
+	"Saturday"
+);
+$t_day_7 = array(
+	"Sonntag",
+	"Sunday"
+);
+
+/* Monate */
+$t_month_1 = array(
+	"Januar",
+	"January"
+);
+$t_month_2 = array(
+	"Februar",
+	"February"
+);
+$t_month_3 = array(
+	"März",
+	"March"
+);
+$t_month_4 = array(
+	"April",
+	"April"
+);
+$t_month_5 = array(
+	"Mai",
+	"May"
+);
+$t_month_6 = array(
+	"Juni",
+	"June"
+);
+$t_month_7 = array(
+	"Juli",
+	"July"
+);
+$t_month_8 = array(
+	"August",
+	"August"
+);
+$t_month_9 = array(
+	"September",
+	"September"
+);
+$t_month_10 = array(
+	"Oktober",
+	"October"
+);
+$t_month_11 = array(
+	"November",
+	"November"
+);
+$t_month_12 = array(
+	"Dezember",
+	"December"
+);
+
 /* index.php */
 $t_title_index = array(
 	"soon - Dein persönlicher Kalender",
@@ -215,6 +302,10 @@ $t_insert_a_valid_date = array(
 	"Geben Sie ein gültiges Datum ein",
 	"Insert a valid date"
 );
+$t_insert_a_future_date = array(
+	"Geben Sie ein zukünftiges Datum ein",
+	"Insert a future date"
+);
 
 /* profile.php */
 $t_title_profile = array(
@@ -306,10 +397,6 @@ $t_title_appointment = array(
 $t_appointment = array(
 	"Termin",
 	"Appointment"
-);
-$t_to_my_calendar = array(
-	"Zum Kalender",
-	"To my calendar"
 );
 $t_from = array(
 	"von",

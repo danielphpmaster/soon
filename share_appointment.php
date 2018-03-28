@@ -14,8 +14,8 @@
 			// Termininformationen als Variablen speichern
 			$appointmentname = $row['appointmentname'];
 			$appointmentid = $row['appointmentid'];
-			$date = $row['date'];
-			$time = $row['time'];
+			$date = date("Y-m-d", $row['timestamp'];
+			$time = date($t_time_format['language'], $row['timestamp'];
 			$location = $row['location'];
 			$comment = $row['comment'];
 		}

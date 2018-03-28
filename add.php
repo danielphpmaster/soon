@@ -43,11 +43,10 @@
 							}
 							
 							if(empty($_POST['time'])) {
-								$time = "";
+								$time = "00:00:01";
 							} else {
 								$time = $_POST['time'];								
 							}
-							
 							if(empty($_POST['location'])) {
 								$location = "";
 							} else {
@@ -59,7 +58,7 @@
 							} else {
 								$comment = $_POST['comment'];								
 							}
-								
+							
 							// Überprüfung, ob ein Terminname angegeben wurde
 							if(empty($appointmentname)) {
 								echo '<div class="alert alert-danger">'.$t_insert_an_appointment_name[$language].'</div>';
@@ -93,19 +92,21 @@
 								echo '<div class="alert alert-danger">'.$t_insert_a_valid_date[$language].'</div>';
 								$error = true;									
 							}
-								
-							/* Überprüfung, ob ein Datum in der Zukunft angegeben wurde
-							if($date <= time()) {
-									echo '<div class="alert alert-danger">Geben Sie ein zukünftiges Datum ein</div>';
+							
+							$timestamp = strtotime("$date $time");
+							
+							// Prüfung, ob ein zukünftiges Datum angegeben wurde
+							if($timestamp < strtotime(date("Y-m-n 00:00:00", time()))) {
+									echo '<div class="alert alert-danger">'.$t_insert_a_future_date[$language].'</div>';
 									$error = true;												
-							}*/
-								
+							}
+							
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {
 								// Erstellung Termin-Token
 								$create_token = '0';
 								while ($create_token < '1') {
-									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.*!";
+									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 									$pass = array(); //remember to declare $pass as an array
 									$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
 									for ($i = 0; $i < 12; $i++) {
@@ -113,8 +114,6 @@
 										$pass[] = $alphabet[$n];
 									}
 									$appointmenttoken = implode($pass); //turn the array into a string
-									
-									$timestamp = strtotime("$date $time");
 									
 									$sql_select = "SELECT * FROM appointments WHERE appointmenttoken = '$appointmenttoken'";
 
@@ -128,7 +127,7 @@
 									}
 								}							
 								
-								$sql_insert = "INSERT INTO appointments (appointmenttoken, userid, appointmentname, timestamp, date, time, location, comment) VALUES ('$appointmenttoken', '$userid', '$appointmentname', '$timestamp', '$date', '$time', '$location', '$comment')";
+								$sql_insert = "INSERT INTO appointments (appointmenttoken, userid, appointmentname, timestamp, location, comment) VALUES ('$appointmenttoken', '$userid', '$appointmentname', '$timestamp', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 								
 								header('Location: '.$path.'calendar');

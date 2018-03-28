@@ -43,6 +43,19 @@
 			// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Suchenleiste und Navigations-Punkte werden angezeigt
 			if(empty($_SESSION['userid'])) {
 				echo "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+				
+						<!-- Dropdown rechts vom Logo. Momentan ohne Funktion.
+							<ul class='nav navbar-nav'>
+								<li class='dropdown'>
+									<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Kalender <span class='caret'></span></a>
+									<ul class='dropdown-menu'>
+										<li><a href='#'>Kalender</a></li>
+										<li><a href='#'>Projektmanager</a></li>
+									</ul>
+								</li>
+							</ul>
+						-->				
+				
 						<ul class='nav navbar-nav navbar-right'>
 							<li><a href='".$path."login'><span class='glyphicon glyphicon-user' aria-hidden='true'></span> ".$t_log_in[$language]."</a></li>
 							<li><a href='".$path."registration'><span class='glyphicon glyphicon-user' aria-hidden='true'></span> ".$t_sign_up[$language]."</a></li>
@@ -61,9 +74,22 @@
 
 			echo "
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+				
+					<!-- Dropdown rechts vom Logo. Momentan ohne Funktion.
+						<ul class='nav navbar-nav'>
+							<li class='dropdown'>
+								<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Kalender <span class='caret'></span></a>
+								<ul class='dropdown-menu'>
+									<li><a href='#'>Kalender</a></li>
+									<li><a href='#'>Projektmanager</a></li>
+								</ul>
+							</li>
+						</ul>
+					-->	
+				
 					<form class='navbar-form navbar-left' action='".$path."result' methode='post'>
 						<div class='form-group'>
-						<input name='search' type='text' class='form-control' placeholder='".$t_search_appointment[$language]."' value='".$searchvalue."'>
+						<input name='search' type='text' class='form-control' placeholder='".$t_search_appointment[$language]."' value='".htmlspecialchars($searchvalue)."'>
 						</div>
 						<button type='submit' class='btn btn-default'>".$t_search[$language]."</button>
 					</form>
@@ -80,9 +106,9 @@
 						<li class='dropdown'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>".htmlspecialchars($username)." <span class='caret'></span></a>
 							<ul class='dropdown-menu'>
-								<li><a href='".$path."profile'>".$t_my_profile[$language]."</a></li>
+								<li><a href='".$path."profile'><span class='glyphicon glyphicon-user' aria-hidden='true'></span> ".$t_my_profile[$language]."</a></li>
 								<li role='separator' class='divider'></li>
-								<li><a href='".$path."logout'>".$t_log_out[$language]."</a></li>
+								<li><a href='".$path."logout'><span class='glyphicon glyphicon-off' aria-hidden='true'></span> ".$t_log_out[$language]."</a></li>
 							</ul>
 						</li>
 					</ul>
