@@ -51,28 +51,26 @@
 				
 		<div class="container">
 			<div class="row" style="margin-top: 20px;">
-				<?php
-				
-				if($timestamp_of_month < time()) {
-					echo "<div class='col-xs-6 col-sm-4'></div>";
-				} else {
+				<?php				
+					echo "<div class='col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl calendar_current_month_mobile' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-default'><b>".$month." ".$year." </b><span class='glyphicon glyphicon glyphicon-print'></span></a></div>";
+					
+					if($timestamp_of_month < time()) {
+						echo "<div class='col-xs-6 col-sm-4'></div>";
+					} else {
+						echo"<div class='col-xs-6 col-sm-4'>
+								<a type='button' href='".$path."calendar/".$previous_month_year."/".$previous_month."' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$previous_month." ".$previous_month_year."</a>
+							</div>";
+					}
+					
+					echo "<div class='hidden-xs col-sm-4 calendar_current_month' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-default'><b>".$month." ".$year." </b><span class='glyphicon glyphicon glyphicon-print'></span></a></div>";
+					
+					if($year == '2019' and $month =='December') {
+						echo "<div class='col-xs-6 col-sm-4'></div>";
+					} else {
 					echo"<div class='col-xs-6 col-sm-4'>
-							<a type='button' href='".$path."calendar/".$previous_month_year."/".$previous_month."' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$previous_month." ".$previous_month_year."</a>
-						</div>";
-				}
-				
-				echo "<div class='hidden-xs col-sm-4 calendar_current_month' style='text-align: center;'><a type='button' href='".$path."export_pdf.php' class='btn btn-default'><b>".$month." ".$year." </b><span class='glyphicon glyphicon glyphicon-print'></span></a></div>";
-				
-				if($year == '2019' and $month =='December') {
-					echo "<div class='col-xs-6 col-sm-4'></div>";
-				} else {
-				echo"<div class='col-xs-6 col-sm-4'>
-						<a type='button' href='".$path."calendar/".$next_month_year."/".$next_month."' class='btn btn-default'>".$next_month." ".$next_month_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
-					</div>";					
-				}
-				
-				echo "<div class='col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl calendar_current_month_mobile' style='text-align: center;'><a type='button' href='".$path."export_pdf.php' class='btn btn-default'><b>".$month." ".$year." </b><span class='glyphicon glyphicon glyphicon-print'></span></a></div>";
-				
+							<a type='button' href='".$path."calendar/".$next_month_year."/".$next_month."' class='btn btn-default'>".$next_month." ".$next_month_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
+						</div>";					
+					}
 				?>
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->

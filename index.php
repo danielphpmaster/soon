@@ -65,19 +65,19 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h1>Deine Zukunft</h1>
+					<h1><span class="glyphicon glyphicon-road" aria-hidden="true"></span> Deine Zukunft</h1>
 					<div class="box">
 						Mit deinem soon-Kalender blickst du in die Zukunft. Plane und bearbeite alle deine künftigen Termine.
 					</div>
-					<h1>Kostenlos</h1>
+					<h1><span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Kostenlos</h1>
 					<div class="box">
 						Registriere dich noch heute und nutze die grenzenlosen Möglichkeiten. Komplett kostenlos.
 					</div>
-					<h1>Überall</h1>
+					<h1><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Überall</h1>
 					<div class="box">
 						Dein soon-Kalender ist stets bei dir. Behalte überall und jederzeit den Überblick – dank Optimierung für all deine Geräte.
 					</div>
-					<h1>Sicher</h1>
+					<h1><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> Sicher</h1>
 					<div class="box">
 						Alle deine Daten gehören dir. Daher verschlüsseln wir diese, sodass du dir keine Sorgen um deine Privatsphäre machen musst.
 					</div>

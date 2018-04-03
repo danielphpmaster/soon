@@ -4,6 +4,8 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 
 
+RewriteRule ^/?export_pdf/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ export_pdf.php?y=$1&mm=$2
+
 RewriteRule ^/?calendar/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ calendar.php?y=$1&mm=$2
 
 RewriteRule ^/?appointment/([A-Za-z0-9-_.*!?]+)/([A-Za-z0-9-_.*!?]+)$ appointment.php?a=$1&ai=$2

@@ -75,7 +75,7 @@
 			echo "
 				<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 				
-					<!-- Dropdown rechts vom Logo. Momentan ohne Funktion.
+					<!-- Dropdown rechts vom Logo. Momentan deaktiviert.
 						<ul class='nav navbar-nav'>
 							<li class='dropdown'>
 								<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Kalender <span class='caret'></span></a>
@@ -86,13 +86,15 @@
 							</li>
 						</ul>
 					-->	
-				
+					
+					<!-- Suchformular. Funktion aufgrund von Verschlüsselung der Daten deaktiviert.
 					<form class='navbar-form navbar-left' action='".$path."result' methode='post'>
 						<div class='form-group'>
 						<input name='search' type='text' class='form-control' placeholder='".$t_search_appointment[$language]."' value='".htmlspecialchars($searchvalue)."'>
 						</div>
 						<button type='submit' class='btn btn-default'>".$t_search[$language]."</button>
 					</form>
+					-->
 							
 					<ul class='nav navbar-nav navbar-right'>
 						<li><a href='".$path."add'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> ".$t_add_appointment[$language]."</a></li>
