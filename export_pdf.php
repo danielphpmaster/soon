@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 	include 'inlcude_all.php';
 	include 'loginwall.php';		
 	require_once('fpdf181/fpdf.php');
@@ -31,9 +31,9 @@
 	$pdf->Cell(36,15,"www.soon-calendar.ch",0,0);
 
 	$pdf->SetFont('Arial','',9);
-	$pdf->Cell(170,15,"Alle deine Termine â€“ immer und Ã¼berall abrufbar.",0,1);
+	$pdf->Cell(170,15,"Alle deine Termine – immer und überall abrufbar.",0,1);
 
-	$pdf->Cell(170,15,"$username generierte diese Ãœbersicht am $date_today.",0,1);
+	$pdf->Cell(170,15,"$username generierte diese Übersicht am $date_today.",0,1);
 
 	$pdf->SetFont('Arial','B',12);
 	$pdf->Cell(170,15,"$month $year",0,1);
