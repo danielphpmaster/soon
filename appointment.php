@@ -121,6 +121,13 @@
 							echo "";
 						} else {
 							echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($location)."</div>";
+							echo "<iframe
+									width='100%'
+									height='250'
+									frameborder='0' style='border:0'
+									src='https://www.google.com/maps/embed/v1/place?key=AIzaSyDrsCwHGUhbw2CFT0Iw5JDjAOEDPvjDknw 
+									&q=".htmlspecialchars($location)."' allowfullscreen>
+								</iframe>";						
 						}
 						
 						// Wenn vorhanden: Ausgabe Terminkommentar
