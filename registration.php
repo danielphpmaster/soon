@@ -128,7 +128,29 @@
 									$pass2[] = $numbers[$n2];
 								}
 								$verification_code = implode($pass2); //turn the array into a string
-																
+								
+								// Versenden der E-Mail mit dem Bestätigungscode
+								$headers = "From:soon-calendar.ch <termin@soon-calendar.ch>\n";
+								$headers .= "MIME-Version: 1.0\n";
+								$headers .= "Content-Type: text/html; charset=\"utf-8\"\n";
+								
+								$subject = "Dein Bestätigungscode für soon";
+								$text = "
+									<html>
+										<head>
+											<title>soon Bestätigungscode</title>
+										</head>
+										
+										<body>
+											Hey<br><br>
+											Bitte nutze den folgenden Code um deine Registrierung bei <a href='https://www.soon-calendar.ch'>soon</a> abzuschliessen:<br><br>
+											<h2>".$verification_code."</h2>
+										</body>
+									</html>
+									";
+
+								mail($email, $subject, $text, $headers);
+								
 								// Erstellung des Registrierungsdatum
 								$created = strtotime(date('Y-m-d H:i:s'));
 								
@@ -145,7 +167,7 @@
 									$userid = $row['userid'];
 								}
 
-								$_SESSION['email_verified'] = false;
+								$_SESSION['email_verified'] = 'false';
 								$_SESSION['userid'] = $userid;
 								header('Location: '.$path.'verification');
 							} // Ende von if(!$error)
