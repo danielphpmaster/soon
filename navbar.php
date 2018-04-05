@@ -30,17 +30,8 @@
 				?>
 			"><img src="<?php echo $path; ?>images/logo.svg" height="20px"></a>
 		</div> <?php // Ende von .navbar-header ?>
-		<?php			
-			// Prüfung, ob ein Suchwert eingegeben wurde
-			if(isset($_GET['search'])) {
-				$searchvalue = $_GET['search'];
-			} elseif (isset($searchvalue)){
-				$searchvalue = $searchvalue;
-			} else {
-				$searchvalue = '';
-			}				
-		
-			// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Suchenleiste und Navigations-Punkte werden angezeigt
+		<?php
+			// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Navigations-Punkte werden angezeigt
 			if(empty($_SESSION['userid'])) {
 				echo "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 				
@@ -63,8 +54,10 @@
 					</div>";
 			} else {
 				// Zählen, wieviele Termine der angemeldete Benutzer heute hat
-				$datetoday = date("Y-m-d");
-				$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = '$userid' AND date = '$datetoday'";
+				$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", time()));
+				$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", time()));
+				
+				$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = '$userid' AND timestamp > '$first_timestamp_of_day' and timestamp < '$last_timestamp_of_day'";
 				$count_result = $connection->prepare($sql_select);
 				$count_result->execute();
 
@@ -87,15 +80,6 @@
 						</ul>
 					-->	
 					
-					<!-- Suchformular. Funktion aufgrund von Verschlüsselung der Daten deaktiviert.
-					<form class='navbar-form navbar-left' action='".$path."result' methode='post'>
-						<div class='form-group'>
-						<input name='search' type='text' class='form-control' placeholder='".$t_search_appointment[$language]."' value='".htmlspecialchars($searchvalue)."'>
-						</div>
-						<button type='submit' class='btn btn-default'>".$t_search[$language]."</button>
-					</form>
-					-->
-							
 					<ul class='nav navbar-nav navbar-right'>
 						<li><a href='".$path."add'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> ".$t_add_appointment[$language]."</a></li>
 						<li><a href='".$path."calendar'><span class='glyphicon glyphicon-calendar' aria-hidden='true'></span> ".$t_my_calendar[$language]."";

@@ -13,8 +13,12 @@
 		foreach ($connection->query($sql_select) as $row) {
 		}
 		
+		$appointmentname = $string = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
+		$location = $string = openssl_decrypt($row['location'],"AES-128-ECB",$key);
+		$comment = $string = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
+		
 		// Umleitung, wenn kein Termin gefunden
-		if(empty($row['appointmentname'])) {
+		if(empty($appointmentname)) {
 			header('Location: '.$path.'calendar');
 		}
 	} elseif (empty($_GET['editappointment'])) {
@@ -118,7 +122,11 @@
 							}
 							
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
-							if(!$error) {									
+							if(!$error) {
+								// Verschlüsselung der Nutzereingaben
+								$newappointmentname = openssl_encrypt($newappointmentname,"AES-128-ECB",$key);
+								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
+								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
 								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', timestamp = '$timestamp', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
 								$sql_update = $connection->query($sql_update);
@@ -131,11 +139,11 @@
 						<div class="day">
 							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($row['timestamp'])){echo date("Y-m-d", $row['timestamp']);} else {echo htmlspecialchars($newdate);}?>"></b></div>
 							<div class='appointment'>
-								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset( $row['appointmentname'])){echo htmlspecialchars($row['appointmentname']);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
+								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
 								<div class='appointmentinformation'>
 									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($row['timestamp'])){echo date('h:i', $row['timestamp']);} else {echo htmlspecialchars($newtime);}?>"></div>
-									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="<?php echo $t_location[$language] ?>" value="<?php if(isset($row['location'])){echo htmlspecialchars($row['location']);} else{echo htmlspecialchars($newlocation);}?>"></div>
-									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="<?php echo $t_comment[$language] ?>" value="<?php if(isset($row['comment'])){echo htmlspecialchars($row['comment']);} else{echo htmlspecialchars($newcomment);}?>"></div>
+									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="<?php echo $t_location[$language] ?>" value="<?php if(isset($location)){echo htmlspecialchars($location);} else{echo htmlspecialchars($newlocation);}?>"></div>
+									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="<?php echo $t_comment[$language] ?>" value="<?php if(isset($comment)){echo htmlspecialchars($comment);} else{echo htmlspecialchars($newcomment);}?>"></div>
 								</div>
 							</div>
 						</div>

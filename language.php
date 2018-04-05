@@ -105,8 +105,8 @@ $t_title_index = array(
 	"soon - Your personal calendar"
 );	
 $t_headline = array(
-	"Alle Ihre Termine - immer und überall aufrufbar",
-	"All dates. Anytime, anywhere"
+	"Alle deine Termine - immer und überall aufrufbar",
+	"All your appointments. Anytime, everywhere"
 );
 $t_sign_up = array(
 	"Registrieren",
@@ -115,6 +115,38 @@ $t_sign_up = array(
 $t_log_in = array(
 	"Anmelden",
 	"Log in"
+);
+$t_your_future = array(
+	"Deine Zukunft",
+	"Your future"
+);
+$t_your_future_text = array(
+	"Mit deinem soon-Kalender blickst du in die Zukunft. Plane und bearbeite alle deine künftigen Termine.",
+	"n/a"
+);
+$t_for_free = array(
+	"Kostenlos",
+	"For free"
+);
+$t_for_free_text = array(
+	"Registriere dich noch heute und nutze die grenzenlosen Möglichkeiten. Komplett kostenlos.",
+	"n/a"
+);
+$t_everywhere = array(
+	"Überall",
+	"Everywhere"
+);
+$t_everywhere_text = array(
+	"Dein soon-Kalender ist stets bei dir. Behalte überall und jederzeit den Überblick – dank Optimierung für all deine Geräte.",
+	"n/a"
+);
+$t_secure = array(
+	"Sicher",
+	"Secure"
+);
+$t_secure_text = array(
+	"Alle deine Daten gehören dir. Daher verschlüsseln wir diese, sodass du dir keine Sorgen um deine Privatsphäre machen musst.",
+	"n/a"
 );
 
 /* navbar.php */
@@ -439,46 +471,18 @@ $t_save = array(
 	"Save"
 );
 
-/* share_appointment.php */
-$t_title_share_appointment = array(
-	"Termin teilen - soon",
-	"Share appointment - soon"
-);
-$t_share_appointment = array(
-	"Termin teilen",
-	"Share appointment"
-);
-$t_email_of_the_recipient = array(
-	"E-Mail-Adresse des Empfängers",
-	"Email of the recipient"
-);
-$t_your_message = array(
-	"Ihre Nachricht",
-	"Your message"
-);
-$t_share = array(
-	"Teilen",
-	"Share"
-);
-$t_your_appointment_has_been_succesfully_shared_with = array(
-	"Termin erfolgreich geteilt mit",
-	"Your appointment has been succesfully shared with"
-);
-$t_share_appointment_with_another_person = array(
-	"Termin mit einer weiteren Person teilen",
-	"Share this appointment with another person"
+/* export_pdf.php */
+$t_all_appointments_of = array(
+	"Alle Termine von",
+	"All appointments of"
 );
 
-/* E-Mail-Nachricht */
-$t_has_shared_a_soon_appointment_with_you = array(
-	"hat einen soon Termin mit dir geteilt.",
-	"has shared a soon-appointment with you."
+$t_in = array(
+	"im",
+	"in"
 );
-$t_hey_there = array(
-	"Hallo!",
-	"Hey there!"
-);
-$t_click_here_to_open_the_appointment_in_soon = array(
-	"Klicke hier um den Termin in soon zu öffnen!",
-	"Click here to open the appointment in soon!"
+
+$t_created_on = array(
+	"Erstellt am",
+	"Created on"
 );

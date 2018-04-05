@@ -12,4 +12,6 @@
 			die(header('Location: '.$path.'verification'));
 		}
 	}
+	
+	include 'key.php';
 ?>

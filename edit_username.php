@@ -34,10 +34,13 @@
 							if(empty($new_username)) {
 								echo "<div class='alert alert-danger'>".$t_please_enter_a_username[$language]."</div>";
 							} else {
+								$_SESSION['username'] = $new_username;
+								
+								$new_username = openssl_encrypt($new_username,"AES-128-ECB",$key);
+								
 								$sql_update = "UPDATE users SET username = '$new_username' WHERE userid = '$userid'";
 								$sql_update = $connection->query($sql_update);
 								
-								$_SESSION['username'] = $new_username;
 								header('Location: '.$path.'profile');
 							}
 						}

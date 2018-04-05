@@ -60,10 +60,12 @@
 							
 							// Wenn kein Fehler besteht, dann wird die E-Mail-Adresse geändert
 							if(!$error) {
+								$_SESSION['email'] = $new_email;
+								
+								$new_email = openssl_encrypt($new_email,"AES-128-ECB",$key_email);
 								$sql_update = "UPDATE users SET email= '$new_email' WHERE userid = '$userid'";
 								$sql_update = $connection->query($sql_update);
 								
-								$_SESSION['email'] = $new_email;
 								header('Location: '.$path.'profile');
 							}
 						} // Ende von if(isset($_GET['editemail']))

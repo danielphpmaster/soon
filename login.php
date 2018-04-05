@@ -17,7 +17,8 @@
 			$password = $_POST['password'];
 		}
 		
-		$sql_select = "SELECT * FROM users WHERE email = '$email'";
+		$email_check = openssl_encrypt($email,"AES-128-ECB",$key_email);
+		$sql_select = "SELECT * FROM users WHERE email = '$email_check'";
 		
 		foreach ($connection->query($sql_select) as $row) {
 			$password_check = $row['password'];
@@ -28,8 +29,7 @@
 		} elseif (password_verify($password, $password_check)) {			
 			
 			// Wenn die Checkbox "Angemeldet bleiben" aktiv: Cookie wird gesetzt
-			if(isset($_POST['stayloggedin'])) {
-								
+			if(isset($_POST['stayloggedin'])) {								
 				$cookie_name = "soonstayloggedin";
 				$cookie_value = $row['usertoken'];
 				setcookie($cookie_name, $cookie_value, time() + (86400 * 365), $path); // 86400 = 1 day
@@ -38,13 +38,21 @@
 			$userid = $row['userid'];
 			$_SESSION['userid'] = $userid;
 			
+			$usertoken = $row['usertoken'];
+			$_SESSION['usertoken'] = $usertoken;
+			
+			include 'key.php';
+			
 			$email_verified = $row['email_verified'];
 			$_SESSION['email_verified'] = $email_verified;
 			
-			$username = $row['username'];
+			$username = openssl_decrypt($row['username'],"AES-128-ECB",$key);
 			$_SESSION['username'] = $username;
 			
-			$language = $language_array[$row['language']];			
+			$language = openssl_decrypt($row['language'],"AES-128-ECB",$key);	
+			echo $language;
+			$language = $language_array[$language];
+			echo $language;
 			$_SESSION['language'] = $language;
 			
 			$_SESSION['email'] = $email;

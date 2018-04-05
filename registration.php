@@ -56,7 +56,6 @@
 							}
 
 							$user_language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-							$_SESSION['language'] = $language_array[$user_language];
 							
 							// Überprüfung, ob ein Benutzername angegeben wurde
 							if(empty($username)) {
@@ -69,7 +68,8 @@
 								echo '<div class="alert alert-danger">'.$t_please_enter_a_valid_email_address[$language].'</div>';
 								$error = true;
 							} else {
-								$sql_select = "SELECT * FROM users WHERE email = '$email'";
+								$email_check = openssl_encrypt($email,"AES-128-ECB",$key_email);
+								$sql_select = "SELECT * FROM users WHERE email = '$email_check'";
 
 								foreach ($connection->query($sql_select) as $row) {
 									// Überprüfung, ob die E-Mail-Adresse noch nicht angegeben wurde
@@ -154,14 +154,23 @@
 								// Erstellung des Registrierungsdatum
 								$created = strtotime(date('Y-m-d H:i:s'));
 								
+								// Speicherung in die Sitzung
+								$_SESSION['usertoken'] = $usertoken;
+								$_SESSION['username'] = $username;
+								$_SESSION['email'] = $email;
+								$_SESSION['language'] = $language_array[$user_language];
+
+								// Verschlüsselung der Nutzereingaben
+								include 'key.php';
+								
+								$username = openssl_encrypt($username,"AES-128-ECB",$key);
+								$email = openssl_encrypt($email,"AES-128-ECB",$key_email);
+								$user_language = openssl_encrypt($user_language,"AES-128-ECB",$key);
 								$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 								$sql_insert = "INSERT INTO users (usertoken, username, email, email_verified, verification_code, password, language, created) VALUES ('$usertoken', '$username', '$email', 'false', '$verification_code', '$password_hash', '$user_language', '$created')";
 								$sql_insert = $connection->query($sql_insert);
-
-								$_SESSION['username'] = $username;
-								$_SESSION['email'] = $email;
-
+								
 								$sql_select = "SELECT * FROM users WHERE email = '$email'";
 								foreach ($connection->query($sql_select) as $row) {
 									$userid = $row['userid'];

@@ -65,21 +65,21 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h1><span class="glyphicon glyphicon-road" aria-hidden="true"></span> Deine Zukunft</h1>
+					<h1><span class="glyphicon glyphicon-road" aria-hidden="true"></span> <?php echo $t_your_future[$language]; ?></h1>
 					<div class="box">
-						Mit deinem soon-Kalender blickst du in die Zukunft. Plane und bearbeite alle deine künftigen Termine.
+						<?php echo $t_your_future_text[$language]; ?>
 					</div>
-					<h1><span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Kostenlos</h1>
+					<h1><span class="glyphicon glyphicon-gift" aria-hidden="true"></span> <?php echo $t_for_free[$language]; ?></h1>
 					<div class="box">
-						Registriere dich noch heute und nutze die grenzenlosen Möglichkeiten. Komplett kostenlos.
+						<?php echo $t_for_free_text[$language]; ?>
 					</div>
-					<h1><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Überall</h1>
+					<h1><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <?php echo $t_everywhere[$language]; ?></h1>
 					<div class="box">
-						Dein soon-Kalender ist stets bei dir. Behalte überall und jederzeit den Überblick – dank Optimierung für all deine Geräte.
+						<?php echo $t_everywhere_text[$language]; ?>
 					</div>
-					<h1><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> Sicher</h1>
+					<h1><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> <?php echo $t_secure[$language]; ?></h1>
 					<div class="box">
-						Alle deine Daten gehören dir. Daher verschlüsseln wir diese, sodass du dir keine Sorgen um deine Privatsphäre machen musst.
+						<?php echo $t_secure_text[$language]; ?>
 					</div>
 				</div>
 			

@@ -5,5 +5,7 @@
 	include 'language.php';
 		
 	/* Pfad (lokal = "/soon/", auf dem Server: "/") */
-	$path = "/soon/";	
+	$path = "/soon/";
+	
+	$key_email = 'test';
 ?>

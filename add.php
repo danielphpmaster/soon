@@ -125,8 +125,13 @@
 									if($total < '1') {
 										$create_token = '1';
 									}
-								}							
+								}
 								
+								// Verschlüsselung der Nutzeneingaben
+								$appointmentname = openssl_encrypt($appointmentname,"AES-128-ECB",$key);
+								$location = openssl_encrypt($location,"AES-128-ECB",$key);
+								$comment = openssl_encrypt($comment,"AES-128-ECB",$key);
+						
 								$sql_insert = "INSERT INTO appointments (appointmenttoken, userid, appointmentname, timestamp, location, comment) VALUES ('$appointmenttoken', '$userid', '$appointmentname', '$timestamp', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 								

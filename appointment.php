@@ -1,5 +1,6 @@
 <?php
 	include 'inlcude_all.php';
+	include 'loginwall.php';
 
 	$guest = false;
 	$other_user = false;
@@ -16,11 +17,11 @@
 		
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
-			$appointmentname = $row['appointmentname'];
+			$appointmentname = $string = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
 			$date = $row['timestamp'];
 			$time = $row['timestamp'];
-			$location = $row['location'];
-			$comment = $row['comment'];
+			$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
+			$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
 			$appointmentid = $row['appointmentid'];
 		}
 		
@@ -41,28 +42,7 @@
 		// Umleitung, wenn kein "a"-Wert mitgeschickt wurde
 		header('Location: '.$path.'calendar');
 	}
-	
-	if(isset($_GET['ai'])) {
-		$sql_select_user = "SELECT * FROM users WHERE userid = '".$row['userid']."'";
-		
-		foreach ($connection->query($sql_select_user) as $row_user) {
-		}
-		
-		if(empty($userid)) {
-				$guest = true;
-		} elseif($userid !== $row_user['userid']) {
-			$other_user = true;
-		}
-	}
-		
-	if($guest OR $other_user) {		
-		$alternative_appointmentname = " ".$t_from[$language]." ".$row_user['username']."";
-	} else {
-		$alternative_appointmentname = "";
-	}
-		
-	include 'loginwall.php';
-		
+			
 	$title = "".$appointmentname." ".$t_title_appointment[$language]."";
 ?>
 
@@ -82,7 +62,7 @@
 				
 				<div class="col-xs-12 col-md-6">
 					<?php
-						echo "<h2>".$t_appointment[$language]."".$alternative_appointmentname."</h2>";
+						echo "<h2>".$t_appointment[$language]."</h2>";
 					
 						// Variable, die definiert, welche Farbe der Terminname hat 
 						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
@@ -98,7 +78,7 @@
 						// Ausgabe Termindatum
 						if(strtotime(date("Y-m-d 00:00:00", $date)) == strtotime(date("Y-m-d 00:00:00", time()))) {
 							$date_output = $t_today[$language].", ".$t_date[$language];
-						} elseif($date == strtotime('+1 day', time())) {
+						} elseif(strtotime(date("Y-m-d 00:00:00", $date)) == strtotime('+1 day', strtotime(date("Y-m-d 00:00:00", time())))) {
 							$date_output = $t_tomorrow[$language].", ".$t_date[$language];
 						} else {
 							$date_output = $t_date[$language];
@@ -106,7 +86,7 @@
 						
 						// Ausgabe Terminname
 						echo "<div class='appointment' style='margin-top: 0'>
-									<div ".$appointment_color." class='title'><b>".htmlspecialchars($row['appointmentname'])."</b>
+									<div ".$appointment_color." class='title'><b>".htmlspecialchars($appointmentname)."</b>
 										<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>";
 						if($guest OR $other_user) {
 						} else {
@@ -114,7 +94,6 @@
 								<div class='float_right'>
 									<a href='".$path."remove?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
 									<a href='".$path."edit_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
-									<!-- Versenden eines Termin via E-Mail. Momentan deaktiviert. <a href='".$path."share_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-envelope' aria-hidden='true'></span></button></a>-->
 								</div>";
 						}
 						echo "
@@ -122,7 +101,7 @@
 						
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-						if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($row['location']) and empty($row['comment'])) {
+						if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($location) and empty($comment)) {
 							echo "";
 						} else {
 							echo "<div class='appointmentinformation'>";
@@ -142,21 +121,21 @@
 						}
 						
 						// Wenn vorhanden: Ausgabe Terminort
-						if(empty($row['location'])) {
+						if(empty($location)) {
 							echo "";
 						} else {
-							echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['location'])."</div>";
+							echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($location)."</div>";
 						}
 						
 						// Wenn vorhanden: Ausgabe Terminkommentar
-						if(empty($row['comment'])) {
+						if(empty($comment)) {
 							echo "";
 						} else {
-							echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($row['comment'])."</div>";
+							echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($comment)."</div>";
 						}
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist						
-						if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($row['location']) and empty($row['comment'])) {
+						if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($location) and empty($comment)) {
 							echo "";
 						} else {
 							echo "</div>"; // Ende .appointmentinformation

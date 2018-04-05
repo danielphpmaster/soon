@@ -34,11 +34,14 @@
 							if(empty($new_language)) {
 								echo "<div class='alert alert-danger'>".$t_please_enter_a_username[$language]."</div>";
 							} else {
+								$language = $new_language;
+								$_SESSION['language'] = $language_array[$language];
+								
+								$new_language = openssl_encrypt($language,"AES-128-ECB",$key);
+								
 								$sql_update = "UPDATE users SET language = '$new_language' WHERE userid = '$userid'";
 								$sql_update = $connection->query($sql_update);
 								
-								$language = $new_language;
-								$_SESSION['language'] = $language_array[$language];
 								header('Location: '.$path.'profile');
 							}
 						}

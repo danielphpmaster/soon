@@ -19,18 +19,18 @@
 		$userid = $_SESSION['userid'];
 	}
 	
+	if (empty($_SESSION['usertoken'])){
+		echo "";
+	} else {
+		$usertoken = $_SESSION['usertoken'];
+	}
+	
 	if (empty($_SESSION['searchvalue'])){
 		echo "";
 	} else {
 		$searchvalue = $_SESSION['searchvalue'];
 	}
-	
-	if (empty($_SESSION['nm'])){
-		echo "";
-	} else {
-		$nm = $_SESSION['nm'];
-	}
-	
+		
 	if (empty($_SESSION['appointmenttoken'])){
 		echo "";
 	} else {
