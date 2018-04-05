@@ -35,9 +35,6 @@
 				setcookie($cookie_name, $cookie_value, time() + (86400 * 365), $path); // 86400 = 1 day
 			}
 			
-			$userid = $row['userid'];
-			$_SESSION['userid'] = $userid;
-			
 			$usertoken = $row['usertoken'];
 			$_SESSION['usertoken'] = $usertoken;
 			

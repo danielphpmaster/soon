@@ -3,7 +3,7 @@
 		<div class="navbar-header">
 			<?php
 				// Button, mit dem man in der Mobile-Ansicht das Navi aufklappt. Erscheint nur im angemeldeten Zustand
-				if(empty($_SESSION['userid'])) {
+				if(empty($_SESSION['usertoken'])) {
 					echo "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>
 							<span class='sr-only'>Toggle navigation</span>
 							<span class='icon-bar'></span>
@@ -22,7 +22,7 @@
 			<a class="navbar-brand" href="
 				<?php
 					// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Link führt zu calendar.php. Wenn nein: Link führt zu index.php
-					if(empty($_SESSION['userid'])) {
+					if(empty($_SESSION['usertoken'])) {
 						echo $path;
 					} else {
 						echo $path."calendar";
@@ -32,7 +32,7 @@
 		</div> <?php // Ende von .navbar-header ?>
 		<?php
 			// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Navigations-Punkte werden angezeigt
-			if(empty($_SESSION['userid'])) {
+			if(empty($_SESSION['usertoken'])) {
 				echo "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 				
 						<!-- Dropdown rechts vom Logo. Momentan ohne Funktion.
@@ -57,7 +57,7 @@
 				$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", time()));
 				$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", time()));
 				
-				$sql_select = "SELECT COUNT(appointmentid) FROM appointments WHERE userid = '$userid' AND timestamp > '$first_timestamp_of_day' and timestamp < '$last_timestamp_of_day'";
+				$sql_select = "SELECT COUNT(appointmenttoken) FROM appointments WHERE usertoken = '$usertoken' AND timestamp > '$first_timestamp_of_day' and timestamp < '$last_timestamp_of_day'";
 				$count_result = $connection->prepare($sql_select);
 				$count_result->execute();
 

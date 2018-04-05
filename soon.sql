@@ -10,9 +10,8 @@ CREATE DATABASE IF NOT EXISTS `soon` DEFAULT CHARACTER SET latin1 COLLATE latin1
 USE `soon`;
 
 CREATE TABLE `appointments` (
-  `appointmentid` int(11) NOT NULL,
-  `appointmenttoken` text NOT NULL,
-  `userid` int(11) NOT NULL,
+  `appointmenttoken` varchar(12) NOT NULL,
+  `usertoken` text NOT NULL,
   `appointmentname` text NOT NULL,
   `timestamp` int(11) NOT NULL,
   `location` text NOT NULL,
@@ -20,8 +19,7 @@ CREATE TABLE `appointments` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `users` (
-  `userid` int(10) UNSIGNED NOT NULL,
-  `usertoken` text COLLATE utf8_unicode_ci NOT NULL,
+  `usertoken` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `username` text COLLATE utf8_unicode_ci NOT NULL,
   `email` text COLLATE utf8_unicode_ci NOT NULL,
   `email_verified` text COLLATE utf8_unicode_ci NOT NULL,
@@ -33,16 +31,11 @@ CREATE TABLE `users` (
 
 
 ALTER TABLE `appointments`
-  ADD PRIMARY KEY (`appointmentid`);
+  ADD PRIMARY KEY (`appointmenttoken`);
 
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userid`);
+  ADD PRIMARY KEY (`usertoken`);
 
-
-ALTER TABLE `appointments`
-  MODIFY `appointmentid` int(11) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `users`
-  MODIFY `userid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

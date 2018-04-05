@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	
 	// Wenn in angemeldetem Zustand: Umleitung zu calendar.php
-	if(isset($_SESSION['userid'])) {
+	if(isset($_SESSION['usertoken'])) {
 		die(header('Location: '.$path.'calendar'));
 	}
 	
@@ -98,7 +98,7 @@
 								// Erstellung User-Token
 								$create_token = '0';
 								while ($create_token < '1') {
-									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.*!?";
+									$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 									$pass = array(); //remember to declare $pass as an array
 									$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
 									for ($i = 0; $i < 12; $i++) {
@@ -171,13 +171,7 @@
 								$sql_insert = "INSERT INTO users (usertoken, username, email, email_verified, verification_code, password, language, created) VALUES ('$usertoken', '$username', '$email', 'false', '$verification_code', '$password_hash', '$user_language', '$created')";
 								$sql_insert = $connection->query($sql_insert);
 								
-								$sql_select = "SELECT * FROM users WHERE email = '$email'";
-								foreach ($connection->query($sql_select) as $row) {
-									$userid = $row['userid'];
-								}
-
 								$_SESSION['email_verified'] = 'false';
-								$_SESSION['userid'] = $userid;
 								header('Location: '.$path.'verification');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['register']))

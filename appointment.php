@@ -5,15 +5,11 @@
 	$guest = false;
 	$other_user = false;
 	
-	if(isset($_GET['a'])) {
-		$appointmenttoken = $_GET['a'];
+	if(isset($_GET['appointmenttoken'])) {
+		$appointmenttoken = $_GET['appointmenttoken'];
 		
 		// Suche nach dem Termin
-		if(isset($_GET['ai'])) {
-			$sql_select = "SELECT * FROM appointments WHERE appointmentid = '".$_GET['ai']."' AND appointmenttoken = '$appointmenttoken'";
-		} else {
-			$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";			
-		}
+		$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";			
 		
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
@@ -22,7 +18,7 @@
 			$time = $row['timestamp'];
 			$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 			$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
-			$appointmentid = $row['appointmentid'];
+			$appointmenttoken = $row['appointmenttoken'];
 		}
 		
 		// Definierung Datumformat
@@ -92,8 +88,8 @@
 						} else {
 							echo "
 								<div class='float_right'>
-									<a href='".$path."remove?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
-									<a href='".$path."edit_appointment?a=".$row['appointmenttoken']."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+									<a href='".$path."remove?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
+									<a href='".$path."edit_appointment?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
 								</div>";
 						}
 						echo "

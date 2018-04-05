@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	
 	// Wenn in angemeldetem Zustand: Umleitung zu calendar.php
-	if(isset($_SESSION['userid'])) {
+	if(isset($_SESSION['usertoken'])) {
 		die(header('Location: '.$path.'calendar'));
 	}
 

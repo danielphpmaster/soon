@@ -8,7 +8,7 @@
 		$appointmenttoken = $_GET['a'];
 	}	
 	
-	$sql_select = "SELECT COUNT(appointmenttoken) FROM appointments WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
+	$sql_select = "SELECT COUNT(appointmenttoken) FROM appointments WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
 	$count_result = $connection->prepare($sql_select);
 	$count_result->execute();
 

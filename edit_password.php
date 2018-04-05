@@ -69,7 +69,7 @@
 									if(!$error) {
 										$newpassword_hash = password_hash($newpassword, PASSWORD_DEFAULT);
 										
-										$sql_update = "UPDATE users SET password = '$newpassword_hash' WHERE userid = '$userid'";
+										$sql_update = "UPDATE users SET password = '$newpassword_hash' WHERE usertoken = '$usertoken'";
 										$sql_update = $connection->query($sql_update);
 										
 										$_SESSION['password'] = $newpassword;

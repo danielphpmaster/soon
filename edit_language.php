@@ -39,7 +39,7 @@
 								
 								$new_language = openssl_encrypt($language,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE users SET language = '$new_language' WHERE userid = '$userid'";
+								$sql_update = "UPDATE users SET language = '$new_language' WHERE usertoken = '$usertoken'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'profile');

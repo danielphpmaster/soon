@@ -13,12 +13,6 @@
 		$username = $_SESSION['username'];
 	}
 
-	if (empty($_SESSION['userid'])){
-		echo "";
-	} else {
-		$userid = $_SESSION['userid'];
-	}
-	
 	if (empty($_SESSION['usertoken'])){
 		echo "";
 	} else {

@@ -127,7 +127,7 @@
 						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
 						$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", $date));
 						
-						$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day'";
+						$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day'";
 										
 						foreach ($connection->query($sql_select) as $row) {
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
@@ -182,17 +182,7 @@
 							
 							echo "</div>"; // Ende <div class='appointment'>
 						}
-												
-						if (empty($row['appointmentid'])) {
-							// Ausgabe, wenn kein Termin an diesem Datum besteht
-							// echo "<div class='noappointment'>Keine Termine</div>";
-						} else {
-							echo '';
-						}
-						
-						// AppointmentID wieder leeren
-						$row['appointmentid'] = '';
-									
+															
 						echo "</div></div>"; // Ende von .col-md-1 und von .day
 						
 						$date = strtotime('+1 day', $date);

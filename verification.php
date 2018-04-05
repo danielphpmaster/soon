@@ -34,7 +34,7 @@
 							}
 							
 							// Überprüfung, ob die E-Mail-Adresse bereits angegeben wurde								
-							$sql_select = "SELECT * FROM users WHERE userid = '$userid'";
+							$sql_select = "SELECT * FROM users WHERE usertoken = '$usertoken'";
 							
 							foreach ($connection->query($sql_select) as $row) {
 								if($row['verification_code'] <> $verification_code) {
@@ -44,7 +44,7 @@
 							
 							// Wenn kein Fehler besteht, dann wird der Verifizierungsstatus geändert
 							if(!$error) {
-								$sql_update = "UPDATE users SET email_verified= 'true' WHERE userid = '$userid'";
+								$sql_update = "UPDATE users SET email_verified= 'true' WHERE usertoken = '$usertoken'";
 								$sql_update = $connection->query($sql_update);
 								
 								$_SESSION['email_verified'] = 'true';

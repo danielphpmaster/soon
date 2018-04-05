@@ -7,7 +7,7 @@
 		$_SESSION['appointmenttoken'] = $appointmenttoken;
 		
 		// Suche nach dem Termin
-		$sql_select = "SELECT * FROM appointments WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
+		$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
 		
 		// Termininformationen als Variablen speichern
 		foreach ($connection->query($sql_select) as $row) {
@@ -128,7 +128,7 @@
 								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
 								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', timestamp = '$timestamp', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND appointmenttoken = '$appointmenttoken'";
+								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', timestamp = '$timestamp', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'calendar');						
