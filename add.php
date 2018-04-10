@@ -138,7 +138,7 @@
 								header('Location: '.$path.'calendar');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
-					?>				
+					?>
 					<form action="?add=1" method="post">
 						<div class="day">
 							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($date)){echo htmlspecialchars($date);}?>"></b></div>
