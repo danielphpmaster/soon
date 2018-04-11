@@ -122,7 +122,7 @@ $t_your_future = array(
 );
 $t_your_future_text = array(
 	"Mit deinem soon-Kalender blickst du in die Zukunft. Plane und bearbeite alle deine künftigen Termine.",
-	"n/a"
+	"Ever wondered what your future brings? With soon calendar, you are able to plan and edit all your upcoming appointments"
 );
 $t_for_free = array(
 	"Kostenlos",
@@ -130,7 +130,7 @@ $t_for_free = array(
 );
 $t_for_free_text = array(
 	"Registriere dich noch heute und nutze die grenzenlosen Möglichkeiten. Komplett kostenlos.",
-	"n/a"
+	"Sign up today and use the unlimited possibilities. It's free!"
 );
 $t_everywhere = array(
 	"Überall",
@@ -138,7 +138,7 @@ $t_everywhere = array(
 );
 $t_everywhere_text = array(
 	"Dein soon-Kalender ist stets bei dir. Behalte überall und jederzeit den Überblick – dank Optimierung für all deine Geräte.",
-	"n/a"
+	"Your soon calendar is your best friend. Keep up with your appointments everywhere and at any time - thanks to the optimisation for all your devices"
 );
 $t_secure = array(
 	"Sicher",
@@ -146,7 +146,7 @@ $t_secure = array(
 );
 $t_secure_text = array(
 	"Alle deine Daten gehören dir. Daher verschlüsseln wir diese, sodass du dir keine Sorgen um deine Privatsphäre machen musst.",
-	"n/a"
+	"In times of Facebook data scandals you won't need to worry about your data. We don't give a damn about it. Seriously, your data is encrypted safely."
 );
 
 /* navbar.php */
