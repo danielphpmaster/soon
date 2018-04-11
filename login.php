@@ -28,12 +28,13 @@
 			$error_message = "<div class='alert alert-danger'>".$t_email_or_password_is_invalid[$language]."</div>";
 		} elseif (password_verify($password, $password_check)) {			
 			
-			// Wenn die Checkbox "Angemeldet bleiben" aktiv: Cookie wird gesetzt
+			/* Wenn die Checkbox "Angemeldet bleiben" aktiv: Cookie wird gesetzt
 			if(isset($_POST['stayloggedin'])) {								
 				$cookie_name = "soonstayloggedin";
 				$cookie_value = $row['usertoken'];
 				setcookie($cookie_name, $cookie_value, time() + (86400 * 365), $path); // 86400 = 1 day
 			}
+			*/
 			
 			$usertoken = $row['usertoken'];
 			$_SESSION['usertoken'] = $usertoken;
@@ -47,9 +48,7 @@
 			$_SESSION['username'] = $username;
 			
 			$language = openssl_decrypt($row['language'],"AES-128-ECB",$key);	
-			echo $language;
 			$language = $language_array[$language];
-			echo $language;
 			$_SESSION['language'] = $language;
 			
 			$_SESSION['email'] = $email;
@@ -88,12 +87,12 @@
 							<div class="form-group">
 								<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="password" type="password" class="form-control with_glyphicon" id="password" placeholder="<?php echo $t_password[$language] ?>">
 							</div>
-							<div class="form-check">
+							<!--<div class="form-check">
 								<label class="form-check-label">
 									<input type="checkbox" name="stayloggedin" class="form-check-input">
 									<?php echo $t_stay_logged_in[$language] ?>
 								</label>
-							</div>
+							</div>-->
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">	
 							<button type="submit" class="btn btn-primary"><?php echo $t_log_in[$language] ?></button>

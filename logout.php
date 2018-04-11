@@ -3,5 +3,5 @@
 
 	session_destroy();
 	setcookie ("soonstayloggedin", "", time() - (86400 * 365));
-	header('Location: '.$path)
+	header('Location: '.$path);
 ?>
