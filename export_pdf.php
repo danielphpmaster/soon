@@ -105,8 +105,20 @@
 			}
 			$z++;
 			
+			if(empty($location)) {
+				$comma_1 = '';
+			} else {
+				$comma_1 = ',';
+			}
+			
+			if(empty($comment)) {
+				$comma_2 = '';
+			} else {
+				$comma_2 = ',';
+			}
+			
 			$pdf->SetFont('Arial','',9);
-			$pdf->Cell(170,5,"$t_time[$language]: $appointmentname, $location, $comment",0,1);			
+			$pdf->Cell(170,5,"$t_time[$language]: $appointmentname$comma_1 $location$comma_2 $comment",0,1);			
 		}
 		
 		$z = 0;

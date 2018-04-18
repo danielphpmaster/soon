@@ -131,7 +131,7 @@
 								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', timestamp = '$timestamp', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
 								$sql_update = $connection->query($sql_update);
 								
-								header('Location: '.$path.'calendar');						
+								header('Location: '.$path.'appointment/'.$appointmenttoken.'');						
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>

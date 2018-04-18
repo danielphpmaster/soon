@@ -51,7 +51,7 @@
 				
 		<div class="container">
 			<div class="row" style="margin-top: 20px;">
-				<?php				
+				<?php
 					echo "<div class='col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl calendar_current_month_mobile' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-default'><b>".$month." ".$year." </b><span class='glyphicon glyphicon glyphicon-print'></span></a></div>";
 					
 					if($timestamp_of_month < time()) {
@@ -86,7 +86,7 @@
 					
 					$last_day_of_month = strtotime(date("Y-m-t 24:00", $timestamp_of_month));
 										
-					while ($date <= $last_day_of_month) {
+					while ($date < $last_day_of_month) {
 						// Variable, die definiert, welche Farbe der Terminname hat
 						if($date == time()) {
 							$appointmentcolor = "style='color: #d9534f;'";

@@ -82,7 +82,7 @@
 									}
 								}
 							}
-							 
+							
 							function validateDate($date) {
 								$d = DateTime::createFromFormat('Y-m-d', $date);
 								return $d && $d->format('Y-m-d') === $date;
@@ -135,7 +135,10 @@
 								$sql_insert = "INSERT INTO appointments (appointmenttoken, usertoken, appointmentname, timestamp, location, comment) VALUES ('$appointmenttoken', '$usertoken', '$appointmentname', '$timestamp', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 								
-								header('Location: '.$path.'calendar');
+								$year = date('Y', strtotime($date));
+								$month = date('F', strtotime($date));
+								
+								header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>

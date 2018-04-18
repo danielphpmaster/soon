@@ -221,6 +221,7 @@ Betrifft nur calendar.php
 		background-color: #f8f8f8;
 		padding: 10px;
 		word-wrap: break-word;
+		overflow: hidden;
 	}
 	
 	div.appointmentinformation {
