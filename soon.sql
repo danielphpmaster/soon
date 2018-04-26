@@ -14,6 +14,7 @@ CREATE TABLE `appointments` (
   `usertoken` text NOT NULL,
   `appointmentname` text NOT NULL,
   `timestamp` int(11) NOT NULL,
+  `time_set` text NOT NULL,
   `location` text NOT NULL,
   `comment` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
