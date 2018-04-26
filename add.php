@@ -43,9 +43,11 @@
 							}
 							
 							if(empty($_POST['time'])) {
-								$time = "00:00:01";
+								$time = "00:00:00";
+								$time_set = 'false';
 							} else {
-								$time = $_POST['time'];								
+								$time = $_POST['time'];
+								$time_set = 'true';
 							}
 							if(empty($_POST['location'])) {
 								$location = "";
@@ -132,7 +134,7 @@
 								$location = openssl_encrypt($location,"AES-128-ECB",$key);
 								$comment = openssl_encrypt($comment,"AES-128-ECB",$key);
 						
-								$sql_insert = "INSERT INTO appointments (appointmenttoken, usertoken, appointmentname, timestamp, location, comment) VALUES ('$appointmenttoken', '$usertoken', '$appointmentname', '$timestamp', '$location', '$comment')";
+								$sql_insert = "INSERT INTO appointments (appointmenttoken, usertoken, appointmentname, timestamp, time_set, location, comment) VALUES ('$appointmenttoken', '$usertoken', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 								
 								$year = date('Y', strtotime($date));

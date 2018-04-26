@@ -62,9 +62,11 @@
 							}
 							
 							if(empty($_POST['time'])) {
-								$newtime = "12:00:01";
+								$newtime = "00:00:00";
+								$time_set = 'false';
 							} else {
-								$newtime = $_POST['time'];								
+								$newtime = $_POST['time'];
+								$time_set = 'true';
 							}
 							
 							if(empty($_POST['location'])) {
@@ -128,7 +130,7 @@
 								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
 								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', timestamp = '$timestamp', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
+								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'appointment/'.$appointmenttoken.'');						
@@ -141,7 +143,7 @@
 							<div class='appointment'>
 								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
 								<div class='appointmentinformation'>
-									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($row['timestamp'])){echo date('h:i', $row['timestamp']);} else {echo htmlspecialchars($newtime);}?>"></div>
+									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language]; ?>" value="<?php if($row['time_set'] == 'true') { if(isset($row['timestamp'])){echo date('h:i', $row['timestamp']);} else {echo htmlspecialchars($newtime);}}?>"></div>
 									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="<?php echo $t_location[$language] ?>" value="<?php if(isset($location)){echo htmlspecialchars($location);} else{echo htmlspecialchars($newlocation);}?>"></div>
 									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="<?php echo $t_comment[$language] ?>" value="<?php if(isset($comment)){echo htmlspecialchars($comment);} else{echo htmlspecialchars($newcomment);}?>"></div>
 								</div>

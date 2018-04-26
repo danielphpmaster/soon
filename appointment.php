@@ -97,7 +97,7 @@
 						
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-						if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($location) and empty($comment)) {
+						if($row['time_set'] == 'false' and empty($location) and empty($comment)) {
 							echo "";
 						} else {
 							echo "<div class='appointmentinformation'>";
@@ -110,9 +110,7 @@
 						);
 						
 						// Wenn vorhanden: Ausgabe Terminzeit
-						if(date("h:i:s", $row['timestamp']) == "12:00:01") {
-							echo "";
-						} else {
+						if($row['time_set'] == 'true') {
 							echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$t_time[$language]."</div>";
 						}
 						
@@ -138,7 +136,7 @@
 						}
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist						
-						if(date("h:i:s", $row['timestamp']) == "12:00:01" and empty($location) and empty($comment)) {
+						if($row['time_set'] == 'false' and empty($location) and empty($comment)) {
 							echo "";
 						} else {
 							echo "</div>"; // Ende .appointmentinformation

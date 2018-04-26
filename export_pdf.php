@@ -19,8 +19,12 @@
 	} else {
 		$month = $_GET['month'];
 	}
-
-	$timestamp = strtotime("$year $month");
+	
+	if($year == date('Y') AND $month == date('F')) {
+		$timestamp = strtotime(date("Y-m-d 00:00:00", time()));
+	} else {
+		$timestamp = strtotime("$year $month");
+	}
 	
 	if($timestamp < strtotime(date('Y-m-01'))) {
 		$year = date('Y');
@@ -89,14 +93,22 @@
 				
 		foreach ($connection->query($sql_select) as $row) {
 			// Definierung Zeitformat
-			$t_time = array(
-				date('G:i', $row['timestamp'])." Uhr",
-				date('g.i a', $row['timestamp'])
-			);
+			if($row['time_set'] == 'true') {
+				$t_time = array(
+					date('G:i', $row['timestamp'])." Uhr",
+					date('g.i a', $row['timestamp'])
+				);
+				$colon_1 = ': ';
+			} else {
+				$t_time = array('','');
+				$colon_1 = '';
+			}
 			
 			$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
 			$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 			$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
+			
+			$z = 0;
 			
 			if($z < 1) {
 				$pdf->SetFont('Arial','B',9);
@@ -108,17 +120,17 @@
 			if(empty($location)) {
 				$comma_1 = '';
 			} else {
-				$comma_1 = ',';
+				$comma_1 = ', ';
 			}
 			
 			if(empty($comment)) {
 				$comma_2 = '';
 			} else {
-				$comma_2 = ',';
+				$comma_2 = ', ';
 			}
 			
 			$pdf->SetFont('Arial','',9);
-			$pdf->Cell(170,5,"$t_time[$language]: $appointmentname$comma_1 $location$comma_2 $comment",0,1);			
+			$pdf->Cell(170,5,"$t_time[$language]$colon_1$appointmentname$comma_1$location$comma_2$comment",0,1);			
 		}
 		
 		$z = 0;
