@@ -44,6 +44,8 @@
 									$currentpassword = $_POST['currentpassword'];									
 								}
 								
+								$email = openssl_encrypt($email,"AES-128-ECB",$key_email);
+								
 								// Überprüfung, dass angebene Passwort mit dem aktuellen Passwort übereinstimmt
 								$sql_select = "SELECT * FROM users WHERE email = '$email'";
 										
