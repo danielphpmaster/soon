@@ -151,7 +151,7 @@
 						</div>
 						<div class="last_element">
 							<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>
-							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar"><?php echo $t_cancel[$language] ?></a>
+							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>appointment/<?php echo $appointmenttoken; ?>"><?php echo $t_cancel[$language] ?></a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

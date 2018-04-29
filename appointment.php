@@ -2,9 +2,6 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 
-	$guest = false;
-	$other_user = false;
-	
 	if(isset($_GET['appointmenttoken'])) {
 		$appointmenttoken = $_GET['appointmenttoken'];
 		
@@ -84,16 +81,12 @@
 						echo "<div class='appointment' style='margin-top: 0'>
 									<div ".$appointment_color." class='title'><b>".htmlspecialchars($appointmentname)."</b>
 										<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>";
-						if($guest OR $other_user) {
-						} else {
-							echo "
-								<div class='float_right'>
+						
+						echo "<div class='float_right'>
 									<a href='".$path."remove?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
 									<a href='".$path."edit_appointment?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
-								</div>";
-						}
-						echo "
-									</div>";
+								</div>
+							</div>";
 						
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
@@ -143,13 +136,13 @@
 						}
 						
 						echo "</div></div>"; // Ende .appointment					
-					
-						if($guest OR $other_user) {
-						} else { echo "
-							<div class='last_element'>
-								<a class='btn btn-primary grey-button' href='".$path."calendar'>".$t_view_calendar[$language]."</a>
+						
+						$month = date("F", $row['timestamp']);
+						$year = date("Y", $row['timestamp']);
+						
+						echo "<div class='last_element'>
+								<a class='btn btn-primary grey-button' href='".$path."calendar/".$year."/".$month."'>".$t_view_calendar[$language]."</a>
 							</div>";
-						}
 					?>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

@@ -40,7 +40,7 @@
 					?>
 					<div class="last_element">
 						<a class="btn btn-primary" href="<?php echo $path; ?>remove_appointment?a=<?php echo $appointmenttoken ?>"><?php echo $t_confirm[$language] ?></a>
-						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar"><?php echo $t_cancel[$language] ?></a>
+						<a class="btn btn-primary grey-button" href="<?php echo $path; ?>appointment/<?php echo $appointmenttoken; ?>"><?php echo $t_cancel[$language] ?></a>
 					</div>
 				</div> <?php // Ende von .col-xs-12.col-md.6 ?>
 				

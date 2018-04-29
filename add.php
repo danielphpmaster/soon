@@ -140,7 +140,7 @@
 								$year = date('Y', strtotime($date));
 								$month = date('F', strtotime($date));
 								
-								header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
+								header('Location: '.$path.'appointment/'.$appointmenttoken.'');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
