@@ -118,7 +118,7 @@
 							$timestamp = strtotime("$newdate $newtime");
 							
 							// Prüfung, ob ein zukünftiges Datum angegeben wurde
-							if($timestamp < strtotime(date("Y-m-n 00:00:00", time()))) {
+							if($timestamp < strtotime(date("Y-m-d 00:00:00", time()))) {
 									echo '<div class="alert alert-danger">'.$t_insert_a_future_date[$language].'</div>';
 									$error = true;												
 							}
@@ -143,7 +143,7 @@
 							<div class='appointment'>
 								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
 								<div class='appointmentinformation'>
-									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language]; ?>" value="<?php if($row['time_set'] == 'true') { if(isset($row['timestamp'])){echo date('h:i', $row['timestamp']);} else {echo htmlspecialchars($newtime);}}?>"></div>
+									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language]; ?>" value="<?php if(isset($row['time_set']) AND $row['time_set'] == 'true') { echo date('H:i', $row['timestamp']);} else {echo htmlspecialchars($newtime);}?>"></div>
 									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="<?php echo $t_location[$language] ?>" value="<?php if(isset($location)){echo htmlspecialchars($location);} else{echo htmlspecialchars($newlocation);}?>"></div>
 									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="<?php echo $t_comment[$language] ?>" value="<?php if(isset($comment)){echo htmlspecialchars($comment);} else{echo htmlspecialchars($newcomment);}?>"></div>
 								</div>

@@ -57,7 +57,7 @@
 				$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", time()));
 				$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", time()));
 				
-				$sql_select = "SELECT COUNT(appointmenttoken) FROM appointments WHERE usertoken = '$usertoken' AND timestamp > '$first_timestamp_of_day' and timestamp < '$last_timestamp_of_day'";
+				$sql_select = "SELECT COUNT(appointmenttoken) FROM appointments WHERE usertoken = '$usertoken' AND timestamp >= '$first_timestamp_of_day' and timestamp <= '$last_timestamp_of_day'";
 				$count_result = $connection->prepare($sql_select);
 				$count_result->execute();
 

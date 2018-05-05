@@ -98,7 +98,7 @@
 							$timestamp = strtotime("$date $time");
 							
 							// Prüfung, ob ein zukünftiges Datum angegeben wurde
-							if($timestamp < strtotime(date("Y-m-n 00:00:00", time()))) {
+							if($timestamp < strtotime(date("Y-m-d 00:00:00", time()))) {
 									echo '<div class="alert alert-danger">'.$t_insert_a_future_date[$language].'</div>';
 									$error = true;												
 							}
