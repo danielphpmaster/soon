@@ -85,15 +85,24 @@
 						?>
 						<form action="?editpassword=1" method="post">
 							<div class="box">
-								<div class="form-group">
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="currentpassword" type="password" class="form-control with_glyphicon" id="currentpassword" placeholder="<?php echo $t_current_password[$language] ?>">
+								<div class="form-group input-group">
+									<span class="input-group-addon">
+										<span class='glyphicon glyphicon-lock' style='color:#777'; aria-hidden='true'></span>
+									</span>
+									<input name="currentpassword" type="password" class="form-control with_glyphicon" id="currentpassword" placeholder="<?php echo $t_current_password[$language] ?>">
 								</div>
-								<div class="form-group">
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword" type="password" class="form-control with_glyphicon" id="newpassword" placeholder="<?php echo $t_new_password[$language] ?>">
+								<div class="form-group input-group">
+									<span class="input-group-addon">
+										<span class='glyphicon glyphicon-lock' style='color:#777'; aria-hidden='true'></span>
+									</span>
+									<input name="newpassword" type="password" class="form-control with_glyphicon" id="newpassword" placeholder="<?php echo $t_new_password[$language] ?>">
 								</div>
-								<div class="form-group margin-bottom-0">
-									<span class='glyphicon glyphicon-lock form' style='color:#777'; aria-hidden='true'></span><input name="newpassword2" type="password" class="form-control with_glyphicon" id="newpassword2" placeholder="<?php echo $t_confirm_new_password[$language] ?>">
-								</div>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<span class='glyphicon glyphicon-lock' style='color:#777'; aria-hidden='true'></span>
+									</span>
+									<input name="newpassword2" type="password" class="form-control with_glyphicon" id="newpassword2" placeholder="<?php echo $t_confirm_new_password[$language] ?>">
+								</div>							
 							</div> <?php // Ende von .box ?>
 							<div class="last_element">
 								<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>

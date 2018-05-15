@@ -22,7 +22,7 @@
 				<div class="col-xs-12 col-md-6">			
 					<h2><?php echo $t_my_profile[$language] ?></h2>
 					<div class="box">		
-						<table class="table table-striped">
+						<table class="margin-bottom-0 table table-striped">
 							<tbody>
 								<tr>
 									<td style="border:0;"><?php echo $t_username[$language] ?></td>

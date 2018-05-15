@@ -1,17 +1,26 @@
-body {
+* {
 	font-family: 'Roboto', sans-serif;
-	background-color: white;
 }
 
 .navbar {
 	margin-bottom: 0px;
-	background-color: white;
-	border: 0;
 }
 
 /* Unterstreichgung von Links verhindern */
 div.row a {
 	text-decoration: none;
+}
+
+span.glyphicon {
+	-webkit-user-select: none; /* Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
+	cursor: default;
+}
+
+a > span.glyphicon, button > span.glyphicon {
+	cursor: auto;
 }
 
 .float_right {
@@ -20,6 +29,16 @@ div.row a {
 
 .last_element {
 	margin-bottom: 90px;
+}
+
+span.glyphicon.form {
+	width: 5%;
+	float: left;
+	padding: 10px 6px 7px 0;
+}
+
+input.with_glyphicon {
+	width: 95%;
 }
 
 .margin-top-0 {
@@ -137,7 +156,19 @@ Betrifft nur index.php
 		text-align: center;
 		padding-top: 45px;
 	} /* Ende von CSS, welches nur index.php betrifft */
+	
+/*
+==============================
+==============================
+Betrifft nur profile.php 
+==============================
+============================== 
+*/
 
+	.table {
+		margin-bottom: 0;
+	}
+	
 /* 
 ==============================
 ==============================
@@ -151,14 +182,13 @@ Betrifft nur calendar.php
 	}
 	
 	div.day {
-		margin: 0 5px 15px 5px;
+		margin-bottom: 15px;
 	}
 	
 	div.date {
-		background-color: white;
+		background-color: #f8f8f8;
 		padding: 10px;
 		border: 1px solid #e7e7e7;
-		border-radius: 6px;
 		margin: 20px 0 0 -1px;
 		overflow: hidden;
 	}
@@ -175,9 +205,7 @@ Betrifft nur calendar.php
 	}
 
 	div.appointment {
-		background-color: white;
 		border: 1px solid #e7e7e7;
-		border-radius: 6px;
 		margin: 16px 2px 0 2px;
 	}
 
@@ -190,6 +218,7 @@ Betrifft nur calendar.php
 	}
 
 	div.title {
+		background-color: #f8f8f8;
 		padding: 10px;
 		word-wrap: break-word;
 		overflow: hidden;
@@ -291,8 +320,8 @@ Betrifft nur calendar.php
 	}
 	
 	div.box {
+		background-color: #f8f8f8;
 		border: 1px solid #e7e7e7;
-		border-radius: 6px;
 		padding: 20px;
 		margin-bottom: 15px;
 	}
@@ -311,10 +340,6 @@ Betrifft nur calendar.php
 	.row > [class*='col-'] {
 	  display: flex;
 	  flex-direction: column;
-	}
-	
-	td {
-		background-color: white;
 	}
 
 /* 
@@ -392,9 +417,8 @@ Formulare und Buttons
 	
 	.dropdown_form {
 		height: 34px;
-		width: 100%;
+		width: 95%;
 		padding-left: 12px;
 		border-color: #ccc;
-		border-top-right-radius: 5px;
-		border-bottom-right-radius: 5px;
+		border-radius: 5px;
 	}/* Ende von CSS betreffend Formulare und Buttons */

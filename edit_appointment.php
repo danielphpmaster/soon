@@ -142,10 +142,25 @@
 							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($row['timestamp'])){echo date("Y-m-d", $row['timestamp']);} else {echo htmlspecialchars($newdate);}?>"></b></div>
 							<div class='appointment'>
 								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
-								<div class='appointmentinformation'>
-									<div class='time'><span class='glyphicon glyphicon-time form' style='color:#777'; aria-hidden='true'></span><input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language]; ?>" value="<?php if(isset($row['time_set']) AND $row['time_set'] == 'true') { echo date('H:i', $row['timestamp']);} elseif(isset($newtime))  {echo htmlspecialchars($newtime);}?>"></div>
-									<div class='location'><span class='glyphicon glyphicon-map-marker form' style='color:#777'; aria-hidden='true'></span><input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="<?php echo $t_location[$language] ?>" value="<?php if(isset($location)){echo htmlspecialchars($location);} else{echo htmlspecialchars($newlocation);}?>"></div>
-									<div class='comment'><span class='glyphicon glyphicon-info-sign form' style='color:#777'; aria-hidden='true'></span><input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="<?php echo $t_comment[$language] ?>" value="<?php if(isset($comment)){echo htmlspecialchars($comment);} else{echo htmlspecialchars($newcomment);}?>"></div>
+								<div class='appointmentinformation'>		
+									<div class="form-group input-group">
+										<span class="input-group-addon">
+											<span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span>
+										</span>
+										<input name="time" class="form-control with_glyphicon" id="time" placeholder="<?php echo $t_time[$language]; ?>" value="<?php if(isset($row['time_set']) AND $row['time_set'] == 'true') { echo date('H:i', $row['timestamp']);} elseif(isset($newtime))  {echo htmlspecialchars($newtime);}?>">
+									</div>
+									<div class="form-group input-group">
+										<span class="input-group-addon">
+											<span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span>
+										</span>
+										<input name="location" type="text" class="form-control with_glyphicon" id="location" placeholder="<?php echo $t_location[$language] ?>" value="<?php if(isset($location)){echo htmlspecialchars($location);} else{echo htmlspecialchars($newlocation);}?>">
+									</div>
+									<div class="form-group input-group">
+										<span class="input-group-addon">
+											<span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span>
+										</span>
+										<input name="comment" type="text" class="form-control with_glyphicon" id="comment" placeholder="<?php echo $t_comment[$language] ?>" value="<?php if(isset($comment)){echo htmlspecialchars($comment);} else{echo htmlspecialchars($newcomment);}?>">
+									</div>									
 								</div>
 							</div>
 						</div>

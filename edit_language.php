@@ -49,11 +49,15 @@
 					<form action="?editlanguage=1" method="post">
 						<div class="box">
 							<div class="form-group margin-bottom-0">
-								<span class='glyphicon glyphicon-globe form' style='color:#777'; aria-hidden='true'></span>
-								<select name="new_language" class="dropdown_form">
-									<option <?php if($language=='0'){echo "selected";}?>value="de">Deutsch</option>
-									<option <?php if($language=='1'){echo "selected";}?> value="en">English</option>
-								</select>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<span class='glyphicon glyphicon-globe' style='color:#777'; aria-hidden='true'></span>
+									</span>
+									<select name="new_language" class="dropdown_form">
+										<option <?php if($language=='0'){echo "selected";}?>value="de">Deutsch</option>
+										<option <?php if($language=='1'){echo "selected";}?> value="en">English</option>
+									</select>
+								</div>								
 							</div>
 						</div> <?php // Ende von .box ?>
 						<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>
