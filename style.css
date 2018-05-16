@@ -157,10 +157,13 @@ Betrifft nur calendar.php
 	div.date {
 		background-color: white;
 		padding: 10px;
-		border: 1px solid #e7e7e7;
 		border-radius: 6px;
 		margin: 20px 0 0 -1px;
 		overflow: hidden;
+	}
+	
+	div.date button {
+		border: 0;
 	}
 	
 	div.date.outside_calendar {
