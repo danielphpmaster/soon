@@ -121,7 +121,14 @@
 						
 						echo "<div class='col-md-1'>
 							<div class='day'>
-							<div class='date ".$dateclass."'><b><span class='date_output_calendar'>".$date_output."</span></b><a href='".$path."add?date=".date("Y-m-d", $date)."' style='float: right;'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a></div>";
+								<div class='date ".$dateclass."'>
+									<b><span class='date_output_calendar'>".$date_output."</span></b>
+									<a href='".$path."add?date=".date("Y-m-d", $date)."'>
+										<button type='button' class='btn btn-default btn-xs'>
+											<span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
+										</button>
+									</a>
+								</div>";
 						
 						// Suche nach einem Termin
 						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
@@ -158,16 +165,12 @@
 							}
 							
 							// Wenn vorhanden: Ausgabe Terminort
-							if(empty($location)) {
-								echo "";
-							} else {
+							if(!empty($location)) {
 								echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($location)."</div>";
 							}
 							
 							// Wenn vorhanden: Ausgabe Terminkommentar
-							if(empty($comment)) {
-								echo "";
-							} else {
+							if(!empty($comment)) {
 								echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($comment)."</div>";
 							}
 							
