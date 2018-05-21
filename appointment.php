@@ -80,11 +80,11 @@
 						// Ausgabe Terminname
 						echo "<div class='appointment' style='margin-top: 0'>
 									<div ".$appointment_color." class='title'><b>".htmlspecialchars($appointmentname)."</b>
-										<span class='date_output'> <span class='glyphicon glyphicon-time'></span> ".$date_output."</span>";
+										<span class='date_output'> <i class='fas fa-calendar'></i> ".$date_output."</span>";
 						
 						echo "<div class='float_right'>
-									<a href='".$path."remove?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></a>
-									<a href='".$path."edit_appointment?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button></a>
+									<a href='".$path."remove?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-sm'><i class='fas fa-times'></i></button></a>
+									<a href='".$path."edit_appointment?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
 								</div>
 							</div>";
 						
@@ -104,14 +104,14 @@
 						
 						// Wenn vorhanden: Ausgabe Terminzeit
 						if($row['time_set'] == 'true') {
-							echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$t_time[$language]."</div>";
+							echo "<div class='time'><i class='fas fa-clock'></i> ".$t_time[$language]."</div>";
 						}
 						
 						// Wenn vorhanden: Ausgabe Terminort
 						if(empty($location)) {
 							echo "";
 						} else {
-							echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($location)."</div>";
+							echo "<div class='location'><i class='fas fa-map-marker-alt'></i> ".htmlspecialchars($location)."</div>";
 							echo "<iframe
 									width='100%'
 									height='250'
@@ -125,7 +125,7 @@
 						if(empty($comment)) {
 							echo "";
 						} else {
-							echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($comment)."</div>";
+							echo "<div class='comment'><i class='fas fa-comment'></i> ".htmlspecialchars($comment)."</div>";
 						}
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist						

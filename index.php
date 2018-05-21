@@ -54,7 +54,7 @@
 					
 					<div class="col-xs-12 more-information-button"> 
 						<div>
-							<a href="#more_information" style="color: white;"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+							<a href="#more_information" style="color: white;"><i class='fas fa-chevron-down'></i></a>
 						</div> 
 					</div>
 				</div> <?php // Ende von .row ?>
@@ -65,19 +65,19 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h1><span class="glyphicon glyphicon-road" aria-hidden="true"></span> <?php echo $t_your_future[$language]; ?></h1>
+					<h1><i class='fas fa-road'></i> <?php echo $t_your_future[$language]; ?></h1>
 					<div class="box">
 						<?php echo $t_your_future_text[$language]; ?>
 					</div>
-					<h1><span class="glyphicon glyphicon-gift" aria-hidden="true"></span> <?php echo $t_for_free[$language]; ?></h1>
+					<h1><i class='fas fa-gift'></i> <?php echo $t_for_free[$language]; ?></h1>
 					<div class="box">
 						<?php echo $t_for_free_text[$language]; ?>
 					</div>
-					<h1><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <?php echo $t_everywhere[$language]; ?></h1>
+					<h1><i class='fas fa-globe'></i> <?php echo $t_everywhere[$language]; ?></h1>
 					<div class="box">
 						<?php echo $t_everywhere_text[$language]; ?>
 					</div>
-					<h1><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> <?php echo $t_secure[$language]; ?></h1>
+					<h1><i class='fas fa-lock'></i> <?php echo $t_secure[$language]; ?></h1>
 					<div class="box">
 						<?php echo $t_secure_text[$language]; ?>
 					</div>
@@ -86,7 +86,7 @@
 				<div class="col-xs-12 col-md-3 last_element"></div>
 				<div class="col-xs-12 more-information-button"> 
 						<div>
-							<a href="index.php" style="color: black;"><span class="glyphicon glyphicon glyphicon-menu-up" aria-hidden="true"></span></a>
+							<a href="index.php" style="color: black;"><i class='fas fa-chevron-up'></i></a>
 						</div> 
 					</div>
 			</div>

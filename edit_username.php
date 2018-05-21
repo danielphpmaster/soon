@@ -47,11 +47,13 @@
 					?>
 					<form action="?editusername=1" method="post">
 						<div class="box">
-							<div class="input-group">
-								<span class="input-group-addon">
-									<span class='glyphicon glyphicon-user' style='color:#777'; aria-hidden='true'></span>
-								</span>
-								<input name="new_username" type="text" class="form-control with_glyphicon" id="new_username" placeholder="<?php echo $t_new_username[$language] ?>" value="<?php if(isset($username)){echo htmlspecialchars($username);}?>">
+							<div class="margin-bottom-0 input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">
+										<i class="fas fa-user"></i>
+									</span>
+								</div>
+								<input name="new_username" type="text" class="form-control" id="new_username" placeholder="<?php echo $t_new_username[$language] ?>" value="<?php if(isset($username)){echo htmlspecialchars($username);}?>">
 							</div>
 						</div> <?php // Ende von .box ?>
 						<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>

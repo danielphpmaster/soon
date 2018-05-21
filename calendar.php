@@ -51,24 +51,22 @@
 				
 		<div class="container">
 			<div class="row" style="margin-top: 20px;">
-				<?php
-					echo "<div class='col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl calendar_current_month_mobile' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-default'><b>".$month." ".$year." </b><span class='glyphicon glyphicon glyphicon-print'></span></a></div>";
-					
+				<?php					
 					if($timestamp_of_month < time()) {
 						echo "<div class='col-xs-6 col-sm-4'></div>";
 					} else {
 						echo"<div class='col-xs-6 col-sm-4'>
-								<a type='button' href='".$path."calendar/".$previous_month_year."/".$previous_month."' class='btn btn-default'><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span> ".$previous_month." ".$previous_month_year."</a>
+								<a type='button' href='".$path."calendar/".$previous_month_year."/".$previous_month."' class='btn btn-default'><i class='fas fa-chevron-left'></i> ".$previous_month." ".$previous_month_year."</a>
 							</div>";
 					}
 					
-					echo "<div class='hidden-xs col-sm-4 calendar_current_month' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-default'><b>".$month." ".$year." </b><span class='glyphicon glyphicon glyphicon-print'></span></a></div>";
+					echo "<div class='hidden-xs col-sm-4 calendar_current_month' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-default'><b><i class='fas fa-print'></i> ".$month." ".$year."</b></a></div>";
 					
 					if($year == '2019' and $month =='December') {
 						echo "<div class='col-xs-6 col-sm-4'></div>";
 					} else {
 					echo"<div class='col-xs-6 col-sm-4'>
-							<a type='button' href='".$path."calendar/".$next_month_year."/".$next_month."' class='btn btn-default'>".$next_month." ".$next_month_year." <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a>
+							<a type='button' href='".$path."calendar/".$next_month_year."/".$next_month."' class='btn btn-default'>".$next_month." ".$next_month_year." <i class='fas fa-chevron-right'></i></a>
 						</div>";					
 					}
 				?>
@@ -124,8 +122,8 @@
 								<div class='date ".$dateclass."'>
 									<b><span class='date_output_calendar'>".$date_output."</span></b>
 									<a href='".$path."add?date=".date("Y-m-d", $date)."'>
-										<button type='button' class='btn btn-default btn-xs'>
-											<span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
+										<button type='button' class='btn btn-default btn-sm'>
+											<i class='fas fa-plus'></i>
 										</button>
 									</a>
 								</div>";
@@ -161,17 +159,17 @@
 							
 							// Wenn vorhanden: Ausgabe Terminzeit
 							if($row['time_set'] == 'true') {
-								echo "<div class='time'><span class='glyphicon glyphicon-time' style='color:#777'; aria-hidden='true'></span> ".$t_time[$language]."</div>";
+								echo "<div class='time'><i class='fas fa-clock'></i> ".$t_time[$language]."</div>";
 							}
 							
 							// Wenn vorhanden: Ausgabe Terminort
 							if(!empty($location)) {
-								echo "<div class='location'><span class='glyphicon glyphicon-map-marker' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($location)."</div>";
+								echo "<div class='location'><i class='fas fa-map-marker-alt'></i> ".htmlspecialchars($location)."</div>";
 							}
 							
 							// Wenn vorhanden: Ausgabe Terminkommentar
 							if(!empty($comment)) {
-								echo "<div class='comment'><span class='glyphicon glyphicon-info-sign' style='color:#777'; aria-hidden='true'></span> ".htmlspecialchars($comment)."</div>";
+								echo "<div class='comment'><i class='fas fa-comment'></i> ".htmlspecialchars($comment)."</div>";
 							}
 							
 							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
@@ -208,7 +206,7 @@
 					document.documentElement.scrollTop = 0; // Für Internet Explorer und Firefox
 				} 
 			</script>
-			<button onclick="topFunction()" id="myBtn"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> Nach oben</button> 
+			<button onclick="topFunction()" id="myBtn"><i class='fas fa-chevron-up'></i> Nach oben</button> 
 		</div> <?php // Ende von .calendar-container ?>
 	</body>
 </html>

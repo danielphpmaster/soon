@@ -87,17 +87,21 @@
 									<?php echo $t_stay_logged_in[$language] ?>
 								</label>
 							</div>-->
-							<div class="form-group input-group">
-								<span class="input-group-addon">
-									<span class='glyphicon glyphicon-envelope' style='color:#777'; aria-hidden='true'></span>
-								</span>
-								<input name="email" type="email" class="form-control with_glyphicon" id="email" aria-describedby="emailHelp" placeholder="<?php echo $t_email[$language] ?>" value="<?php if(isset($email)){echo htmlspecialchars($email);}?>">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">
+										<i class="fas fa-envelope"></i>
+									</span>
+								</div>
+								<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="<?php echo $t_email[$language] ?>" value="<?php if(isset($email)){echo htmlspecialchars($email);}?>">
 							</div>
-							<div class="input-group">
-								<span class="input-group-addon">
-									<span class='glyphicon glyphicon-lock' style='color:#777'; aria-hidden='true'></span>
-								</span>
-								<input name="password" type="password" class="form-control with_glyphicon" id="password" placeholder="<?php echo $t_password[$language] ?>">
+							<div class="margin-bottom-0 input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">
+										<i class="fas fa-lock"></i>
+									</span>
+								</div>
+								<input name="password" type="password" class="form-control" id="password" placeholder="<?php echo $t_password[$language] ?>">
 							</div>
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">	

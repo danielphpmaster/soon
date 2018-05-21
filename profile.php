@@ -22,28 +22,24 @@
 				<div class="col-xs-12 col-md-6">			
 					<h2><?php echo $t_my_profile[$language] ?></h2>
 					<div class="box">		
-						<table class="margin-bottom-0 table table-striped">
+						<table class="margin-bottom-0 table">
 							<tbody>
 								<tr>
 									<td style="border:0;"><?php echo $t_username[$language] ?></td>
-									<td style="border:0;"><?php echo htmlspecialchars($username);?></td>
-									<td style="border:0;"><a href="<?php echo $path; ?>edit_username"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
+									<td style="border:0;"><?php echo htmlspecialchars($username);?><a class="float-right" href="<?php echo $path; ?>edit_username"><button type="button" class="btn btn-default btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
 								</tr>
 								<tr>
 									<td><?php echo $t_email[$language] ?></td>
-									<td><?php echo $email;?></td>
-									<td><a href="<?php echo $path; ?>edit_mail"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
+									<td><?php echo $email;?><a class="float-right" href="<?php echo $path; ?>edit_mail"><button type="button" class="btn btn-default btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
 								</tr>
 								<tr>
 									<td><?php echo $t_password[$language] ?></td>
-									<td><a href="<?php echo $path; ?>edit_password"><button type="button" class="btn btn-default btn-xs"><?php echo $t_change_password[$language] ?></button></a></td>
-									<td></td>
+									<td><a href="<?php echo $path; ?>edit_password"><button type="button" class="btn btn-default btn-sm"><?php echo $t_change_password[$language] ?></button></a></td>
 								</tr>
 								<tr>
 									<td><?php echo $t_language[$language] ?></td>
 									<?php $language_array_long = array("Deutsch", "English"); ?>
-									<td><?php echo $language_array_long[$language];?></td>
-									<td><a href="<?php echo $path; ?>edit_language"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
+									<td><?php echo $language_array_long[$language];?><a class="float-right" href="<?php echo $path; ?>edit_language"><button type="button" class="btn btn-default btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
 								</tr>
 							</tbody>
 						 </table>				

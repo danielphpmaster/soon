@@ -85,23 +85,29 @@
 						?>
 						<form action="?editpassword=1" method="post">
 							<div class="box">
-								<div class="form-group input-group">
-									<span class="input-group-addon">
-										<span class='glyphicon glyphicon-lock' style='color:#777'; aria-hidden='true'></span>
-									</span>
-									<input name="currentpassword" type="password" class="form-control with_glyphicon" id="currentpassword" placeholder="<?php echo $t_current_password[$language] ?>">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">
+											<i class="fas fa-lock"></i>
+										</span>
+									</div>
+									<input name="currentpassword" type="password" class="form-control" id="currentpassword" placeholder="<?php echo $t_current_password[$language] ?>">
 								</div>
-								<div class="form-group input-group">
-									<span class="input-group-addon">
-										<span class='glyphicon glyphicon-lock' style='color:#777'; aria-hidden='true'></span>
-									</span>
-									<input name="newpassword" type="password" class="form-control with_glyphicon" id="newpassword" placeholder="<?php echo $t_new_password[$language] ?>">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">
+											<i class="fas fa-lock"></i>
+										</span>
+									</div>
+									<input name="newpassword" type="password" class="form-control" id="newpassword" placeholder="<?php echo $t_new_password[$language] ?>">
 								</div>
-								<div class="input-group">
-									<span class="input-group-addon">
-										<span class='glyphicon glyphicon-lock' style='color:#777'; aria-hidden='true'></span>
-									</span>
-									<input name="newpassword2" type="password" class="form-control with_glyphicon" id="newpassword2" placeholder="<?php echo $t_confirm_new_password[$language] ?>">
+								<div class="margin-bottom-0 input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">
+											<i class="fas fa-lock"></i>
+										</span>
+									</div>
+									<input name="newpassword2" type="password" class="form-control" id="newpassword2" placeholder="<?php echo $t_confirm_new_password[$language] ?>">
 								</div>							
 							</div> <?php // Ende von .box ?>
 							<div class="last_element">
