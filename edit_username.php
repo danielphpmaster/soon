@@ -56,8 +56,8 @@
 								<input name="new_username" type="text" class="form-control" id="new_username" placeholder="<?php echo $t_new_username[$language] ?>" value="<?php if(isset($username)){echo htmlspecialchars($username);}?>">
 							</div>
 						</div> <?php // Ende von .box ?>
-						<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>
-						<a class="btn btn-primary grey-button" href="profile"><?php echo $t_cancel[$language] ?></a>
+						<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
+						<a class="btn btn-light" href="profile"><?php echo $t_cancel[$language] ?></a>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

@@ -25,7 +25,7 @@
 						echo "<div class='alert alert-success'>","".$t_you_have_successfully_registered[$language]."</div>";
 					?>
 					<div class="last_element">
-						<a href="<?php echo $path; ?>calendar" class="btn btn-primary" role="button"><?php echo $t_getting_started[$language] ?></a>
+						<a href="<?php echo $path; ?>calendar" class="btn btn-light" role="button"><?php echo $t_getting_started[$language] ?></a>
 					</div>
 				</div>
 				

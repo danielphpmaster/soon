@@ -212,7 +212,7 @@
 							</div>						
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">
-							<button type="submit" class="btn btn-primary"><?php echo $t_sign_up[$language] ?></button>
+							<button type="submit" class="btn btn-red"><?php echo $t_sign_up[$language] ?></button>
 							<?php echo $t_already_have_an_account[$language] ?> <a href="login.php"><?php echo $t_log_in[$language] ?>!</a>
 						</div>
 					</form>

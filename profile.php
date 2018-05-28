@@ -26,20 +26,20 @@
 							<tbody>
 								<tr>
 									<td style="border:0;"><?php echo $t_username[$language] ?></td>
-									<td style="border:0;"><?php echo htmlspecialchars($username);?><a class="float-right" href="<?php echo $path; ?>edit_username"><button type="button" class="btn btn-default btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
+									<td style="border:0;"><?php echo htmlspecialchars($username);?><a class="float-right" href="<?php echo $path; ?>edit_username"><button type="button" class="btn btn-light btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
 								</tr>
 								<tr>
 									<td><?php echo $t_email[$language] ?></td>
-									<td><?php echo $email;?><a class="float-right" href="<?php echo $path; ?>edit_mail"><button type="button" class="btn btn-default btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
+									<td><?php echo $email;?><a class="float-right" href="<?php echo $path; ?>edit_mail"><button type="button" class="btn btn-light btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
 								</tr>
 								<tr>
 									<td><?php echo $t_password[$language] ?></td>
-									<td><a href="<?php echo $path; ?>edit_password"><button type="button" class="btn btn-default btn-sm"><?php echo $t_change_password[$language] ?></button></a></td>
+									<td><a href="<?php echo $path; ?>edit_password"><button type="button" class="btn btn-light btn-sm"><?php echo $t_change_password[$language] ?></button></a></td>
 								</tr>
 								<tr>
 									<td><?php echo $t_language[$language] ?></td>
 									<?php $language_array_long = array("Deutsch", "English"); ?>
-									<td><?php echo $language_array_long[$language];?><a class="float-right" href="<?php echo $path; ?>edit_language"><button type="button" class="btn btn-default btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
+									<td><?php echo $language_array_long[$language];?><a class="float-right" href="<?php echo $path; ?>edit_language"><button type="button" class="btn btn-light btn-sm"><i class='fas fa-pencil-alt'></i></button></a></td>
 								</tr>
 							</tbody>
 						 </table>				

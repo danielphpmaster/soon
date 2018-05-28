@@ -56,17 +56,17 @@
 						echo "<div class='col-xs-6 col-sm-4'></div>";
 					} else {
 						echo"<div class='col-xs-6 col-sm-4'>
-								<a type='button' href='".$path."calendar/".$previous_month_year."/".$previous_month."' class='btn btn-default'><i class='fas fa-chevron-left'></i> ".$previous_month." ".$previous_month_year."</a>
+								<a type='button' href='".$path."calendar/".$previous_month_year."/".$previous_month."' class='btn btn-light'><i class='fas fa-chevron-left'></i> ".$previous_month." ".$previous_month_year."</a>
 							</div>";
 					}
 					
-					echo "<div class='hidden-xs col-sm-4 calendar_current_month' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-default'><b><i class='fas fa-print'></i> ".$month." ".$year."</b></a></div>";
+					echo "<div class='hidden-xs col-sm-4 calendar_current_month' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-light'><b><i class='fas fa-print'></i> ".$month." ".$year."</b></a></div>";
 					
 					if($year == '2019' and $month =='December') {
 						echo "<div class='col-xs-6 col-sm-4'></div>";
 					} else {
 					echo"<div class='col-xs-6 col-sm-4'>
-							<a type='button' href='".$path."calendar/".$next_month_year."/".$next_month."' class='btn btn-default'>".$next_month." ".$next_month_year." <i class='fas fa-chevron-right'></i></a>
+							<a type='button' href='".$path."calendar/".$next_month_year."/".$next_month."' class='btn btn-light'>".$next_month." ".$next_month_year." <i class='fas fa-chevron-right'></i></a>
 						</div>";					
 					}
 				?>
@@ -122,7 +122,7 @@
 								<div class='date ".$dateclass."'>
 									<b><span class='date_output_calendar'>".$date_output."</span></b>
 									<a href='".$path."add?date=".date("Y-m-d", $date)."'>
-										<button type='button' class='btn btn-default btn-sm'>
+										<button type='button' class='btn btn-light btn-sm'>
 											<i class='fas fa-plus'></i>
 										</button>
 									</a>

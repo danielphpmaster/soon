@@ -54,14 +54,14 @@
 										<i class="fas fa-globe"></i>
 									</span>
 								</div>
-								<select name="new_language" class="dropdown_form">
+								<select name="new_language" class="dropdown-form">
 									<option <?php if($language=='0'){echo "selected";}?>value="de">Deutsch</option>
 									<option <?php if($language=='1'){echo "selected";}?> value="en">English</option>
 								</select>
 							</div>
 						</div> <?php // Ende von .box ?>
-						<button type="submit" class="btn btn-primary"><?php echo $t_save[$language] ?></button>
-						<a class="btn btn-primary grey-button" href="profile"><?php echo $t_cancel[$language] ?></a>
+						<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
+						<a class="btn btn-light" href="profile"><?php echo $t_cancel[$language] ?></a>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

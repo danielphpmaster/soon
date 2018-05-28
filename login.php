@@ -105,7 +105,7 @@
 							</div>
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">	
-							<button type="submit" class="btn btn-primary"><?php echo $t_log_in[$language] ?></button>
+							<button type="submit" class="btn btn-red"><?php echo $t_log_in[$language] ?></button>
 							<?php echo $t_no_account_yet[$language] ?> <a href="<?php echo $path; ?>registration"><?php echo $t_sign_up[$language] ?>!</a>
 						</div>
 					</form>

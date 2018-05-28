@@ -146,9 +146,23 @@
 					?>
 					<form action="?add=1" method="post">
 						<div class="day">
-							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($date)){echo htmlspecialchars($date);}?>"></b></div>
+							<div class='date outside_calendar'>
+								<b>
+									<!--<input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($date)){echo htmlspecialchars($date);}?>">
+									--><input name="date" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
+								</b>
+							</div>
+							
+            
+        <script type="text/javascript">
+            $('#datetimepicker').datetimepicker({
+                    format: 'L'
+                });
+
+        </script>
+
 							<div class='appointment'>
-								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);}?>"></b></div>
+								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);}?>" autofocus></b></div>
 								<div class='appointmentinformation'>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
@@ -178,8 +192,8 @@
 							</div>
 						</div>
 						<div class="last_element">
-							<button type="submit" class="btn btn-primary"><?php echo $t_add_appointment[$language] ?></button>
-							<a class="btn btn-primary grey-button" href="<?php echo $path; ?>calendar"><?php echo $t_cancel[$language] ?></a>
+							<button type="submit" class="btn btn-red"><?php echo $t_add_appointment[$language] ?></button>
+							<a class="btn btn-light" href="<?php echo $path; ?>calendar"><?php echo $t_cancel[$language] ?></a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

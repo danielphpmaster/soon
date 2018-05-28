@@ -66,7 +66,7 @@
 							</div>
 						</div> <?php // Ende von .box ?>
 						<div class="last_element">
-							<button type="submit" class="btn btn-primary"><?php echo $t_confirm[$language] ?></button>
+							<button type="submit" class="btn btn-red"><?php echo $t_confirm[$language] ?></button>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

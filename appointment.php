@@ -83,8 +83,8 @@
 										<span class='date_output'> <i class='fas fa-calendar'></i> ".$date_output."</span>";
 						
 						echo "<div class='float_right'>
-									<a href='".$path."remove?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-sm'><i class='fas fa-times'></i></button></a>
-									<a href='".$path."edit_appointment?a=".$appointmenttoken."'><button type='button' class='btn btn-default btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
+									<a href='".$path."remove?a=".$appointmenttoken."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-times'></i></button></a>
+									<a href='".$path."edit_appointment?a=".$appointmenttoken."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
 								</div>
 							</div>";
 						
@@ -141,7 +141,7 @@
 						$year = date("Y", $row['timestamp']);
 						
 						echo "<div class='last_element'>
-								<a class='btn btn-primary grey-button' href='".$path."calendar/".$year."/".$month."'>".$t_view_calendar[$language]."</a>
+								<a class='btn btn-light' href='".$path."calendar/".$year."/".$month."'>".$t_view_calendar[$language]."</a>
 							</div>";
 					?>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

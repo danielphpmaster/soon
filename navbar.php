@@ -40,7 +40,9 @@
 							<a href='".$path."add' class='nav-link'><i class='fas fa-plus'></i> ".$t_add_appointment[$language]."</a>
 						</li>
 						<li class='nav-item'>
-							<a href='".$path."calendar' class='nav-link'><i class='far fa-calendar'></i> ".$t_my_calendar[$language]." <span class='badge badge-danger'>".$total_appointments_today."</span></a>
+							<a href='".$path."calendar' class='nav-link'><i class='far fa-calendar'></i> ".$t_my_calendar[$language]; 
+								if($total_appointments_today > 0) { echo " <span class='badge badge-danger'>".$total_appointments_today."</span>"; }
+							echo "</a>
 						</li>
 						<li class='nav-item dropdown'>
 							<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>".htmlspecialchars($username)."</a>
