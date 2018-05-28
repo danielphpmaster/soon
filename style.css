@@ -17,10 +17,6 @@ div.row a {
 	margin-bottom: 90px;
 }
 
-.margin-top-0 {
-	margin-top: 0;
-}
-
 .margin-bottom-0 {
 	margin-bottom: 0 !important;
 }
@@ -28,11 +24,7 @@ div.row a {
 .date_output {
 	padding-left: 5px;
 	color: grey;
-	font-size:12px;
-}
-
-.date_output_calendar {
-	font-size:13px;
+	font-size:0.75rem;
 }
 
 /* 
@@ -69,15 +61,16 @@ Betrifft nur index.php
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-attachment: fixed;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	div.index-title {
+	h1#headline {
 		color: white;
 		padding: 20px;
 		text-align: center;
 		line-height: 1.4285;
-		font-size: 40px;
-		margin-top: calc(100vh*0.25);
 		background: rgba(0,0,0,0.5);
 		background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
 		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,0,0,0.5)), color-stop(70%, rgba(179,179,179,0)), color-stop(100%, rgba(255,255,255,0)));
@@ -88,18 +81,9 @@ Betrifft nur index.php
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
 	}
 
-	/* margin-top bei mobilen Geräten */
-		@media (max-width: 600px) {
-			div.index-title {
-				margin-top: calc(100vh/5);
-				font-size: 35px;
-			}
-		}
-
 	h2 {
 		color: black;
 		line-height: 1.4285;
-		font-size: 32px;
 		margin: 80px 0 20px 0;
 		padding: 0 10px 0 10px;
 	}
@@ -107,7 +91,7 @@ Betrifft nur index.php
 	div.linkbox {
 		padding: 20px;
 		text-align: center;
-		font-size: 20px;
+		font-size: 1.5rem;
 		box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
 	}
 
@@ -124,14 +108,9 @@ Betrifft nur index.php
 		background-color: #f8f8f8;
 		color: black;
 	}
-	
-	div.index-margin-bottom {
-		margin-bottom: calc(100vh*0.25);		
-	} 
-	
+		
 	div.more-information-button {
 		color: white;
-		font-size: 40px;
 		text-align: center;
 	} 
 	
@@ -209,7 +188,7 @@ Betrifft nur calendar.php
 		word-wrap: break-word;
 		overflow: hidden;
 	}
-	
+		
 	div.appointmentinformation {
 		padding: 10px;
 		border-top: 1px solid #e7e7e7;
@@ -227,13 +206,6 @@ Betrifft nur calendar.php
 	div.comment {
 		padding-bottom: 10px;
 		word-wrap: break-word;
-	}
-
-	h3 {
-		color: black;
-		line-height: 1.4285;
-		font-size: 14px;
-		margin: 0 0 20px 0;
 	}
 
 	.calendar-container .row {

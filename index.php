@@ -22,19 +22,17 @@
 		<div class="background-image">
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-12 col-md-3"></div>
+					<div class="col-0 col-lg-3"></div>
 					
-					<div class="col-xs-12 col-md-6">
-						<div class="index-title"><?php echo $t_headline[$language]; ?></div>
+					<div class="col-12 col-lg-6">
+						<h1 id='headline'><?php echo $t_headline[$language]; ?></h1>
 					</div>
 					
-					<div class="col-xs-12 col-md-3"></div>
-				</div> <!-- Ende von .row -->
-				
-				<div class="row">
-					<div class="col-xs-12 col-md-3"></div>
+					<div class="col-0 col-lg-3"></div>
 					
-					<div class="col-xs-6 col-md-3">
+					<div class="col-0 col-lg-2"></div>
+					
+					<div class="col-6 col-lg-4">
 						<a href="<?php echo $path; ?>registration">
 							<div class="linkbox registration">
 								<?php echo $t_sign_up[$language]; ?>
@@ -42,19 +40,19 @@
 						</a>
 					</div>
 					
-					<div class="col-xs-6 col-md-3 index-margin-bottom">
+					<div class="col-6 col-lg-4">
 						<a href="<?php echo $path; ?>login">
 							<div class="linkbox login">
 								<?php echo $t_log_in[$language]; ?>
 							</div>
 						</a>
-					</div>
+					</div>					
 					
-					<div class="col-xs-12 col-md-3"></div>
+					<div class="col-0 col-lg-2"></div>
 					
-					<div class="col-xs-12 more-information-button"> 
-						<div>
-							<a href="#more_information" style="color: white;"><i class='fas fa-chevron-down'></i></a>
+					<div class="col-12 more-information-button"> 
+						<div style="margin-top: 28px;">
+							<a href="#more_information" style="color: white; text-align: center; font-size: 2.5rem;"><i class='fas fa-chevron-down'></i></a>
 						</div> 
 					</div>
 				</div> <?php // Ende von .row ?>
@@ -62,9 +60,9 @@
 		</div> <?php // Ende von .background-image ?>
 		<div id="more_information" class="container" style="height:100vh">
 			<div class="row">
-				<div class="col-xs-12 col-md-3"></div>
+				<div class="col-12 col-lg-3"></div>
 				
-				<div class="col-xs-12 col-md-6">
+				<div class="col-12 col-lg-6">
 					<h1><i class='fas fa-road'></i> <?php echo $t_your_future[$language]; ?></h1>
 					<div class="box">
 						<?php echo $t_your_future_text[$language]; ?>
@@ -83,10 +81,10 @@
 					</div>
 				</div>
 			
-				<div class="col-xs-12 col-md-3 last_element"></div>
-				<div class="col-xs-12 more-information-button"> 
-						<div>
-							<a href="index.php" style="color: black;"><i class='fas fa-chevron-up'></i></a>
+				<div class="col-12 col-lg-3 last_element"></div>
+				<div class="col-12 more-information-button"> 
+						<div style="margin-top: 28px;">
+							<a href="index.php" style="color: black; text-align: center; font-size: 2.5rem;"><i class='fas fa-chevron-up'></i></a>
 						</div> 
 					</div>
 			</div>
