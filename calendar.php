@@ -53,20 +53,32 @@
 			<div class="row" style="margin-top: 20px;">
 				<?php					
 					if($timestamp_of_month < time()) {
-						echo "<div class='col-xs-6 col-sm-4'></div>";
+						echo "<div class='col-6 col-md-4'></div>";
 					} else {
-						echo"<div class='col-xs-6 col-sm-4'>
-								<a type='button' href='".$path."calendar/".$previous_month_year."/".$previous_month."' class='btn btn-light'><i class='fas fa-chevron-left'></i> ".$previous_month." ".$previous_month_year."</a>
+						echo"<div class='col-12 col-md-4' style='margin-bottom: 10px;'>
+								<a class='btn btn-light' href='".$path."calendar/".$previous_month_year."/".$previous_month."'>
+									<i class='fas fa-chevron-left'></i>
+									".$previous_month." ".$previous_month_year."
+								</a>
 							</div>";
 					}
 					
-					echo "<div class='hidden-xs col-sm-4 calendar_current_month' style='text-align: center;'><a type='button' href='".$path."export_pdf/".$year."/".$month."' target='_blank' class='btn btn-light'><b><i class='fas fa-print'></i> ".$month." ".$year."</b></a></div>";
+					echo "<div class='col-md-4' style='text-align: center; margin-bottom: 10px;'>
+						<a class='btn btn-light' href='".$path."export_pdf/".$year."/".$month."' target='_blank'>
+							<b>
+								<i class='fas fa-print'></i> ".$month." ".$year."
+							</b>
+						</a>
+					</div>";
 					
 					if($year == '2019' and $month =='December') {
-						echo "<div class='col-xs-6 col-sm-4'></div>";
+						echo "<div class='col-6 col-md-4'></div>";
 					} else {
-					echo"<div class='col-xs-6 col-sm-4'>
-							<a type='button' href='".$path."calendar/".$next_month_year."/".$next_month."' class='btn btn-light'>".$next_month." ".$next_month_year." <i class='fas fa-chevron-right'></i></a>
+					echo"<div class='col-12 col-md-4'>
+							<a class='btn btn-light' href='".$path."calendar/".$next_month_year."/".$next_month."'>
+								".$next_month." ".$next_month_year."
+								<i class='fas fa-chevron-right'></i>
+							</a>
 						</div>";					
 					}
 				?>

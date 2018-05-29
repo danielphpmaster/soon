@@ -266,12 +266,7 @@ Betrifft nur calendar.php
 	
 	#myBtn:hover {
 		background-color: #eee;
-	}
-
-	div.calendar_current_month {
-		padding: 0px 12px 7px 12px;
-		text-align: center;
-	} /* Ende von CSS, welches nur calendar.php betrifft */
+	}/* Ende von CSS, welches nur calendar.php betrifft */
 
 		div.calendar_current_month_mobile {
 		padding: 7px 12px 7px 12px;
@@ -337,10 +332,14 @@ Formulare und Buttons
 	label {
 		font-weight: normal;
 	}
+		
+	.fa, .far, .fas {
+		width: 16px;
+	}
 	
 	.dropdown-form {
 		height: 34px;
-		width: calc(100% - 41.5px);
+		width: calc(100% - 42px);
 		padding-left: 12px;
 		border-color: #ccc;
 		border-top-right-radius: 5px;
