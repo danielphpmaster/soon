@@ -83,11 +83,43 @@
 										<span class='date_output'> <i class='fas fa-calendar'></i> ".$date_output."</span>";
 						
 						echo "<div class='float_right'>
-									<a href='".$path."remove?a=".$appointmenttoken."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-times'></i></button></a>
+									<!--
+									<a class='btn btn-light btn-sm' data-target='#exampleModalCenter'><i class='fas fa-times'></i></a>-->
+									<button type='button' class='btn btn-light btn-sm' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-times'></i></button>
 									<a href='".$path."edit_appointment?a=".$appointmenttoken."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
 								</div>
 							</div>";
+						?>
 						
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">
+											<?php echo $t_delete_appointment[$language]; ?>
+										</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">
+												<i class='fas fa-times'></i>
+											</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<?php echo $t_do_you_want_to_delete_this_appointment[$language]; ?>
+									</div>
+									<div class="modal-footer">
+										<?php
+											echo"<a class='btn btn-red' href='".$path."remove?a=".$appointmenttoken."'>".$t_confirm[$language]."</a>";
+										?>
+										<button type="button" class="btn btn-light" data-dismiss="modal">
+											<?php echo $t_cancel[$language]; ?>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<?php
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
 						if($row['time_set'] == 'false' and empty($location) and empty($comment)) {

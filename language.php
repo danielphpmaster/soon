@@ -442,15 +442,13 @@ $t_tomorrow = array(
 	"morgen",
 	"tomorrow"
 );
-
-/* remove.php */
-$t_title_remove = array(
-	"Termin löschen - soon",
-	"Delete appointment - soon"
-);
 $t_delete_appointment = array(
 	"Termin löschen",
 	"Delete appointment"
+);
+$t_do_you_want_to_delete_this_appointment = array(
+	"Möchtest du diesen Termin löschen?",
+	"Do you want to delete this appointment?"
 );
 $t_confirm = array(
 	"Bestätigen",
