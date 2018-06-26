@@ -3,7 +3,7 @@
 	include 'loginwall.php';
 
 	$title = $t_title_add[$language];
-	
+
 	if(isset($_GET['date'])) {
 		$date = $_GET['date'];
 	}
@@ -18,30 +18,30 @@
 
 	<body>
 		<?php include 'navbar.php';?>
-		
+
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-3"></div>
-				
+
 				<div class="col-xs-12 col-md-6">
 					<h2><?php echo $t_add_appointment[$language]; ?></h2>
 					<?php
 						if(isset($_GET['add'])) {
 							$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
-							
+
 							// Werte aus dem Formular als Variablen speichern
 							if(empty($_POST['appointmentname'])) {
 								$appointmentname = "";
 							} else {
-								$appointmentname = $_POST['appointmentname'];								
+								$appointmentname = $_POST['appointmentname'];
 							}
-							
+
 							if(empty($_POST['date'])) {
 								$date = "";
 							} else {
-								$date = $_POST['date'];								
+								$date = $_POST['date'];
 							}
-							
+
 							if(empty($_POST['time'])) {
 								$time = "00:00:00";
 								$time_set = 'false';
@@ -52,30 +52,30 @@
 							if(empty($_POST['location'])) {
 								$location = "";
 							} else {
-								$location = $_POST['location'];								
+								$location = $_POST['location'];
 							}
-							
+
 							if(empty($_POST['comment'])) {
 								$comment = "";
 							} else {
-								$comment = $_POST['comment'];								
+								$comment = $_POST['comment'];
 							}
-							
+
 							// Überprüfung, ob ein Terminname angegeben wurde
 							if(empty($appointmentname)) {
 								echo '<div class="alert alert-danger">'.$t_insert_an_appointment_name[$language].'</div>';
 								$error = true;
 							}
-											
-							// Überprüfung, ob ein gültiges Datum angegeben wurde							
+
+							// Überprüfung, ob ein gültiges Datum angegeben wurde
 							$formats = array("d.m.Y", "Ymd", "Y-m-d");
 							$dates = array($date);
-							
+
 							foreach ($dates as $input) {
 								foreach ($formats as $format) {
 									// echo "Applying format $format on date $input...<br>";
 									$date2 = DateTime::createFromFormat($format, $input);
-									
+
 									if ($date2 == false) {
 										// echo "Failed<br>";
 									} else {
@@ -84,25 +84,25 @@
 									}
 								}
 							}
-							
+
 							function validateDate($date) {
 								$d = DateTime::createFromFormat('Y-m-d', $date);
 								return $d && $d->format('Y-m-d') === $date;
 							}
-								
+
 							if(validateDate($date) == '0') {
 								echo '<div class="alert alert-danger">'.$t_insert_a_valid_date[$language].'</div>';
-								$error = true;									
+								$error = true;
 							}
-							
+
 							$timestamp = strtotime("$date $time");
-							
+
 							// Prüfung, ob ein zukünftiges Datum angegeben wurde
 							if($timestamp < strtotime(date("Y-m-d 00:00:00", time()))) {
 									echo '<div class="alert alert-danger">'.$t_insert_a_future_date[$language].'</div>';
-									$error = true;												
+									$error = true;
 							}
-							
+
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {
 								// Erstellung Termin-Token
@@ -116,30 +116,30 @@
 										$pass[] = $alphabet[$n];
 									}
 									$appointmenttoken = implode($pass); //turn the array into a string
-									
+
 									$sql_select = "SELECT * FROM appointments WHERE appointmenttoken = '$appointmenttoken'";
 
 									$count_result = $connection->prepare($sql_select);
 									$count_result->execute();
 
 									$total = $count_result->fetchColumn();
-									
+
 									if($total < '1') {
 										$create_token = '1';
 									}
 								}
-								
+
 								// Verschlüsselung der Nutzeneingaben
 								$appointmentname = openssl_encrypt($appointmentname,"AES-128-ECB",$key);
 								$location = openssl_encrypt($location,"AES-128-ECB",$key);
 								$comment = openssl_encrypt($comment,"AES-128-ECB",$key);
-						
+
 								$sql_insert = "INSERT INTO appointments (appointmenttoken, usertoken, appointmentname, timestamp, time_set, location, comment) VALUES ('$appointmenttoken', '$usertoken', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
-								
+
 								$year = date('Y', strtotime($date));
 								$month = date('F', strtotime($date));
-								
+
 								header('Location: '.$path.'appointment/'.$appointmenttoken.'');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
@@ -152,11 +152,14 @@
 									--><input name="date" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
 								</b>
 							</div>
-							
-            
+
+
         <script type="text/javascript">
             $('#datetimepicker').datetimepicker({
-                    format: 'L'
+                    format: 'L',
+										locale: '<?php echo "de"; ?>',
+										minDate: '<?php echo date('m/d/Y');?>',
+										defaultDate: "<?php echo date('m/d/Y');?>",
                 });
 
         </script>
@@ -197,7 +200,7 @@
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
-				
+
 				<div class="col-xs-12 col-md-3"></div>
 			</div> <?php // Ende von .row ?>
 		</div> <?php // Ende von .container ?>
