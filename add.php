@@ -153,17 +153,18 @@
 								</b>
 							</div>
 
+							<script type="text/javascript">
+							 $(function () {
 
-        <script type="text/javascript">
-            $('#datetimepicker').datetimepicker({
-                    format: 'L',
+								$('#datetimepicker').datetimepicker({
+										format: 'L',
 										locale: '<?php echo "de"; ?>',
 										minDate: '<?php echo date('m/d/Y');?>',
-										defaultDate: "<?php echo date('m/d/Y');?>",
-                });
-
-        </script>
-
+										defaultDate: '<?php echo date('m-d-Y');?>'
+									});
+									});
+							</script>
+<!--<?php echo date('m-d-Y');?>-->
 							<div class='appointment'>
 								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);}?>" autofocus></b></div>
 								<div class='appointmentinformation'>
@@ -173,8 +174,18 @@
 												<i class="fas fa-clock"></i>
 											</span>
 										</div>
-										<input name="time" class="form-control" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($time)){echo htmlspecialchars($time);}?>">
+										<!--<input name="time" class="form-control" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($time)){echo htmlspecialchars($time);}?>">-->
+										<input name="time" type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="<?php echo $t_time[$language] ?>">
 									</div>
+									
+									<script type="text/javascript">
+										$(function () {
+											$('#datetimepicker5').datetimepicker({
+											format: 'LT'											
+											});
+										});
+									</script>
+		
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
