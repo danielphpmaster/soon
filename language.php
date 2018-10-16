@@ -105,7 +105,7 @@ $t_title_index = array(
 	"soon - Your personal calendar"
 );	
 $t_headline = array(
-	"Alle deine Termine - immer und überall aufrufbar",
+	"Alle deine Termine - immer und überall abrufbar",
 	"All your appointments. Anytime, everywhere"
 );
 $t_sign_up = array(

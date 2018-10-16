@@ -4,7 +4,7 @@
 	require_once('fpdf181/fpdf.php');
 	
 	$t_headline = array(
-		"Alle deine Termine - immer und überall aufrufbar",
+		"Alle deine Termine - immer und überall abrufbar",
 		"All your appointments. Anytime, everywhere"
 	);
 	
