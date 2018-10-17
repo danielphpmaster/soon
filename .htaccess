@@ -8,6 +8,8 @@ RewriteRule ^/?export_pdf/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ export_pdf.php?year
 
 RewriteRule ^/?calendar/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ calendar.php?year=$1&month=$2
 
+RewriteRule ^/?projects/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ projects.php?year=$1&month=$2
+
 RewriteRule ^/?appointment/([A-Za-z0-9-_.*!?]+)$ appointment.php?appointmenttoken=$1
 
 RewriteRule ^/?add/([A-Za-z0-9-_.*!?]+)$ add.php?date=$1

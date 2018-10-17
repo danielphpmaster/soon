@@ -12,12 +12,21 @@ USE `soon`;
 CREATE TABLE `appointments` (
   `appointmenttoken` varchar(12) NOT NULL,
   `usertoken` text NOT NULL,
+  `appointment` text NOT NULL,
+  `projecttoken` text NOT NULL,
   `appointmentname` text NOT NULL,
   `timestamp` int(11) NOT NULL,
   `time_set` text NOT NULL,
   `location` text NOT NULL,
   `comment` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `projects` (
+  `projecttoken` varchar(12) NOT NULL,
+  `usertoken` text NOT NULL,
+  `color` text NOT NULL,
+  `projectname` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `users` (
   `usertoken` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
@@ -33,6 +42,9 @@ CREATE TABLE `users` (
 
 ALTER TABLE `appointments`
   ADD PRIMARY KEY (`appointmenttoken`);
+
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`projecttoken`);
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`usertoken`);

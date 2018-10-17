@@ -49,5 +49,28 @@
 				<div class="col-xs-12 col-md-3"></div>
 			</div> <?php // Ende von .row ?>
 		</div> <?php // Ende von .container ?>
+		
+		<div class="container">
+  <a href="#" data-toggle="popover" data-placement="top" data-html="true" data-content="<a href='calendar'>link</a> Some content inside the popover">Toggle popover</a>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
+		
+	
+		<div class="container">
+  <a href="#" data-toggle="popover" data-placement="top" data-html="true" data-content="<a href='calendar'>link</a> Some content inside the pkopover">Toggle popover</a>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
+		
+		
 	</body>
 </html>

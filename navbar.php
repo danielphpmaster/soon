@@ -11,14 +11,7 @@
 	'><img src='<?php echo $path; ?>images/logo.svg' height='25px'></a>
 	<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarToggler' aria-controls='navbarToggler' aria-expanded='false' aria-label='Toggle navigation'>
 		<span class='navbar-toggler-icon'></span>
-	</button>  
-	<!--
-	<ul class='navbar-nav mr-auto'>
-		<li class='nav-item active'>
-			<a class='nav-link'>Left Link 1</a>
-		</li>
-	</ul>
-	-->
+	</button>
 	<?php
 		if(isset($_SESSION['usertoken'])) {
 			// Zählen, wieviele Termine der angemeldete Benutzer heute hat
@@ -43,6 +36,9 @@
 							<a href='".$path."calendar' class='nav-link'><i class='far fa-calendar'></i> ".$t_my_calendar[$language]; 
 								if($total_appointments_today > 0) { echo " <span class='badge badge-danger'>".$total_appointments_today."</span>"; }
 							echo "</a>
+						</li>
+						<li class='nav-item'>
+							<a href='".$path."projects' class='nav-link'><i class='fas fa-tasks'></i> ".$t_my_projects[$language]."</a>
 						</li>
 						<li class='nav-item dropdown'>
 							<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>".htmlspecialchars($username)."</a>

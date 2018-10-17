@@ -19,13 +19,13 @@
 	if($timestamp_of_month < strtotime(date('Y-m-01'))) {
 		$year = date('Y');
 		$month = date('F');
-		header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
+		header('Location: '.$path.'projects/'.$year.'/'.$month.'');
 	}
 	
 	if($timestamp_of_month > strtotime(date('2020-12-01'))) {
 		$year = date('Y');
 		$month = date('F');
-		header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
+		header('Location: '.$path.'projects/'.$year.'/'.$month.'');
 	}
 	
 	$previous_month_timestamp = strtotime('-1 month', $timestamp_of_month);
@@ -56,7 +56,7 @@
 						echo "<div class='col-6 col-md-4'></div>";
 					} else {
 						echo"<div class='col-12 col-md-4' style='margin-bottom: 10px;'>
-								<a class='btn btn-light' href='".$path."calendar/".$previous_month_year."/".$previous_month."'>
+								<a class='btn btn-light' href='".$path."projects/".$previous_month_year."/".$previous_month."'>
 									<i class='fas fa-chevron-left'></i>
 									".$previous_month." ".$previous_month_year."
 								</a>
@@ -75,7 +75,7 @@
 						echo "<div class='col-6 col-md-4'></div>";
 					} else {
 					echo"<div class='col-12 col-md-4'>
-							<a class='btn btn-light' href='".$path."calendar/".$next_month_year."/".$next_month."'>
+							<a class='btn btn-light' href='".$path."projects/".$next_month_year."/".$next_month."'>
 								".$next_month." ".$next_month_year."
 								<i class='fas fa-chevron-right'></i>
 							</a>
@@ -84,8 +84,8 @@
 				?>
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->
-		<div class="calendar-container">
-			<div class="row calendar-cols">
+		<div class="projects-container">
+			<div class="row projects-cols">
 				<?php
 					$date = $timestamp_of_month;
 					
@@ -116,28 +116,15 @@
 						$t_month = 't_month_'.date("n", $date);
 					
 						$t_date_format = array(
-							${$t_day}[$language].", ".date("j.", $date)/*.${$t_month}[$language]*/, 
-							${$t_day}[$language].", ".${$t_month}[$language].date(" d", $date)
+							date("j.", $date), 
+							date("j", $date)
 						);
 						
 						// Ausgabe Datum
-						if($date == time()) {
-							$date_output = $t_today[$language].", ".$t_date_format[$language];
-						} elseif($date == strtotime('+1 day', time())) {
-							$date_output = $t_tomorrow[$language].", ".$t_date_format[$language];
-						} else {
-							$date_output = $t_date_format[$language];
-						}
-						
 						echo "<div class='col-md-1'>
 							<div class='day'>
 								<div class='date ".$dateclass."'>
-									<b><span class='date_output_calendar'>".$date_output."</span></b>
-									<a href='".$path."add?date=".date("Y-m-d", $date)."'>
-										<button type='button' class='btn btn-light btn-sm'>
-											<i class='fas fa-plus'></i>
-										</button>
-									</a>
+									<b><span class='date_output_calendar'>".$t_date_format[$language]."</span></b>
 								</div>";
 						
 						// Suche nach einem Termin
@@ -152,6 +139,27 @@
 							$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 							$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
 							
+							
+							echo "<span style='padding: 0 10px'>";
+							// Ausgabe Termin Popover
+							echo "<span style='font-size: 150%;'>
+								<a data-toggle='popover' data-placement='top' data-html='true' title='".htmlspecialchars($appointmentname)."' data-content=";
+							
+							echo "SOS";
+							
+							echo ">";
+							
+							if($row['appointment'] == 'true') {									
+								echo "<i class='far fa-calendar'></i>";
+							} else {
+								echo "<i class='far fa-clipboard'></i>";
+							}
+							echo "	
+								</a>
+							</span>";
+							
+							echo "</span>";
+							/*
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
 							<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".htmlspecialchars($appointmentname)."</b></div></a>";
@@ -192,6 +200,7 @@
 							}
 							
 							echo "</div>"; // Ende <div class='appointment'>
+							*/
 						}
 															
 						echo "</div></div>"; // Ende von .col-md-1 und von .day
@@ -199,7 +208,7 @@
 						$date = strtotime('+1 day', $date);
 					} // Ende von while ($date <= $last_day_of_month)
 				?>
-			</div> <?php // Ende von .row.calendar-cols ?>
+			</div> <?php // Ende von .row.projects-cols ?>
 			<script>
 				// Zeigt "Nach oben"-Button an, wenn ein Benutzer 100 oder mehr Pixel runterscrollt
 				window.onscroll = function() {scrollFunction()};
@@ -219,6 +228,12 @@
 				} 
 			</script>
 			<button onclick="topFunction()" id="myBtn"><i class='fas fa-chevron-up'></i> Nach oben</button> 
-		</div> <?php // Ende von .calendar-container ?>
+		</div> <?php // Ende von .projects-container ?>
 	</body>
 </html>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>

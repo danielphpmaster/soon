@@ -144,7 +144,6 @@ Betrifft nur calendar.php
 	}
 	
 	div.date {
-		background-color: white;
 		padding: 10px;
 		border-radius: 5px;
 		margin: 20px 0 0 -1px;
@@ -155,21 +154,14 @@ Betrifft nur calendar.php
 		border: 1px solid #e7e7e7;
 		margin-top: 0;
 	}
-	
-	@media (min-width: 750px) {
-		div.date.last {
-			border-right: 1px solid #e7e7e7;
-		}
-	}
-	
-	@media (max-width: 749.5px) {
+		
+	@media (max-width: 767.5px) {
 		div.date button {
 			float: right;
 		}
 	}
 
 	div.appointment {
-		background-color: white;
 		border: 1px solid #e7e7e7;
 		border-radius: 5px;
 		margin: 16px 2px 0 2px;
@@ -212,33 +204,33 @@ Betrifft nur calendar.php
 		margin: 0;
 	} 
 
-	/* Ermöglicht sieben Spalten */	
+	/* Ermöglicht Spalten */	
 	@media (min-width: 0px){
-		.seven-cols .col-md-1,
-		.seven-cols .col-sm-1,
-		.seven-cols .col-lg-1  {
+		.calendar-cols .col-md-1,
+		.calendar-cols .col-sm-1,
+		.calendar-cols .col-lg-1  {
 			width: 100% !important;
 			*width: 100% !important;
 			padding: 0;
 		}
 	}
 
-	@media (min-width: 769px) {
-		.seven-cols .col-md-1,
-		.seven-cols .col-sm-1,
-		.seven-cols .col-lg-1 {
-			width: 20% !important;
-			*width: 20% !important;
-			max-width: 20% !important;
+	@media (min-width: 768px) {
+		.calendar-cols .col-md-1,
+		.calendar-cols .col-sm-1,
+		.calendar-cols .col-lg-1 {
+			width: 50% !important;
+			*width: 50% !important;
+			max-width: 50% !important;
 			flex:none !important;
 			padding: 0;
 		}
 	}
 
 	@media (min-width: 1200px) {
-		.seven-cols .col-md-1,
-		.seven-cols .col-sm-1,
-		.seven-cols .col-lg-1 {
+		.calendar-cols .col-md-1,
+		.calendar-cols .col-sm-1,
+		.calendar-cols .col-lg-1 {
 			width: 14.285714285714285714285714285714%;
 			*width: 14.285714285714285714285714285714%;
 			max-width: 14.285714285714285714285714285714% !important;
@@ -298,6 +290,57 @@ Betrifft nur calendar.php
 	
 	td {
 		background-color: white;
+	}
+
+/* 
+==============================
+==============================
+Betrifft nur calendar.php 
+==============================
+============================== 
+*/
+
+	div.projects-container {
+		margin-bottom: 100px;
+	}
+	
+	.projects-container .row {
+		margin: 0;
+	}
+	
+	/* Ermöglicht Spalten */	
+	@media (min-width: 0px){
+		.projects-cols .col-md-1,
+		.projects-cols .col-sm-1,
+		.projects-cols .col-lg-1  {
+			width: 20% !important;
+			*width: 20% !important;
+			padding: 0;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.projects-cols .col-md-1,
+		.projects-cols .col-sm-1,
+		.projects-cols .col-lg-1 {
+			width: 10% !important;
+			*width: 10% !important;
+			max-width: 10% !important;
+			flex:none !important;
+			padding: 0;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.projects-cols .col-md-1,
+		.projects-cols .col-sm-1,
+		.projects-cols .col-lg-1 {
+			width: 5%;
+			*width: 5%;
+			max-width: 5% !important;
+			flex:none !important;
+			padding: 0;
+		}
 	}
 
 /* 

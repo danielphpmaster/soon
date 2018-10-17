@@ -166,6 +166,10 @@ $t_my_calendar = array(
 	"Mein Kalender",
 	"My calendar"
 );
+$t_my_projects = array(
+	"Meine Projekte",
+	"My projects"
+);
 $t_my_profile = array(
 	"Mein Profil",
 	"My profile"
