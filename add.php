@@ -6,6 +6,8 @@
 
 	if(isset($_GET['date'])) {
 		$date = $_GET['date'];
+		$date = date($date);
+		echo $date."---"; //check if valid date
 	}
 ?>
 
@@ -160,7 +162,7 @@
 										format: 'L',
 										locale: '<?php echo "de"; ?>',
 										minDate: '<?php echo date('m/d/Y');?>',
-										defaultDate: '<?php echo date('m-d-Y');?>'
+										defaultDate: '<?php echo $date;?>'
 									});
 									});
 							</script>
@@ -177,15 +179,15 @@
 										<!--<input name="time" class="form-control" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($time)){echo htmlspecialchars($time);}?>">-->
 										<input name="time" type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="<?php echo $t_time[$language] ?>">
 									</div>
-									
+
 									<script type="text/javascript">
 										$(function () {
 											$('#datetimepicker5').datetimepicker({
-											format: 'LT'											
+											format: 'LT'
 											});
 										});
 									</script>
-		
+
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
