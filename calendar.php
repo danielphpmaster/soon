@@ -13,7 +13,19 @@
 	} else {
 		$month = $_GET['month'];
 	}
-			
+	
+	if(empty($_GET['view'])) {
+		$view = 2;
+	} else {
+		$view = $_GET['view'];
+	}
+	
+	if($view == 1) {
+		$other_view = 2;
+	} else {
+		$other_view = 1;
+	}
+	
 	$timestamp_of_month = strtotime("$year $month");
 	
 	if($timestamp_of_month < strtotime(date('Y-m-01'))) {
@@ -51,42 +63,56 @@
 				
 		<div class="container">
 			<div class="row" style="margin-top: 20px;">
-				<?php					
+				<?php
 					if($timestamp_of_month < time()) {
-						echo "<div class='col-6 col-md-4'></div>";
+						echo "<div class='col-3 col-lg-4'></div>";
 					} else {
-						echo"<div class='col-12 col-md-4' style='margin-bottom: 10px;'>
-								<a class='btn btn-light' href='".$path."calendar/".$previous_month_year."/".$previous_month."'>
+						echo"<div class='col-3 col-lg-4'>
+								<a class='btn btn-light' href='".$path."calendar/".$previous_month_year."/".$previous_month."/".$view."'>
 									<i class='fas fa-chevron-left'></i>
-									".$previous_month." ".$previous_month_year."
 								</a>
 							</div>";
 					}
-					
-					echo "<div class='col-md-4' style='text-align: center; margin-bottom: 10px;'>
+
+					echo "<div class='col-6 col-lg-4' style='padding: 0;'>
 						<a class='btn btn-light' href='".$path."export_pdf/".$year."/".$month."' target='_blank'>
 							<b>
 								<i class='fas fa-print'></i> ".$month." ".$year."
 							</b>
 						</a>
 					</div>";
-					
+
 					if($year == '2020' and $month =='December') {
-						echo "<div class='col-6 col-md-4'></div>";
+						echo "<div class='col-3 col-lg-4'></div>";
 					} else {
-					echo"<div class='col-12 col-md-4'>
-							<a class='btn btn-light' href='".$path."calendar/".$next_month_year."/".$next_month."'>
-								".$next_month." ".$next_month_year."
+					echo"<div class='col-3 col-lg-4'>
+							<a class='btn btn-light' href='".$path."calendar/".$next_month_year."/".$next_month."/".$view."'>
 								<i class='fas fa-chevron-right'></i>
 							</a>
-						</div>";					
+						</div>";
 					}
+				
+					echo"<div class='col-12' style='margin-top: 10px;'>
+						<a class='btn btn-light' href='".$path."calendar/".$year."/".$month."/".$other_view."'>";
+							if($view == 1) {
+								echo "<i class='fas fa-th-large'></i>";
+							} else {
+								echo "<i class='fas fa-th'></i>";
+							}
+						echo"</a>
+					</div>";
 				?>
+				
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->
-		<div class="calendar-container">
-			<div class="row calendar-cols">
-				<?php
+		<?php
+		if($view == 1) {
+			echo "<div class='projects-container'>
+			<div class='row projects-cols'>";
+		} else {
+		echo "<div class='calendar-container'>
+			<div class='row calendar-cols'>";
+		}
 					$date = $timestamp_of_month;
 					
 					// Einstellung, dass beim aktuellen Monat beim aktuellen Tag begonnen wird
@@ -104,53 +130,92 @@
 							$appointmentcolor = "";
 						}
 						
-						// Variable, die definiert, ob das ausgegebene Datum einen border: right erhält
-						if($date == $last_day_of_month) {
-							$dateclass = "last";
-						} else {
-							$dateclass = "";
-						}
-						
 						// Definierung Datumformat
 						$t_day = 't_day_'.date("N", $date);
-						$t_month = 't_month_'.date("n", $date);
-					
-						$t_date_format = array(
-							${$t_day}[$language].", ".date("j.", $date)/*.${$t_month}[$language]*/, 
-							${$t_day}[$language].", ".${$t_month}[$language].date(" d", $date)
-						);
 						
+						$t_date_format = array(
+							${$t_day}[$language].", ".date("j.", $date), 
+							${$t_day}[$language].", ".date(" j", $date)
+						);
+					
+					if($view == 1) {
+						// Definierung Datumformat
+						$t_date_format = array(
+							date("j.", $date),
+							date("j", $date)
+						);
+
+						// Ausgabe Datum
+						echo "<div class='col-md-1'>
+							<div class='day'>
+								<div class='date'>
+									
+									<a href='".$path."add.php?date=".date("Y-m-d", $date)."'>
+										<button type='button' class='btn btn-light btn-sm'>
+											<b><span class='date_output_calendar'>".$t_date_format[$language]."</span></b>
+										</button>
+									</a>
+								</div>";
+					} else {
 						// Ausgabe Datum
 						if($date == time()) {
-							$date_output = $t_today[$language].", ".$t_date_format[$language];
+							$date_output = $t_today[$language];
 						} elseif($date == strtotime('+1 day', time())) {
-							$date_output = $t_tomorrow[$language].", ".$t_date_format[$language];
+							$date_output = $t_tomorrow[$language];
 						} else {
 							$date_output = $t_date_format[$language];
 						}
 						
 						echo "<div class='col-md-1'>
 							<div class='day'>
-								<div class='date ".$dateclass."'>
-									<b><span class='date_output_calendar'>".$date_output."</span></b>
-									<a href='".$path."add?date=".date("Y-m-d", $date)."'>
-										<button type='button' class='btn btn-light btn-sm'>
-											<i class='fas fa-plus'></i>
-										</button>
+								<div class='date'>
+									<a class='btn btn-light btn-sm xs-float-right' href='".$path."add.php?date=".date("Y-m-d", $date)."'>
+										<b>
+											<span class='date_output_calendar'>
+												".$date_output."
+											</span>
+										</b>									
 									</a>
 								</div>";
+					}
 						
 						// Suche nach einem Termin
 						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
 						$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", $date));
 						
-						$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day'";
+						$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day' ORDER BY timestamp";
 										
 						foreach ($connection->query($sql_select) as $row) {
+							
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
 							$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
 							$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 							$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
+							
+						if($view == 1) {
+								echo "<span style='padding: 0 10px'>";
+							// Ausgabe Termin Popover
+							echo "<span style='font-size: 150%;'>
+								<a data-toggle='popover' data-placement='top' data-html='true' title='";
+								
+							echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
+							
+							echo"' data-content='";
+
+							echo "Inhalt";
+
+							echo "'>";
+
+							if($row['is_appointment'] == 'true') {
+								echo "<i class='far fa-calendar'></i>";
+							} else {
+								echo "<i class='far fa-clipboard'></i>";
+							}
+							echo "
+								</a>
+							</span>";
+							echo "</span>";	
+						} else {
 							
 							// Ausgabe Terminname
 							echo "<div class='appointment'>
@@ -193,6 +258,7 @@
 							
 							echo "</div>"; // Ende <div class='appointment'>
 						}
+						}
 															
 						echo "</div></div>"; // Ende von .col-md-1 und von .day
 						
@@ -218,7 +284,16 @@
 					document.documentElement.scrollTop = 0; // Für Internet Explorer und Firefox
 				} 
 			</script>
-			<button onclick="topFunction()" id="myBtn"><i class='fas fa-chevron-up'></i> Nach oben</button> 
+			<button onclick="topFunction()" id="myBtn">
+				<i class='fas fa-chevron-up'></i> 
+				<?php echo $t_back_to_top[$language] ?>
+			</button> 
 		</div> <?php // Ende von .calendar-container ?>
 	</body>
 </html>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>

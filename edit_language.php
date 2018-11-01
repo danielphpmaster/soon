@@ -54,7 +54,7 @@
 										<i class="fas fa-globe"></i>
 									</span>
 								</div>
-								<select name="new_language" class="dropdown-form">
+								<select name="new_language" class="dropdown-form-prepend">
 									<option <?php if($language=='0'){echo "selected";}?>value="de">Deutsch</option>
 									<option <?php if($language=='1'){echo "selected";}?> value="en">English</option>
 								</select>

@@ -25,7 +25,7 @@
 		header('Location: '.$path.'calendar');
 	}
 	
-	$title = $t_title_edit_appointment[$language];
+	$title = $t_title_edit[$language];
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2><?php echo $t_edit_appointment[$language] ?></h2>
+					<h2><?php echo $t_edit[$language] ?></h2>
 					<?php
 						if(isset($_GET['editappointment'])) {
 							$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll

@@ -30,7 +30,7 @@
 				<div class='collapse navbar-collapse' id='navbarToggler'>
 					<ul class='navbar-nav ml-auto'>
 						<li class='nav-item'>
-							<a href='".$path."add' class='nav-link'><i class='fas fa-plus'></i> ".$t_add_appointment[$language]."</a>
+							<a href='".$path."add' class='nav-link'><i class='fas fa-plus'></i> ".$t_add[$language]."</a>
 						</li>
 						<li class='nav-item'>
 							<a href='".$path."calendar' class='nav-link'><i class='far fa-calendar'></i> ".$t_my_calendar[$language]; 

@@ -5,9 +5,13 @@
 	$title = $t_title_add[$language];
 
 	if(isset($_GET['date'])) {
+		$date = strtotime($_GET['date']);
+	}
+		
+	if(empty($date)) {
+		$date = date("Y-m-d");
+	} else {
 		$date = $_GET['date'];
-		$date = date($date);
-		echo $date."---"; //check if valid date
 	}
 ?>
 
@@ -26,22 +30,34 @@
 				<div class="col-xs-12 col-md-3"></div>
 
 				<div class="col-xs-12 col-md-6">
-					<h2><?php echo $t_add_appointment[$language]; ?></h2>
+					<h2><?php echo $t_add[$language]; ?></h2>
 					<?php
 						if(isset($_GET['add'])) {
 							$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
 
 							// Werte aus dem Formular als Variablen speichern
 							if(empty($_POST['appointmentname'])) {
-								$appointmentname = "";
+								$appointmentname = "Neuer Termin";
 							} else {
 								$appointmentname = $_POST['appointmentname'];
 							}
 
 							if(empty($_POST['date'])) {
-								$date = "";
+								$date = date("Y-m-d");
 							} else {
 								$date = $_POST['date'];
+							}
+							
+							if($_POST['is_appointment'] == "false") {
+								$is_appointment = "false";
+							} else {
+								$is_appointment = "true";								
+							}
+							
+							if(empty($_POST['project'])) {
+								$projecttoken = "false";
+							} else {
+								$projecttoken = $_POST['project'];								
 							}
 
 							if(empty($_POST['time'])) {
@@ -62,7 +78,7 @@
 							} else {
 								$comment = $_POST['comment'];
 							}
-
+							
 							// Überprüfung, ob ein Terminname angegeben wurde
 							if(empty($appointmentname)) {
 								echo '<div class="alert alert-danger">'.$t_insert_an_appointment_name[$language].'</div>';
@@ -136,7 +152,7 @@
 								$location = openssl_encrypt($location,"AES-128-ECB",$key);
 								$comment = openssl_encrypt($comment,"AES-128-ECB",$key);
 
-								$sql_insert = "INSERT INTO appointments (appointmenttoken, usertoken, appointmentname, timestamp, time_set, location, comment) VALUES ('$appointmenttoken', '$usertoken', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
+								$sql_insert = "INSERT INTO appointments (appointmenttoken, usertoken, is_appointment, projecttoken, appointmentname, timestamp, time_set, location, comment) VALUES ('$appointmenttoken', '$usertoken', '$is_appointment', '$projecttoken', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 
 								$year = date('Y', strtotime($date));
@@ -150,8 +166,7 @@
 						<div class="day">
 							<div class='date outside_calendar'>
 								<b>
-									<!--<input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($date)){echo htmlspecialchars($date);}?>">
-									--><input name="date" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
+									<input name="date" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
 								</b>
 							</div>
 
@@ -166,17 +181,56 @@
 									});
 									});
 							</script>
-<!--<?php echo date('m-d-Y');?>-->
 							<div class='appointment'>
-								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);}?>" autofocus></b></div>
+								<div class='title'>
+									<b>
+										<input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);}?>" autofocus>
+									</b>
+								</div>
 								<div class='appointmentinformation'>
+									<div class="btn-group btn-group-toggle" style='margin-bottom: 16px; width: 100%;' data-toggle="buttons">
+										<label class="btn btn-light active" style='width: 50%;'>
+											<input type="radio" name="is_appointment" id="true" value="true" autocomplete="off" checked>
+											<?php echo $t_appointment[$language] ?>
+										</label>
+										<label class="btn btn-light" style='width: 50%;'>
+											<input type="radio" name="is_appointment" id="false" value="false" autocomplete="off">
+											<?php echo $t_task[$language] ?>
+										</label>
+									</div>
+									
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">
+												<i class="fas fa-tasks"></i>
+											</span>
+										</div>
+										<select name="project" class="dropdown-form-prepend">
+										<option value="false" selected>Kein Projekt</option>
+												<?php
+					$sql_select = "SELECT * FROM projects WHERE usertoken = '$usertoken'";
+									
+					foreach ($connection->query($sql_select) as $row) {
+						
+						// Entschlüsselung der vom Nutzer angegebenen Informationen
+						$projectname = openssl_decrypt($row['projectname'],"AES-128-ECB",$key);
+						$projecttoken = $row['projecttoken'];
+						
+						echo "<option value='".$projecttoken."'>".$projectname."</option>";
+						
+					}
+				
+				?>	
+											
+										</select>
+									</div>
+									
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
 												<i class="fas fa-clock"></i>
 											</span>
-										</div>
-										<!--<input name="time" class="form-control" id="time" placeholder="<?php echo $t_time[$language] ?>" value="<?php if(isset($time)){echo htmlspecialchars($time);}?>">-->
+										</div>										
 										<input name="time" type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="<?php echo $t_time[$language] ?>">
 									</div>
 
@@ -208,7 +262,7 @@
 							</div>
 						</div>
 						<div class="last_element">
-							<button type="submit" class="btn btn-red"><?php echo $t_add_appointment[$language] ?></button>
+							<button type="submit" class="btn btn-red"><?php echo $t_add[$language] ?></button>
 							<a class="btn btn-light" href="<?php echo $path; ?>calendar"><?php echo $t_cancel[$language] ?></a>
 						</div>
 					</form>

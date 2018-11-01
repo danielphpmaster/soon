@@ -83,10 +83,9 @@
 										<span class='date_output'> <i class='fas fa-calendar'></i> ".$date_output."</span>";
 						
 						echo "<div class='float_right'>
-									<!--
-									<a class='btn btn-light btn-sm' data-target='#exampleModalCenter'><i class='fas fa-times'></i></a>-->
+									
 									<button type='button' class='btn btn-light btn-sm' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-times'></i></button>
-									<a href='".$path."edit_appointment?a=".$appointmenttoken."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
+									<a href='".$path."edit?a=".$appointmenttoken."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
 								</div>
 							</div>";
 						?>

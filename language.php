@@ -21,32 +21,32 @@ $t_time_format = array(
 
 /* Wochentage */
 $t_day_1 = array(
-	"Montag",
-	"Monday"
+	"Mo",
+	"Mon"
 );
 $t_day_2 = array(
-	"Dienstag",
-	"Tuesday"
+	"Di",
+	"Tue"
 );
 $t_day_3 = array(
-	"Mittwoch",
-	"Wednesday"
+	"Mi",
+	"Wed"
 );
 $t_day_4 = array(
-	"Donnerstag",
-	"Thursday"
+	"Do",
+	"Thu"
 );
 $t_day_5 = array(
-	"Freitag",
-	"Friday"
+	"Fr",
+	"Fri"
 );
 $t_day_6 = array(
-	"Samstag",
-	"Saturday"
+	"Sa",
+	"Sat"
 );
 $t_day_7 = array(
-	"Sonntag",
-	"Sunday"
+	"So",
+	"Sun"
 );
 
 /* Monate */
@@ -158,9 +158,9 @@ $t_search = array(
 	"Suchen",
 	"Search"
 );
-$t_add_appointment = array(
-	"Termin hinzufügen",
-	"Add appointment"
+$t_add = array(
+	"Hinzufügen",
+	"Add"
 );
 $t_my_calendar = array(
 	"Mein Kalender",
@@ -177,6 +177,26 @@ $t_my_profile = array(
 $t_log_out = array(
 	"Abmelden",
 	"Log out"
+);
+
+/* calendar.php */
+$t_back_to_top = array(
+	"Nach oben",
+	"Back to top"
+);
+
+/* projects.php */
+$t_title_projects = array(
+	"Meine Projekte - soon",
+	"My projects - soon"
+);
+$t_add_project = array(
+	"Projekt hinzufügen",
+	"Add project"
+);
+$t_project_name = array(
+	"Projektname",
+	"Project name"
 );
 
 /* registration.php */
@@ -303,16 +323,20 @@ $t_search_results_for = array(
 
 /* add.php */
 $t_title_add = array(
-	"Termin hinzufügen - soon",
-	"Add appointment - soon"
+	"Hinzufügen - soon",
+	"Add - soon"
 );
 $t_date = array(
 	"Datum",
 	"Date"
 );
-$t_appointment_name = array(
-	"Terminname",
-	"Appointment name"
+$t_name = array(
+	"Name",
+	"Name"
+);
+$t_task = array(
+	"Aufgabe",
+	"Task"
 );
 $t_time = array(
 	"Zeit",
@@ -460,13 +484,13 @@ $t_confirm = array(
 );
 
 /* edit_appointment.php	*/
-$t_title_edit_appointment = array(
-	"Termin bearbeiten - soon",
-	"Edit appointment - soon"
+$t_title_edit = array(
+	"Bearbeiten - soon",
+	"Edit - soon"
 );
-$t_edit_appointment = array(
-	"Termin bearbeiten",
-	"Edit appointment"
+$t_edit = array(
+	"Bearbeiten",
+	"Edit"
 );
 $t_save = array(
 	"Speichern",

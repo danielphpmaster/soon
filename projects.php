@@ -2,41 +2,7 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 
-	if(empty($_GET['year'])) {
-		$year = date('Y');
-	} else {
-		$year = $_GET['year'];
-	}
-
-	if(empty($_GET['month'])) {
-		$month = date('F');
-	} else {
-		$month = $_GET['month'];
-	}
-
-	$timestamp_of_month = strtotime("$year $month");
-
-	if($timestamp_of_month < strtotime(date('Y-m-01'))) {
-		$year = date('Y');
-		$month = date('F');
-		header('Location: '.$path.'projects/'.$year.'/'.$month.'');
-	}
-
-	if($timestamp_of_month > strtotime(date('2020-12-01'))) {
-		$year = date('Y');
-		$month = date('F');
-		header('Location: '.$path.'projects/'.$year.'/'.$month.'');
-	}
-
-	$previous_month_timestamp = strtotime('-1 month', $timestamp_of_month);
-	$previous_month = date("F", $previous_month_timestamp);
-	$previous_month_year = date("Y", $previous_month_timestamp);
-
-	$next_month_timestamp = strtotime('+1 month', $timestamp_of_month);
-	$next_month = date("F", $next_month_timestamp);
-	$next_month_year = date("Y", $next_month_timestamp);
-
-	$title = "".$month." ".$year."  - soon";
+	$title = $t_title_projects[$language];
 ?>
 
 <!DOCTYPE html>
@@ -50,188 +16,145 @@
 		<?php include 'navbar.php';?>
 
 		<div class="container">
-			<div class="row" style="margin-top: 20px;">
+			<div class="row" style="margin-top: 20px; margin-bottom: 10px;">
+				<div class="col-12">
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
+						<i class="fas fa-plus"></i>
+						<?php echo $t_add_project[$language]; ?>
+					</button>
+				</div>
+				
 				<?php
-					if($timestamp_of_month < time()) {
-						echo "<div class='col-6 col-md-4'></div>";
-					} else {
-						echo"<div class='col-12 col-md-4' style='margin-bottom: 10px;'>
-								<a class='btn btn-light' href='".$path."projects/".$previous_month_year."/".$previous_month."'>
-									<i class='fas fa-chevron-left'></i>
-									".$previous_month." ".$previous_month_year."
-								</a>
-							</div>";
-					}
+					if(isset($_GET['newproject'])) {
+						if(empty($_POST['new_project'])) {
+							$new_project = "Neues Projekt";
+						} else {
+							$new_project = $_POST['new_project'];								
+						}
+							
+						// Speicherung des neuen Projektes
+						$create_token = '0';
+						while ($create_token < '1') {
+							$alphabet = "abcdefghijlkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+							$pass = array(); //remember to declare $pass as an array
+							$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+							for ($i = 0; $i < 12; $i++) {
+								$n = rand(0, $alphaLength);
+								$pass[] = $alphabet[$n];
+							}
+							$projecttoken = implode($pass); //turn the array into a string
 
-					echo "<div class='col-md-4' style='text-align: center; margin-bottom: 10px;'>
-						<a class='btn btn-light' href='".$path."export_pdf/".$year."/".$month."' target='_blank'>
-							<b>
-								<i class='fas fa-print'></i> ".$month." ".$year."
-							</b>
-						</a>
-					</div>";
+							$sql_select = "SELECT * FROM projetcs WHERE projecttoken = '$projecttoken'";
 
-					if($year == '2020' and $month =='December') {
-						echo "<div class='col-6 col-md-4'></div>";
-					} else {
-					echo"<div class='col-12 col-md-4'>
-							<a class='btn btn-light' href='".$path."projects/".$next_month_year."/".$next_month."'>
-								".$next_month." ".$next_month_year."
-								<i class='fas fa-chevron-right'></i>
-							</a>
-						</div>";
+							$count_result = $connection->prepare($sql_select);
+							$count_result->execute();
+
+							$total = $count_result->fetchColumn();
+
+							if($total < '1') {
+								$create_token = '1';
+							}
+						}
+								
+						$new_project = openssl_encrypt($new_project,"AES-128-ECB",$key);
+						$color = "#333333";
+						$sql_insert = "INSERT INTO projects (projecttoken, usertoken, color, projectname) VALUES ('$projecttoken','$usertoken','$color', '$new_project')";
+						$sql_insert = $connection->query($sql_insert);
+								
+						header('Location: '.$path.'projects');
 					}
 				?>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">
+									<?php echo $t_add_project[$language]; ?>
+								</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							 </div>
+					  
+							<form action="?newproject=1" method="post">
+								<div class="modal-body">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">
+												<i class="fas fa-tasks"></i>
+											</span>
+										</div>
+										<input name="new_project" type="text" class="form-control" id="new_project" placeholder="<?php echo $t_project_name[$language]; ?>">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
+									<button type="button" class="btn btn-light" data-dismiss="modal"><?php echo $t_cancel[$language] ?></button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>				
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->
-		<div class="projects-container">
-			<div class="row projects-cols">
-				<?php
-					$date = $timestamp_of_month;
 
-					// Einstellung, dass beim aktuellen Monat beim aktuellen Tag begonnen wird
-					if($timestamp_of_month == strtotime(date('Y-m-01'))) {
-						$date = time();
-					}
-
-					$last_day_of_month = strtotime(date("Y-m-t 24:00", $timestamp_of_month));
-
-					while ($date < $last_day_of_month) {
-						// Variable, die definiert, welche Farbe der Terminname hat
-						if($date == time()) {
-							$appointmentcolor = "style='color: #d9534f;'";
-						} else {
-							$appointmentcolor = "";
-						}
-
-						// Variable, die definiert, ob das ausgegebene Datum einen border: right erhält
-						if($date == $last_day_of_month) {
-							$dateclass = "last";
-						} else {
-							$dateclass = "";
-						}
-
-						// Definierung Datumformat
-						$t_day = 't_day_'.date("N", $date);
-						$t_month = 't_month_'.date("n", $date);
-
-						$t_date_format = array(
-							date("j.", $date),
-							date("j", $date)
-						);
-
-						// Ausgabe Datum
-						echo "<div class='col-md-1'>
-							<div class='day'>
-								<div class='date ".$dateclass."'>
-									<b><span class='date_output_calendar'>".$t_date_format[$language]."</span></b>
-								</div>";
-
-						// Suche nach einem Termin
-						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
-						$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", $date));
-
-						$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day'";
-
+		<div class='container'>
+			<div class='row'>
+				<div class='col-12'>
+					<?php
+						$sql_select = "SELECT * FROM projects WHERE usertoken = '$usertoken'";
+										
 						foreach ($connection->query($sql_select) as $row) {
+							
+							// Entschlüsselung der vom Nutzer angegebenen Informationen
+							$projectname = openssl_decrypt($row['projectname'],"AES-128-ECB",$key);
+							$projecttoken = $row['projecttoken'];
+							
+							echo "<div style='border: 1px solid #e7e7e7; border-radius: 4px; padding: 6px 12px; margin-bottom: 10px; width: 100%'>
+								".htmlspecialchars($projectname);
+							
+							
+							$sql_select_appointment = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND projecttoken = '$projecttoken'";
+										
+						foreach ($connection->query($sql_select_appointment) as $row) {
+							
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
 							$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
-							$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
-							$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
+											
+								echo "<span style='padding: 0 10px'>";
+								// Ausgabe Termin Popover
+								echo "<span style='font-size: 150%;'>
+									<a data-toggle='popover' data-placement='top' data-html='true' title='";
+									
+								echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
+								
+								echo"' data-content='";
 
+								echo "Inhalt";
 
-							echo "<span style='padding: 0 10px'>";
-							// Ausgabe Termin Popover
-							echo "<span style='font-size: 150%;'>
-								<a data-toggle='popover' data-placement='top' data-html='true' title='".htmlspecialchars($appointmentname)."' data-content='";
+								echo "'>";
 
-							echo "<a href=\"www.we-teve.com\">we-teve</a>";
-
-							echo "'>";
-
-							if($row['appointment'] == 'true') {
-								echo "<i class='far fa-calendar'></i>";
-							} else {
-								echo "<i class='far fa-clipboard'></i>";
-							}
-							echo "
-								</a>
-							</span>";
-
-							echo "</span>";
-							/*
-							// Ausgabe Terminname
-							echo "<div class='appointment'>
-							<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".htmlspecialchars($appointmentname)."</b></div></a>";
-
-							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-							if($row['time_set'] == "false" and empty($location) and empty($comment)) {
-								echo "";
-							} else {
-								echo "<div class='appointmentinformation'>";
-							}
-
-							// Definierung Zeitformat
-							$t_time = array(
-								date('G:i', $row['timestamp'])." Uhr",
-								date('g.i a', $row['timestamp'])
-							);
-
-							// Wenn vorhanden: Ausgabe Terminzeit
-							if($row['time_set'] == 'true') {
-								echo "<div class='time'><i class='fas fa-clock'></i> ".$t_time[$language]."</div>";
-							}
-
-							// Wenn vorhanden: Ausgabe Terminort
-							if(!empty($location)) {
-								echo "<div class='location'><i class='fas fa-map-marker-alt'></i> ".htmlspecialchars($location)."</div>";
-							}
-
-							// Wenn vorhanden: Ausgabe Terminkommentar
-							if(!empty($comment)) {
-								echo "<div class='comment'><i class='fas fa-comment'></i> ".htmlspecialchars($comment)."</div>";
-							}
-
-							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-							if($row['time_set'] == "false" and empty($location) and empty($comment)) {
-								echo "";
-							} else {
-								echo "</div>"; // Ende <div class='appointmentinformation'>
-							}
-
-							echo "</div>"; // Ende <div class='appointment'>
-							*/
+								if($row['is_appointment'] == 'true') {
+									echo "<i class='far fa-calendar'></i>";
+								} else {
+									echo "<i class='far fa-clipboard'></i>";
+								}
+								echo "
+									</a>
+								</span>";
+								echo "</span>";
+						}	
+						echo "</div>";
 						}
-
-						echo "</div></div>"; // Ende von .col-md-1 und von .day
-
-						$date = strtotime('+1 day', $date);
-					} // Ende von while ($date <= $last_day_of_month)
-				?>
-			</div> <?php // Ende von .row.projects-cols ?>
-			<script>
-				// Zeigt "Nach oben"-Button an, wenn ein Benutzer 100 oder mehr Pixel runterscrollt
-				window.onscroll = function() {scrollFunction()};
-
-				function scrollFunction() {
-					if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-						document.getElementById("myBtn").style.display = "block";
-					} else {
-					 	document.getElementById("myBtn").style.display = "none";
-					}
-				}
-
-				// Wenn ein Benutzer auf den Button klickt, landet er zuoberst der Seite
-				function topFunction() {
-					document.body.scrollTop = 0; // Für Chrome, Safari und Opera
-					document.documentElement.scrollTop = 0; // Für Internet Explorer und Firefox
-				}
-			</script>
-			<button onclick="topFunction()" id="myBtn"><i class='fas fa-chevron-up'></i> Nach oben</button>
-		</div> <?php // Ende von .projects-container ?>
+					?>	
+				</div>				
+			</div>			
+		</div>
 	</body>
 </html>
-
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
