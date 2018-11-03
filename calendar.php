@@ -13,17 +13,14 @@
 	} else {
 		$month = $_GET['month'];
 	}
-	
-	if(empty($_GET['view'])) {
+		
+	if(isset($_GET['view']) AND $_GET['view'] == 2) {
 		$view = 2;
-	} else {
-		$view = $_GET['view'];
-	}
-	
-	if($view == 1) {
-		$other_view = 2;
-	} else {
+		$_SESSION['view'] = $view;
 		$other_view = 1;
+	} else {
+		$view = 1;
+		$other_view = 2;
 	}
 	
 	$timestamp_of_month = strtotime("$year $month");
@@ -141,8 +138,8 @@
 					if($view == 1) {
 						// Definierung Datumformat
 						$t_date_format = array(
-							date("j.", $date),
-							date("j", $date)
+							${$t_day}[$language].", ".date("j.", $date),
+							${$t_day}[$language].", ".date("j", $date)
 						);
 
 						// Ausgabe Datum
@@ -192,74 +189,79 @@
 							$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 							$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
 							
-						if($view == 1) {
-								echo "<span style='padding: 0 10px'>";
-							// Ausgabe Termin Popover
-							echo "<span style='font-size: 150%;'>
-								<a data-toggle='popover' data-placement='top' data-html='true' title='";
-								
-							echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
-							
-							echo"' data-content='";
-
-							echo "Inhalt";
-
-							echo "'>";
-
-							if($row['is_appointment'] == 'true') {
-								echo "<i class='far fa-calendar'></i>";
-							} else {
-								echo "<i class='far fa-clipboard'></i>";
-							}
-							echo "
-								</a>
-							</span>";
-							echo "</span>";	
-						} else {
-							
-							// Ausgabe Terminname
-							echo "<div class='appointment'>
-							<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".htmlspecialchars($appointmentname)."</b></div></a>";
-														
-							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-							if($row['time_set'] == "false" and empty($location) and empty($comment)) {
-								echo "";
-							} else {
-								echo "<div class='appointmentinformation'>";
-							}
-							
 							// Definierung Zeitformat
 							$t_time = array(
 								date('G:i', $row['timestamp'])." Uhr",
 								date('g.i a', $row['timestamp'])
 							);
 							
-							// Wenn vorhanden: Ausgabe Terminzeit
-							if($row['time_set'] == 'true') {
-								echo "<div class='time'><i class='fas fa-clock'></i> ".$t_time[$language]."</div>";
-							}
-							
-							// Wenn vorhanden: Ausgabe Terminort
-							if(!empty($location)) {
-								echo "<div class='location'><i class='fas fa-map-marker-alt'></i> ".htmlspecialchars($location)."</div>";
-							}
-							
-							// Wenn vorhanden: Ausgabe Terminkommentar
-							if(!empty($comment)) {
-								echo "<div class='comment'><i class='fas fa-comment'></i> ".htmlspecialchars($comment)."</div>";
-							}
-							
-							// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-							if($row['time_set'] == "false" and empty($location) and empty($comment)) {
-								echo "";
+							if($view == 1) {
+									echo "<span style='padding: 0 10px'>";
+								// Ausgabe Termin Popover
+								echo "<span style='font-size: 150%;'>
+									<a data-toggle='popover' data-placement='top' data-html='true' title='";								
+								echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
+								echo"' data-content='";
+								
+								if($row['time_set'] == 'true') {
+									echo "<div><i class=\"fas fa-clock\"></i> ".$t_time[$language]."</div>";
+								}
+								if(!empty($location)) {
+									echo "<div><i class=\"fas fa-map-marker-alt\"></i> ".htmlspecialchars($location)."</div>";
+								};
+								if(!empty($comment)) {
+									echo "<div><i class=\"fas fa-comment\"></i> ".htmlspecialchars($comment)."</div>";
+								};
+								
+								echo "'>";
+
+								if($row['is_appointment'] == 'true') {
+									echo "<i class='far fa-calendar'></i>";
+								} else {
+									echo "<i class='far fa-clipboard'></i>";
+								}
+								echo "
+									</a>
+								</span>";
+								echo "</span>";	
 							} else {
-								echo "</div>"; // Ende <div class='appointmentinformation'>
-							}
-							
-							echo "</div>"; // Ende <div class='appointment'>
-						}
-						}
+								
+								// Ausgabe Terminname
+								echo "<div class='appointment'>
+								<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".htmlspecialchars($appointmentname)."</b></div></a>";
 															
+								// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
+								if($row['time_set'] == "false" and empty($location) and empty($comment)) {
+									echo "";
+								} else {
+									echo "<div class='appointmentinformation'>";
+								}
+																
+								// Wenn vorhanden: Ausgabe Terminzeit
+								if($row['time_set'] == 'true') {
+									echo "<div class='time'><i class='fas fa-clock'></i> ".$t_time[$language]."</div>";
+								}
+								
+								// Wenn vorhanden: Ausgabe Terminort
+								if(!empty($location)) {
+									echo "<div class='location'><i class='fas fa-map-marker-alt'></i> ".htmlspecialchars($location)."</div>";
+								}
+								
+								// Wenn vorhanden: Ausgabe Terminkommentar
+								if(!empty($comment)) {
+									echo "<div class='comment'><i class='fas fa-comment'></i> ".htmlspecialchars($comment)."</div>";
+								}
+								
+								// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
+								if($row['time_set'] == "false" and empty($location) and empty($comment)) {
+									echo "";
+								} else {
+									echo "</div>"; // Ende <div class='appointmentinformation'>
+								}
+								
+								echo "</div>"; // Ende <div class='appointment'>
+							}
+						}								
 						echo "</div></div>"; // Ende von .col-md-1 und von .day
 						
 						$date = strtotime('+1 day', $date);

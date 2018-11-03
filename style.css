@@ -345,9 +345,9 @@ Betrifft nur projects.php
 		.projects-cols .col-sm-1,
 		.projects-cols .col-lg-1 {
 			word-wrap: break-word;
-			width: 5%;
-			*width: 5%;
-			max-width: 5% !important;
+			width: 8%;
+			*width: 8%;
+			max-width: 8% !important;
 			flex:none !important;
 			padding: 0;
 		}

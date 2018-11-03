@@ -1,44 +1,32 @@
 <?php
 	session_start();
 
-	if (empty($_SESSION['email'])){
-		echo "";
-	} else {
+	if(isset($_SESSION['email'])){
 		$email = $_SESSION['email'];
 	}
-
-	if (empty($_SESSION['username'])){
-		echo "";
-	} else {
+	if(isset($_SESSION['username'])){
 		$username = $_SESSION['username'];
 	}
-
-	if (empty($_SESSION['usertoken'])){
-		echo "";
-	} else {
+	if(isset($_SESSION['usertoken'])){
 		$usertoken = $_SESSION['usertoken'];
-	}
-	
-	if (empty($_SESSION['searchvalue'])){
-		echo "";
 	} else {
+	}	
+	if(isset($_SESSION['searchvalue'])){
 		$searchvalue = $_SESSION['searchvalue'];
-	}
-		
-	if (empty($_SESSION['appointmenttoken'])){
-		echo "";
-	} else {
+	}		
+	if(isset($_SESSION['appointmenttoken'])){
 		$appointmenttoken = $_SESSION['appointmenttoken'];
-	}
-	
-	if (empty($_SESSION['language'])){
-		echo "";
-	} else {
+	}		
+	if(isset($_SESSION['projecttoken'])){
+		$projecttoken = $_SESSION['projecttoken'];
+	}	
+	if(isset($_SESSION['language'])){
 		$language = $_SESSION['language'];
-	}
-	if (empty($_SESSION['email_verified'])){
-		echo "";
-	} else {
+	}	
+	if(isset($_SESSION['email_verified'])){
 		$email_verified = $_SESSION['email_verified'];
+	}
+	if(isset($_SESSION['view'])){
+		$view = $_SESSION['view'];
 	}
 ?>

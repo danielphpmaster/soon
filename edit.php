@@ -16,6 +16,7 @@
 		$appointmentname = $string = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
 		$location = $string = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 		$comment = $string = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
+		$date = date("Y-m-d", $row['timestamp']);
 		
 		// Umleitung, wenn kein Termin gefunden
 		if(empty($appointmentname)) {
@@ -59,6 +60,12 @@
 								$newdate = "";
 							} else {
 								$newdate = $_POST['date'];								
+							}
+							
+							if(empty($_POST['project'])) {
+								$projecttoken = "false";
+							} else {
+								$projecttoken = $_POST['project'];								
 							}
 							
 							if(empty($_POST['time'])) {
@@ -130,7 +137,7 @@
 								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
 								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE appointments SET appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
+								$sql_update = "UPDATE appointments SET projecttoken = '$projecttoken', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'appointment/'.$appointmenttoken.'');						
@@ -138,19 +145,61 @@
 						} // Ende von if(isset($_GET['add']))
 					?>
 					<form action="?editappointment=1" method="post">
-						<div class="day">
-							<div class='date outside_calendar'><b><input name="date" class="form-control" id="date" min="<?php echo date("Y-m-d"); ?>" placeholder="<?php echo $t_date[$language] ?>" value="<?php if(isset($row['timestamp'])){echo date("Y-m-d", $row['timestamp']);} else {echo htmlspecialchars($newdate);}?>"></b></div>
+						<div class="day">							
+							<div class='date outside_calendar'>
+								<b>
+									<input name="date" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
+								</b>
+							</div>
+							<script type="text/javascript">
+								$(function () {
+									$('#datetimepicker').datetimepicker({
+											format: 'L',
+											locale: '<?php echo "de"; ?>',
+											minDate: '<?php echo date('m/d/Y');?>',
+											defaultDate: '<?php echo $date;?>'
+									});
+								});
+							</script>
 							<div class='appointment'>
-								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_appointment_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
-								<div class='appointmentinformation'>		
+								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
+								<div class='appointmentinformation'>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">
+												<i class="fas fa-tasks"></i>
+											</span>
+										</div>
+										<select name="project" class="dropdown-form-prepend">
+											<option value="false" selected>Kein Projekt</option>
+											<?php
+												$sql_select = "SELECT * FROM projects WHERE usertoken = '$usertoken'";
+																
+												foreach ($connection->query($sql_select) as $row) {													
+													// Entschlüsselung der vom Nutzer angegebenen Informationen
+													$projectname = openssl_decrypt($row['projectname'],"AES-128-ECB",$key);
+													$projecttoken = $row['projecttoken'];
+													
+													echo "<option value='".$projecttoken."'>".$projectname."</option>";													
+												}										
+											?>	
+										</select>
+									</div>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
 												<i class="fas fa-clock"></i>
 											</span>
-										</div>
-										<input name="time" class="form-control" id="time" placeholder="<?php echo $t_time[$language]; ?>" value="<?php if(isset($row['time_set']) AND $row['time_set'] == 'true') { echo date('H:i', $row['timestamp']);} elseif(isset($newtime))  {echo htmlspecialchars($newtime);}?>">
+										</div>										
+										<input name="time" type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="<?php echo $t_time[$language] ?>">
 									</div>
+									<script type="text/javascript">
+										$(function () {
+											$('#datetimepicker5').datetimepicker({
+											format: 'LT'
+											});
+										});
+									</script>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">

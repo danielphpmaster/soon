@@ -114,9 +114,10 @@
 							$projecttoken = $row['projecttoken'];
 							
 							echo "<div style='border: 1px solid #e7e7e7; border-radius: 4px; padding: 6px 12px; margin-bottom: 10px; width: 100%'>
-								".htmlspecialchars($projectname);
-							
-							
+								<a href='".$path."project/".$projecttoken."'>
+									".htmlspecialchars($projectname)."
+								</a>";
+										
 							$sql_select_appointment = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND projecttoken = '$projecttoken'";
 										
 						foreach ($connection->query($sql_select_appointment) as $row) {
@@ -124,7 +125,7 @@
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
 							$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
 											
-								echo "<span style='padding: 0 10px'>";
+								echo "<span style='padding: 0 5px'>";
 								// Ausgabe Termin Popover
 								echo "<span style='font-size: 150%;'>
 									<a data-toggle='popover' data-placement='top' data-html='true' title='";

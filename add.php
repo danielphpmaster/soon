@@ -169,7 +169,6 @@
 									<input name="date" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
 								</b>
 							</div>
-
 							<script type="text/javascript">
 							 $(function () {
 
@@ -197,8 +196,7 @@
 											<input type="radio" name="is_appointment" id="false" value="false" autocomplete="off">
 											<?php echo $t_task[$language] ?>
 										</label>
-									</div>
-									
+									</div>									
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
@@ -206,25 +204,21 @@
 											</span>
 										</div>
 										<select name="project" class="dropdown-form-prepend">
-										<option value="false" selected>Kein Projekt</option>
-												<?php
-					$sql_select = "SELECT * FROM projects WHERE usertoken = '$usertoken'";
-									
-					foreach ($connection->query($sql_select) as $row) {
-						
-						// Entschlüsselung der vom Nutzer angegebenen Informationen
-						$projectname = openssl_decrypt($row['projectname'],"AES-128-ECB",$key);
-						$projecttoken = $row['projecttoken'];
-						
-						echo "<option value='".$projecttoken."'>".$projectname."</option>";
-						
-					}
-				
-				?>	
-											
+											<option value="false" selected>Kein Projekt</option>
+											<?php
+												$sql_select = "SELECT * FROM projects WHERE usertoken = '$usertoken'";
+																
+												foreach ($connection->query($sql_select) as $row) {
+													
+													// Entschlüsselung der vom Nutzer angegebenen Informationen
+													$projectname = openssl_decrypt($row['projectname'],"AES-128-ECB",$key);
+													$projecttoken = $row['projecttoken'];
+													
+													echo "<option value='".$projecttoken."'>".$projectname."</option>";													
+												}											
+											?>	
 										</select>
-									</div>
-									
+									</div>									
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
@@ -233,7 +227,6 @@
 										</div>										
 										<input name="time" type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="<?php echo $t_time[$language] ?>">
 									</div>
-
 									<script type="text/javascript">
 										$(function () {
 											$('#datetimepicker5').datetimepicker({
@@ -241,7 +234,6 @@
 											});
 										});
 									</script>
-
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">

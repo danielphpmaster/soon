@@ -199,6 +199,38 @@ $t_project_name = array(
 	"Project name"
 );
 
+/* project.php */
+$t_title_project = array(
+	"- soon",
+	"- soon"
+);
+$t_project = array(
+	"Projekt",
+	"Projects"
+);
+$t_delete_project = array(
+	"Projekt löschen",
+	"Delete project"
+);
+$t_do_you_want_to_delete_this_project = array(
+	"Möchtest du dieses Projekt löschen?",
+	"Do you want to delete this project?"
+);
+
+/* edit_project.php */
+$t_title_edit_project = array(
+	"Projekt bearbeiten - soon",
+	"Edit project - soon"
+);
+$t_change_project = array(
+	"Projekt bearbeiten",
+	"Edit project"
+);
+$t_new_project_name = array(
+	"Neuer Projektname",
+	"New project name"
+);
+
 /* registration.php */
 $t_title_registration = array(
 	"Registrieren - soon",
@@ -297,28 +329,6 @@ $t_no_account_yet = array(
 $t_email_or_password_is_invalid = array(
 	"E-Mail-Adresse oder Passwort ist ungültig",
 	"Email or password is invalid"
-);
-
-/* result.php */
-$t_title_result = array(
-	"Suchergebnisse - soon",
-	"Search results - soon"
-);
-$t_no_search_results = array(
-	"Keine Suchergebnisse",
-	"No search results"
-);
-$t_please_enter_a_search_term = array(
-	"Geben Sie einen Suchbegriff ein",
-	"Please enter a search term"
-);
-$t_view_calendar = array(
-	"Zum Kalender",
-	"View calendar"
-);
-$t_search_results_for = array(
-	"Suchergebnisse zu",
-	"Search results for"
 );
 
 /* add.php */
@@ -481,6 +491,10 @@ $t_do_you_want_to_delete_this_appointment = array(
 $t_confirm = array(
 	"Bestätigen",
 	"Confirm"
+);
+$t_view_calendar = array(
+	"Zum Kalender",
+	"View calendar"
 );
 
 /* edit_appointment.php	*/
