@@ -1,19 +1,20 @@
 <?php
 	include 'inlcude_all.php';
 	include 'loginwall.php';
-
+	
+	// Prüfung, ob die "year"-Variable in der URL mitgesendet wurde: Wenn nein, wird das aktuelle Jahr als Wert gespeichert.
 	if(empty($_GET['year'])) {
 		$year = date('Y');
 	} else {
 		$year = $_GET['year'];
 	}
-	
+	// Prüfung, ob die "month"-Variable in der URL mitgesendet wurde: Wenn nein, wird der aktuelle Monat als Wert gespeichert.
 	if(empty($_GET['month'])) {
 		$month = date('F');
 	} else {
 		$month = $_GET['month'];
 	}
-		
+	// Prüfung, ob die "view"-Variable in der URL mitgesendet wurde
 	if(isset($_GET['view']) AND $_GET['view'] == 2) {
 		$view = 2;
 		$_SESSION['view'] = $view;
@@ -22,28 +23,24 @@
 		$view = 1;
 		$other_view = 2;
 	}
-	
+	// Umwandlung von den Angaben Jahr und Monat als Zeitstempel
 	$timestamp_of_month = strtotime("$year $month");
-	
+	// Prüfung, ob sich um einen Zeitstempel vor dem aktuellen Monat handelt
 	if($timestamp_of_month < strtotime(date('Y-m-01'))) {
 		$year = date('Y');
 		$month = date('F');
 		header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
 	}
-	
-	if($timestamp_of_month > strtotime(date('2020-12-01'))) {
-		$year = date('Y');
-		$month = date('F');
-		header('Location: '.$path.'calendar/'.$year.'/'.$month.'');
-	}
-	
+	// Speicherung von vergangenen Zeitangaben
 	$previous_month_timestamp = strtotime('-1 month', $timestamp_of_month);
 	$previous_month = date("F", $previous_month_timestamp);
 	$previous_month_year = date("Y", $previous_month_timestamp);
-	
+	// Speicherung von zukünftigen Zeitangaben
 	$next_month_timestamp = strtotime('+1 month', $timestamp_of_month);
 	$next_month = date("F", $next_month_timestamp);
 	$next_month_year = date("Y", $next_month_timestamp);
+	
+	$t_month = 't_month_'.date("n", $timestamp_of_month);
 	
 	$title = "".$month." ".$year."  - soon";
 ?>
@@ -56,11 +53,11 @@
 	</head>
 
 	<body>
-		<?php include 'navbar.php';?>
-				
+		<?php include 'navbar.php';?>				
 		<div class="container">
-			<div class="row" style="margin-top: 20px;">
+			<div class="row margin-top-20 margin-bottom-20">
 				<?php
+					// Prüfung, ob ein zukünftiger Monat angezeigt wird. Wenn ja: Anzeige der "einen Monat zurück"-Schaltfläche
 					if($timestamp_of_month < time()) {
 						echo "<div class='col-3 col-lg-4'></div>";
 					} else {
@@ -70,26 +67,22 @@
 								</a>
 							</div>";
 					}
-
-					echo "<div class='col-6 col-lg-4' style='padding: 0;'>
+					// Anzeige des aktuellen Monats mit Schaltfläche für den PDF-Export
+					echo "<div class='col-6 col-lg-4 padding-0'>
 						<a class='btn btn-light' href='".$path."export_pdf/".$year."/".$month."' target='_blank'>
 							<b>
-								<i class='fas fa-print'></i> ".$month." ".$year."
+								<i class='fas fa-print'></i> ".${$t_month}[$language]." ".$year."
 							</b>
 						</a>
 					</div>";
-
-					if($year == '2020' and $month =='December') {
-						echo "<div class='col-3 col-lg-4'></div>";
-					} else {
+					// Anzeige der "einen Monat weiter"-Schaltfläche					
 					echo"<div class='col-3 col-lg-4'>
 							<a class='btn btn-light' href='".$path."calendar/".$next_month_year."/".$next_month."/".$view."'>
 								<i class='fas fa-chevron-right'></i>
 							</a>
 						</div>";
-					}
-				
-					echo"<div class='col-12' style='margin-top: 10px;'>
+					// Schaltfläche für die Änderung der Ansicht
+					echo"<div class='col-12 margin-top-10'>
 						<a class='btn btn-light' href='".$path."calendar/".$year."/".$month."/".$other_view."'>";
 							if($view == 1) {
 								echo "<i class='fas fa-th-large'></i>";
@@ -122,7 +115,7 @@
 					while ($date < $last_day_of_month) {
 						// Variable, die definiert, welche Farbe der Terminname hat
 						if($date == time()) {
-							$appointmentcolor = "style='color: #d9534f;'";
+							$appointmentcolor = "color-red";
 						} else {
 							$appointmentcolor = "";
 						}
@@ -136,44 +129,18 @@
 						);
 					
 					if($view == 1) {
-						// Definierung Datumformat
-						$t_date_format = array(
-							${$t_day}[$language].", ".date("j.", $date),
-							${$t_day}[$language].", ".date("j", $date)
-						);
-
 						// Ausgabe Datum
 						echo "<div class='col-md-1'>
-							<div class='day'>
-								<div class='date'>
-									
-									<a href='".$path."add.php?date=".date("Y-m-d", $date)."'>
-										<button type='button' class='btn btn-light btn-sm'>
-											<b><span class='date_output_calendar'>".$t_date_format[$language]."</span></b>
-										</button>
-									</a>
-								</div>";
-					} else {
-						// Ausgabe Datum
-						if($date == time()) {
-							$date_output = $t_today[$language];
-						} elseif($date == strtotime('+1 day', time())) {
-							$date_output = $t_tomorrow[$language];
-						} else {
-							$date_output = $t_date_format[$language];
-						}
-						
+							<div>
+								<a class='date btn btn-light btn-sm' href='".$path."add.php?date=".date("Y-m-d", $date)."'>
+									".$t_date_format[$language]."
+								</a>";
+					} else {						
 						echo "<div class='col-md-1'>
-							<div class='day'>
-								<div class='date'>
-									<a class='btn btn-light btn-sm xs-float-right' href='".$path."add.php?date=".date("Y-m-d", $date)."'>
-										<b>
-											<span class='date_output_calendar'>
-												".$date_output."
-											</span>
-										</b>									
-									</a>
-								</div>";
+							<div>							
+								<a class='date btn btn-light btn-sm' href='".$path."add.php?date=".date("Y-m-d", $date)."'>								
+									".$t_date_format[$language]."														
+								</a>";
 					}
 						
 						// Suche nach einem Termin
@@ -196,40 +163,38 @@
 							);
 							
 							if($view == 1) {
-									echo "<span style='padding: 0 10px'>";
+										echo "<span class='appointment-icon'>";
 								// Ausgabe Termin Popover
-								echo "<span style='font-size: 150%;'>
-									<a data-toggle='popover' data-placement='top' data-html='true' title='";								
-								echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
-								echo"' data-content='";
-								
-								if($row['time_set'] == 'true') {
-									echo "<div><i class=\"fas fa-clock\"></i> ".$t_time[$language]."</div>";
-								}
-								if(!empty($location)) {
-									echo "<div><i class=\"fas fa-map-marker-alt\"></i> ".htmlspecialchars($location)."</div>";
-								};
-								if(!empty($comment)) {
-									echo "<div><i class=\"fas fa-comment\"></i> ".htmlspecialchars($comment)."</div>";
-								};
-								
-								echo "'>";
-
-								if($row['is_appointment'] == 'true') {
-									echo "<i class='far fa-calendar'></i>";
-								} else {
-									echo "<i class='far fa-clipboard'></i>";
-								}
-								echo "
-									</a>
-								</span>";
-								echo "</span>";	
+									echo "<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";								
+										// Titel des Popovers
+										echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
+										// Inhalt des Popovers
+										echo"' data-content='";										
+											if($row['time_set'] == 'true') {
+												echo "<div><i class=\"fas fa-clock\"></i> ".$t_time[$language]."</div>";
+											}
+											if(!empty($location)) {
+												echo "<div><i class=\"fas fa-map-marker-alt\"></i> ".htmlspecialchars($location)."</div>";
+											};
+											if(!empty($comment)) {
+												echo "<div><i class=\"fas fa-comment\"></i> ".htmlspecialchars($comment)."</div>";
+											};								
+										echo "'>";
+										// Element, welches beim Anklicken das Popover öffnet
+										if($row['is_appointment'] == 'true') {
+											echo "<i class='".$appointmentcolor." icon far fa-calendar'></i>";
+										} else {
+											echo "<i class='".$appointmentcolor." far fa-clipboard'></i>";
+										}
+									echo "</a></span>";	
 							} else {
 								
 								// Ausgabe Terminname
 								echo "<div class='appointment'>
-								<a href='".$path."appointment/".$row['appointmenttoken']."'".$appointmentcolor."><div class='title'><b>".htmlspecialchars($appointmentname)."</b></div></a>";
-															
+									<a class='".$appointmentcolor." title' href='".$path."appointment/".$row['appointmenttoken']."'>
+										".htmlspecialchars($appointmentname)."
+									</a>";
+									
 								// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
 								if($row['time_set'] == "false" and empty($location) and empty($comment)) {
 									echo "";
@@ -262,7 +227,7 @@
 								echo "</div>"; // Ende <div class='appointment'>
 							}
 						}								
-						echo "</div></div>"; // Ende von .col-md-1 und von .day
+						echo "</div></div>"; // Ende von .col-md-1
 						
 						$date = strtotime('+1 day', $date);
 					} // Ende von while ($date <= $last_day_of_month)

@@ -104,7 +104,7 @@
 								<input name="password" type="password" class="form-control" id="password" placeholder="<?php echo $t_password[$language] ?>">
 							</div>
 						</div> <?php // Ende von .box ?>
-						<div class="last_element">	
+						<div class="margin-bottom-90">	
 							<button type="submit" class="btn btn-red"><?php echo $t_log_in[$language] ?></button>
 							<?php echo $t_no_account_yet[$language] ?> <a href="<?php echo $path; ?>registration"><?php echo $t_sign_up[$language] ?>!</a>
 						</div>

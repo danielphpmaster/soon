@@ -145,12 +145,8 @@
 						} // Ende von if(isset($_GET['add']))
 					?>
 					<form action="?editappointment=1" method="post">
-						<div class="day">							
-							<div class='date outside_calendar'>
-								<b>
-									<input name="date" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
-								</b>
-							</div>
+						<div class="day">
+							<input name="date" type="text" class="form-control datetimepicker-input margin-bottom-10" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
 							<script type="text/javascript">
 								$(function () {
 									$('#datetimepicker').datetimepicker({
@@ -219,7 +215,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="last_element">
+						<div class="margin-bottom-90">
 							<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
 							<a class="btn btn-light" href="<?php echo $path; ?>appointment/<?php echo $appointmenttoken; ?>"><?php echo $t_cancel[$language] ?></a>
 						</div>

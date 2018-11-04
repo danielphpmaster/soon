@@ -3,355 +3,44 @@ body {
 	background-color: white;
 }
 
-/* Unterstreichgung von Links verhindern */
-div.row a {
-	color: black;
-	text-decoration: none;
-}
-
 .float_right {
 	float: right;
 }
 
-.last_element {
-	margin-bottom: 90px;
+.padding-0 {
+	padding: 0;
+}
+
+.margin-top-10 {
+	margin-top: 10px;
+}
+.margin-top-20 {
+	margin-top: 20px;
 }
 
 .margin-bottom-0 {
 	margin-bottom: 0 !important;
 }
-
 .margin-bottom-10 {
 	margin-bottom: 10px;
 }
-
-.date_output {
-	padding-left: 5px;
-	color: grey;
-	font-size:0.75rem;
+.margin-bottom-20 {
+	margin-bottom: 20px;
+}
+.margin-bottom-90 {
+	margin-bottom: 90px;
 }
 
-/* 
-==============================
-==============================
-Betrifft nur navbar.php 
-==============================
-============================== 
-*/
+.color-red {
+	color: #d9534f !important;
+}
 
-	.navbar {
-		margin-bottom: 0px;
-		background-color: white;
-		border: 0;
-	}
-
-	.ml-auto .dropdown-menu {
-		left: auto !important;
-		right: 0px;
-	}
-	
-/* 
-==============================
-==============================
-Betrifft nur index.php 
-==============================
-============================== 
-*/
-
-	div.background-image {
-		background-image: url(images/landscape_resize.jpg);
-		min-height: calc(100vh - 52px);
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-attachment: fixed;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	h1#headline {
-		color: white;
-		padding: 20px;
-		text-align: center;
-		line-height: 1.4285;
-		background: rgba(0,0,0,0.5);
-		background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,0,0,0.5)), color-stop(70%, rgba(179,179,179,0)), color-stop(100%, rgba(255,255,255,0)));
-		background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-		background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-		background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-		background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
-	}
-
-	h2 {
-		color: black;
-		line-height: 1.4285;
-		margin: 80px 0 20px 0;
-		padding: 0 10px 0 10px;
-	}
-
-	div.linkbox {
-		padding: 20px;
-		text-align: center;
-		font-size: 1.5rem;
-		box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
-	}
-
-	div.linkbox:hover {
-		opacity: 0.95;
-	}
-
-	div.registration {
-		background-color: #e9494c;
-		color: white;
-	}
-
-	div.login {
-		background-color: #f8f8f8;
-		color: black;
-	}
-		
-	div.more-information-button {
-		color: white;
-		text-align: center;
-	} 
-	
-	div.container#more_information div.box {
-		text-align: left;
-	}
-	
-	div.container#more_information h1 {
-		padding-top: 45px;
-	}
-	
-	div.container#more_information {
-		text-align: center;
-		padding-top: 45px;
-	} /* Ende von CSS, welches nur index.php betrifft */
-
-/* 
-==============================
-==============================
-Betrifft nur calendar.php 
-==============================
-============================== 
-*/
-
-	div.calendar-container {
-		margin-bottom: 100px;
-	}
-	
-	div.day {
-		margin: 0 5px 15px 5px;
-	}
-	
-	div.date {
-		padding: 10px;
-		border-radius: 5px;
-		margin-top: 20px;
-		overflow: hidden;
-	}
-		
-	div.date.outside_calendar {
-		border: 1px solid #e7e7e7;
-		margin-top: 0;
-	}
-		
-	@media (max-width: 767.5px) {
-		div.date button.xs-float-right {
-			float: right;
-		}
-	}
-
-	div.appointment {
-		border: 1px solid #e7e7e7;
-		border-radius: 5px;
-		margin: 16px 2px 0 2px;
-	}
-
-	div.appointment:hover, div.appointment:focus {
-	}
-
-	div.noappointment {
-		padding: 10px;
-		margin-top: 16px;
-	}
-
-	div.title {
-		padding: 10px;
-		word-wrap: break-word;
-		overflow: hidden;
-	}
-		
-	div.appointmentinformation {
-		padding: 10px;
-		border-top: 1px solid #e7e7e7;
-	}
-	
-	div.time {
-		padding-bottom: 10px;
-	}
-
-	div.location {
-		padding-bottom: 10px;
-		word-wrap: break-word;
-	}
-
-	div.comment {
-		padding-bottom: 10px;
-		word-wrap: break-word;
-	}
-
-	.calendar-container .row {
-		margin: 0;
-	} 
-
-	/* Ermöglicht Spalten */	
-	@media (min-width: 0px){
-		.calendar-cols .col-md-1,
-		.calendar-cols .col-sm-1,
-		.calendar-cols .col-lg-1  {
-			word-wrap: break-word;
-			width: 100% !important;
-			*width: 100% !important;
-			padding: 0;
-		}
-	}
-
-	@media (min-width: 768px) {
-		.calendar-cols .col-md-1,
-		.calendar-cols .col-sm-1,
-		.calendar-cols .col-lg-1 {
-			word-wrap: break-word;
-			width: 50% !important;
-			*width: 50% !important;
-			max-width: 50% !important;
-			flex:none !important;
-			padding: 0;
-		}
-	}
-
-	@media (min-width: 1200px) {
-		.calendar-cols .col-md-1,
-		.calendar-cols .col-sm-1,
-		.calendar-cols .col-lg-1 {
-			word-wrap: break-word;
-			width: 14.285714285714285714285714285714%;
-			*width: 14.285714285714285714285714285714%;
-			max-width: 14.285714285714285714285714285714% !important;
-			flex:none !important;
-			padding: 0;
-		}
-	}
-	
-/* "Nach oben"-Button */
-	#myBtn {
-		display: none; /* Hidden by default */
-		position: fixed; /* Fixed/sticky position */
-		bottom: 20px; /* Place the button at the bottom of the page */
-		right: 30px; /* Place the button 30px from the right */
-		z-index: 99; /* Make sure it does not overlap */
-		border: none; /* Remove borders */
-		outline: none; /* Remove outline */
-		background-color: white; /* Set a background color */
-		color: black; /* Text color */
-		cursor: pointer; /* Add a mouse pointer on hover */
-		padding: 15px; /* Some padding */
-		border: 1px solid #e7e7e7;
-		border-radius: 5px; /* Rounded corners */
-	}
-	
-	#myBtn:hover {
-		background-color: #eee;
-	}/* Ende von CSS, welches nur calendar.php betrifft */
-
-		div.calendar_current_month_mobile {
-		padding: 7px 12px 7px 12px;
-		text-align: center;
-	}
-	
-	div.box {
-		border: 1px solid #e7e7e7;
-		border-radius: 5px;
-		padding: 20px;
-		margin-bottom: 15px;
-	}
-
-	div.box.form-group {
-		margin-bottom: 15px;
-	}
-
-	.row {
-	  display: -webkit-box;
-	  display: -webkit-flex;
-	  display: -ms-flexbox;
-	  display: flex;
-	  flex-wrap: wrap;
-	}
-	.row > [class*='col-'] {
-	  display: flex;
-	  flex-direction: column;
-	}
-	
-	td {
-		background-color: white;
-	}
-
-/* 
-==============================
-==============================
-Betrifft nur projects.php 
-==============================
-============================== 
-*/
-
-	div.projects-container {
-		margin-bottom: 100px;
-	}
-	
-	.projects-container .row {
-		margin: 0;
-	}
-	
-	/* Ermöglicht Spalten */	
-	@media (min-width: 0px){
-		.projects-cols .col-md-1,
-		.projects-cols .col-sm-1,
-		.projects-cols .col-lg-1  {
-			word-wrap: break-word;
-			width: 20% !important;
-			*width: 20% !important;
-			padding: 0;
-		}
-	}
-
-	@media (min-width: 768px) {
-		.projects-cols .col-md-1,
-		.projects-cols .col-sm-1,
-		.projects-cols .col-lg-1 {
-			word-wrap: break-word;
-			width: 10% !important;
-			*width: 10% !important;
-			max-width: 10% !important;
-			flex:none !important;
-			padding: 0;
-		}
-	}
-
-	@media (min-width: 1200px) {
-		.projects-cols .col-md-1,
-		.projects-cols .col-sm-1,
-		.projects-cols .col-lg-1 {
-			word-wrap: break-word;
-			width: 8%;
-			*width: 8%;
-			max-width: 8% !important;
-			flex:none !important;
-			padding: 0;
-		}
-	}
+.box {
+	border: 1px solid #e7e7e7;
+	border-radius: 5px;
+	padding: 20px;
+	margin-bottom: 15px;
+}
 
 /* 
 ==============================
@@ -407,3 +96,315 @@ Formulare und Buttons
 		border-top-right-radius: 5px;
 		border-bottom-right-radius: 5px;
 	}/* Ende von CSS betreffend Formulare und Buttons */
+
+/* 
+==============================
+==============================
+Betrifft nur appointment.php 
+==============================
+============================== 
+*/
+
+.date_output {
+	padding-left: 5px;
+	color: grey;
+	font-size:0.75rem;
+}
+
+/* 
+==============================
+==============================
+Betrifft nur calendar.php 
+==============================
+============================== 
+*/
+
+	.calendar-container {
+		margin-bottom: 100px;
+	}
+	
+	.calendar-container a, .appointment-icon a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	.date {
+		font-weight: bold;
+		margin-bottom: 10px;
+		width: 100%;
+		overflow: hidden;
+		word-wrap: break-word;
+	}
+		
+	.appointment {
+		margin-bottom: 10px;
+		border: 1px solid #e7e7e7;
+		border-radius: 5px;
+	}
+	
+	.appointment-icon {
+		font-size: 150%;
+		padding: 0 5px;
+		cursor: default;
+		-webkit-user-select: none; /* Safari 3.1+ */
+		-moz-user-select: none; /* Firefox 2+ */
+		-ms-user-select: none; /* IE 10+ */
+		user-select: none; /* Standard syntax */
+	}
+	
+	.title {
+		font-weight: bold;
+		display: block;
+		padding: 10px;
+		word-wrap: break-word;
+		overflow: hidden;
+	}
+		
+	.appointmentinformation {
+		padding: 10px;
+		border-top: 1px solid #e7e7e7;
+	}
+	
+	.time, .location, .comment {
+		padding-bottom: 10px;
+		word-wrap: break-word;
+	}
+
+	.calendar-container .row {
+		margin: 0;
+	} 
+
+	/* Ermöglicht Spalten */
+	@media (min-width: 0px){
+		.calendar-cols .col-md-1,
+		.calendar-cols .col-sm-1,
+		.calendar-cols .col-lg-1  {
+			word-wrap: break-word;
+			width: 50% !important;
+			*width: 50% !important;
+			padding: 0 5px;
+			margin-bottom: 20px;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.calendar-cols .col-md-1,
+		.calendar-cols .col-sm-1,
+		.calendar-cols .col-lg-1 {
+			word-wrap: break-word;
+			width: 33.33333333333333% !important;
+			*width: 33.33333333333333% !important;
+			max-width: 33.33333333333333% !important;
+			flex: none !important;
+			padding: 0 5px;
+			margin-bottom: 20px;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.calendar-cols .col-md-1,
+		.calendar-cols .col-sm-1,
+		.calendar-cols .col-lg-1 {
+			word-wrap: break-word;
+			width: 14.285714285714285714285714285714%;
+			*width: 14.285714285714285714285714285714%;
+			max-width: 14.285714285714285714285714285714% !important;
+			flex: none !important;
+			padding: 0 5px;
+			margin-bottom: 20px;
+		}
+	}
+	
+	.projects-container {
+		margin-bottom: 100px;
+	}
+	
+	.projects-container .row {
+		margin: 0;
+	}
+	
+	/* Ermöglicht Spalten */	
+	@media (min-width: 0px){
+		.projects-cols .col-md-1,
+		.projects-cols .col-sm-1,
+		.projects-cols .col-lg-1  {
+			word-wrap: break-word;
+			width: 25% !important;
+			*width: 25% !important;
+			padding: 0 5px;
+			margin-bottom: 20px;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.projects-cols .col-md-1,
+		.projects-cols .col-sm-1,
+		.projects-cols .col-lg-1 {
+			word-wrap: break-word;
+			width: 14.285714285714285714285714285714% !important;
+			*width: 14.285714285714285714285714285714% !important;
+			max-width: 14.285714285714285714285714285714% !important;
+			flex: none !important;
+			padding: 0 5px;
+			margin-bottom: 20px;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.projects-cols .col-md-1,
+		.projects-cols .col-sm-1,
+		.projects-cols .col-lg-1 {
+			word-wrap: break-word;
+			width: 7.142857142857143%;
+			*width: 7.142857142857143%;
+			max-width: 7.142857142857143% !important;
+			flex: none !important;
+			padding: 0 5px;
+			margin-bottom: 20px;
+		}
+	}
+	
+	/* "Nach oben"-Button */
+	#myBtn {
+		display: none; /* Hidden by default */
+		position: fixed; /* Fixed/sticky position */
+		bottom: 20px; /* Place the button at the bottom of the page */
+		right: 30px; /* Place the button 30px from the right */
+		z-index: 99; /* Make sure it does not overlap */
+		border: none; /* Remove borders */
+		outline: none; /* Remove outline */
+		background-color: white; /* Set a background color */
+		color: black; /* Text color */
+		cursor: pointer; /* Add a mouse pointer on hover */
+		padding: 15px; /* Some padding */
+		border: 1px solid #e7e7e7;
+		border-radius: 5px; /* Rounded corners */
+	}
+	
+	#myBtn:hover {
+		background-color: #eee;
+	}/* Ende von CSS, welches nur calendar.php betrifft */
+	
+	.row {
+	  display: -webkit-box;
+	  display: -webkit-flex;
+	  display: -ms-flexbox;
+	  display: flex;
+	  flex-wrap: wrap;
+	}
+	
+	.row > [class*='col-'] {
+	  display: flex;
+	  flex-direction: column;
+	}
+
+/* 
+==============================
+==============================
+Betrifft nur index.php 
+==============================
+============================== 
+*/
+
+	.background-image {
+		background-image: url(images/landscape_resize.jpg);
+		min-height: calc(100vh - 52px);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-attachment: fixed;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	h1#headline {
+		color: white;
+		padding: 20px;
+		text-align: center;
+		line-height: 1.4285;
+		background: rgba(0,0,0,0.5);
+		background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,0,0,0.5)), color-stop(70%, rgba(179,179,179,0)), color-stop(100%, rgba(255,255,255,0)));
+		background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(179,179,179,0) 70%, rgba(255,255,255,0) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+	}
+
+	h2 {
+		color: black;
+		line-height: 1.4285;
+		margin: 80px 0 20px 0;
+		padding: 0 10px 0 10px;
+	}
+
+	.linkbox {
+		padding: 20px;
+		text-align: center;
+		font-size: 1.5rem;
+		box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+	}
+
+	.linkbox:hover {
+		opacity: 0.95;
+	}
+
+	.registration {
+		background-color: #e9494c;
+		color: white;
+	}
+
+	.login {
+		background-color: #f8f8f8;
+		color: black;
+	}
+		
+	.more-information-button {
+		color: white;
+		text-align: center;
+	} 
+	
+	.container#more_information .box {
+		text-align: left;
+	}
+	
+	.container#more_information h1 {
+		padding-top: 45px;
+	}
+	
+	.container#more_information {
+		text-align: center;
+		padding-top: 45px;
+	} /* Ende von CSS, welches nur index.php betrifft */
+
+/* 
+==============================
+==============================
+Betrifft nur navbar.php 
+==============================
+============================== 
+*/
+
+	.navbar {
+		margin-bottom: 0px;
+		background-color: white;
+		border: 0;
+	}
+
+	.ml-auto .dropdown-menu {
+		left: auto !important;
+		right: 0px;
+	}
+
+/* 
+==============================
+==============================
+Betrifft nur profile.php 
+==============================
+============================== 
+*/
+	td {
+		background-color: white;
+	}

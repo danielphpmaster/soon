@@ -211,7 +211,7 @@
 								<input name="password2" type="password" class="form-control" id="password2" placeholder="<?php echo $t_repeat_password[$language] ?>">
 							</div>						
 						</div> <?php // Ende von .box ?>
-						<div class="last_element">
+						<div class="margin-bottom-90">
 							<button type="submit" class="btn btn-red"><?php echo $t_sign_up[$language] ?></button>
 							<?php echo $t_already_have_an_account[$language] ?> <a href="login.php"><?php echo $t_log_in[$language] ?>!</a>
 						</div>

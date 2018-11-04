@@ -65,7 +65,7 @@
 								<input name="verification_code" type="text" class="form-control" id="verification_code" placeholder="<?php echo $t_verification_code[$language] ?>" value="<?php if(isset($_POST['verification_code'])){echo htmlspecialchars($_POST['verification_code']);}?>">
 							</div>
 						</div> <?php // Ende von .box ?>
-						<div class="last_element">
+						<div class="margin-bottom-90">
 							<button type="submit" class="btn btn-red"><?php echo $t_confirm[$language] ?></button>
 						</div>
 					</form>

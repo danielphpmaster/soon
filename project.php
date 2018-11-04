@@ -57,7 +57,7 @@
 							</div>
 						</div>";
 						
-						echo "<div class='last_element'>
+						echo "<div class='margin-bottom-90'>
 								<a class='btn btn-light' href='".$path."projects'>".$t_view_calendar[$language]."</a>
 							</div>";
 					?>

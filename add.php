@@ -164,11 +164,7 @@
 					?>
 					<form action="?add=1" method="post">
 						<div class="day">
-							<div class='date outside_calendar'>
-								<b>
-									<input name="date" type="text" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
-								</b>
-							</div>
+							<input name="date" type="text" class="form-control datetimepicker-input margin-bottom-10" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker" placeholder="<?php echo $t_date[$language] ?>">
 							<script type="text/javascript">
 							 $(function () {
 
@@ -253,7 +249,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="last_element">
+						<div class="margin-bottom-90">
 							<button type="submit" class="btn btn-red"><?php echo $t_add[$language] ?></button>
 							<a class="btn btn-light" href="<?php echo $path; ?>calendar"><?php echo $t_cancel[$language] ?></a>
 						</div>

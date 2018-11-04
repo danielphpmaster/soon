@@ -81,7 +81,7 @@
 								<input name="new_email" type="mail" class="form-control" id="new_email" aria-describedby="emailHelp" placeholder="<?php echo $t_new_email[$language] ?>" value="<?php if(isset($_POST['new_email'])){echo htmlspecialchars($_POST['new_email']);} else {echo htmlspecialchars($email);}?>">
 							</div>
 						</div> <?php // Ende von .box ?>
-						<div class="last_element">
+						<div class="margin-bottom-90">
 							<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
 							<a class="btn btn-light" href="<?php echo $path; ?>profile"><?php echo $t_cancel[$language] ?></a>
 						</div>

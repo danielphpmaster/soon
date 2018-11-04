@@ -81,7 +81,7 @@
 					</div>
 				</div>
 			
-				<div class="col-12 col-lg-3 last_element"></div>
+				<div class="col-12 col-lg-3 margin-bottom-90"></div>
 				<div class="col-12 more-information-button"> 
 						<div style="margin-top: 28px;">
 							<a href="index.php" style="color: black; text-align: center; font-size: 2.5rem;"><i class='fas fa-chevron-up'></i></a>

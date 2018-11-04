@@ -110,7 +110,7 @@
 									<input name="newpassword2" type="password" class="form-control" id="newpassword2" placeholder="<?php echo $t_confirm_new_password[$language] ?>">
 								</div>							
 							</div> <?php // Ende von .box ?>
-							<div class="last_element">
+							<div class="margin-bottom-90">
 								<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
 								<a class="btn btn-light" href="<?php echo $path; ?>profile"><?php echo $t_cancel[$language] ?></a>
 							</div>
