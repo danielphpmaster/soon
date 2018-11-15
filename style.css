@@ -42,6 +42,12 @@ body {
 	margin-bottom: 15px;
 }
 
+a, a:hover {
+	text-decoration: none;
+	color: black;
+}
+	
+
 /* 
 ==============================
 ==============================
@@ -121,11 +127,6 @@ Betrifft nur calendar.php
 
 	.calendar-container {
 		margin-bottom: 100px;
-	}
-	
-	.calendar-container a, .appointment-icon a {
-		text-decoration: none;
-		color: black;
 	}
 	
 	.date {

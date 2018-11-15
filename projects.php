@@ -16,7 +16,7 @@
 		<?php include 'navbar.php';?>
 
 		<div class="container">
-			<div class="row" style="margin-top: 20px; margin-bottom: 10px;">
+			<div class="row margin-top-20 margin-bottom-20">
 				<div class="col-12">
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
@@ -56,7 +56,7 @@
 								$create_token = '1';
 							}
 						}
-								
+						
 						$new_project = openssl_encrypt($new_project,"AES-128-ECB",$key);
 						$color = "#333333";
 						$sql_insert = "INSERT INTO projects (projecttoken, usertoken, color, projectname) VALUES ('$projecttoken','$usertoken','$color', '$new_project')";
@@ -128,7 +128,7 @@
 								echo "<span style='padding: 0 5px'>";
 								// Ausgabe Termin Popover
 								echo "<span style='font-size: 150%;'>
-									<a data-toggle='popover' data-placement='top' data-html='true' title='";
+									<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";
 									
 								echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
 								
