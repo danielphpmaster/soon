@@ -38,7 +38,7 @@
 							echo "</a>
 						</li>
 						<li class='nav-item'>
-							<a href='".$path."projects' class='nav-link'><i class='fas fa-tasks'></i> ".$t_my_projects[$language]."</a>
+							<a href='".$path."goals' class='nav-link'><i class='fas fa-tasks'></i> ".$t_my_goals[$language]."</a>
 						</li>
 						<li class='nav-item dropdown'>
 							<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>".htmlspecialchars($username)."</a>

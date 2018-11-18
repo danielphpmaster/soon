@@ -62,10 +62,10 @@
 								$newdate = $_POST['date'];								
 							}
 							
-							if(empty($_POST['project'])) {
-								$projecttoken = "false";
+							if(empty($_POST['goal'])) {
+								$goaltoken = "false";
 							} else {
-								$projecttoken = $_POST['project'];								
+								$goaltoken = $_POST['goal'];								
 							}
 							
 							if(empty($_POST['time'])) {
@@ -137,7 +137,7 @@
 								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
 								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE appointments SET projecttoken = '$projecttoken', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
+								$sql_update = "UPDATE appointments SET goaltoken = '$goaltoken', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'appointment/'.$appointmenttoken.'');						
@@ -166,17 +166,17 @@
 												<i class="fas fa-tasks"></i>
 											</span>
 										</div>
-										<select name="project" class="dropdown-form-prepend">
+										<select name="goal" class="dropdown-form-prepend">
 											<option value="false" selected>Kein Projekt</option>
 											<?php
-												$sql_select = "SELECT * FROM projects WHERE usertoken = '$usertoken'";
+												$sql_select = "SELECT * FROM goals WHERE usertoken = '$usertoken'";
 																
 												foreach ($connection->query($sql_select) as $row) {													
 													// Entschlüsselung der vom Nutzer angegebenen Informationen
-													$projectname = openssl_decrypt($row['projectname'],"AES-128-ECB",$key);
-													$projecttoken = $row['projecttoken'];
+													$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
+													$goaltoken = $row['goaltoken'];
 													
-													echo "<option value='".$projecttoken."'>".$projectname."</option>";													
+													echo "<option value='".$goaltoken."'>".$goalname."</option>";													
 												}										
 											?>	
 										</select>

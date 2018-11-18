@@ -1,3 +1,5 @@
+*:focus {outline: none;}
+
 body {
 	font-family: 'Roboto', sans-serif;
 	background-color: white;
@@ -216,19 +218,19 @@ Betrifft nur calendar.php
 		}
 	}
 	
-	.projects-container {
+	.goals-container {
 		margin-bottom: 100px;
 	}
 	
-	.projects-container .row {
+	.goals-container .row {
 		margin: 0;
 	}
 	
 	/* Ermöglicht Spalten */	
 	@media (min-width: 0px){
-		.projects-cols .col-md-1,
-		.projects-cols .col-sm-1,
-		.projects-cols .col-lg-1  {
+		.goals-cols .col-md-1,
+		.goals-cols .col-sm-1,
+		.goals-cols .col-lg-1  {
 			word-wrap: break-word;
 			width: 25% !important;
 			*width: 25% !important;
@@ -238,9 +240,9 @@ Betrifft nur calendar.php
 	}
 
 	@media (min-width: 768px) {
-		.projects-cols .col-md-1,
-		.projects-cols .col-sm-1,
-		.projects-cols .col-lg-1 {
+		.goals-cols .col-md-1,
+		.goals-cols .col-sm-1,
+		.goals-cols .col-lg-1 {
 			word-wrap: break-word;
 			width: 14.285714285714285714285714285714% !important;
 			*width: 14.285714285714285714285714285714% !important;
@@ -252,9 +254,9 @@ Betrifft nur calendar.php
 	}
 
 	@media (min-width: 1200px) {
-		.projects-cols .col-md-1,
-		.projects-cols .col-sm-1,
-		.projects-cols .col-lg-1 {
+		.goals-cols .col-md-1,
+		.goals-cols .col-sm-1,
+		.goals-cols .col-lg-1 {
 			word-wrap: break-word;
 			width: 7.142857142857143%;
 			*width: 7.142857142857143%;

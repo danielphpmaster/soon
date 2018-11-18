@@ -97,8 +97,8 @@
 		</div> <!-- Ende von .container -->
 		<?php
 		if($view == 1) {
-			echo "<div class='projects-container'>
-			<div class='row projects-cols'>";
+			echo "<div class='goals-container'>
+			<div class='row goals-cols'>";
 		} else {
 		echo "<div class='calendar-container'>
 			<div class='row calendar-cols'>";

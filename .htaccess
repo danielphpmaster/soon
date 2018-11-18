@@ -9,8 +9,8 @@ RewriteRule ^/?calendar/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ cale
 
 RewriteRule ^/?export_pdf/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ export_pdf.php?year=$1&month=$2
 
-RewriteRule ^/?edit_project/([A-Za-z0-9-_.*!?]+)$ edit_project.php?projecttoken=$1
+RewriteRule ^/?edit_goal/([A-Za-z0-9-_.*!?]+)$ edit_goal.php?goaltoken=$1
 
-RewriteRule ^/?project/([A-Za-z0-9-_.*!?]+)$ project.php?projecttoken=$1
+RewriteRule ^/?goal/([A-Za-z0-9-_.*!?]+)$ goal.php?goaltoken=$1
 
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

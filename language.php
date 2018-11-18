@@ -166,9 +166,9 @@ $t_my_calendar = array(
 	"Mein Kalender",
 	"My calendar"
 );
-$t_my_projects = array(
-	"Meine Projekte",
-	"My projects"
+$t_my_goals = array(
+	"Meine Ziele",
+	"My goals"
 );
 $t_my_profile = array(
 	"Mein Profil",
@@ -185,50 +185,50 @@ $t_back_to_top = array(
 	"Back to top"
 );
 
-/* projects.php */
-$t_title_projects = array(
-	"Meine Projekte - soon",
-	"My projects - soon"
+/* goals.php */
+$t_title_goals = array(
+	"Meine Ziele - soon",
+	"My goals - soon"
 );
-$t_add_project = array(
-	"Projekt hinzufügen",
-	"Add project"
+$t_add_goal = array(
+	"Ziel hinzufügen",
+	"Add goal"
 );
-$t_project_name = array(
-	"Projektname",
-	"Project name"
+$t_goal_name = array(
+	"Zielname",
+	"Goal name"
 );
 
-/* project.php */
-$t_title_project = array(
+/* goal.php */
+$t_title_goal = array(
 	"- soon",
 	"- soon"
 );
-$t_project = array(
-	"Projekt",
-	"Projects"
+$t_goal = array(
+	"Ziel",
+	"Goal"
 );
-$t_delete_project = array(
-	"Projekt löschen",
-	"Delete project"
+$t_delete_goal = array(
+	"Ziel löschen",
+	"Delete goal"
 );
-$t_do_you_want_to_delete_this_project = array(
-	"Möchtest du dieses Projekt löschen?",
-	"Do you want to delete this project?"
+$t_do_you_want_to_delete_this_goal = array(
+	"Möchtest du dieses Ziel löschen?",
+	"Do you want to delete this goal?"
 );
 
-/* edit_project.php */
-$t_title_edit_project = array(
-	"Projekt bearbeiten - soon",
-	"Edit project - soon"
+/* edit_goal.php */
+$t_title_edit_goal = array(
+	"Ziel bearbeiten - soon",
+	"Edit goal - soon"
 );
-$t_change_project = array(
-	"Projekt bearbeiten",
-	"Edit project"
+$t_change_goal = array(
+	"Ziel bearbeiten",
+	"Edit goal"
 );
-$t_new_project_name = array(
-	"Neuer Projektname",
-	"New project name"
+$t_new_goal_name = array(
+	"Neuer Zielname",
+	"New goal name"
 );
 
 /* registration.php */

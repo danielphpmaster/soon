@@ -17,8 +17,8 @@
 	if(isset($_SESSION['appointmenttoken'])){
 		$appointmenttoken = $_SESSION['appointmenttoken'];
 	}		
-	if(isset($_SESSION['projecttoken'])){
-		$projecttoken = $_SESSION['projecttoken'];
+	if(isset($_SESSION['goaltoken'])){
+		$goaltoken = $_SESSION['goaltoken'];
 	}	
 	if(isset($_SESSION['language'])){
 		$language = $_SESSION['language'];

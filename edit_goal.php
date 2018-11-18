@@ -3,25 +3,25 @@
 	include 'loginwall.php';
 	
 	if(isset($_GET['p'])) {
-		$projecttoken = $_GET['p'];
-		$_SESSION['projecttoken'] = $projecttoken;
+		$goaltoken = $_GET['p'];
+		$_SESSION['goaltoken'] = $goaltoken;
 		
 		// Suche nach dem Termin
-		$sql_select = "SELECT * FROM projects WHERE usertoken = '$usertoken' AND projecttoken = '$projecttoken'";
+		$sql_select = "SELECT * FROM goals WHERE usertoken = '$usertoken' AND goaltoken = '$goaltoken'";
 		
 		// Termininformationen als Variablen speichern
 		foreach ($connection->query($sql_select) as $row) {
 		}
 		
-		$projectname = $string = openssl_decrypt($row['projectname'],"AES-128-ECB",$key);
+		$goalname = $string = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
 		
 		// Umleitung, wenn kein Termin gefunden
-		if(empty($projectname)) {
-			header('Location: '.$path.'projects');
+		if(empty($goalname)) {
+			header('Location: '.$path.'goals');
 		}
 	}
 	
-	$title = $t_title_edit_project[$language];
+	$title = $t_title_edit_goal[$language];
 ?>
 
 <!DOCTYPE html>
@@ -39,32 +39,32 @@
 				<div class="col-xs-12 col-md-3"></div>
 				
 				<div class="col-xs-12 col-md-6">
-					<h2><?php echo $t_change_project[$language] ?></h2>
+					<h2><?php echo $t_change_goal[$language] ?></h2>
 					<?php
-						if(isset($_GET['editproject'])) {
+						if(isset($_GET['editgoal'])) {
 														
-							if(empty($_POST['new_project'])) {
-								$new_project = "";
+							if(empty($_POST['new_goal'])) {
+								$new_goal = "";
 							} else {
-								$new_project = $_POST['new_project'];								
+								$new_goal = $_POST['new_goal'];								
 							}
 							
 							// Prüfung, ob ein Nutzername angegeben wurde. Wenn ja, wird dieser gespeichert
-							if(empty($new_project)) {
+							if(empty($new_goal)) {
 								echo "<div class='alert alert-danger'>".$t_please_enter_a_username[$language]."</div>";
 							} else {
-								$_SESSION['projectname'] = $new_project;
+								$_SESSION['goalname'] = $new_goal;
 								
-								$new_project = openssl_encrypt($new_project,"AES-128-ECB",$key);
+								$new_goal = openssl_encrypt($new_goal,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE projects SET projectname = '$new_project' WHERE usertoken = '$usertoken' AND projecttoken = '$projecttoken'";
+								$sql_update = "UPDATE goals SET goalname = '$new_goal' WHERE usertoken = '$usertoken' AND goaltoken = '$goaltoken'";
 								$sql_update = $connection->query($sql_update);
 								
-								header('Location: '.$path.'project/'.$projecttoken);
+								header('Location: '.$path.'goal/'.$goaltoken);
 							}
 						}
 					?>
-					<form action="?editproject=1" method="post">
+					<form action="?editgoal=1" method="post">
 						<div class="box">
 							<div class="margin-bottom-0 input-group mb-3">
 								<div class="input-group-prepend">
@@ -72,11 +72,11 @@
 										<i class="fas fa-user"></i>
 									</span>
 								</div>
-								<input name="new_project" type="text" class="form-control" id="new_project" placeholder="<?php echo $t_new_project_name[$language] ?>" value="<?php if(isset($projectname)){echo htmlspecialchars($projectname);}?>">
+								<input name="new_goal" type="text" class="form-control" id="new_goal" placeholder="<?php echo $t_new_goal_name[$language] ?>" value="<?php if(isset($goalname)){echo htmlspecialchars($goalname);}?>">
 							</div>
 						</div> <?php // Ende von .box ?>
 						<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
-						<a class="btn btn-light" href="project<?php echo "/".$projecttoken;?>"><?php echo $t_cancel[$language] ?></a>
+						<a class="btn btn-light" href="goal<?php echo "/".$goaltoken;?>"><?php echo $t_cancel[$language] ?></a>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

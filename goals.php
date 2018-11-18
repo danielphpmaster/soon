@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 
-	$title = $t_title_projects[$language];
+	$title = $t_title_goals[$language];
 ?>
 
 <!DOCTYPE html>
@@ -21,16 +21,16 @@
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
 						<i class="fas fa-plus"></i>
-						<?php echo $t_add_project[$language]; ?>
+						<?php echo $t_add_goal[$language]; ?>
 					</button>
 				</div>
 				
 				<?php
-					if(isset($_GET['newproject'])) {
-						if(empty($_POST['new_project'])) {
-							$new_project = "Neues Projekt";
+					if(isset($_GET['newgoal'])) {
+						if(empty($_POST['new_goal'])) {
+							$new_goal = "Neues Projekt";
 						} else {
-							$new_project = $_POST['new_project'];								
+							$new_goal = $_POST['new_goal'];								
 						}
 							
 						// Speicherung des neuen Projektes
@@ -43,9 +43,9 @@
 								$n = rand(0, $alphaLength);
 								$pass[] = $alphabet[$n];
 							}
-							$projecttoken = implode($pass); //turn the array into a string
+							$goaltoken = implode($pass); //turn the array into a string
 
-							$sql_select = "SELECT * FROM projetcs WHERE projecttoken = '$projecttoken'";
+							$sql_select = "SELECT * FROM projetcs WHERE goaltoken = '$goaltoken'";
 
 							$count_result = $connection->prepare($sql_select);
 							$count_result->execute();
@@ -57,12 +57,12 @@
 							}
 						}
 						
-						$new_project = openssl_encrypt($new_project,"AES-128-ECB",$key);
+						$new_goal = openssl_encrypt($new_goal,"AES-128-ECB",$key);
 						$color = "#333333";
-						$sql_insert = "INSERT INTO projects (projecttoken, usertoken, color, projectname) VALUES ('$projecttoken','$usertoken','$color', '$new_project')";
+						$sql_insert = "INSERT INTO goals (goaltoken, usertoken, color, goalname) VALUES ('$goaltoken','$usertoken','$color', '$new_goal')";
 						$sql_insert = $connection->query($sql_insert);
 								
-						header('Location: '.$path.'projects');
+						header('Location: '.$path.'goals');
 					}
 				?>
 
@@ -72,14 +72,14 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">
-									<?php echo $t_add_project[$language]; ?>
+									<?php echo $t_add_goal[$language]; ?>
 								</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							 </div>
 					  
-							<form action="?newproject=1" method="post">
+							<form action="?newgoal=1" method="post">
 								<div class="modal-body">
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
@@ -87,7 +87,7 @@
 												<i class="fas fa-tasks"></i>
 											</span>
 										</div>
-										<input name="new_project" type="text" class="form-control" id="new_project" placeholder="<?php echo $t_project_name[$language]; ?>">
+										<input name="new_goal" type="text" class="form-control" id="new_goal" placeholder="<?php echo $t_goal_name[$language]; ?>">
 									</div>
 								</div>
 								<div class="modal-footer">
@@ -105,20 +105,20 @@
 			<div class='row'>
 				<div class='col-12'>
 					<?php
-						$sql_select = "SELECT * FROM projects WHERE usertoken = '$usertoken'";
+						$sql_select = "SELECT * FROM goals WHERE usertoken = '$usertoken'";
 										
 						foreach ($connection->query($sql_select) as $row) {
 							
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
-							$projectname = openssl_decrypt($row['projectname'],"AES-128-ECB",$key);
-							$projecttoken = $row['projecttoken'];
+							$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
+							$goaltoken = $row['goaltoken'];
 							
-							echo "<div style='border: 1px solid #e7e7e7; border-radius: 4px; padding: 6px 12px; margin-bottom: 10px; width: 100%'>
-								<a href='".$path."project/".$projecttoken."'>
-									".htmlspecialchars($projectname)."
-								</a>";
+							echo "
+								<a class='btn btn-light btn-sm margin-top-10' href='".$path."goal/".$goaltoken."'>
+									".htmlspecialchars($goalname)."
+								</a><div>";
 										
-							$sql_select_appointment = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND projecttoken = '$projecttoken'";
+							$sql_select_appointment = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND goaltoken = '$goaltoken' ORDER BY timestamp";
 										
 						foreach ($connection->query($sql_select_appointment) as $row) {
 							
@@ -147,7 +147,7 @@
 									</a>
 								</span>";
 								echo "</span>";
-						}	
+						}
 						echo "</div>";
 						}
 					?>	
