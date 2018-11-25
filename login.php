@@ -31,13 +31,13 @@
 			/* Wenn die Checkbox "Angemeldet bleiben" aktiv: Cookie wird gesetzt
 			if(isset($_POST['stayloggedin'])) {								
 				$cookie_name = "soonstayloggedin";
-				$cookie_value = $row['usertoken'];
+				$cookie_value = $row['userid'];
 				setcookie($cookie_name, $cookie_value, time() + (86400 * 365), $path); // 86400 = 1 day
 			}
 			*/
 			
-			$usertoken = $row['usertoken'];
-			$_SESSION['usertoken'] = $usertoken;
+			$userid = $row['userid'];
+			$_SESSION['userid'] = $userid;
 			
 			include 'key.php';
 			

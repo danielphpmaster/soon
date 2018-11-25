@@ -3,10 +3,10 @@
 	include 'loginwall.php';
 
 	if(isset($_GET['a'])) {
-		$appointmenttoken = $_GET['a'];
+		$entryid = $_GET['a'];
 	}
 
-	$sql_delete = "DELETE FROM appointments WHERE appointmenttoken = '$appointmenttoken' and usertoken = '$usertoken'";
+	$sql_delete = "DELETE FROM entries WHERE entryid = '$entryid' and userid = '$userid'";
 	$sql_delete = $connection->query($sql_delete);
 
 	header('Location: '.$path.'calendar')

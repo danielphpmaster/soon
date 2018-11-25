@@ -63,7 +63,7 @@
 								$_SESSION['email'] = $new_email;
 								
 								$new_email = openssl_encrypt($new_email,"AES-128-ECB",$key_email);
-								$sql_update = "UPDATE users SET email= '$new_email' WHERE usertoken = '$usertoken'";
+								$sql_update = "UPDATE users SET email= '$new_email' WHERE userid = '$userid'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'profile');

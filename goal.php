@@ -2,16 +2,16 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 
-	if(isset($_GET['goaltoken'])) {
-		$goaltoken = $_GET['goaltoken'];
+	if(isset($_GET['goalid'])) {
+		$goalid = $_GET['goalid'];
 		
 		// Suche nach dem Termin
-		$sql_select = "SELECT * FROM goals WHERE usertoken = '$usertoken' AND goaltoken = '$goaltoken'";			
+		$sql_select = "SELECT * FROM goals WHERE userid = '$userid' AND goalid = '$goalid'";			
 		
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
 			$goalname = $string = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
-			$goaltoken = $row['goaltoken'];
+			$goalid = $row['goalid'];
 		}
 						
 		// Umleitung, wenn kein Projekt gefunden
@@ -19,7 +19,7 @@
 			header('Location: '.$path.'calendar');
 		}
 	} else {
-		// Umleitung, wenn kein "goaltoken"-Wert mitgeschickt wurde
+		// Umleitung, wenn kein "goalid"-Wert mitgeschickt wurde
 		header('Location: '.$path.'calendar');
 	}
 			
@@ -51,7 +51,7 @@
 						
 									echo "<div class='float_right'>
 										<button type='button' class='btn btn-light btn-sm' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-times'></i></button>
-										<a href='".$path."edit_goal?p=".$goaltoken."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
+										<a href='".$path."edit_goal?p=".$goalid."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
 									</div>
 								</div>
 							</div>
@@ -80,7 +80,7 @@
 									</div>
 									<div class="modal-footer">
 										<?php
-											echo"<a class='btn btn-red' href='".$path."remove_goal?p=".$goaltoken."'>".$t_confirm[$language]."</a>";
+											echo"<a class='btn btn-red' href='".$path."remove_goal?p=".$goalid."'>".$t_confirm[$language]."</a>";
 										?>
 										<button type="button" class="btn btn-light" data-dismiss="modal">
 											<?php echo $t_cancel[$language]; ?>

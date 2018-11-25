@@ -7,18 +7,18 @@
 	if(isset($_SESSION['username'])){
 		$username = $_SESSION['username'];
 	}
-	if(isset($_SESSION['usertoken'])){
-		$usertoken = $_SESSION['usertoken'];
+	if(isset($_SESSION['userid'])){
+		$userid = $_SESSION['userid'];
 	} else {
 	}	
 	if(isset($_SESSION['searchvalue'])){
 		$searchvalue = $_SESSION['searchvalue'];
 	}		
-	if(isset($_SESSION['appointmenttoken'])){
-		$appointmenttoken = $_SESSION['appointmenttoken'];
+	if(isset($_SESSION['entryid'])){
+		$entryid = $_SESSION['entryid'];
 	}		
-	if(isset($_SESSION['goaltoken'])){
-		$goaltoken = $_SESSION['goaltoken'];
+	if(isset($_SESSION['goalid'])){
+		$goalid = $_SESSION['goalid'];
 	}	
 	if(isset($_SESSION['language'])){
 		$language = $_SESSION['language'];

@@ -38,7 +38,7 @@
 								
 								$new_username = openssl_encrypt($new_username,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE users SET username = '$new_username' WHERE usertoken = '$usertoken'";
+								$sql_update = "UPDATE users SET username = '$new_username' WHERE userid = '$userid'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'profile');

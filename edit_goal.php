@@ -3,11 +3,11 @@
 	include 'loginwall.php';
 	
 	if(isset($_GET['p'])) {
-		$goaltoken = $_GET['p'];
-		$_SESSION['goaltoken'] = $goaltoken;
+		$goalid = $_GET['p'];
+		$_SESSION['goalid'] = $goalid;
 		
 		// Suche nach dem Termin
-		$sql_select = "SELECT * FROM goals WHERE usertoken = '$usertoken' AND goaltoken = '$goaltoken'";
+		$sql_select = "SELECT * FROM goals WHERE userid = '$userid' AND goalid = '$goalid'";
 		
 		// Termininformationen als Variablen speichern
 		foreach ($connection->query($sql_select) as $row) {
@@ -57,10 +57,10 @@
 								
 								$new_goal = openssl_encrypt($new_goal,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE goals SET goalname = '$new_goal' WHERE usertoken = '$usertoken' AND goaltoken = '$goaltoken'";
+								$sql_update = "UPDATE goals SET goalname = '$new_goal' WHERE userid = '$userid' AND goalid = '$goalid'";
 								$sql_update = $connection->query($sql_update);
 								
-								header('Location: '.$path.'goal/'.$goaltoken);
+								header('Location: '.$path.'goal/'.$goalid);
 							}
 						}
 					?>
@@ -76,7 +76,7 @@
 							</div>
 						</div> <?php // Ende von .box ?>
 						<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
-						<a class="btn btn-light" href="goal<?php echo "/".$goaltoken;?>"><?php echo $t_cancel[$language] ?></a>
+						<a class="btn btn-light" href="goal<?php echo "/".$goalid;?>"><?php echo $t_cancel[$language] ?></a>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

@@ -15,14 +15,8 @@
 		$month = $_GET['month'];
 	}
 	// Prüfung, ob die "view"-Variable in der URL mitgesendet wurde
-	if(isset($_GET['view']) AND $_GET['view'] == 2) {
-		$view = 2;
-		$_SESSION['view'] = $view;
-		$other_view = 1;
-	} else {
-		$view = 1;
-		$other_view = 2;
-	}
+	$view = 1;
+	
 	// Umwandlung von den Angaben Jahr und Monat als Zeitstempel
 	$timestamp_of_month = strtotime("$year $month");
 	// Prüfung, ob sich um einen Zeitstempel vor dem aktuellen Monat handelt
@@ -55,14 +49,14 @@
 	<body>
 		<?php include 'navbar.php';?>				
 		<div class="container">
-			<div class="row margin-top-20 margin-bottom-20">
+			<div class="row margin-top-20 margin-bottom-30">
 				<?php
 					// Prüfung, ob ein zukünftiger Monat angezeigt wird. Wenn ja: Anzeige der "einen Monat zurück"-Schaltfläche
 					if($timestamp_of_month < time()) {
 						echo "<div class='col-3 col-lg-4'></div>";
 					} else {
 						echo"<div class='col-3 col-lg-4'>
-								<a class='btn btn-light' href='".$path."calendar/".$previous_month_year."/".$previous_month."/".$view."'>
+								<a class='btn btn-light' href='".$path."calendar/".$previous_month_year."/".$previous_month."'>
 									<i class='fas fa-chevron-left'></i>
 								</a>
 							</div>";
@@ -77,20 +71,10 @@
 					</div>";
 					// Anzeige der "einen Monat weiter"-Schaltfläche					
 					echo"<div class='col-3 col-lg-4'>
-							<a class='btn btn-light' href='".$path."calendar/".$next_month_year."/".$next_month."/".$view."'>
+							<a class='btn btn-light' href='".$path."calendar/".$next_month_year."/".$next_month."'>
 								<i class='fas fa-chevron-right'></i>
 							</a>
 						</div>";
-					// Schaltfläche für die Änderung der Ansicht
-					echo"<div class='col-12 margin-top-10'>
-						<a class='btn btn-light' href='".$path."calendar/".$year."/".$month."/".$other_view."'>";
-							if($view == 1) {
-								echo "<i class='fas fa-th-large'></i>";
-							} else {
-								echo "<i class='fas fa-th'></i>";
-							}
-						echo"</a>
-					</div>";
 				?>
 				
 			</div> <!-- Ende von .row -->
@@ -147,7 +131,7 @@
 						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
 						$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", $date));
 						
-						$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day' ORDER BY timestamp";
+						$sql_select = "SELECT * FROM entries WHERE userid = '$userid' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day' ORDER BY timestamp";
 										
 						foreach ($connection->query($sql_select) as $row) {
 							
@@ -167,7 +151,7 @@
 								// Ausgabe Termin Popover
 									echo "<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";								
 										// Titel des Popovers
-										echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
+										echo "<a href=\"".$path."appointment/".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
 										// Inhalt des Popovers
 										echo"' data-content='";										
 											if($row['time_set'] == 'true') {
@@ -191,7 +175,7 @@
 								
 								// Ausgabe Terminname
 								echo "<div class='appointment'>
-									<a class='".$appointmentcolor." title' href='".$path."appointment/".$row['appointmenttoken']."'>
+									<a class='".$appointmentcolor." title' href='".$path."appointment/".$row['entryid']."'>
 										".htmlspecialchars($appointmentname)."
 									</a>";
 									

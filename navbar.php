@@ -2,7 +2,7 @@
 	<a class='navbar-brand' href='
 		<?php
 			// Prüfung, ob der Benutzer angemeldet ist. Wenn ja: Link führt zu calendar.php. Wenn nein: Link führt zu index.php
-			if(empty($_SESSION['usertoken'])) {
+			if(empty($_SESSION['userid'])) {
 				echo $path;
 			} else {
 				echo $path.'calendar';
@@ -13,12 +13,12 @@
 		<span class='navbar-toggler-icon'></span>
 	</button>
 	<?php
-		if(isset($_SESSION['usertoken'])) {
+		if(isset($_SESSION['userid'])) {
 			// Zählen, wieviele Termine der angemeldete Benutzer heute hat
 			$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", time()));
 			$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", time()));
 			
-			$sql_select = "SELECT COUNT(appointmenttoken) FROM appointments WHERE usertoken = '$usertoken' AND timestamp >= '$first_timestamp_of_day' and timestamp <= '$last_timestamp_of_day'";
+			$sql_select = "SELECT COUNT(entryid) FROM entries WHERE userid = '$userid' AND timestamp >= '$first_timestamp_of_day' and timestamp <= '$last_timestamp_of_day'";
 			$count_result = $connection->prepare($sql_select);
 			$count_result->execute();
 

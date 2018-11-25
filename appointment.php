@@ -2,11 +2,11 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 
-	if(isset($_GET['appointmenttoken'])) {
-		$appointmenttoken = $_GET['appointmenttoken'];
+	if(isset($_GET['entryid'])) {
+		$entryid = $_GET['entryid'];
 		
 		// Suche nach dem Termin
-		$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";			
+		$sql_select = "SELECT * FROM entries WHERE userid = '$userid' AND entryid = '$entryid'";			
 		
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
@@ -15,7 +15,7 @@
 			$time = $row['timestamp'];
 			$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 			$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
-			$appointmenttoken = $row['appointmenttoken'];
+			$entryid = $row['entryid'];
 		}
 		
 		// Definierung Datumformat
@@ -85,7 +85,7 @@
 						echo "<div class='float_right'>
 									
 									<button type='button' class='btn btn-light btn-sm' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-times'></i></button>
-									<a href='".$path."edit?a=".$appointmenttoken."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
+									<a href='".$path."edit?a=".$entryid."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
 								</div>
 							</div>";
 						?>
@@ -108,7 +108,7 @@
 									</div>
 									<div class="modal-footer">
 										<?php
-											echo"<a class='btn btn-red' href='".$path."remove?a=".$appointmenttoken."'>".$t_confirm[$language]."</a>";
+											echo"<a class='btn btn-red' href='".$path."remove?a=".$entryid."'>".$t_confirm[$language]."</a>";
 										?>
 										<button type="button" class="btn btn-light" data-dismiss="modal">
 											<?php echo $t_cancel[$language]; ?>

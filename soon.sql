@@ -9,11 +9,11 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `soon` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `soon`;
 
-CREATE TABLE `appointments` (
-  `appointmenttoken` varchar(12) NOT NULL,
-  `usertoken` text NOT NULL,
+CREATE TABLE `entries` (
+  `entryid` varchar(12) NOT NULL,
+  `userid` text NOT NULL,
   `is_appointment` text NOT NULL,
-  `goaltoken` text NOT NULL,
+  `goalid` text NOT NULL,
   `appointmentname` text NOT NULL,
   `timestamp` int(11) NOT NULL,
   `time_set` text NOT NULL,
@@ -22,14 +22,19 @@ CREATE TABLE `appointments` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `goals` (
-  `goaltoken` varchar(12) NOT NULL,
-  `usertoken` text NOT NULL,
+  `goalid` varchar(12) NOT NULL,
+  `userid` text NOT NULL,
   `belonging_to` text NOT NULL,
   `goalname` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+CREATE TABLE `types` (
+  `typeid` int(11) NOT NULL,
+  `typename` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `users` (
-  `usertoken` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `userid` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `username` text COLLATE utf8_unicode_ci NOT NULL,
   `email` text COLLATE utf8_unicode_ci NOT NULL,
   `email_verified` text COLLATE utf8_unicode_ci NOT NULL,
@@ -40,14 +45,17 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-ALTER TABLE `appointments`
-  ADD PRIMARY KEY (`appointmenttoken`);
+ALTER TABLE `entries`
+  ADD PRIMARY KEY (`entryid`);
 
 ALTER TABLE `goals`
-  ADD PRIMARY KEY (`goaltoken`);
+  ADD PRIMARY KEY (`goalid`);
+
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`typeid`);
 
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`usertoken`);
+  ADD PRIMARY KEY (`userid`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

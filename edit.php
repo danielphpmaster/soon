@@ -3,11 +3,11 @@
 	include 'loginwall.php';
 
 	if(isset($_GET['a'])) {
-		$appointmenttoken = $_GET['a'];
-		$_SESSION['appointmenttoken'] = $appointmenttoken;
+		$entryid = $_GET['a'];
+		$_SESSION['entryid'] = $entryid;
 		
 		// Suche nach dem Termin
-		$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
+		$sql_select = "SELECT * FROM entries WHERE userid = '$userid' AND entryid = '$entryid'";
 		
 		// Termininformationen als Variablen speichern
 		foreach ($connection->query($sql_select) as $row) {
@@ -63,9 +63,9 @@
 							}
 							
 							if(empty($_POST['goal'])) {
-								$goaltoken = "false";
+								$goalid = "false";
 							} else {
-								$goaltoken = $_POST['goal'];								
+								$goalid = $_POST['goal'];								
 							}
 							
 							if(empty($_POST['time'])) {
@@ -137,10 +137,10 @@
 								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
 								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE appointments SET goaltoken = '$goaltoken', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE usertoken = '$usertoken' AND appointmenttoken = '$appointmenttoken'";
+								$sql_update = "UPDATE entries SET goalid = '$goalid', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND entryid = '$entryid'";
 								$sql_update = $connection->query($sql_update);
 								
-								header('Location: '.$path.'appointment/'.$appointmenttoken.'');						
+								header('Location: '.$path.'appointment/'.$entryid.'');						
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
@@ -169,14 +169,14 @@
 										<select name="goal" class="dropdown-form-prepend">
 											<option value="false" selected>Kein Projekt</option>
 											<?php
-												$sql_select = "SELECT * FROM goals WHERE usertoken = '$usertoken'";
+												$sql_select = "SELECT * FROM goals WHERE userid = '$userid'";
 																
 												foreach ($connection->query($sql_select) as $row) {													
 													// Entschlüsselung der vom Nutzer angegebenen Informationen
 													$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
-													$goaltoken = $row['goaltoken'];
+													$goalid = $row['goalid'];
 													
-													echo "<option value='".$goaltoken."'>".$goalname."</option>";													
+													echo "<option value='".$goalid."'>".$goalname."</option>";													
 												}										
 											?>	
 										</select>
@@ -217,7 +217,7 @@
 						</div>
 						<div class="margin-bottom-90">
 							<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
-							<a class="btn btn-light" href="<?php echo $path; ?>appointment/<?php echo $appointmenttoken; ?>"><?php echo $t_cancel[$language] ?></a>
+							<a class="btn btn-light" href="<?php echo $path; ?>appointment/<?php echo $entryid; ?>"><?php echo $t_cancel[$language] ?></a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

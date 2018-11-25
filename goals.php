@@ -43,9 +43,9 @@
 								$n = rand(0, $alphaLength);
 								$pass[] = $alphabet[$n];
 							}
-							$goaltoken = implode($pass); //turn the array into a string
+							$goalid = implode($pass); //turn the array into a string
 
-							$sql_select = "SELECT * FROM projetcs WHERE goaltoken = '$goaltoken'";
+							$sql_select = "SELECT * FROM projetcs WHERE goalid = '$goalid'";
 
 							$count_result = $connection->prepare($sql_select);
 							$count_result->execute();
@@ -59,7 +59,7 @@
 						
 						$new_goal = openssl_encrypt($new_goal,"AES-128-ECB",$key);
 						$color = "#333333";
-						$sql_insert = "INSERT INTO goals (goaltoken, usertoken, color, goalname) VALUES ('$goaltoken','$usertoken','$color', '$new_goal')";
+						$sql_insert = "INSERT INTO goals (goalid, userid, belonging_to, goalname) VALUES ('$goalid','$userid','$color', '$new_goal')";
 						$sql_insert = $connection->query($sql_insert);
 								
 						header('Location: '.$path.'goals');
@@ -105,20 +105,20 @@
 			<div class='row'>
 				<div class='col-12'>
 					<?php
-						$sql_select = "SELECT * FROM goals WHERE usertoken = '$usertoken'";
+						$sql_select = "SELECT * FROM goals WHERE userid = '$userid'";
 										
 						foreach ($connection->query($sql_select) as $row) {
 							
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
 							$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
-							$goaltoken = $row['goaltoken'];
+							$goalid = $row['goalid'];
 							
 							echo "
-								<a class='btn btn-light btn-sm margin-top-10' href='".$path."goal/".$goaltoken."'>
+								<a class='btn btn-light btn-sm margin-top-10' href='".$path."goal/".$goalid."'>
 									".htmlspecialchars($goalname)."
 								</a><div>";
 										
-							$sql_select_appointment = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND goaltoken = '$goaltoken' ORDER BY timestamp";
+							$sql_select_appointment = "SELECT * FROM entries WHERE userid = '$userid' AND goalid = '$goalid' ORDER BY timestamp";
 										
 						foreach ($connection->query($sql_select_appointment) as $row) {
 							
@@ -130,7 +130,7 @@
 								echo "<span style='font-size: 150%;'>
 									<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";
 									
-								echo "<a href=\"".$path."appointment/".$row['appointmenttoken']."\">".htmlspecialchars($appointmentname)."</a>";
+								echo "<a href=\"".$path."appointment/".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
 								
 								echo"' data-content='";
 

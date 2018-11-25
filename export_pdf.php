@@ -89,7 +89,7 @@
 		$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $timestamp));
 		$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", $timestamp));
 				
-		$sql_select = "SELECT * FROM appointments WHERE usertoken = '$usertoken' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day'";
+		$sql_select = "SELECT * FROM entries WHERE userid = '$userid' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day'";
 				
 		foreach ($connection->query($sql_select) as $row) {
 			// Definierung Zeitformat

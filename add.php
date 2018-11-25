@@ -55,9 +55,9 @@
 							}
 							
 							if(empty($_POST['goal'])) {
-								$goaltoken = "false";
+								$goalid = "false";
 							} else {
-								$goaltoken = $_POST['goal'];								
+								$goalid = $_POST['goal'];								
 							}
 
 							if(empty($_POST['time'])) {
@@ -133,9 +133,10 @@
 										$n = rand(0, $alphaLength);
 										$pass[] = $alphabet[$n];
 									}
-									$appointmenttoken = implode($pass); //turn the array into a string
+									$entryid = implode($pass); //turn the array into a string
 
-									$sql_select = "SELECT * FROM appointments WHERE appointmenttoken = '$appointmenttoken'";
+									// Prüfung, ob die ID bereits besteht
+									$sql_select = "SELECT * FROM entries WHERE entryid = '$entryid'";
 
 									$count_result = $connection->prepare($sql_select);
 									$count_result->execute();
@@ -152,13 +153,13 @@
 								$location = openssl_encrypt($location,"AES-128-ECB",$key);
 								$comment = openssl_encrypt($comment,"AES-128-ECB",$key);
 
-								$sql_insert = "INSERT INTO appointments (appointmenttoken, usertoken, is_appointment, goaltoken, appointmentname, timestamp, time_set, location, comment) VALUES ('$appointmenttoken', '$usertoken', '$is_appointment', '$goaltoken', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
+								$sql_insert = "INSERT INTO entries (entryid, userid, is_appointment, goalid, appointmentname, timestamp, time_set, location, comment) VALUES ('$entryid', '$userid', '$is_appointment', '$goalid', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 
 								$year = date('Y', strtotime($date));
 								$month = date('F', strtotime($date));
 
-								header('Location: '.$path.'appointment/'.$appointmenttoken.'');
+								header('Location: '.$path.'appointment/'.$entryid.'');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
@@ -202,15 +203,15 @@
 										<select name="goal" class="dropdown-form-prepend">
 											<option value="false" selected>Kein Projekt</option>
 											<?php
-												$sql_select = "SELECT * FROM goals WHERE usertoken = '$usertoken'";
+												$sql_select = "SELECT * FROM goals WHERE userid = '$userid'";
 																
 												foreach ($connection->query($sql_select) as $row) {
 													
 													// Entschlüsselung der vom Nutzer angegebenen Informationen
 													$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
-													$goaltoken = $row['goaltoken'];
+													$goalid = $row['goalid'];
 													
-													echo "<option value='".$goaltoken."'>".$goalname."</option>";													
+													echo "<option value='".$goalid."'>".$goalname."</option>";													
 												}											
 											?>	
 										</select>

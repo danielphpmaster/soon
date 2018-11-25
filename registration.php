@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	
 	// Wenn in angemeldetem Zustand: Umleitung zu calendar.php
-	if(isset($_SESSION['usertoken'])) {
+	if(isset($_SESSION['userid'])) {
 		die(header('Location: '.$path.'calendar'));
 	}
 	
@@ -105,9 +105,9 @@
 										$n = rand(0, $alphaLength);
 										$pass[] = $alphabet[$n];
 									}
-									$usertoken = implode($pass); //turn the array into a string
+									$userid = implode($pass); //turn the array into a string
 									
-									$sql_select = "SELECT * FROM users WHERE usertoken = '$usertoken'";
+									$sql_select = "SELECT * FROM users WHERE userid = '$userid'";
 
 									$count_result = $connection->prepare($sql_select);
 									$count_result->execute();
@@ -155,7 +155,7 @@
 								$created = strtotime(date('Y-m-d H:i:s'));
 								
 								// Speicherung in die Sitzung
-								$_SESSION['usertoken'] = $usertoken;
+								$_SESSION['userid'] = $userid;
 								$_SESSION['username'] = $username;
 								$_SESSION['email'] = $email;
 								$_SESSION['language'] = $language_array[$user_language];
@@ -168,7 +168,7 @@
 								$user_language = openssl_encrypt($user_language,"AES-128-ECB",$key);
 								$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-								$sql_insert = "INSERT INTO users (usertoken, username, email, email_verified, verification_code, password, language, created) VALUES ('$usertoken', '$username', '$email', 'false', '$verification_code', '$password_hash', '$user_language', '$created')";
+								$sql_insert = "INSERT INTO users (userid, username, email, email_verified, verification_code, password, language, created) VALUES ('$userid', '$username', '$email', 'false', '$verification_code', '$password_hash', '$user_language', '$created')";
 								$sql_insert = $connection->query($sql_insert);
 								
 								$_SESSION['email_verified'] = 'false';
