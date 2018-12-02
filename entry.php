@@ -10,6 +10,9 @@
 		
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
+			if ($row['goalid'] !== 'false') {
+			}
+			
 			$appointmentname = $string = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
 			$date = $row['timestamp'];
 			$time = $row['timestamp'];
@@ -23,8 +26,8 @@
 		$t_month = 't_month_'.date("n", $date);
 		
 		$t_date = array(
-			${$t_day}[$language].", ".date("d. ", $date).${$t_month}[$language], 
-			${$t_day}[$language].", ".${$t_month}[$language].date(" d", $date)
+			${$t_day}[$language].", ".date("j. ", $date).${$t_month}[$language], 
+			${$t_day}[$language].", ".${$t_month}[$language].date(" j", $date)
 		);
 				
 		// Umleitung, wenn kein Termin gefunden
@@ -36,7 +39,7 @@
 		header('Location: '.$path.'calendar');
 	}
 			
-	$title = "".$appointmentname." ".$t_title_appointment[$language]."";
+	$title = "".$appointmentname." ".$t_title_entry[$language]."";
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +58,10 @@
 				
 				<div class="col-xs-12 col-md-6">
 					<?php
-						echo "<h2>".$t_appointment[$language]."</h2>";
+						echo "<h2>".$t_appointment[$language]."
+								<a class='float-right btn btn-light width-42' href='".$path."edit?a=".$entryid."'><i class='fas fa-pencil-alt'></i></a>
+								<a class='float-right btn btn-light width-42 margin-right-10' data-toggle='modal' data-target='#deleteModal'><i class='fas fa-times'></i></a>
+							</h2>";
 					
 						// Variable, die definiert, welche Farbe der Terminname hat 
 						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
@@ -65,8 +71,6 @@
 						} else {
 							$appointment_color = "";
 						}
-						
-						echo "<div class='day'>";
 						
 						// Ausgabe Termindatum
 						if(strtotime(date("Y-m-d 00:00:00", $date)) == strtotime(date("Y-m-d 00:00:00", time()))) {
@@ -79,22 +83,16 @@
 						
 						// Ausgabe Terminname
 						echo "<div class='appointment' style='margin-top: 0'>
-									<div ".$appointment_color." class='title'><b>".htmlspecialchars($appointmentname)."</b>
-										<span class='date_output'> <i class='fas fa-calendar'></i> ".$date_output."</span>";
-						
-						echo "<div class='float_right'>
-									
-									<button type='button' class='btn btn-light btn-sm' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-times'></i></button>
-									<a href='".$path."edit?a=".$entryid."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
-								</div>
-							</div>";
+								<div ".$appointment_color." class='title'>
+									".htmlspecialchars($appointmentname)."
+								</div>";		
 						?>
 						
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">
+										<h5 class="modal-title" id="deleteModalLabel">
 											<?php echo $t_delete_appointment[$language]; ?>
 										</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -120,12 +118,10 @@
 						
 						<?php
 						
-						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist
-						if($row['time_set'] == 'false' and empty($location) and empty($comment)) {
-							echo "";
-						} else {
-							echo "<div class='appointmentinformation'>";
-						}
+						// Ausgabe der Informationen
+						echo "<div class='appointmentinformation'>";
+						
+						echo "<div class='time'><i class='fas fa-calendar'></i> ".$date_output."</div>";
 						
 						// Definierung Zeitformat
 						$t_time = array(
@@ -146,7 +142,7 @@
 							echo "<iframe
 									width='100%'
 									height='250'
-									frameborder='0' style='border:0'
+									frameborder='0' style='border: 0'
 									src='https://www.google.com/maps/embed/v1/place?key=AIzaSyDrsCwHGUhbw2CFT0Iw5JDjAOEDPvjDknw 
 									&q=".htmlspecialchars($location)."' allowfullscreen>
 								</iframe>";						
@@ -160,13 +156,8 @@
 						}
 						
 						// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist						
-						if($row['time_set'] == 'false' and empty($location) and empty($comment)) {
-							echo "";
-						} else {
-							echo "</div>"; // Ende .appointmentinformation
-						}
-						
-						echo "</div></div>"; // Ende .appointment					
+						echo "</div>
+						</div>"; // Ende .appointmentinformation und .appointment
 						
 						$month = date("F", $row['timestamp']);
 						$year = date("Y", $row['timestamp']);

@@ -198,6 +198,10 @@ $t_goal_name = array(
 	"Zielname",
 	"Goal name"
 );
+$t_description = array(
+	"Beschreibung",
+	"Description"
+);
 
 /* goal.php */
 $t_title_goal = array(
@@ -225,10 +229,6 @@ $t_title_edit_goal = array(
 $t_change_goal = array(
 	"Ziel bearbeiten",
 	"Edit goal"
-);
-$t_new_goal_name = array(
-	"Neuer Zielname",
-	"New goal name"
 );
 
 /* registration.php */
@@ -405,8 +405,8 @@ $t_new_username = array(
 	"New username"
 );
 
-/* edit_mail.php */
-$t_title_edit_mail = array(
+/* edit_email.php */
+$t_title_edit_email = array(
 	"E-Mail-Adresse bearbeiten - soon",
 	"Change email - soon"
 );
@@ -459,8 +459,8 @@ $t_change_language = array(
 	"Change language"
 );
 
-/* appointment.php */
-$t_title_appointment = array(
+/* entry.php */
+$t_title_entry = array(
 	"- soon", 
 	"- soon"
 );						
@@ -497,7 +497,7 @@ $t_view_calendar = array(
 	"View calendar"
 );
 
-/* edit_appointment.php	*/
+/* edit.php	*/
 $t_title_edit = array(
 	"Bearbeiten - soon",
 	"Edit - soon"

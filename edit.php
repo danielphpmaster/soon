@@ -140,7 +140,7 @@
 								$sql_update = "UPDATE entries SET goalid = '$goalid', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND entryid = '$entryid'";
 								$sql_update = $connection->query($sql_update);
 								
-								header('Location: '.$path.'appointment/'.$entryid.'');						
+								header('Location: '.$path.'entry/'.$entryid.'');						
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
@@ -158,7 +158,7 @@
 								});
 							</script>
 							<div class='appointment'>
-								<div class='title'><b><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></b></div>
+								<div class='title'><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></div>
 								<div class='appointmentinformation'>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
@@ -217,7 +217,7 @@
 						</div>
 						<div class="margin-bottom-90">
 							<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
-							<a class="btn btn-light" href="<?php echo $path; ?>appointment/<?php echo $entryid; ?>"><?php echo $t_cancel[$language] ?></a>
+							<a class="btn btn-light" href="<?php echo $path; ?>entry/<?php echo $entryid; ?>"><?php echo $t_cancel[$language] ?></a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

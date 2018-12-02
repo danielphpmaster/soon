@@ -15,7 +15,7 @@
 		$month = $_GET['month'];
 	}
 	// Prüfung, ob die "view"-Variable in der URL mitgesendet wurde
-	$view = 1;
+	$view = 2;
 	
 	// Umwandlung von den Angaben Jahr und Monat als Zeitstempel
 	$timestamp_of_month = strtotime("$year $month");
@@ -64,9 +64,7 @@
 					// Anzeige des aktuellen Monats mit Schaltfläche für den PDF-Export
 					echo "<div class='col-6 col-lg-4 padding-0'>
 						<a class='btn btn-light' href='".$path."export_pdf/".$year."/".$month."' target='_blank'>
-							<b>
-								<i class='fas fa-print'></i> ".${$t_month}[$language]." ".$year."
-							</b>
+							<i class='fas fa-print'></i> ".${$t_month}[$language]." ".$year."
 						</a>
 					</div>";
 					// Anzeige der "einen Monat weiter"-Schaltfläche					
@@ -151,7 +149,7 @@
 								// Ausgabe Termin Popover
 									echo "<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";								
 										// Titel des Popovers
-										echo "<a href=\"".$path."appointment/".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
+										echo "<a href=\"".$path."entry/".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
 										// Inhalt des Popovers
 										echo"' data-content='";										
 											if($row['time_set'] == 'true') {
@@ -175,7 +173,7 @@
 								
 								// Ausgabe Terminname
 								echo "<div class='appointment'>
-									<a class='".$appointmentcolor." title' href='".$path."appointment/".$row['entryid']."'>
+									<a class='".$appointmentcolor." title' href='".$path."entry/".$row['entryid']."'>
 										".htmlspecialchars($appointmentname)."
 									</a>";
 									

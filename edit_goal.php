@@ -15,6 +15,10 @@
 		
 		$goalname = $string = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
 		
+		if($row['description'] !== 'false') {
+			$description = $string = openssl_decrypt($row['description'],"AES-128-ECB",$key);
+		}
+		
 		// Umleitung, wenn kein Termin gefunden
 		if(empty($goalname)) {
 			header('Location: '.$path.'goals');
@@ -42,11 +46,17 @@
 					<h2><?php echo $t_change_goal[$language] ?></h2>
 					<?php
 						if(isset($_GET['editgoal'])) {
-														
+							
 							if(empty($_POST['new_goal'])) {
 								$new_goal = "";
 							} else {
 								$new_goal = $_POST['new_goal'];								
+							}
+							
+							if(empty($_POST['description'])) {
+								$description = "false";
+							} else {
+								$description = $_POST['description'];								
 							}
 							
 							// Prüfung, ob ein Nutzername angegeben wurde. Wenn ja, wird dieser gespeichert
@@ -55,9 +65,10 @@
 							} else {
 								$_SESSION['goalname'] = $new_goal;
 								
-								$new_goal = openssl_encrypt($new_goal,"AES-128-ECB",$key);
+								$new_goal = openssl_encrypt($new_goal,"AES-128-ECB",$key);								
+							$description = openssl_encrypt($description,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE goals SET goalname = '$new_goal' WHERE userid = '$userid' AND goalid = '$goalid'";
+								$sql_update = "UPDATE goals SET goalname = '$new_goal', description = '$description' WHERE userid = '$userid' AND goalid = '$goalid'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'goal/'.$goalid);
@@ -66,13 +77,21 @@
 					?>
 					<form action="?editgoal=1" method="post">
 						<div class="box">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">
+										<i class="fas fa-tasks"></i>
+									</span>
+								</div>
+								<input name="new_goal" type="text" class="form-control" id="new_goal" placeholder="<?php echo $t_goal_name[$language] ?>" value="<?php if(isset($goalname)){echo htmlspecialchars($goalname);}?>">
+							</div>
 							<div class="margin-bottom-0 input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1">
-										<i class="fas fa-user"></i>
+										<i class="fas fa-comment"></i>
 									</span>
 								</div>
-								<input name="new_goal" type="text" class="form-control" id="new_goal" placeholder="<?php echo $t_new_goal_name[$language] ?>" value="<?php if(isset($goalname)){echo htmlspecialchars($goalname);}?>">
+								<input name="description" class="form-control" placeholder="<?php echo $t_description[$language] ?>" value="<?php if(isset($description)){echo htmlspecialchars($description);}?>"></input>								
 							</div>
 						</div> <?php // Ende von .box ?>
 						<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>

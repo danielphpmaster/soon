@@ -3,7 +3,7 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
 
-RewriteRule ^/?appointment/([A-Za-z0-9-_.*!?]+)$ appointment.php?entryid=$1
+RewriteRule ^/?entry/([A-Za-z0-9-_.*!?]+)$ entry.php?entryid=$1
 
 RewriteRule ^/?calendar/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ calendar.php?year=$1&month=$2
 

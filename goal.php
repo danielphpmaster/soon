@@ -11,6 +11,11 @@
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
 			$goalname = $string = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
+			
+			if ($row['description'] !== 'false') {
+				$description = $string = openssl_decrypt($row['description'],"AES-128-ECB",$key);
+			}
+			
 			$goalid = $row['goalid'];
 		}
 						
@@ -42,31 +47,23 @@
 				
 				<div class="col-xs-12 col-md-6">
 					<?php
-						echo "<h2>".$t_goal[$language]."</h2>";
-						
-						echo "<div class='day'>";						
-							// Ausgabe Projektname
-							echo "<div class='appointment' style='margin-top: 0'>
-								<div class='title'><b>".htmlspecialchars($goalname)."</b>";
-						
-									echo "<div class='float_right'>
-										<button type='button' class='btn btn-light btn-sm' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-times'></i></button>
-										<a href='".$path."edit_goal?p=".$goalid."'><button type='button' class='btn btn-light btn-sm'><i class='fas fa-pencil-alt'></i></button></a>
-									</div>
-								</div>
-							</div>
-						</div>";
-						
-						echo "<div class='margin-bottom-90'>
-								<a class='btn btn-light' href='".$path."goals'>".$t_view_calendar[$language]."</a>
+						echo "<h2>".$t_goal[$language]."						
+							<a class='float-right btn btn-light width-42' href='".$path."edit_goal?p=".$goalid."'><i class='fas fa-pencil-alt'></i></a>
+							<a class='float-right btn btn-light width-42 margin-right-10' data-toggle='modal' data-target='#deleteModal'><i class='fas fa-times'></i></a>
+						</h2>";
+											
+						// Ausgabe Projektname
+						echo "<div class='appointment' style='margin-top: 0'>
+							<div class='title'>
+								".htmlspecialchars($goalname)."
 							</div>";
 					?>
 					
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">
+										<h5 class="modal-title" id="deleteModalLabel">
 											<?php echo $t_delete_goal[$language]; ?>
 										</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -89,6 +86,26 @@
 								</div>
 							</div>
 						</div>
+					
+					<?php					
+						// Ausgabe der Informationen
+						echo "<div class='goalinformation'>";
+						
+						if(isset($description)) {
+							echo"<div class='description'>
+								<i class='fas fa-comment'></i>
+								".htmlspecialchars($description)."
+							</div>";
+						}							
+						
+						echo "</div>
+						</div>";
+						
+						echo "<div class='margin-bottom-90'>
+							<a class='btn btn-light' href='".$path."goals'>".$t_view_calendar[$language]."</a>
+						</div>";
+					?>	
+						
 						
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>
 				

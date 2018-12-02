@@ -2,7 +2,7 @@
 	include 'inlcude_all.php';
 	include 'loginwall.php';
 	
-	$title = $t_title_edit_mail[$language];
+	$title = $t_title_edit_email[$language];
 ?>
 
 <!DOCTYPE html>

@@ -159,7 +159,7 @@
 								$year = date('Y', strtotime($date));
 								$month = date('F', strtotime($date));
 
-								header('Location: '.$path.'appointment/'.$entryid.'');
+								header('Location: '.$path.'entry/'.$entryid.'');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
@@ -179,9 +179,7 @@
 							</script>
 							<div class='appointment'>
 								<div class='title'>
-									<b>
-										<input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);}?>" autofocus>
-									</b>
+									<input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);}?>" autofocus>
 								</div>
 								<div class='appointmentinformation'>
 									<div class="btn-group btn-group-toggle" style='margin-bottom: 16px; width: 100%;' data-toggle="buttons">

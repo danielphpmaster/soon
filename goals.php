@@ -16,7 +16,7 @@
 		<?php include 'navbar.php';?>
 
 		<div class="container">
-			<div class="row margin-top-20 margin-bottom-20">
+			<div class="row margin-top-20 margin-bottom-10">
 				<div class="col-12">
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
@@ -31,6 +31,13 @@
 							$new_goal = "Neues Projekt";
 						} else {
 							$new_goal = $_POST['new_goal'];								
+						}
+						
+						if(empty($_POST['description'])) {
+							$description = "false";
+						} else {
+							$description = $_POST['description'];
+							$description = openssl_encrypt($description,"AES-128-ECB",$key);				
 						}
 							
 						// Speicherung des neuen Projektes
@@ -58,8 +65,9 @@
 						}
 						
 						$new_goal = openssl_encrypt($new_goal,"AES-128-ECB",$key);
+						
 						$color = "#333333";
-						$sql_insert = "INSERT INTO goals (goalid, userid, belonging_to, goalname) VALUES ('$goalid','$userid','$color', '$new_goal')";
+						$sql_insert = "INSERT INTO goals (goalid, userid, belonging_to, goalname, description) VALUES ('$goalid','$userid','$color', '$new_goal', '$description')";
 						$sql_insert = $connection->query($sql_insert);
 								
 						header('Location: '.$path.'goals');
@@ -89,6 +97,16 @@
 										</div>
 										<input name="new_goal" type="text" class="form-control" id="new_goal" placeholder="<?php echo $t_goal_name[$language]; ?>">
 									</div>
+									
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">
+												<i class="fas fa-comment"></i>
+											</span>
+										</div>
+										<input name="description" class="form-control" rows="3" placeholder="<?php echo $t_description[$language] ?>"></input>
+									</div>
+
 								</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
@@ -101,7 +119,7 @@
 			</div> <!-- Ende von .row -->
 		</div> <!-- Ende von .container -->
 
-		<div class='container'>
+		<div class='container margin-bottom-90'>
 			<div class='row'>
 				<div class='col-12'>
 					<?php
@@ -110,27 +128,43 @@
 						foreach ($connection->query($sql_select) as $row) {
 							
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
-							$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
 							$goalid = $row['goalid'];
+							$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
 							
-							echo "
-								<a class='btn btn-light btn-sm margin-top-10' href='".$path."goal/".$goalid."'>
+							if($row['description'] !== 'false') {
+								$description = openssl_decrypt($row['description'],"AES-128-ECB",$key);
+							} else {
+								$description = '';
+							}
+							
+							echo "<div class='margin-top-20' style=''>
+								<a class='box-10' style='display: block; text-align: left; overflow: hidden' href='".$path."goal/".$goalid."'>								
 									".htmlspecialchars($goalname)."
-								</a><div>";
-										
+									<div class='float-right'>".htmlspecialchars($description)."</div>
+								</a>
+									
+								<div class='margin-top-10' style='margin-left: 20px;'>
+									<a class='box-10' style='display: block; text-align: left;' href='".$path."goal/".$goalid."'>".htmlspecialchars($goalname)."</a>
+								
+									<div class='margin-top-10' style='margin-left: 20px;'>
+									<a class='box-10' style='display: block; text-align: left;' href='".$path."goal/".$goalid."'>".htmlspecialchars($goalname)."</a>
+								</div>
+								
+								</div>";
+						
+									/*	
 							$sql_select_appointment = "SELECT * FROM entries WHERE userid = '$userid' AND goalid = '$goalid' ORDER BY timestamp";
 										
 						foreach ($connection->query($sql_select_appointment) as $row) {
 							
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
 							$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
-											
-								echo "<span style='padding: 0 5px'>";
+								
 								// Ausgabe Termin Popover
-								echo "<span style='font-size: 150%;'>
+								echo "<span style='font-size: 150%; padding: 0 5px;'>
 									<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";
 									
-								echo "<a href=\"".$path."appointment/".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
+								echo "<a href=\"".$path."entry/".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
 								
 								echo"' data-content='";
 
@@ -146,11 +180,11 @@
 								echo "
 									</a>
 								</span>";
-								echo "</span>";
-						}
+						}*/
 						echo "</div>";
 						}
-					?>	
+					?>			
+				
 				</div>				
 			</div>			
 		</div>
