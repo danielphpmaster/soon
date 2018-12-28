@@ -13,6 +13,18 @@
 			if ($row['goalid'] !== 'false') {
 			}
 			
+			if($row['is_appointment'] == 'true') {
+				$is_appointment = 'true';
+			} else {
+				$is_appointment = 'false';
+				
+				if($row['is_task_done'] == 'true') {
+					$is_task_done = 'true';
+				} else {
+					$is_task_done = 'false';
+				}
+			}
+			
 			$appointmentname = $string = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
 			$date = $row['timestamp'];
 			$time = $row['timestamp'];
@@ -58,8 +70,27 @@
 				
 				<div class="col-xs-12 col-md-6">
 					<?php
-						echo "<h2>".$t_appointment[$language]."
-								<a class='float-right btn btn-light width-42' href='".$path."edit?a=".$entryid."'><i class='fas fa-pencil-alt'></i></a>
+						if(isset($_GET['done'])) {
+							if($_GET['done'] == 0) {
+								$is_task_done = 'false';
+							} else {
+								$is_task_done = 'true';
+							}
+								$sql_update = "UPDATE entries SET is_task_done = '$is_task_done' WHERE userid = '$userid' AND entryid = '$entryid'";
+								$sql_update = $connection->query($sql_update);
+								
+								header('Location: '.$path.'entry.php?entryid='.$entryid.'');
+						}
+					
+						echo "<h2>";
+						
+							if($is_appointment == 'true') {
+								echo $t_appointment[$language];
+							} else {
+								echo $t_task[$language];								
+							}
+								
+								echo"<a class='float-right btn btn-light width-42' href='".$path."edit?a=".$entryid."'><i class='fas fa-pencil-alt'></i></a>
 								<a class='float-right btn btn-light width-42 margin-right-10' data-toggle='modal' data-target='#deleteModal'><i class='fas fa-times'></i></a>
 							</h2>";
 					
@@ -121,7 +152,19 @@
 						// Ausgabe der Informationen
 						echo "<div class='appointmentinformation'>";
 						
-						echo "<div class='time'><i class='fas fa-calendar'></i> ".$date_output."</div>";
+						echo "<div class='time'>";
+						
+						if($row['is_appointment'] == 'true') {
+							echo "<i class='far fa-calendar'></i>";
+						} else {
+							if($row['is_task_done'] == 'false') {
+							echo "<i class='far fa-clipboard'></i>";
+						} else {
+							echo "<i class='fas fa-clipboard-check'></i>";
+							}
+						}
+						
+						echo " ".$date_output."</div>";
 						
 						// Definierung Zeitformat
 						$t_time = array(
@@ -162,8 +205,15 @@
 						$month = date("F", $row['timestamp']);
 						$year = date("Y", $row['timestamp']);
 						
-						echo "<div class='margin-bottom-90'>
-								<a class='btn btn-light' href='".$path."calendar/".$year."/".$month."'>".$t_view_calendar[$language]."</a>
+						echo "<div class='margin-bottom-90'>";
+								if($is_appointment == 'false') {
+									if($is_task_done == 'true') {
+										echo "<a class='btn btn-light' href='".$path."entry.php?entryid=".$entryid."&done=0'><i class='fas fa-times'></i> Als unerledigt markieren</a>";	
+									} else {										
+										echo "<a class='btn btn-red' href='".$path."entry.php?entryid=".$entryid."&done=1'><i class='fas fa-check'></i> Als erledigt markieren</a>";	
+									}
+								}
+								echo " <a class='btn btn-light' href='".$path."calendar/".$year."/".$month."'>".$t_view_calendar[$language]."</a>
 							</div>";
 					?>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

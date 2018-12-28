@@ -13,6 +13,12 @@
 		foreach ($connection->query($sql_select) as $row) {
 		}
 		
+		if($row['is_appointment'] == 'true') {
+			$is_appointment = 'true';
+		} else {
+			$is_appointment = 'false';
+		}
+		
 		$appointmentname = $string = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
 		$location = $string = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 		$comment = $string = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
@@ -60,6 +66,12 @@
 								$newdate = "";
 							} else {
 								$newdate = $_POST['date'];								
+							}
+							
+							if($_POST['is_appointment'] == "false") {
+								$is_appointment = "false";
+							} else {
+								$is_appointment = "true";								
 							}
 							
 							if(empty($_POST['goal'])) {
@@ -137,10 +149,10 @@
 								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
 								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE entries SET goalid = '$goalid', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND entryid = '$entryid'";
+								$sql_update = "UPDATE entries SET is_appointment = '$is_appointment', goalid = '$goalid', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND entryid = '$entryid'";
 								$sql_update = $connection->query($sql_update);
 								
-								header('Location: '.$path.'entry/'.$entryid.'');						
+								header('Location: '.$path.'entry?entryid='.$entryid.'');						
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
@@ -160,6 +172,17 @@
 							<div class='appointment'>
 								<div class='title'><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></div>
 								<div class='appointmentinformation'>
+									<div class="btn-group btn-group-toggle" style='margin-bottom: 16px; width: 100%;' data-toggle="buttons">
+										<label class="btn btn-light <?php if($is_appointment == 'true') { echo "active"; } ?>" style='width: 50%;'>
+											<input type="radio" name="is_appointment" id="true" value="true" autocomplete="off">
+											<?php echo $t_appointment[$language]; ?>
+										</label>
+										<label class="btn btn-light <?php if($is_appointment == 'false') { echo "active"; } ?>" style='width: 50%;'>
+											<input type="radio" name="is_appointment" id="false" value="false" autocomplete="off">
+											<?php echo $t_task[$language]; ?>
+										</label>
+									</div>
+									
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
@@ -217,7 +240,7 @@
 						</div>
 						<div class="margin-bottom-90">
 							<button type="submit" class="btn btn-red"><?php echo $t_save[$language] ?></button>
-							<a class="btn btn-light" href="<?php echo $path; ?>entry/<?php echo $entryid; ?>"><?php echo $t_cancel[$language] ?></a>
+							<a class="btn btn-light" href="<?php echo $path; ?>entry?entryid=<?php echo $entryid; ?>"><?php echo $t_cancel[$language] ?></a>
 						</div>
 					</form>
 				</div> <?php // Ende von .col-xs-12.col-md-6 ?>

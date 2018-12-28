@@ -126,10 +126,10 @@
 					}
 						
 						// Suche nach einem Termin
-						$first_timestamp_of_day = strtotime(date("Y-m-d 00:00:00", $date));
-						$last_timestamp_of_day = strtotime(date("Y-m-d 23:59:59", $date));
+						$first_timestamp_of_today = strtotime(date("Y-m-d 00:00:00", $date));
+						$last_timestamp_of_today = strtotime(date("Y-m-d 23:59:59", $date));
 						
-						$sql_select = "SELECT * FROM entries WHERE userid = '$userid' AND timestamp >= '$first_timestamp_of_day' AND timestamp <= '$last_timestamp_of_day' ORDER BY timestamp";
+						$sql_select = "SELECT * FROM entries WHERE userid = '$userid' AND timestamp >= '$first_timestamp_of_today' AND timestamp <= '$last_timestamp_of_today' ORDER BY timestamp";
 										
 						foreach ($connection->query($sql_select) as $row) {
 							
@@ -149,7 +149,7 @@
 								// Ausgabe Termin Popover
 									echo "<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";								
 										// Titel des Popovers
-										echo "<a href=\"".$path."entry/".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
+										echo "<a href=\"".$path."entry?entryid=".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
 										// Inhalt des Popovers
 										echo"' data-content='";										
 											if($row['time_set'] == 'true') {
@@ -172,8 +172,19 @@
 							} else {
 								
 								// Ausgabe Terminname
-								echo "<div class='appointment'>
-									<a class='".$appointmentcolor." title' href='".$path."entry/".$row['entryid']."'>
+								echo "<div class='appointment'><a class='".$appointmentcolor." title' href='".$path."entry?entryid=".$row['entryid']."'>";
+									
+									if($row['is_appointment'] == 'true') {
+										echo "<i class='far fa-calendar'></i>";
+									} else {
+										if($row['is_task_done'] == 'false') {
+											echo "<i class='far fa-clipboard'></i>";
+										} else {
+											echo "<i class='fas fa-clipboard-check'></i>";
+										}
+									}
+									
+									echo"
 										".htmlspecialchars($appointmentname)."
 									</a>";
 									

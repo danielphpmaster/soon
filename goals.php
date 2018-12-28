@@ -67,11 +67,12 @@
 						$new_goal = openssl_encrypt($new_goal,"AES-128-ECB",$key);
 						
 						$color = "#333333";
-						$sql_insert = "INSERT INTO goals (goalid, userid, belonging_to, goalname, description) VALUES ('$goalid','$userid','$color', '$new_goal', '$description')";
+						$sql_insert = "INSERT INTO goals (goalid, userid, goalname, description) VALUES ('$goalid', '$userid', '$new_goal', '$description')";
 						$sql_insert = $connection->query($sql_insert);
 								
 						header('Location: '.$path.'goals');
 					}
+					
 				?>
 
 				<!-- Modal -->
@@ -137,51 +138,47 @@
 								$description = '';
 							}
 							
-							echo "<div class='margin-top-20' style=''>
+							echo "<div class='margin-top-20'>
 								<a class='box-10' style='display: block; text-align: left; overflow: hidden' href='".$path."goal/".$goalid."'>								
 									".htmlspecialchars($goalname)."
 									<div class='float-right'>".htmlspecialchars($description)."</div>
-								</a>
-									
-								<div class='margin-top-10' style='margin-left: 20px;'>
-									<a class='box-10' style='display: block; text-align: left;' href='".$path."goal/".$goalid."'>".htmlspecialchars($goalname)."</a>
-								
-									<div class='margin-top-10' style='margin-left: 20px;'>
-									<a class='box-10' style='display: block; text-align: left;' href='".$path."goal/".$goalid."'>".htmlspecialchars($goalname)."</a>
-								</div>
-								
-								</div>";
-						
-									/*	
-							$sql_select_appointment = "SELECT * FROM entries WHERE userid = '$userid' AND goalid = '$goalid' ORDER BY timestamp";
+								</a>";
 										
-						foreach ($connection->query($sql_select_appointment) as $row) {
-							
-							// Entschlüsselung der vom Nutzer angegebenen Informationen
-							$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
+								$first_timestamp_of_today = strtotime(date('Y-m-d 00:00:00'));
 								
-								// Ausgabe Termin Popover
-								echo "<span style='font-size: 150%; padding: 0 5px;'>
-									<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";
+								$sql_select_appointment = "SELECT * FROM entries WHERE userid = '$userid' AND goalid = '$goalid' AND timestamp >= '$first_timestamp_of_today' ORDER BY timestamp";
+											
+								foreach ($connection->query($sql_select_appointment) as $row) {
 									
-								echo "<a href=\"".$path."entry/".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
-								
-								echo"' data-content='";
+									// Entschlüsselung der vom Nutzer angegebenen Informationen
+									$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
+										
+										// Ausgabe Termin Popover
+										echo "<span style='font-size: 150%; padding: 0 5px;'>
+											<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";
+											
+										echo "<a href=\"".$path."entry?entryid=".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
+										
+										echo"' data-content='";
 
-								echo "Inhalt";
+										echo "Inhalt";
 
-								echo "'>";
+										echo "'>";
 
-								if($row['is_appointment'] == 'true') {
-									echo "<i class='far fa-calendar'></i>";
-								} else {
-									echo "<i class='far fa-clipboard'></i>";
+										if($row['is_appointment'] == 'true') {
+											echo "<i class='far fa-calendar'></i>";
+										} else {
+											if($row['is_task_done'] == 'false') {
+												echo "<i class='far fa-clipboard'></i>";
+											} else {
+												echo "<i class='fas fa-clipboard-check'></i>";
+											}
+										}
+										echo "
+											</a>
+										</span>";								
 								}
-								echo "
-									</a>
-								</span>";
-						}*/
-						echo "</div>";
+							echo "</div>";
 						}
 					?>			
 				

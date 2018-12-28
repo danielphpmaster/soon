@@ -28,7 +28,7 @@
 						<div class="col-12 col-md-6 margin-bottom-10">
 							<a class="float-right btn btn-light btn-sm" href="<?php echo $path; ?>edit_username">
 								<?php echo htmlspecialchars($username);?>
-								<i class='fas fa-pencil-alt'></i>
+								<i class='float-right margin-top-4 fas fa-pencil-alt'></i>
 							</a>
 						</div>
 						
@@ -38,7 +38,7 @@
 						<div class="col-12 col-md-6 margin-bottom-10">
 							<a class="float-right btn btn-light btn-sm" href="<?php echo $path; ?>edit_email">
 								<?php echo $email;?>
-								<i class='fas fa-pencil-alt'></i>
+								<i class='float-right margin-top-4 fas fa-pencil-alt'></i>
 							</a>
 						</div>
 						
@@ -48,7 +48,7 @@
 						<div class="col-12 col-md-6 margin-bottom-10">
 							<a class="float-right btn btn-light btn-sm" href="<?php echo $path; ?>edit_password">
 								•••
-								<i class='fas fa-pencil-alt'></i>
+								<i class='float-right margin-top-4 fas fa-pencil-alt'></i>
 							</a>
 						</div>
 						
@@ -61,7 +61,7 @@
 									$language_array_long = array("Deutsch", "English");
 									echo $language_array_long[$language];
 								?>
-								<i class='fas fa-pencil-alt'></i>
+								<i class='float-right margin-top-4 fas fa-pencil-alt'></i>
 							</a>
 						</div>			
 					</div> <?php // Ende von .box ?>

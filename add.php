@@ -153,13 +153,13 @@
 								$location = openssl_encrypt($location,"AES-128-ECB",$key);
 								$comment = openssl_encrypt($comment,"AES-128-ECB",$key);
 
-								$sql_insert = "INSERT INTO entries (entryid, userid, is_appointment, goalid, appointmentname, timestamp, time_set, location, comment) VALUES ('$entryid', '$userid', '$is_appointment', '$goalid', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
+								$sql_insert = "INSERT INTO entries (entryid, userid, is_appointment, is_task_done, goalid, appointmentname, timestamp, time_set, location, comment) VALUES ('$entryid', '$userid', '$is_appointment', 'false', '$goalid', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 
 								$year = date('Y', strtotime($date));
 								$month = date('F', strtotime($date));
 
-								header('Location: '.$path.'entry/'.$entryid.'');
+								header('Location: '.$path.'entry?entryid='.$entryid.'');
 							} // Ende von if(!$error)
 						} // Ende von if(isset($_GET['add']))
 					?>
@@ -184,7 +184,7 @@
 								<div class='appointmentinformation'>
 									<div class="btn-group btn-group-toggle" style='margin-bottom: 16px; width: 100%;' data-toggle="buttons">
 										<label class="btn btn-light active" style='width: 50%;'>
-											<input type="radio" name="is_appointment" id="true" value="true" autocomplete="off" checked>
+											<input type="radio" name="is_appointment" id="true" value="true" autocomplete="off">
 											<?php echo $t_appointment[$language] ?>
 										</label>
 										<label class="btn btn-light" style='width: 50%;'>
@@ -203,8 +203,7 @@
 											<?php
 												$sql_select = "SELECT * FROM goals WHERE userid = '$userid'";
 																
-												foreach ($connection->query($sql_select) as $row) {
-													
+												foreach ($connection->query($sql_select) as $row) {													
 													// Entschlüsselung der vom Nutzer angegebenen Informationen
 													$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
 													$goalid = $row['goalid'];

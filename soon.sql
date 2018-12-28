@@ -13,6 +13,7 @@ CREATE TABLE `entries` (
   `entryid` varchar(12) NOT NULL,
   `userid` text NOT NULL,
   `is_appointment` text NOT NULL,
+  `is_task_done` text NOT NULL,
   `goalid` text NOT NULL,
   `appointmentname` text NOT NULL,
   `timestamp` int(11) NOT NULL,
@@ -24,14 +25,9 @@ CREATE TABLE `entries` (
 CREATE TABLE `goals` (
   `goalid` varchar(12) NOT NULL,
   `userid` text NOT NULL,
-  `belonging_to` text NOT NULL,
-  `goalname` text NOT NULL
+  `goalname` text NOT NULL,
+  `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
-CREATE TABLE `types` (
-  `typeid` int(11) NOT NULL,
-  `typename` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `users` (
   `userid` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
@@ -50,9 +46,6 @@ ALTER TABLE `entries`
 
 ALTER TABLE `goals`
   ADD PRIMARY KEY (`goalid`);
-
-ALTER TABLE `types`
-  ADD PRIMARY KEY (`typeid`);
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`userid`);
