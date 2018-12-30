@@ -104,7 +104,7 @@
 				$colon_1 = '';
 			}
 			
-			$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
+			$entryname = openssl_decrypt($row['entryname'],"AES-128-ECB",$key);
 			$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 			$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
 			
@@ -130,13 +130,13 @@
 			}
 			
 			$pdf->SetFont('Arial','',9);
-			$pdf->Cell(170,5,"$t_time[$language]$colon_1$appointmentname$comma_1$location$comma_2$comment",0,1);			
+			$pdf->Cell(170,5,"$t_time[$language]$colon_1$entryname$comma_1$location$comma_2$comment",0,1);			
 		}
 		
 		$z = 0;
 		$timestamp = strtotime('+1 day', $timestamp);
 		
-		$appointmentname = '';
+		$entryname = '';
 	}
 
 	$pdf->Output();

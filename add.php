@@ -36,10 +36,10 @@
 							$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
 
 							// Werte aus dem Formular als Variablen speichern
-							if(empty($_POST['appointmentname'])) {
-								$appointmentname = "Neuer Termin";
+							if(empty($_POST['entryname'])) {
+								$entryname = "Neuer Termin";
 							} else {
-								$appointmentname = $_POST['appointmentname'];
+								$entryname = $_POST['entryname'];
 							}
 
 							if(empty($_POST['date'])) {
@@ -80,7 +80,7 @@
 							}
 							
 							// Überprüfung, ob ein Terminname angegeben wurde
-							if(empty($appointmentname)) {
+							if(empty($entryname)) {
 								echo '<div class="alert alert-danger">'.$t_insert_an_appointment_name[$language].'</div>';
 								$error = true;
 							}
@@ -149,11 +149,11 @@
 								}
 
 								// Verschlüsselung der Nutzeneingaben
-								$appointmentname = openssl_encrypt($appointmentname,"AES-128-ECB",$key);
+								$entryname = openssl_encrypt($entryname,"AES-128-ECB",$key);
 								$location = openssl_encrypt($location,"AES-128-ECB",$key);
 								$comment = openssl_encrypt($comment,"AES-128-ECB",$key);
 
-								$sql_insert = "INSERT INTO entries (entryid, userid, is_appointment, is_task_done, goalid, appointmentname, timestamp, time_set, location, comment) VALUES ('$entryid', '$userid', '$is_appointment', 'false', '$goalid', '$appointmentname', '$timestamp', '$time_set', '$location', '$comment')";
+								$sql_insert = "INSERT INTO entries (entryid, userid, is_appointment, is_task_done, goalid, entryname, timestamp, time_set, location, comment) VALUES ('$entryid', '$userid', '$is_appointment', 'false', '$goalid', '$entryname', '$timestamp', '$time_set', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 
 								$year = date('Y', strtotime($date));
@@ -179,7 +179,7 @@
 							</script>
 							<div class='appointment'>
 								<div class='title'>
-									<input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);}?>" autofocus>
+									<input name="entryname" type="text" class="form-control" id="entryname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($entryname)){echo htmlspecialchars($entryname);}?>" autofocus>
 								</div>
 								<div class='appointmentinformation'>
 									<div class="btn-group btn-group-toggle" style='margin-bottom: 16px; width: 100%;' data-toggle="buttons">

@@ -134,7 +134,7 @@
 						foreach ($connection->query($sql_select) as $row) {
 							
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
-							$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
+							$entryname = openssl_decrypt($row['entryname'],"AES-128-ECB",$key);
 							$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 							$comment = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
 							
@@ -149,7 +149,7 @@
 								// Ausgabe Termin Popover
 									echo "<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";								
 										// Titel des Popovers
-										echo "<a href=\"".$path."entry?entryid=".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
+										echo "<a href=\"".$path."entry?entryid=".$row['entryid']."\">".htmlspecialchars($entryname)."</a>";
 										// Inhalt des Popovers
 										echo"' data-content='";										
 											if($row['time_set'] == 'true') {
@@ -185,7 +185,7 @@
 									}
 									
 									echo"
-										".htmlspecialchars($appointmentname)."
+										".htmlspecialchars($entryname)."
 									</a>";
 									
 								// Prüfung, ob zum Termin eine Uhrzeit, ein Ort oder ein Kommentar vorhanden ist

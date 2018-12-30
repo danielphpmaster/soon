@@ -25,7 +25,7 @@
 			$is_appointment = 'false';
 		}
 		
-		$appointmentname = $string = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
+		$entryname = $string = openssl_decrypt($row['entryname'],"AES-128-ECB",$key);
 		$location = $string = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 		$comment = $string = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
 		$date = date("Y-m-d", $row['timestamp']);
@@ -40,7 +40,7 @@
 		echo $time_set;
 		
 		// Umleitung, wenn kein Termin gefunden
-		if(empty($appointmentname)) {
+		if(empty($entryname)) {
 			header('Location: '.$path.'calendar');
 		}
 	} elseif (empty($_GET['editappointment'])) {
@@ -72,10 +72,10 @@
 							$error = false; // Variable, die definiert, ob eine Fehlermeldung angezeigt werden soll
 							
 							// Werte aus dem Formular als Variablen speichern
-							if(empty($_POST['appointmentname'])) {
-								$newappointmentname = "";
+							if(empty($_POST['entryname'])) {
+								$newentryname = "";
 							} else {
-								$newappointmentname = $_POST['appointmentname'];								
+								$newentryname = $_POST['entryname'];								
 							}
 							
 							if(empty($_POST['date'])) {
@@ -117,7 +117,7 @@
 							}
 							
 							// Überprüfung, ob ein Terminname angegeben wurde
-							if(empty($newappointmentname)) {
+							if(empty($newentryname)) {
 								echo '<div class="alert alert-danger">'.$t_insert_an_appointment_name[$language].'</div>';
 								$error = true;
 							}
@@ -161,11 +161,11 @@
 							// Wenn kein Fehler besteht, dann wird der Termin gespeichert
 							if(!$error) {
 								// Verschlüsselung der Nutzereingaben
-								$newappointmentname = openssl_encrypt($newappointmentname,"AES-128-ECB",$key);
+								$newentryname = openssl_encrypt($newentryname,"AES-128-ECB",$key);
 								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
 								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE entries SET is_appointment = '$is_appointment', goalid = '$goalid', appointmentname = '$newappointmentname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND entryid = '$entryid'";
+								$sql_update = "UPDATE entries SET is_appointment = '$is_appointment', goalid = '$goalid', entryname = '$newentryname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND entryid = '$entryid'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'entry?entryid='.$entryid.'');						
@@ -186,7 +186,7 @@
 								});
 							</script>
 							<div class='appointment'>
-								<div class='title'><input name="appointmentname" type="text" class="form-control" id="appointmentname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($appointmentname)){echo htmlspecialchars($appointmentname);} else {echo htmlspecialchars($newappointmentname);}?>"></div>
+								<div class='title'><input name="entryname" type="text" class="form-control" id="entryname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($entryname)){echo htmlspecialchars($entryname);} else {echo htmlspecialchars($newentryname);}?>"></div>
 								<div class='appointmentinformation'>
 									<div class="btn-group btn-group-toggle" style='margin-bottom: 16px; width: 100%;' data-toggle="buttons">
 										<label class="btn btn-light <?php if($is_appointment == 'true') { echo "active"; } ?>" style='width: 50%;'>

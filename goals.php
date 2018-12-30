@@ -151,13 +151,13 @@
 								foreach ($connection->query($sql_select_appointment) as $row) {
 									
 									// Entschlüsselung der vom Nutzer angegebenen Informationen
-									$appointmentname = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
+									$entryname = openssl_decrypt($row['entryname'],"AES-128-ECB",$key);
 										
 										// Ausgabe Termin Popover
 										echo "<span style='font-size: 150%; padding: 0 5px;'>
 											<a tabindex='0' data-toggle='popover' data-trigger='focus hover' data-placement='top' data-html='true' title='";
 											
-										echo "<a href=\"".$path."entry?entryid=".$row['entryid']."\">".htmlspecialchars($appointmentname)."</a>";
+										echo "<a href=\"".$path."entry?entryid=".$row['entryid']."\">".htmlspecialchars($entryname)."</a>";
 										
 										echo"' data-content='";
 

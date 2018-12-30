@@ -28,7 +28,7 @@
 				}
 			}
 			
-			$appointmentname = $string = openssl_decrypt($row['appointmentname'],"AES-128-ECB",$key);
+			$entryname = $string = openssl_decrypt($row['entryname'],"AES-128-ECB",$key);
 			$date = $row['timestamp'];
 			$time = $row['timestamp'];
 			$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
@@ -46,7 +46,7 @@
 		);
 				
 		// Umleitung, wenn kein Termin gefunden
-		if(empty($appointmentname)) {
+		if(empty($entryname)) {
 			header('Location: '.$path.'calendar');
 		}
 	} else {
@@ -54,7 +54,7 @@
 		header('Location: '.$path.'calendar');
 	}
 			
-	$title = "".$appointmentname." ".$t_title_entry[$language]."";
+	$title = "".$entryname." ".$t_title_entry[$language]."";
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +118,7 @@
 						// Ausgabe Terminname
 						echo "<div class='appointment' style='margin-top: 0'>
 								<div ".$appointment_color." class='title'>
-									".htmlspecialchars($appointmentname)."
+									".htmlspecialchars($entryname)."
 								</div>";		
 						?>
 						

@@ -15,7 +15,7 @@ CREATE TABLE `entries` (
   `is_appointment` text NOT NULL,
   `is_task_done` text NOT NULL,
   `goalid` text NOT NULL,
-  `appointmentname` text NOT NULL,
+  `entryname` text NOT NULL,
   `timestamp` int(11) NOT NULL,
   `time_set` text NOT NULL,
   `location` text NOT NULL,
@@ -23,10 +23,10 @@ CREATE TABLE `entries` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `goals` (
-  `goalid` varchar(12) NOT NULL,
-  `userid` text NOT NULL,
-  `goalname` text NOT NULL,
-  `description` text NOT NULL
+  `goalid` varchar(12) CHARACTER SET utf8 NOT NULL,
+  `userid` text CHARACTER SET utf8 NOT NULL,
+  `goalname` text CHARACTER SET utf8 NOT NULL,
+  `description` text CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 CREATE TABLE `users` (

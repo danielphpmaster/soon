@@ -12,7 +12,6 @@
 		if(isset($_SESSION['userid'])) {
 			session_destroy();
 			setcookie ("soonstayloggedin", "", time() - (86400 * 365));
-			header('Location: '.$path.'maintenance');	
 		}
 	}
 ?>
