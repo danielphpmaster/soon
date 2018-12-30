@@ -11,6 +11,9 @@
 		foreach ($connection->query($sql_select) as $row) {
 			// Termininformationen als Variablen speichern
 			if ($row['goalid'] !== 'false') {
+				$goalid = $row['goalid'];
+			} else {
+				$goalid = 'false';
 			}
 			
 			if($row['is_appointment'] == 'true') {
@@ -208,9 +211,9 @@
 						echo "<div class='margin-bottom-90'>";
 								if($is_appointment == 'false') {
 									if($is_task_done == 'true') {
-										echo "<a class='btn btn-light' href='".$path."entry.php?entryid=".$entryid."&done=0'><i class='fas fa-times'></i> Als unerledigt markieren</a>";	
+										echo "<a class='btn btn-light' href='".$path."entry.php?entryid=".$entryid."&done=0'><i class='fas fa-times'></i> ".$t_mark_as_undone[$language]."</a>";	
 									} else {										
-										echo "<a class='btn btn-red' href='".$path."entry.php?entryid=".$entryid."&done=1'><i class='fas fa-check'></i> Als erledigt markieren</a>";	
+										echo "<a class='btn btn-red' href='".$path."entry.php?entryid=".$entryid."&done=1'><i class='fas fa-check'></i> ".$t_mark_as_done[$language]."</a>";	
 									}
 								}
 								echo " <a class='btn btn-light' href='".$path."calendar/".$year."/".$month."'>".$t_view_calendar[$language]."</a>

@@ -199,7 +199,7 @@
 											</span>
 										</div>
 										<select name="goal" class="dropdown-form-prepend">
-											<option value="false" selected>Kein Projekt</option>
+											<option value="false" selected><?php echo $t_no_goal[$language] ?></option>
 											<?php
 												$sql_select = "SELECT * FROM goals WHERE userid = '$userid'";
 																

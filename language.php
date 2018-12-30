@@ -99,6 +99,274 @@ $t_month_12 = array(
 	"December"
 );
 
+/* add.php */
+$t_title_add = array(
+	"Hinzufügen - soon",
+	"Add - soon"
+);
+$t_date = array(
+	"Datum",
+	"Date"
+);
+$t_name = array(
+	"Name",
+	"Name"
+);
+$t_task = array(
+	"Aufgabe",
+	"Task"
+);
+$t_time = array(
+	"Zeit",
+	"Time"
+);
+$t_location = array(
+	"Ort",
+	"Location"
+);
+$t_comment = array(
+	"Bemerkung",
+	"Comment"
+);
+$t_no_goal = array(
+	"Kein Ziel",
+	"No goal"
+);
+$t_cancel = array(
+	"Abbrechen",
+	"Cancel"
+);
+$t_insert_an_appointment_name = array(
+	"Geben Sie einen Terminnamen ein",
+	"Insert an appointment name"
+); 
+$t_insert_a_valid_date = array(
+	"Geben Sie ein gültiges Datum ein",
+	"Insert a valid date"
+);
+$t_insert_a_future_date = array(
+	"Geben Sie ein zukünftiges Datum ein",
+	"Insert a future date"
+);
+
+/* calendar.php */
+$t_back_to_top = array(
+	"Nach oben",
+	"Back to top"
+);
+
+/* confirmation.php */
+$t_title_confirmation = array(
+	"Erfolgreiche Registrierung - soon",
+	"Successfully registrated - soon"
+);
+$t_you_have_successfully_registered = array(
+	"Du hast dich erfolgreich registriert",
+	"You have successfully registered."
+);
+$t_welcome_to_soon = array(
+	"Willkommen bei soon",
+	"Welcome to soon"
+);
+$t_getting_started = array(
+	"Loslegen",
+	"Getting started"
+);
+
+/* edit.php	*/
+$t_title_edit = array(
+	"Bearbeiten - soon",
+	"Edit - soon"
+);
+$t_edit = array(
+	"Bearbeiten",
+	"Edit"
+);
+$t_save = array(
+	"Speichern",
+	"Save"
+);
+
+/* edit_email.php */
+$t_title_edit_email = array(
+	"E-Mail-Adresse bearbeiten - soon",
+	"Change email - soon"
+);
+$t_change_email = array(
+	"E-Mail-Adresse ändern",
+	"Change email"
+);
+$t_new_email = array(
+	"Neue E-Mail-Adresse",
+	"New email"
+);
+
+/* edit_goal.php */
+$t_title_edit_goal = array(
+	"Ziel bearbeiten - soon",
+	"Edit goal - soon"
+);
+$t_change_goal = array(
+	"Ziel bearbeiten",
+	"Edit goal"
+);
+
+/* edit_language.php */
+$t_title_edit_language = array(
+	"Sprache ändern - soon",
+	"Change language - soon"
+);
+$t_change_language = array(
+	"Srache ändern",
+	"Change language"
+);
+
+/* edit_password.php */
+$t_title_edit_password = array(
+	"Passwort ändern - soon",
+	"Change password - soon"
+);
+$t_current_password = array(
+	"Aktuelles Passwort",
+	"Current password"
+);
+$t_new_password = array(
+	"Neues Passwort",
+	"New password"
+);
+$t_confirm_new_password = array(
+	"Neues Passwort bestätigen",
+	"Confirm new password"
+);
+$t_the_current_password_is_wrong = array(
+	"Das aktuelle Passwort muss stimmen",
+	"The current password is wrong"
+);
+$t_please_insert_a_new_password = array(
+	"Geben Sie ein neues Passwort ein",
+	"Please insert a new password"
+);
+$t_the_passwords_must_match = array(
+	"Die neuen Passwörter müssen übereinstimmen",
+	"The passwords must match"
+);
+
+/* edit_username.php */
+$t_title_edit_username = array(
+	"Benutzername ändern - soon",
+	"Change username - soon"
+);
+$t_change_username = array(
+	"Benutzername ändern",
+	"Change username"
+);
+$t_new_username = array(
+	"Neuer Benutzername",
+	"New username"
+);
+
+/* entry.php */
+$t_title_entry = array(
+	"- soon", 
+	"- soon"
+);						
+$t_appointment = array(
+	"Termin",
+	"Appointment"
+);
+$t_from = array(
+	"von",
+	"from"
+);
+$t_today = array(
+	"heute",
+	"today"
+);
+$t_tomorrow = array(
+	"morgen",
+	"tomorrow"
+);
+$t_delete_appointment = array(
+	"Termin löschen",
+	"Delete appointment"
+);
+$t_do_you_want_to_delete_this_appointment = array(
+	"Möchtest du diesen Termin löschen?",
+	"Do you want to delete this appointment?"
+);
+$t_confirm = array(
+	"Bestätigen",
+	"Confirm"
+);
+$t_view_calendar = array(
+	"Zum Kalender",
+	"View calendar"
+);
+$t_mark_as_done = array(
+	"Als erledigt markieren",
+	"Mark as done"
+);
+$t_mark_as_undone = array(
+	"Als unerledigt markieren",
+	"Mark as undone"
+);
+
+/* export_pdf.php */
+$t_all_appointments_of = array(
+	"Alle Termine von",
+	"All appointments of"
+);
+
+$t_in = array(
+	"im",
+	"in"
+);
+
+$t_created_on = array(
+	"Erstellt am",
+	"Created on"
+);
+
+/* goal.php */
+$t_title_goal = array(
+	"- soon",
+	"- soon"
+);
+$t_goal = array(
+	"Ziel",
+	"Goal"
+);
+$t_view_my_goals = array(
+	"Zu meinen Zielen",
+	"View my goals"
+);
+$t_delete_goal = array(
+	"Ziel löschen",
+	"Delete goal"
+);
+$t_do_you_want_to_delete_this_goal = array(
+	"Möchtest du dieses Ziel löschen?",
+	"Do you want to delete this goal?"
+);
+
+/* goals.php */
+$t_title_goals = array(
+	"Meine Ziele - soon",
+	"My goals - soon"
+);
+$t_add_goal = array(
+	"Ziel hinzufügen",
+	"Add goal"
+);
+$t_goal_name = array(
+	"Zielname",
+	"Goal name"
+);
+$t_description = array(
+	"Beschreibung",
+	"Description"
+);
+
 /* index.php */
 $t_title_index = array(
 	"soon - Dein persönlicher Kalender",
@@ -149,6 +417,24 @@ $t_secure_text = array(
 	"In times of Facebook data scandals you won't need to worry about your data. We don't give a damn about it. Seriously, your data is encrypted safely."
 );
 
+/* login.php */
+$t_title_login = array(
+	"Anmelden - soon",
+	"Log in - soon"
+);
+$t_stay_logged_in = array(
+	"Angemeldet bleiben",
+	"Stay logged in"
+);
+$t_no_account_yet = array(
+	"Noch keinen Account?",
+	"No account yet?"
+);
+$t_email_or_password_is_invalid = array(
+	"E-Mail-Adresse oder Passwort ist ungültig",
+	"Email or password is invalid"
+);
+
 /* navbar.php */
 $t_search_appointment = array(
 	"Termin suchen",
@@ -179,56 +465,18 @@ $t_log_out = array(
 	"Log out"
 );
 
-/* calendar.php */
-$t_back_to_top = array(
-	"Nach oben",
-	"Back to top"
+/* profile.php */
+$t_title_profile = array(
+	"Mein Profil - soon",
+	"My profile - soon"
 );
-
-/* goals.php */
-$t_title_goals = array(
-	"Meine Ziele - soon",
-	"My goals - soon"
+$t_language = array(
+	"Sprache",
+	"Language"
 );
-$t_add_goal = array(
-	"Ziel hinzufügen",
-	"Add goal"
-);
-$t_goal_name = array(
-	"Zielname",
-	"Goal name"
-);
-$t_description = array(
-	"Beschreibung",
-	"Description"
-);
-
-/* goal.php */
-$t_title_goal = array(
-	"- soon",
-	"- soon"
-);
-$t_goal = array(
-	"Ziel",
-	"Goal"
-);
-$t_delete_goal = array(
-	"Ziel löschen",
-	"Delete goal"
-);
-$t_do_you_want_to_delete_this_goal = array(
-	"Möchtest du dieses Ziel löschen?",
-	"Do you want to delete this goal?"
-);
-
-/* edit_goal.php */
-$t_title_edit_goal = array(
-	"Ziel bearbeiten - soon",
-	"Edit goal - soon"
-);
-$t_change_goal = array(
-	"Ziel bearbeiten",
-	"Edit goal"
+$t_change_password = array(
+	"Passwort ändern",
+	"Change password"
 );
 
 /* registration.php */
@@ -293,236 +541,4 @@ $t_verification_code = array(
 $t_invalid_verification_code = array(
 	"Ungültiger Bestätigungscode",
 	"Invalid verification code"
-);
-
-/* confirmation.php */
-$t_title_confirmation = array(
-	"Erfolgreiche Registrierung - soon",
-	"Successfully registrated - soon"
-);
-$t_you_have_successfully_registered = array(
-	"Du hast dich erfolgreich registriert",
-	"You have successfully registered."
-);
-$t_welcome_to_soon = array(
-	"Willkommen bei soon",
-	"Welcome to soon"
-);
-$t_getting_started = array(
-	"Loslegen",
-	"Getting started"
-);
-
-/* login.php */
-$t_title_login = array(
-	"Anmelden - soon",
-	"Log in - soon"
-);
-$t_stay_logged_in = array(
-	"Angemeldet bleiben",
-	"Stay logged in"
-);
-$t_no_account_yet = array(
-	"Noch keinen Account?",
-	"No account yet?"
-);
-$t_email_or_password_is_invalid = array(
-	"E-Mail-Adresse oder Passwort ist ungültig",
-	"Email or password is invalid"
-);
-
-/* add.php */
-$t_title_add = array(
-	"Hinzufügen - soon",
-	"Add - soon"
-);
-$t_date = array(
-	"Datum",
-	"Date"
-);
-$t_name = array(
-	"Name",
-	"Name"
-);
-$t_task = array(
-	"Aufgabe",
-	"Task"
-);
-$t_time = array(
-	"Zeit",
-	"Time"
-);
-$t_location = array(
-	"Ort",
-	"Location"
-);
-$t_comment = array(
-	"Bemerkung",
-	"Comment"
-);
-$t_cancel = array(
-	"Abbrechen",
-	"Cancel"
-);
-$t_insert_an_appointment_name = array(
-	"Geben Sie einen Terminnamen ein",
-	"Insert an appointment name"
-); 
-$t_insert_a_valid_date = array(
-	"Geben Sie ein gültiges Datum ein",
-	"Insert a valid date"
-);
-$t_insert_a_future_date = array(
-	"Geben Sie ein zukünftiges Datum ein",
-	"Insert a future date"
-);
-
-/* profile.php */
-$t_title_profile = array(
-	"Mein Profil - soon",
-	"My profile - soon"
-);
-$t_language = array(
-	"Sprache",
-	"Language"
-);
-$t_change_password = array(
-	"Passwort ändern",
-	"Change password"
-);
-
-/* edit_username.php */
-$t_title_edit_username = array(
-	"Benutzername ändern - soon",
-	"Change username - soon"
-);
-$t_change_username = array(
-	"Benutzername ändern",
-	"Change username"
-);
-$t_new_username = array(
-	"Neuer Benutzername",
-	"New username"
-);
-
-/* edit_email.php */
-$t_title_edit_email = array(
-	"E-Mail-Adresse bearbeiten - soon",
-	"Change email - soon"
-);
-$t_change_email = array(
-	"E-Mail-Adresse ändern",
-	"Change email"
-);
-$t_new_email = array(
-	"Neue E-Mail-Adresse",
-	"New email"
-);
-
-/* edit_password.php */
-$t_title_edit_password = array(
-	"Passwort ändern - soon",
-	"Change password - soon"
-);
-$t_current_password = array(
-	"Aktuelles Passwort",
-	"Current password"
-);
-$t_new_password = array(
-	"Neues Passwort",
-	"New password"
-);
-$t_confirm_new_password = array(
-	"Neues Passwort bestätigen",
-	"Confirm new password"
-);
-$t_the_current_password_is_wrong = array(
-	"Das aktuelle Passwort muss stimmen",
-	"The current password is wrong"
-);
-$t_please_insert_a_new_password = array(
-	"Geben Sie ein neues Passwort ein",
-	"Please insert a new password"
-);
-$t_the_passwords_must_match = array(
-	"Die neuen Passwörter müssen übereinstimmen",
-	"The passwords must match"
-);
-
-/* edit_language.php */
-$t_title_edit_language = array(
-	"Sprache ändern - soon",
-	"Change language - soon"
-);
-$t_change_language = array(
-	"Srache ändern",
-	"Change language"
-);
-
-/* entry.php */
-$t_title_entry = array(
-	"- soon", 
-	"- soon"
-);						
-$t_appointment = array(
-	"Termin",
-	"Appointment"
-);
-$t_from = array(
-	"von",
-	"from"
-);
-$t_today = array(
-	"heute",
-	"today"
-);
-$t_tomorrow = array(
-	"morgen",
-	"tomorrow"
-);
-$t_delete_appointment = array(
-	"Termin löschen",
-	"Delete appointment"
-);
-$t_do_you_want_to_delete_this_appointment = array(
-	"Möchtest du diesen Termin löschen?",
-	"Do you want to delete this appointment?"
-);
-$t_confirm = array(
-	"Bestätigen",
-	"Confirm"
-);
-$t_view_calendar = array(
-	"Zum Kalender",
-	"View calendar"
-);
-
-/* edit.php	*/
-$t_title_edit = array(
-	"Bearbeiten - soon",
-	"Edit - soon"
-);
-$t_edit = array(
-	"Bearbeiten",
-	"Edit"
-);
-$t_save = array(
-	"Speichern",
-	"Save"
-);
-
-/* export_pdf.php */
-$t_all_appointments_of = array(
-	"Alle Termine von",
-	"All appointments of"
-);
-
-$t_in = array(
-	"im",
-	"in"
-);
-
-$t_created_on = array(
-	"Erstellt am",
-	"Created on"
 );

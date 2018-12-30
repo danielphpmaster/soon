@@ -102,7 +102,7 @@
 						</div>";
 						
 						echo "<div class='margin-bottom-90'>
-							<a class='btn btn-light' href='".$path."goals'>".$t_view_calendar[$language]."</a>
+							<a class='btn btn-light' href='".$path."goals'>".$t_view_my_goals[$language]."</a>
 						</div>";
 					?>	
 						

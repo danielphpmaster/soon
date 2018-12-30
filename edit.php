@@ -13,6 +13,12 @@
 		foreach ($connection->query($sql_select) as $row) {
 		}
 		
+		if ($row['goalid'] !== 'false') {
+			$goalid = $row['goalid'];
+		} else {
+			$goalid = 'false';
+		}
+		
 		if($row['is_appointment'] == 'true') {
 			$is_appointment = 'true';
 		} else {
@@ -23,6 +29,15 @@
 		$location = $string = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 		$comment = $string = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
 		$date = date("Y-m-d", $row['timestamp']);
+		if($row ['time_set'] == 'true') {
+			$time_set = 'true';
+			$time_hour = date("H", $row['timestamp']);
+			$time_minute = date("i", $row['timestamp']);
+		} else {
+			$time_set = 'false';
+		}
+		
+		echo $time_set;
 		
 		// Umleitung, wenn kein Termin gefunden
 		if(empty($appointmentname)) {
@@ -31,6 +46,7 @@
 	} elseif (empty($_GET['editappointment'])) {
 		header('Location: '.$path.'calendar');
 	}
+	
 	
 	$title = $t_title_edit[$language];
 ?>
@@ -99,7 +115,7 @@
 							} else {
 								$newcomment = $_POST['comment'];								
 							}
-														
+							
 							// Überprüfung, ob ein Terminname angegeben wurde
 							if(empty($newappointmentname)) {
 								echo '<div class="alert alert-danger">'.$t_insert_an_appointment_name[$language].'</div>';
@@ -190,17 +206,20 @@
 											</span>
 										</div>
 										<select name="goal" class="dropdown-form-prepend">
-											<option value="false" selected>Kein Projekt</option>
+											<option value="false" selected><?php echo $t_no_goal[$language] ?></option>
 											<?php
 												$sql_select = "SELECT * FROM goals WHERE userid = '$userid'";
 																
 												foreach ($connection->query($sql_select) as $row) {													
 													// Entschlüsselung der vom Nutzer angegebenen Informationen
 													$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
-													$goalid = $row['goalid'];
 													
-													echo "<option value='".$goalid."'>".$goalname."</option>";													
-												}										
+													if($goalid == $row['goalid']) {												
+														echo "<option value='".$row['goalid']."' selected>".$goalname."</option>";
+													} else {
+														echo "<option value='".$row['goalid']."'>".$goalname."</option>";
+													}
+												}							
 											?>	
 										</select>
 									</div>
@@ -212,13 +231,28 @@
 										</div>										
 										<input name="time" type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5" placeholder="<?php echo $t_time[$language] ?>">
 									</div>
+									<?php if($time_set == 'true') { ?>
 									<script type="text/javascript">
 										$(function () {
 											$('#datetimepicker5').datetimepicker({
-											format: 'LT'
+												defaultDate: moment({
+													hour: <?php echo $time_hour; ?>,
+													minute: <?php echo $time_minute; ?>
+												}),
+												format: 'LT'
 											});
 										});
 									</script>
+									<?php } else { ?>
+									<script type="text/javascript">
+										$(function () {
+											$('#datetimepicker5').datetimepicker({
+												format: 'LT'
+											});
+										});
+									</script>
+									
+									<?php } ?>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
