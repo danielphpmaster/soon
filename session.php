@@ -16,10 +16,7 @@
 	}		
 	if(isset($_SESSION['entryid'])){
 		$entryid = $_SESSION['entryid'];
-	}		
-	if(isset($_SESSION['goalid'])){
-		$goalid = $_SESSION['goalid'];
-	}	
+	}
 	if(isset($_SESSION['language'])){
 		$language = $_SESSION['language'];
 	}	

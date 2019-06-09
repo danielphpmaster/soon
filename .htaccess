@@ -7,10 +7,6 @@ RewriteRule ^/?calendar/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ calendar.php?year=$1&
 
 RewriteRule ^/?entry/([A-Za-z0-9-_?&=/]+)$ entry.php?entryid=$1
 
-RewriteRule ^/?export_pdf/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ export_pdf.php?year=$1&month=$2
-
-RewriteRule ^/?edit_goal/([A-Za-z0-9-_.*!?]+)$ edit_goal.php?goalid=$1
-
-RewriteRule ^/?goal/([A-Za-z0-9-_.*!?]+)$ goal.php?goalid=$1
+RewriteRule ^/?pdf/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)$ pdf.php?year=$1&month=$2
 
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

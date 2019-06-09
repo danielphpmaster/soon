@@ -13,18 +13,6 @@
 		foreach ($connection->query($sql_select) as $row) {
 		}
 		
-		if ($row['goalid'] !== 'false') {
-			$goalid = $row['goalid'];
-		} else {
-			$goalid = 'false';
-		}
-		
-		if($row['is_appointment'] == 'true') {
-			$is_appointment = 'true';
-		} else {
-			$is_appointment = 'false';
-		}
-		
 		$entryname = $string = openssl_decrypt($row['entryname'],"AES-128-ECB",$key);
 		$location = $string = openssl_decrypt($row['location'],"AES-128-ECB",$key);
 		$comment = $string = openssl_decrypt($row['comment'],"AES-128-ECB",$key);
@@ -36,9 +24,7 @@
 		} else {
 			$time_set = 'false';
 		}
-		
-		echo $time_set;
-		
+				
 		// Umleitung, wenn kein Termin gefunden
 		if(empty($entryname)) {
 			header('Location: '.$path.'calendar');
@@ -46,8 +32,7 @@
 	} elseif (empty($_GET['editappointment'])) {
 		header('Location: '.$path.'calendar');
 	}
-	
-	
+		
 	$title = $t_title_edit[$language];
 ?>
 
@@ -83,19 +68,7 @@
 							} else {
 								$newdate = $_POST['date'];								
 							}
-							
-							if($_POST['is_appointment'] == "false") {
-								$is_appointment = "false";
-							} else {
-								$is_appointment = "true";								
-							}
-							
-							if(empty($_POST['goal'])) {
-								$goalid = "false";
-							} else {
-								$goalid = $_POST['goal'];								
-							}
-							
+														
 							if(empty($_POST['time'])) {
 								$newtime = "00:00:00";
 								$time_set = 'false';
@@ -165,7 +138,7 @@
 								$newlocation = openssl_encrypt($newlocation,"AES-128-ECB",$key);
 								$newcomment = openssl_encrypt($newcomment,"AES-128-ECB",$key);
 								
-								$sql_update = "UPDATE entries SET is_appointment = '$is_appointment', goalid = '$goalid', entryname = '$newentryname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND entryid = '$entryid'";
+								$sql_update = "UPDATE entries SET entryname = '$newentryname', timestamp = '$timestamp', time_set = '$time_set', location = '$newlocation', comment = '$newcomment' WHERE userid = '$userid' AND entryid = '$entryid'";
 								$sql_update = $connection->query($sql_update);
 								
 								header('Location: '.$path.'entry?entryid='.$entryid.'');						
@@ -188,41 +161,7 @@
 							<div class='appointment'>
 								<div class='title'><input name="entryname" type="text" class="form-control" id="entryname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($entryname)){echo htmlspecialchars($entryname);} else {echo htmlspecialchars($newentryname);}?>"></div>
 								<div class='appointmentinformation'>
-									<div class="btn-group btn-group-toggle" style='margin-bottom: 16px; width: 100%;' data-toggle="buttons">
-										<label class="btn btn-light <?php if($is_appointment == 'true') { echo "active"; } ?>" style='width: 50%;'>
-											<input type="radio" name="is_appointment" id="true" value="true" autocomplete="off">
-											<?php echo $t_appointment[$language]; ?>
-										</label>
-										<label class="btn btn-light <?php if($is_appointment == 'false') { echo "active"; } ?>" style='width: 50%;'>
-											<input type="radio" name="is_appointment" id="false" value="false" autocomplete="off">
-											<?php echo $t_task[$language]; ?>
-										</label>
-									</div>
 									
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon1">
-												<i class="fas fa-tasks"></i>
-											</span>
-										</div>
-										<select name="goal" class="dropdown-form-prepend">
-											<option value="false" selected><?php echo $t_no_goal[$language] ?></option>
-											<?php
-												$sql_select = "SELECT * FROM goals WHERE userid = '$userid'";
-																
-												foreach ($connection->query($sql_select) as $row) {													
-													// Entschlüsselung der vom Nutzer angegebenen Informationen
-													$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
-													
-													if($goalid == $row['goalid']) {												
-														echo "<option value='".$row['goalid']."' selected>".$goalname."</option>";
-													} else {
-														echo "<option value='".$row['goalid']."'>".$goalname."</option>";
-													}
-												}							
-											?>	
-										</select>
-									</div>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">

@@ -14,8 +14,8 @@
 	} else {
 		$month = $_GET['month'];
 	}
-	// Prüfung, ob die "view"-Variable in der URL mitgesendet wurde
-	$view = 2;
+	// Kalenderdarstellung, 1 = kompakte Ansicht
+	$view = 1;
 	
 	// Umwandlung von den Angaben Jahr und Monat als Zeitstempel
 	$timestamp_of_month = strtotime("$year $month");
@@ -63,7 +63,7 @@
 					}
 					// Anzeige des aktuellen Monats mit Schaltfläche für den PDF-Export
 					echo "<div class='col-6 col-lg-4 padding-0'>
-						<a class='btn btn-light' href='".$path."export_pdf/".$year."/".$month."' target='_blank'>
+						<a class='btn btn-light' href='".$path."pdf/".$year."/".$month."' target='_blank'>
 							<i class='fas fa-print'></i> ".${$t_month}[$language]." ".$year."
 						</a>
 					</div>";
@@ -79,8 +79,8 @@
 		</div> <!-- Ende von .container -->
 		<?php
 		if($view == 1) {
-			echo "<div class='goals-container'>
-			<div class='row goals-cols'>";
+			echo "<div class='compact-container'>
+			<div class='row compact-cols'>";
 		} else {
 		echo "<div class='calendar-container'>
 			<div class='row calendar-cols'>";
@@ -133,6 +133,8 @@
 										
 						foreach ($connection->query($sql_select) as $row) {
 							
+						
+							
 							// Entschlüsselung der vom Nutzer angegebenen Informationen
 							$entryname = openssl_decrypt($row['entryname'],"AES-128-ECB",$key);
 							$location = openssl_decrypt($row['location'],"AES-128-ECB",$key);
@@ -163,26 +165,16 @@
 											};								
 										echo "'>";
 										// Element, welches beim Anklicken das Popover öffnet
-										if($row['is_appointment'] == 'true') {
-											echo "<i class='".$appointmentcolor." icon far fa-calendar'></i>";
-										} else {
-											echo "<i class='".$appointmentcolor." far fa-clipboard'></i>";
-										}
+										echo "<i class='".$appointmentcolor." icon far fa-calendar'></i>";
+										
 									echo "</a></span>";	
 							} else {
 								
 								// Ausgabe Terminname
 								echo "<div class='appointment'><a class='".$appointmentcolor." title' href='".$path."entry?entryid=".$row['entryid']."'>";
 									
-									if($row['is_appointment'] == 'true') {
-										echo "<i class='far fa-calendar'></i>";
-									} else {
-										if($row['is_task_done'] == 'false') {
-											echo "<i class='far fa-clipboard'></i>";
-										} else {
-											echo "<i class='fas fa-clipboard-check'></i>";
-										}
-									}
+									echo "<i class='far fa-calendar'></i>";
+									
 									
 									echo"
 										".htmlspecialchars($entryname)."

@@ -112,10 +112,6 @@ $t_name = array(
 	"Name",
 	"Name"
 );
-$t_task = array(
-	"Aufgabe",
-	"Task"
-);
 $t_time = array(
 	"Zeit",
 	"Time"
@@ -127,10 +123,6 @@ $t_location = array(
 $t_comment = array(
 	"Bemerkung",
 	"Comment"
-);
-$t_no_goal = array(
-	"Kein Ziel",
-	"No goal"
 );
 $t_cancel = array(
 	"Abbrechen",
@@ -199,16 +191,6 @@ $t_change_email = array(
 $t_new_email = array(
 	"Neue E-Mail-Adresse",
 	"New email"
-);
-
-/* edit_goal.php */
-$t_title_edit_goal = array(
-	"Ziel bearbeiten - soon",
-	"Edit goal - soon"
-);
-$t_change_goal = array(
-	"Ziel bearbeiten",
-	"Edit goal"
 );
 
 /* edit_language.php */
@@ -327,46 +309,6 @@ $t_created_on = array(
 	"Created on"
 );
 
-/* goal.php */
-$t_title_goal = array(
-	"- soon",
-	"- soon"
-);
-$t_goal = array(
-	"Ziel",
-	"Goal"
-);
-$t_view_my_goals = array(
-	"Zu meinen Zielen",
-	"View my goals"
-);
-$t_delete_goal = array(
-	"Ziel löschen",
-	"Delete goal"
-);
-$t_do_you_want_to_delete_this_goal = array(
-	"Möchtest du dieses Ziel löschen?",
-	"Do you want to delete this goal?"
-);
-
-/* goals.php */
-$t_title_goals = array(
-	"Meine Ziele - soon",
-	"My goals - soon"
-);
-$t_add_goal = array(
-	"Ziel hinzufügen",
-	"Add goal"
-);
-$t_goal_name = array(
-	"Zielname",
-	"Goal name"
-);
-$t_description = array(
-	"Beschreibung",
-	"Description"
-);
-
 /* index.php */
 $t_title_index = array(
 	"soon - Dein persönlicher Kalender",
@@ -451,10 +393,6 @@ $t_add = array(
 $t_my_calendar = array(
 	"Mein Kalender",
 	"My calendar"
-);
-$t_my_goals = array(
-	"Meine Ziele",
-	"My goals"
 );
 $t_my_profile = array(
 	"Mein Profil",

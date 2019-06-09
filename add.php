@@ -48,18 +48,6 @@
 								$date = $_POST['date'];
 							}
 							
-							if($_POST['is_appointment'] == "false") {
-								$is_appointment = "false";
-							} else {
-								$is_appointment = "true";								
-							}
-							
-							if(empty($_POST['goal'])) {
-								$goalid = "false";
-							} else {
-								$goalid = $_POST['goal'];								
-							}
-
 							if(empty($_POST['time'])) {
 								$time = "00:00:00";
 								$time_set = 'false';
@@ -153,7 +141,7 @@
 								$location = openssl_encrypt($location,"AES-128-ECB",$key);
 								$comment = openssl_encrypt($comment,"AES-128-ECB",$key);
 
-								$sql_insert = "INSERT INTO entries (entryid, userid, is_appointment, is_task_done, goalid, entryname, timestamp, time_set, location, comment) VALUES ('$entryid', '$userid', '$is_appointment', 'false', '$goalid', '$entryname', '$timestamp', '$time_set', '$location', '$comment')";
+								$sql_insert = "INSERT INTO entries (entryid, userid, entryname, timestamp, time_set, location, comment) VALUES ('$entryid', '$userid', '$entryname', '$timestamp', '$time_set', '$location', '$comment')";
 								$sql_insert = $connection->query($sql_insert);
 
 								$year = date('Y', strtotime($date));
@@ -182,37 +170,7 @@
 									<input name="entryname" type="text" class="form-control" id="entryname" placeholder="<?php echo $t_name[$language] ?>" value="<?php if(isset($entryname)){echo htmlspecialchars($entryname);}?>" autofocus>
 								</div>
 								<div class='appointmentinformation'>
-									<div class="btn-group btn-group-toggle" style='margin-bottom: 16px; width: 100%;' data-toggle="buttons">
-										<label class="btn btn-light active" style='width: 50%;'>
-											<input type="radio" name="is_appointment" id="true" value="true" autocomplete="off">
-											<?php echo $t_appointment[$language] ?>
-										</label>
-										<label class="btn btn-light" style='width: 50%;'>
-											<input type="radio" name="is_appointment" id="false" value="false" autocomplete="off">
-											<?php echo $t_task[$language] ?>
-										</label>
-									</div>									
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon1">
-												<i class="fas fa-tasks"></i>
-											</span>
-										</div>
-										<select name="goal" class="dropdown-form-prepend">
-											<option value="false" selected><?php echo $t_no_goal[$language] ?></option>
-											<?php
-												$sql_select = "SELECT * FROM goals WHERE userid = '$userid'";
-																
-												foreach ($connection->query($sql_select) as $row) {													
-													// Entschlüsselung der vom Nutzer angegebenen Informationen
-													$goalname = openssl_decrypt($row['goalname'],"AES-128-ECB",$key);
-													$goalid = $row['goalid'];
-													
-													echo "<option value='".$goalid."'>".$goalname."</option>";													
-												}											
-											?>	
-										</select>
-									</div>									
+																	
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="basic-addon1">
